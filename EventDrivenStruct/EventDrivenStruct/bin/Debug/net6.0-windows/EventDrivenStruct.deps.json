@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "EventDrivenStruct/1.0.0": {
+        "dependencies": {
+          "EvevntDrivenAbstractElements": "1.0.0.0"
+        },
+        "runtime": {
+          "EventDrivenStruct.dll": {}
+        }
+      },
+      "EvevntDrivenAbstractElements/1.0.0.0": {
+        "runtime": {
+          "EvevntDrivenAbstractElements.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "EventDrivenStruct/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "EvevntDrivenAbstractElements/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

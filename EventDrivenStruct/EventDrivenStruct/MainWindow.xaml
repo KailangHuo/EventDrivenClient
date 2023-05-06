@@ -1,0 +1,137 @@
+﻿<Window x:Class="EventDrivenStruct.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EventDrivenStruct"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="900" Width="1600" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <DataTemplate x:Key="Study_ComboBox_Template">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Name="PatientNameLabel" Content="{Binding Name}" HorizontalAlignment="Left"  VerticalAlignment="Top"/>
+                    <Label Grid.Column="2"  Name="PatientGenderLabel" Content="{Binding Gender}" HorizontalAlignment="Right" VerticalAlignment="Top" />
+                </Grid>
+                
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0"  Name="PatientAgeLabel" Content="{Binding Age}" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                    <Label Grid.Column="2"   Name="PatientUidLabel" Content="{Binding Uid}" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+        
+        <DataTemplate x:Key="App_ListBox_Template">
+            <StackPanel Orientation="Vertical" >
+                <Button Content="x" Height="10" Width="10" HorizontalAlignment="Right" FontSize="10" HorizontalContentAlignment="Center" VerticalContentAlignment="Top"/>
+                <Label Width="85" Content="{Binding Type}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Grid x:Name="MainGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Border Grid.ColumnSpan="5"/>
+            <Button Margin="2" 
+                Command="{Binding GotoPaTabCommand}" 
+                Height="55" Content="PA List" FontSize="12" 
+                Visibility="Visible" 
+                Name="btnMFPATab" 
+                Focusable="False" 
+                Cursor="Hand"
+                HorizontalAlignment="Left" Width="60">
+            </Button>
+            <ComboBox Grid.Column="1" Name="StudiesComboBox"
+                      Margin="2"
+                      Cursor="Hand"
+                      AllowDrop="False"
+                      Height="55"
+                      Width="255"
+                      IsReadOnly="True"
+                      ItemTemplate="{StaticResource Study_ComboBox_Template}"
+                      ItemsSource="{Binding StudyTabContainer.StudyTabs}"
+                      SelectedItem="{Binding StudyTabContainer.CurrentSelectedTab}"
+            >
+                <ComboBox.ContextMenu>
+                    <ContextMenu >
+                        <MenuItem Header="删除" Command="{Binding StudyTabContainer.RemoveStudyTabCommand}" CommandParameter="{Binding }"/>
+                        <MenuItem Header="删除所有" Command="{Binding StudyTabContainer.RemoveAllStudyTabsCommand}"/>
+                    </ContextMenu>
+                </ComboBox.ContextMenu>
+            </ComboBox>
+            <Button Grid.Column="2" Name="CurrentStudySelection"
+                    Margin="2"
+                    Height="55"
+                    Width="60"
+                    Cursor="Hand"
+                    HorizontalAlignment="Left"
+                    Content="CurTrig"
+                    Command="{Binding HostingWindowViewModel.TriggerCurrentCommand}"
+                    CommandParameter="{Binding ApplicationTabContainer.CurrentSelectedApplicationTab.ApplicationDto}"
+                    />
+            <Button Grid.Column="3" Name="Lock"
+                    Margin="2"
+                    Height="55"
+                    Width="60"
+                    Cursor="Hand"
+                    HorizontalAlignment="Left"
+                    Content="LOCK"
+                    />
+            <ListBox Grid.Column="4" Name="AppsListBox"
+                     Visibility="{Binding ApplicationTabContainer.IsTabContained}"
+                     Height="55"
+                     HorizontalAlignment="Left"
+                     ItemTemplate="{StaticResource App_ListBox_Template}"
+                     ItemsSource="{Binding ApplicationTabContainer.ApplicationTabs}"
+                     SelectedItem="{Binding ApplicationTabContainer.CurrentSelectedApplicationTab, Mode=TwoWay}"
+                     
+            >
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"></StackPanel>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+        </Grid>
+        <Button Grid.Row="1" Name="GetPatientButton"
+                Height="30"
+                Width="180"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Content="单击添加Study"
+                Command="{Binding InitOpenStudyWindowCommand}"
+                />
+        <TextBlock Grid.Row="2" Name="PAandAppWindow"
+                   TextAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="30"
+                   Text="{Binding HostingWindowViewModel.Content}"></TextBlock>
+    </Grid>
+</Window>
