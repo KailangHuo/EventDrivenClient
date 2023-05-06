@@ -8,6 +8,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Reference Include="EventDrivenElements">
+        <HintPath>..\..\..\EventDrivenObject\OutPut\net6.0\EventDrivenElements.dll</HintPath>
+      </Reference>
       <Reference Include="EvevntDrivenAbstractElements">
         <HintPath>..\..\..\EventDrivenObject\OutPut\net6.0\EvevntDrivenAbstractElements.dll</HintPath>
       </Reference>
