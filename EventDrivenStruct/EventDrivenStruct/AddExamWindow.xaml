@@ -1,12 +1,14 @@
-<Window x:Class="EventDrivenStruct.PatientAddingWindow"
+<Window x:Class="EventDrivenStruct.AddExamWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:EventDrivenStruct"
         mc:Ignorable="d"
-        Title="Add Patient"
-        Height="270" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+        Title="Add Exam" 
+        Height="270" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize"
+        ShowInTaskbar="False"
+        >
     <Grid x:Name="mainGrid">
         <Grid.RowDefinitions>
             <RowDefinition/>

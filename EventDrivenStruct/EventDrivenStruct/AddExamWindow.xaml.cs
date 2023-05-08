@@ -2,8 +2,8 @@ using System.Windows;
 
 namespace EventDrivenStruct; 
 
-public partial class PatientAddingWindow : Window {
-    public PatientAddingWindow() {
+public partial class AddExamWindow : Window {
+    public AddExamWindow() {
         InitializeComponent();
     }
 }

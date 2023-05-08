@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using EventDrivenElements;
 using EventDrivenStruct.ViewModels;
 
 namespace EventDrivenStruct {
@@ -24,9 +25,11 @@ namespace EventDrivenStruct {
             Current.Dispatcher.BeginInvoke(() => {
                 MainWindow mainWindow = new MainWindow();
                 MainWindow_ViewModel mainWindowViewModel = new MainWindow_ViewModel();
+                GlobalContext.GetInstance().RegisterMainWindowViewModel(mainWindow);
                 mainWindow.DataContext = mainWindowViewModel;
                 mainWindow.Show();
             });
         }
+        
     }
 }
