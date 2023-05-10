@@ -19,9 +19,10 @@ public class PopupManager : AbstractEventDrivenObject{
         return _popupManager;
     }
 
-    private void GenerateMainSec_AddWindow() {
+    private void MainWindowPopup_AddWindow() {
         AddExamWindow addExamWindow = new AddExamWindow();
         AddExamWindow_ViewModel addExamWindowViewModel = new AddExamWindow_ViewModel();
+        addExamWindow.DataContext = addExamWindowViewModel;
         addExamWindow.Owner = GlobalContext.GetInstance().MainWindow;
         Application.Current.Dispatcher.Invoke(() => {
             addExamWindow.ShowDialog();
@@ -31,7 +32,7 @@ public class PopupManager : AbstractEventDrivenObject{
 
     public override void UpdateByEvent(string propertyName, object o) {
         if (propertyName.Equals(nameof(MainWindow_ViewModel.AddExam))) {
-            GenerateMainSec_AddWindow();
+            MainWindowPopup_AddWindow();
         }
     }
 }

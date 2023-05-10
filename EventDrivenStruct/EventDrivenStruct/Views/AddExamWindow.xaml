@@ -21,8 +21,8 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="新建并打开病患资料" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Width="250" Height="25">
-            <TextBlock Text="StudyUID" VerticalAlignment="Center" Margin="3" Width="60"/>
-            <TextBox x:Name="study_uid_Box" Width="170" Height="20" HorizontalAlignment="Right" Text="{Binding StudyUID}"/>
+            <TextBlock Text="ExamId" VerticalAlignment="Center" Margin="3" Width="60"/>
+            <TextBox  Width="170" Height="20" HorizontalAlignment="Right" Text="{Binding ExamID}"/>
         </StackPanel>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Width="250" Height="25">
             <TextBlock Text="Name" VerticalAlignment="Center" Margin="3" Width="60"/>

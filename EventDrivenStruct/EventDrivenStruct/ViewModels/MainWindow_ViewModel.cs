@@ -14,17 +14,9 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel{
 
     public MainWindow_ViewModel() {
         ApplicationContainerViewModel = new ApplicationContainer_ViewModel();
-        ApplicationContainer.GetInstance().RegisterObserver(ApplicationContainerViewModel);
-        
         ExamContainerViewModel = new ExamContainer_ViewModel();
-        ExamContainer.GetInstance().RegisterObserver(ExamContainerViewModel);
-        
         HostingWindowViewModel = new HostingWindow_ViewModel();
-        HostingWindowContent.GetInstance().RegisterObserver(HostingWindowViewModel);
-        
-        HostingWindowContent.GetInstance().RegisterObserver(ApplicationContainer.GetInstance());
-        ApplicationContainer.GetInstance().RegisterObserver(ExamContainer.GetInstance());
-        
+
         RegisterObserver(PopupManager.GetInstance());
         SetupCommands();
     }
@@ -36,13 +28,49 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel{
 
     #endregion
 
-    #region NOTIFY_VIEW_MODELS
+    #region NOTIFIABLE_VIEW_MODELS
 
-    public ExamContainer_ViewModel ExamContainerViewModel { get; set; }
+    private ExamContainer_ViewModel _examContainerViewModel;
 
-    public ApplicationContainer_ViewModel ApplicationContainerViewModel { get; set; }
+    public ExamContainer_ViewModel ExamContainerViewModel {
+        get {
+            return this._examContainerViewModel;
+        }
+        set {
+            if(this._examContainerViewModel == value) return;
+            this._examContainerViewModel = value;
+            PublishEvent(nameof(ExamContainerViewModel), this._examContainerViewModel);
+            RisePropertyChanged(nameof(ExamContainerViewModel));
+        }
+    }
 
-    public HostingWindow_ViewModel HostingWindowViewModel { get; set; }
+    private ApplicationContainer_ViewModel _applicationContainerViewModel;
+
+    public ApplicationContainer_ViewModel ApplicationContainerViewModel {
+        get {
+            return this._applicationContainerViewModel;
+        }
+        set {
+            if(this._applicationContainerViewModel == value) return;
+            this._applicationContainerViewModel = value;
+            PublishEvent(nameof(ApplicationContainerViewModel), this._applicationContainerViewModel);
+            RisePropertyChanged(nameof(ApplicationContainerViewModel));
+        }
+    }
+
+    private HostingWindow_ViewModel _hostingWindowViewModel;
+
+    public HostingWindow_ViewModel HostingWindowViewModel {
+        get {
+            return this._hostingWindowViewModel;
+        }
+        set {
+            if(_hostingWindowViewModel == value) return;
+            _hostingWindowViewModel = value;
+            PublishEvent(nameof(HostingWindowViewModel), this._hostingWindowViewModel);
+            RisePropertyChanged(nameof(HostingWindowViewModel));
+        }
+    }
 
     #endregion
 
@@ -65,6 +93,11 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel{
     } 
 
     #endregion
-    
-    
+
+    public override void UpdateByEvent(string propertyName, object o) {
+        if (propertyName.Equals(nameof(MainEntry_ModelFacade.ExamContainer))) {
+            ExamContainer examContainer = (ExamContainer)o;
+            examContainer.RegisterObserver(ExamContainerViewModel);
+        }
+    }
 }
