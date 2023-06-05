@@ -20,17 +20,16 @@ public class StudyCollection : AbstractEventDrivenObject{
             AddItemFailed(studyCollectionItem);
             return;
         }
+        AddInHashSet(studyCollectionItem.GetStudyComposition());
         StudyCollectionItems.Add(studyCollectionItem);
         PublishEvent(nameof(AddStudyCollectionItem), studyCollectionItem);
     }
 
     public void DeleteStudyCollectionItem(StudyCollectionItem studyCollectionItem) {
         if (this.StudyCollectionItems.Contains(studyCollectionItem)) {
-            for (int i = 0; i < studyCollectionItem.GetStudyComposition().Count; i++) {
-                this.StudyHashSet.Remove(studyCollectionItem.GetStudyComposition()[i]);
-            }
+            RemoveFromHashSet(studyCollectionItem.GetStudyComposition());
             StudyCollectionItems.Remove(studyCollectionItem);
-            public
+            PublishEvent(nameof(DeleteStudyCollectionItem), studyCollectionItem);
         }
 
         
@@ -43,6 +42,18 @@ public class StudyCollection : AbstractEventDrivenObject{
 
     private void AddItemFailed(StudyCollectionItem studyCollectionItem) {
         PublishEvent(nameof(AddItemFailed), studyCollectionItem);
+    }
+
+    private void AddInHashSet(List<Study> studyList) {
+        for (int i = 0; i < studyList.Count; i++) {
+            this.StudyHashSet.Add(studyList[i]);
+        }
+    }
+
+    private void RemoveFromHashSet(List<Study> studyList) {
+        for (int i = 0; i < studyList.Count; i++) {
+            this.StudyHashSet.Remove(studyList[i]);
+        }
     }
 
 }

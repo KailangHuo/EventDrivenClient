@@ -35,16 +35,18 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
         }
     }
     
-    public void AddStudy(Study study) {
-        this.StudyCollection.AddExam(study);
+    public void AddStudyItem(StudyCollectionItem studyItem, AppModel appModel) {
+        StudyCollection.AddStudyCollectionItem(studyItem);
+        StudyAppMappingManager.GetInstance().PutStudyAppMapObj(studyItem, appModel);
     }
 
-    public void DeleteStudy(Study study) {
-        this.StudyCollection.DeleteExam(study);
+    public void DeleteStudyItem(StudyCollectionItem studyItem) {
+        StudyCollection.DeleteStudyCollectionItem(studyItem);
+        StudyAppMappingManager.GetInstance().RemoveStudyAppMapObj(studyItem);
     }
 
-    public void AddAppToStudy(Study study, AppModel appModel) {
-        
+    public void AddAppToStudy(StudyCollectionItem studyItem, AppModel appModel) {
+        StudyAppMappingManager.GetInstance().PutStudyAppMapObj(studyItem, appModel);
     }
 
 }

@@ -26,12 +26,34 @@ public class StudyAppMappingManager : AbstractEventDrivenObject{
 
     private Dictionary<StudyCollectionItem, StudyAppMappingObj> _map;
     
-    public void PutStudyAppMapObj(StudyCollectionItem o) {
-        
+    public void PutStudyAppMapObj(StudyCollectionItem studyItem, AppModel appModel) {
+        if (!_map.ContainsKey(studyItem)) {
+            StudyAppMappingObj obj = new StudyAppMappingObj();
+            obj.StudyCollectionItem = studyItem;
+            obj.AppList = new List<AppModel>();
+            obj.AppList.Add(appModel);
+            
+            _map.Add(studyItem, obj);
+            PublishEvent(nameof(PutStudyAppMapObj), obj);
+        }
+        else {
+            if (!_map[studyItem].AppList.Contains(appModel)) {
+                _map[studyItem].AppList.Add(appModel);
+                PublishEvent(nameof(PutStudyAppMapObj), _map[studyItem]);
+            }
+            
+        }
     }
 
-    public StudyAppMappingObj GetStudyAppMapObject(StudyCollectionItem study) {
-        
+    public void RemoveStudyAppMapObj(StudyCollectionItem studyItem) {
+        if (!_map.ContainsKey(studyItem)) {
+            PublishEvent(nameof(RemoveStudyAppMapObj), null);
+            return;
+        }
+
+        _map.Remove(studyItem);
+        PublishEvent(nameof(RemoveStudyAppMapObj), studyItem);
     }
     
+
 }

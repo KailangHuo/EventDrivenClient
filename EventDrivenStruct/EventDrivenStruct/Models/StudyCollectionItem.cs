@@ -14,4 +14,8 @@ public class StudyCollectionItem : AbstractEventDrivenObject{
     public List<Study> GetStudyComposition() {
         return studyComposition;
     }
+
+    public void AddInStudyComposition(Study study) {
+        this.studyComposition.Add(study);
+    }
 }

@@ -14,17 +14,13 @@ public class AddExamWindow_ViewModel : AbstractEventDrivenViewModel{
         CancleCommand = new CommonCommand(Cancle);
         SetUpApplicationTypeList();
         _study = new Study();
-        _app = new DiagnoApplication();
         _mappingObj = new StudyAppMappingObj();
-        _mappingObj.Study = _study;
-        _mappingObj.AppList.Add(_app);
     }
 
     #region PROPERTY
 
     private Study _study;
 
-    private DiagnoApplication _app;
 
     private StudyAppMappingObj _mappingObj;
 
@@ -88,7 +84,6 @@ public class AddExamWindow_ViewModel : AbstractEventDrivenViewModel{
         set {
             if(_name == value) return;
             _name = value;
-            _study.PatientInfo.PatientName = value;
             RisePropertyChanged(nameof(Name));
         }
     }
@@ -102,7 +97,6 @@ public class AddExamWindow_ViewModel : AbstractEventDrivenViewModel{
         set {
             if(_age == value) return;
             _age = value;
-            _study.PatientInfo.PatientAge = value;
             RisePropertyChanged(nameof(Age));
         }
     }
@@ -116,7 +110,6 @@ public class AddExamWindow_ViewModel : AbstractEventDrivenViewModel{
         set {
             if(_gender == value) return;
             _gender = value;
-            _study.PatientInfo.PatientGender = value;
             RisePropertyChanged(nameof(Gender));
         }
     }

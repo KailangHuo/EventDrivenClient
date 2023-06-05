@@ -23,7 +23,8 @@ namespace EventDrivenStruct {
         }
 
         protected override void OnStartup(StartupEventArgs e) {
-            GlobalContext.GetInstance().RegisterModelFacade(MainEntry_ModelFacade.GetInstance());
+            UnitTest();
+            /*GlobalContext.GetInstance().RegisterModelFacade(MainEntry_ModelFacade.GetInstance());
             Current.Dispatcher.BeginInvoke(() => {
                 MainWindow mainWindow = new MainWindow();
                 MainWindow_ViewModel mainWindowViewModel = new MainWindow_ViewModel();
@@ -33,8 +34,32 @@ namespace EventDrivenStruct {
                 
                 mainWindow.DataContext = mainWindowViewModel;
                 mainWindow.Show();
-            });
+            });*/
         }
-        
+
+        private void UnitTest() {
+            MainEntry_ModelFacade facade = MainEntry_ModelFacade.GetInstance();
+
+            StudyCollectionItem studyCollectionItem = MakeItem("老王");
+
+            AppModel appModel = new AppModel("Review 2D");
+            
+            facade.AddStudyItem(studyCollectionItem, appModel);
+        }
+
+        private StudyCollectionItem MakeItem(string param1) {
+            StudyCollectionItem studyCollectionItem = new StudyCollectionItem();
+
+            Study studyOne = new Study("One" + " " + param1);
+            Study studyTwo = new Study("Two"+ " " + param1);
+            Study studyThree = new Study("Three"+ " " + param1);
+            
+            studyCollectionItem.AddInStudyComposition(studyOne);
+            studyCollectionItem.AddInStudyComposition(studyTwo);
+            studyCollectionItem.AddInStudyComposition(studyThree);
+
+            return studyCollectionItem;
+        }
+
     }
 }

@@ -9,7 +9,7 @@ public class StudyAppMappingObj : AbstractEventDrivenObject {
 
     }
 
-    public Study Study;
+    public StudyCollectionItem StudyCollectionItem;
 
     public List<AppModel> AppList;
 

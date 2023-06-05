@@ -8,5 +8,9 @@ public class AppModel : AbstractEventDrivenObject{
         
     }
 
+    public AppModel(string name) {
+        AppName = name;
+    }
+
     public string AppName { get; private set; }
 }
