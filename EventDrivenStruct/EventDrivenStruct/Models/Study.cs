@@ -3,25 +3,25 @@ using EventDrivenElements;
 
 namespace EventDrivenStruct.Models; 
 
-public class Exam : AbstractEventDrivenObject{
+public class Study : AbstractEventDrivenObject{
 
-    public Exam() {
-        PatientInfo = new PatientInfo();
-        ApplicationContainer = new ApplicationContainer();
+    public Study() {
     }
 
-    public PatientInfo PatientInfo { get; set; }
+    public string PatientName { get; set; }
+    
+    public string PatientGender { get; set; }
 
+    public string PatientAge { get; set; }
     public string ExamInstanceId { get; set; }
-
-    public ApplicationContainer ApplicationContainer { get; set; }
+    
 
     #region HASH_AND_EQUALS
 
     public override bool Equals(object? obj) {
         if (this == obj) return true;
         if (obj == null || GetType() != obj.GetType()) return false;
-        Exam t = (Exam)obj;
+        Study t = (Study)obj;
         return this.ExamInstanceId.Equals(t.ExamInstanceId);
     }
 

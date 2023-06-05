@@ -8,7 +8,7 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
     private static MainEntry_ModelFacade _instance;
 
     private MainEntry_ModelFacade() {
-        ExamContainer = new ExamContainer();
+        StudyCollection = new StudyCollection();
     }
 
     public static MainEntry_ModelFacade GetInstance() {
@@ -23,24 +23,28 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
         return _instance;
     }
 
-    private ExamContainer _examContainer;
-    public ExamContainer ExamContainer {
+    private StudyCollection _studyCollection;
+    public StudyCollection StudyCollection {
         get {
-            return _examContainer;
+            return _studyCollection;
         }
         set {
-            if(_examContainer == value) return;
-            _examContainer = value;
-            PublishEvent(nameof(ExamContainer), _examContainer);
+            if(_studyCollection == value) return;
+            _studyCollection = value;
+            PublishEvent(nameof(StudyCollection), _studyCollection);
         }
     }
     
-    public void AddExam(Exam exam) {
-        this.ExamContainer.AddExam(exam);
+    public void AddStudy(Study study) {
+        this.StudyCollection.AddExam(study);
     }
 
-    public void DeleteExam(Exam exam) {
-        this.ExamContainer.DeleteExam(exam);
+    public void DeleteStudy(Study study) {
+        this.StudyCollection.DeleteExam(study);
     }
-    
+
+    public void AddAppToStudy(Study study, AppModel appModel) {
+        
+    }
+
 }

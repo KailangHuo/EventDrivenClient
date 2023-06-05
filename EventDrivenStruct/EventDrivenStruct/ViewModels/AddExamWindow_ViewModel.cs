@@ -13,20 +13,20 @@ public class AddExamWindow_ViewModel : AbstractEventDrivenViewModel{
         ConfirmCommand = new CommonCommand(Confirm);
         CancleCommand = new CommonCommand(Cancle);
         SetUpApplicationTypeList();
-        _exam = new Exam();
+        _study = new Study();
         _app = new DiagnoApplication();
-        _mappingObj = new ExamAppMappingObj();
-        _mappingObj.Exam = _exam;
+        _mappingObj = new StudyAppMappingObj();
+        _mappingObj.Study = _study;
         _mappingObj.AppList.Add(_app);
     }
 
     #region PROPERTY
 
-    private Exam _exam;
+    private Study _study;
 
     private DiagnoApplication _app;
 
-    private ExamAppMappingObj _mappingObj;
+    private StudyAppMappingObj _mappingObj;
 
     #endregion
 
@@ -74,7 +74,7 @@ public class AddExamWindow_ViewModel : AbstractEventDrivenViewModel{
         set {
             if(_examId == value) return;
             _examId = value;
-            _exam.ExamInstanceId = value;
+            _study.ExamInstanceId = value;
             RisePropertyChanged(nameof(ExamID));
         }
     }
@@ -88,7 +88,7 @@ public class AddExamWindow_ViewModel : AbstractEventDrivenViewModel{
         set {
             if(_name == value) return;
             _name = value;
-            _exam.PatientInfo.PatientName = value;
+            _study.PatientInfo.PatientName = value;
             RisePropertyChanged(nameof(Name));
         }
     }
@@ -102,7 +102,7 @@ public class AddExamWindow_ViewModel : AbstractEventDrivenViewModel{
         set {
             if(_age == value) return;
             _age = value;
-            _exam.PatientInfo.PatientAge = value;
+            _study.PatientInfo.PatientAge = value;
             RisePropertyChanged(nameof(Age));
         }
     }
@@ -116,7 +116,7 @@ public class AddExamWindow_ViewModel : AbstractEventDrivenViewModel{
         set {
             if(_gender == value) return;
             _gender = value;
-            _exam.PatientInfo.PatientGender = value;
+            _study.PatientInfo.PatientGender = value;
             RisePropertyChanged(nameof(Gender));
         }
     }

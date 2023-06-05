@@ -4,13 +4,9 @@ D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\Event
 D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\bin\Debug\net6.0-windows\EventDrivenStruct.dll
 D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\bin\Debug\net6.0-windows\EventDrivenStruct.pdb
 D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\EventDrivenStruct.csproj.AssemblyReference.cache
-D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\MainWindow.g.cs
-D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\PatientAddingWindow.g.cs
 D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\App.g.cs
 D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\EventDrivenStruct_MarkupCompile.cache
 D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\EventDrivenStruct_MarkupCompile.lref
-D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\MainWindow.baml
-D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\PatientAddingWindow.baml
 D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\EventDrivenStruct.g.resources
 D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\EventDrivenStruct.GeneratedMSBuildEditorConfig.editorconfig
 D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\EventDrivenStruct.AssemblyInfoInputs.cache
@@ -50,3 +46,7 @@ D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\
 D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\EventDrivenStruct.pdb
 D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\EventDrivenStruct.genruntimeconfig.cache
 D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\ref\EventDrivenStruct.dll
+D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\Views\AddExamWindow.g.cs
+D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\Views\MainWindow.g.cs
+D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\Views\AddExamWindow.baml
+D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\Views\MainWindow.baml

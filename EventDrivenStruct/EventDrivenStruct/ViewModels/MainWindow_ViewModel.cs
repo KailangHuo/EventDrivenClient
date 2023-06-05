@@ -95,9 +95,9 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel{
     #endregion
 
     public override void UpdateByEvent(string propertyName, object o) {
-        if (propertyName.Equals(nameof(MainEntry_ModelFacade.ExamContainer))) {
-            ExamContainer examContainer = (ExamContainer)o;
-            examContainer.RegisterObserver(ExamContainerViewModel);
+        if (propertyName.Equals(nameof(MainEntry_ModelFacade.StudyCollection))) {
+            StudyCollection studyCollection = (StudyCollection)o;
+            studyCollection.RegisterObserver(ExamContainerViewModel);
         }
     }
 }

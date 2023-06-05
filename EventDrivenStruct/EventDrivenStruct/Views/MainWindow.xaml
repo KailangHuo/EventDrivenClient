@@ -97,16 +97,6 @@
                       ItemsSource="{Binding StudyTabContainer.StudyTabs}"
                       SelectedItem="{Binding StudyTabContainer.CurrentSelectedTab}"
             >
-                <ComboBox.Tag>
-                    <ListBox HorizontalAlignment="Right" VerticalAlignment="Center" Cursor="Hand" Margin="0,0,0,0"
-                             Width="230" Height="50">
-                        <ListBoxItem HorizontalAlignment="Right" ContentTemplate="{StaticResource Study_ComboBox_Template}"
-                                     MouseLeftButtonUp="{Binding }">
-                            
-                        </ListBoxItem>
-                    </ListBox>
-                </ComboBox.Tag>
-                
             </ComboBox>
             <Button Grid.Column="2" Name="CurrentStudySelection"
                     Margin="2"
