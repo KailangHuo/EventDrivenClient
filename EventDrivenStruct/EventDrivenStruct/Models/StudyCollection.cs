@@ -24,8 +24,16 @@ public class StudyCollection : AbstractEventDrivenObject{
         PublishEvent(nameof(AddStudyCollectionItem), studyCollectionItem);
     }
 
-    public void DeleteAddStudyCollectionItem(StudyCollectionItem studyCollectionItem) {
-        if (this.StudyCollectionItems.Contains(studyCollectionItem)) StudyCollectionItems.Remove(studyCollectionItem);
+    public void DeleteStudyCollectionItem(StudyCollectionItem studyCollectionItem) {
+        if (this.StudyCollectionItems.Contains(studyCollectionItem)) {
+            for (int i = 0; i < studyCollectionItem.GetStudyComposition().Count; i++) {
+                this.StudyHashSet.Remove(studyCollectionItem.GetStudyComposition()[i]);
+            }
+            StudyCollectionItems.Remove(studyCollectionItem);
+            public
+        }
+
+        
     }
 
     private bool Contains(StudyCollectionItem studyCollectionItem) {
