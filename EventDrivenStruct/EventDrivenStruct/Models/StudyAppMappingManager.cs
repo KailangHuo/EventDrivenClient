@@ -26,6 +26,11 @@ public class StudyAppMappingManager : AbstractEventDrivenObject{
 
     private Dictionary<StudyCollectionItem, StudyAppMappingObj> _map;
     
+    /// <summary>
+    /// TODO:有问题
+    /// </summary>
+    /// <param name="studyItem"></param>
+    /// <param name="appModel"></param>
     public void PutStudyAppMapObj(StudyCollectionItem studyItem, AppModel appModel) {
         if (!_map.ContainsKey(studyItem)) {
             StudyAppMappingObj obj = new StudyAppMappingObj();

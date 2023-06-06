@@ -40,11 +40,28 @@ namespace EventDrivenStruct {
         private void UnitTest() {
             MainEntry_ModelFacade facade = MainEntry_ModelFacade.GetInstance();
 
-            StudyCollectionItem studyCollectionItem = MakeItem("老王");
+            StudyCollectionItem laoWangColl = MakeItem("老王");
 
-            AppModel appModel = new AppModel("Review 2D");
+            AppModel review2D = new AppModel("Review 2D");
             
-            facade.AddStudyItem(studyCollectionItem, appModel);
+            facade.AddStudyItem(laoWangColl, review2D);
+
+            StudyCollectionItem laoZhangColl = MakeItem("老张");
+
+            AppModel review3D = new AppModel("Review 3D");
+            
+            facade.AddStudyItem(laoZhangColl, review3D);
+            
+            facade.AddStudyItem(laoWangColl, review2D);
+            
+            facade.AddStudyItem(laoWangColl, review3D);
+
+            StudyCollectionItem laoZhangRedundant = new StudyCollectionItem();
+            Study study = new Study("One" + " " + "老张");
+            laoZhangRedundant.GetStudyComposition().Add(study);
+            
+            facade.AddStudyItem(laoZhangRedundant, review3D);
+            facade.DeleteStudyItem(laoZhangRedundant);
         }
 
         private StudyCollectionItem MakeItem(string param1) {
