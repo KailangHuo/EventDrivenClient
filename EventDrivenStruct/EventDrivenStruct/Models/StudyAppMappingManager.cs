@@ -26,39 +26,26 @@ public class StudyAppMappingManager : AbstractEventDrivenObject{
 
     private Dictionary<StudyCollectionItem, StudyAppMappingObj> _map;
     
-    /// <summary>
-    /// TODO:有问题
-    /// </summary>
-    /// <param name="studyItem"></param>
-    /// <param name="appModel"></param>
     public void PutStudyAppMapObj(StudyCollectionItem studyItem, AppModel appModel) {
         if (!_map.ContainsKey(studyItem)) {
             StudyAppMappingObj obj = new StudyAppMappingObj();
             obj.StudyCollectionItem = studyItem;
-            obj.AppList = new List<AppModel>();
-            obj.AppList.Add(appModel);
-            
+            obj.AddAppModel(appModel); 
             _map.Add(studyItem, obj);
-            PublishEvent(nameof(PutStudyAppMapObj), obj);
         }
         else {
-            if (!_map[studyItem].AppList.Contains(appModel)) {
-                _map[studyItem].AppList.Add(appModel);
-                PublishEvent(nameof(PutStudyAppMapObj), _map[studyItem]);
-            }
-            
+            _map[studyItem].AddAppModel(appModel);
         }
     }
 
-    public void RemoveStudyAppMapObj(StudyCollectionItem studyItem) {
-        if (!_map.ContainsKey(studyItem)) {
-            PublishEvent(nameof(RemoveStudyAppMapObj), null);
-            return;
-        }
 
+    public void RemoveStudyAppMapObj(StudyCollectionItem studyItem) { 
         _map.Remove(studyItem);
-        PublishEvent(nameof(RemoveStudyAppMapObj), studyItem);
     }
-    
+
+    public void RemoveAppFromStudyAppObj(StudyCollectionItem studyCollectionItem, AppModel appModel) {
+        if(!_map.ContainsKey(studyCollectionItem)) return;
+        _map[studyCollectionItem].RemoveAppModel(appModel);
+    }
 
 }

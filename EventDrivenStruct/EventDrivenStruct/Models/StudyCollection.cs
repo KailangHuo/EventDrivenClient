@@ -8,51 +8,49 @@ public class StudyCollection : AbstractEventDrivenObject{
 
     public StudyCollection() {
         StudyCollectionItems = new List<StudyCollectionItem>();
-        StudyHashSet = new HashSet<Study>();
+        _studyHashSet = new HashSet<Study>();
     }
 
     private List<StudyCollectionItem> StudyCollectionItems;
 
-    private HashSet<Study> StudyHashSet;
+    private HashSet<Study> _studyHashSet;
 
-    public void AddStudyCollectionItem(StudyCollectionItem studyCollectionItem) {
-        if (Contains(studyCollectionItem)) {
-            AddItemFailed(studyCollectionItem);
-            return;
+    public bool AddStudyCollectionItem(StudyCollectionItem studyCollectionItem) {
+        if (this.ContainsAnyStudy(studyCollectionItem.GetStudyComposition())) {
+            return false;
         }
-        AddInHashSet(studyCollectionItem.GetStudyComposition());
         StudyCollectionItems.Add(studyCollectionItem);
+        AddStudiesInHashSet(studyCollectionItem.GetStudyComposition());
         PublishEvent(nameof(AddStudyCollectionItem), studyCollectionItem);
+        return true;
     }
 
     public void DeleteStudyCollectionItem(StudyCollectionItem studyCollectionItem) {
-        if (this.StudyCollectionItems.Contains(studyCollectionItem)) {
-            RemoveFromHashSet(studyCollectionItem.GetStudyComposition());
+        if (this.Contains(studyCollectionItem)) {
             StudyCollectionItems.Remove(studyCollectionItem);
+            RemoveStudiesFromHashSet(studyCollectionItem.GetStudyComposition());
             PublishEvent(nameof(DeleteStudyCollectionItem), studyCollectionItem);
         }
-
-        
     }
 
-    private bool Contains(StudyCollectionItem studyCollectionItem) {
-        HashSet<Study> set = new HashSet<Study>(studyCollectionItem.GetStudyComposition());
-        return this.StudyHashSet.IsSupersetOf(set);
+    public bool Contains(StudyCollectionItem studyCollectionItem) {
+        return this.StudyCollectionItems.Contains(studyCollectionItem);
     }
 
-    private void AddItemFailed(StudyCollectionItem studyCollectionItem) {
-        PublishEvent(nameof(AddItemFailed), studyCollectionItem);
+    private bool ContainsAnyStudy(List<Study> studies) {
+        HashSet<Study> hashSet = new HashSet<Study>(studies);
+        return this._studyHashSet.Overlaps(hashSet);
     }
 
-    private void AddInHashSet(List<Study> studyList) {
-        for (int i = 0; i < studyList.Count; i++) {
-            this.StudyHashSet.Add(studyList[i]);
+    private void AddStudiesInHashSet(List<Study> studies) {
+        for (int i = 0; i < studies.Count; i++) {
+            this._studyHashSet.Add(studies[i]);
         }
     }
 
-    private void RemoveFromHashSet(List<Study> studyList) {
-        for (int i = 0; i < studyList.Count; i++) {
-            this.StudyHashSet.Remove(studyList[i]);
+    private void RemoveStudiesFromHashSet(List<Study> studies) {
+        for (int i = 0; i < studies.Count; i++) {
+            this._studyHashSet.Remove(studies[i]);
         }
     }
 

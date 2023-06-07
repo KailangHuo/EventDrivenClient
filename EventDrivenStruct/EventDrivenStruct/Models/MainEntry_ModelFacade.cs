@@ -34,19 +34,47 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
             PublishEvent(nameof(StudyCollection), _studyCollection);
         }
     }
-    
-    public void AddStudyItem(StudyCollectionItem studyItem, AppModel appModel) {
-        StudyCollection.AddStudyCollectionItem(studyItem);
-        StudyAppMappingManager.GetInstance().PutStudyAppMapObj(studyItem, appModel);
+
+    private StudyAppMappingManager _studyAppMappingManager;
+
+    public StudyAppMappingManager StudyAppMappingManager {
+        get {
+            return _studyAppMappingManager;
+        }
+        set {
+            if(_studyAppMappingManager == value) return;
+            _studyAppMappingManager = StudyAppMappingManager.GetInstance();
+            PublishEvent(nameof(StudyAppMappingManager), _studyAppMappingManager);
+        }
+    }
+
+    public void AddStudyItemWithApp(StudyCollectionItem studyItem, AppModel appModel) {
+        AddStudyItem(studyItem); 
+        AddAppToStudy(studyItem, appModel);
+    }
+
+    private void AddStudyItem(StudyCollectionItem studyCollectionItem) {
+        StudyCollection.AddStudyCollectionItem(studyCollectionItem);
+    }
+
+    public void AddAppToStudy(StudyCollectionItem studyCollectionItem, AppModel appModel) {
+        if(StudyCollection.Contains(studyCollectionItem))StudyAppMappingManager.PutStudyAppMapObj(studyCollectionItem, appModel);
     }
 
     public void DeleteStudyItem(StudyCollectionItem studyItem) {
-        StudyCollection.DeleteStudyCollectionItem(studyItem);
-        StudyAppMappingManager.GetInstance().RemoveStudyAppMapObj(studyItem);
+        if (StudyCollection.Contains(studyItem)) {
+            StudyAppMappingManager.RemoveStudyAppMapObj(studyItem);
+            StudyCollection.DeleteStudyCollectionItem(studyItem);
+        }
     }
 
-    public void AddAppToStudy(StudyCollectionItem studyItem, AppModel appModel) {
-        StudyAppMappingManager.GetInstance().PutStudyAppMapObj(studyItem, appModel);
+    public void DeleteAppFromStudy(StudyCollectionItem studyCollectionItem, AppModel appModel) {
+        if (StudyCollection.Contains(studyCollectionItem)) {
+            StudyAppMappingManager.RemoveAppFromStudyAppObj(studyCollectionItem, appModel);
+        }
     }
 
+    public StudyAppMappingObj GetMappingObjByStudy(StudyCollectionItem studyCollectionItem) {
+        
+    }
 }

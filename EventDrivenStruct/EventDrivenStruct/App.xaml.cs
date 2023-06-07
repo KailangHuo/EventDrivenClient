@@ -23,7 +23,7 @@ namespace EventDrivenStruct {
         }
 
         protected override void OnStartup(StartupEventArgs e) {
-            UnitTest();
+            UnitTest1();
             /*GlobalContext.GetInstance().RegisterModelFacade(MainEntry_ModelFacade.GetInstance());
             Current.Dispatcher.BeginInvoke(() => {
                 MainWindow mainWindow = new MainWindow();
@@ -37,43 +37,40 @@ namespace EventDrivenStruct {
             });*/
         }
 
-        private void UnitTest() {
+        private void UnitTest1() {
             MainEntry_ModelFacade facade = MainEntry_ModelFacade.GetInstance();
 
             StudyCollectionItem laoWangColl = MakeItem("老王");
 
             AppModel review2D = new AppModel("Review 2D");
             
-            facade.AddStudyItem(laoWangColl, review2D);
+            facade.AddStudyItemWithApp(laoWangColl, review2D); // 添加 老王 2d -> 成功
 
             StudyCollectionItem laoZhangColl = MakeItem("老张");
 
             AppModel review3D = new AppModel("Review 3D");
             
-            facade.AddStudyItem(laoZhangColl, review3D);
+            facade.AddStudyItemWithApp(laoZhangColl, review3D);// 添加 老张 3D -> 成功
             
-            facade.AddStudyItem(laoWangColl, review2D);
+            facade.AddStudyItemWithApp(laoWangColl, review2D);// 再次添加 老王 2d -> 不能添加应用
             
-            facade.AddStudyItem(laoWangColl, review3D);
+            facade.AddStudyItemWithApp(laoWangColl, review3D);// 添加 老王 3d -> 成功添加新的应用
 
             StudyCollectionItem laoZhangRedundant = new StudyCollectionItem();
             Study study = new Study("One" + " " + "老张");
             laoZhangRedundant.GetStudyComposition().Add(study);
             
-            facade.AddStudyItem(laoZhangRedundant, review3D);
-            facade.DeleteStudyItem(laoZhangRedundant);
+            facade.AddStudyItemWithApp(laoZhangRedundant, review3D);// 添加 老王残 3d -> 不能
+            facade.DeleteStudyItem(laoZhangRedundant);// 移除 老王残 -> 不能
+            facade.DeleteStudyItem(laoWangColl);// 移除 老王 -> 成功
         }
 
         private StudyCollectionItem MakeItem(string param1) {
             StudyCollectionItem studyCollectionItem = new StudyCollectionItem();
 
             Study studyOne = new Study("One" + " " + param1);
-            Study studyTwo = new Study("Two"+ " " + param1);
-            Study studyThree = new Study("Three"+ " " + param1);
-            
+
             studyCollectionItem.AddInStudyComposition(studyOne);
-            studyCollectionItem.AddInStudyComposition(studyTwo);
-            studyCollectionItem.AddInStudyComposition(studyThree);
 
             return studyCollectionItem;
         }

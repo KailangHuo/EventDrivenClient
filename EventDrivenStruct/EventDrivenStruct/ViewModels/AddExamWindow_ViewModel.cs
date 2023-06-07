@@ -70,7 +70,7 @@ public class AddExamWindow_ViewModel : AbstractEventDrivenViewModel{
         set {
             if(_examId == value) return;
             _examId = value;
-            _study.ExamInstanceId = value;
+            _study.StudyInstanceId = value;
             RisePropertyChanged(nameof(ExamID));
         }
     }

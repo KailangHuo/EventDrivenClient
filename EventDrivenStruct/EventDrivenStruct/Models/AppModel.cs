@@ -13,4 +13,8 @@ public class AppModel : AbstractEventDrivenObject{
     }
 
     public string AppName { get; private set; }
+
+    public override string ToString() {
+        return AppName;
+    }
 }
