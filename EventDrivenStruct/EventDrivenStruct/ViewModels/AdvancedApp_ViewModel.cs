@@ -19,7 +19,7 @@ public class AdvancedApp_ViewModel : AbstractEventDrivenViewModel{
             return _appName;
         }
         set {
-            if(_appName.Equals(value))return;
+            if(_appName == (value))return;
             _appName = value;
             RisePropertyChanged(nameof(AppName));
         }

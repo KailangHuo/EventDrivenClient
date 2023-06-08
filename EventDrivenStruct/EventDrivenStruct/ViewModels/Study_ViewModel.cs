@@ -22,7 +22,7 @@ public class Study_ViewModel : AbstractEventDrivenViewModel{
             return _patientName;
         }
         set {
-            if(_patientName.Equals(value)) return;
+            if(_patientName == value) return;
             _patientName = value;
             RisePropertyChanged(nameof(PatientName));
         }
@@ -35,7 +35,7 @@ public class Study_ViewModel : AbstractEventDrivenViewModel{
             return _patientAge;
         }
         set {
-            if(_patientAge.Equals(value))return;
+            if(_patientAge == value)return;
             _patientAge = value;
             RisePropertyChanged(nameof(PatientAge));
         }
@@ -48,7 +48,7 @@ public class Study_ViewModel : AbstractEventDrivenViewModel{
             return _patientGender;
         }
         set {
-            if(_patientGender.Equals(value))return;
+            if(_patientGender == value)return;
             _patientGender = value;
             RisePropertyChanged(nameof(PatientGender));
         }
@@ -61,7 +61,7 @@ public class Study_ViewModel : AbstractEventDrivenViewModel{
             return _studyUid;
         }
         set {
-            if(_studyUid.Equals(value))return;
+            if(_studyUid == (value))return;
             _studyUid = value;
             RisePropertyChanged(nameof(StudyUid));
         }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using EventDrivenElements;
 using EventDrivenStruct.Models;
 
@@ -6,20 +7,56 @@ namespace EventDrivenStruct.ViewModels;
 public class AppTab_ViewModel : AbstractEventDrivenViewModel{
 
     public AppTab_ViewModel() {
-        AppContainerViewModel = new AppContainer_ViewModel();
+        _map = new Dictionary<StudyCollectionItem, AppContainer_ViewModel>();
+        
     }
 
-    public AppContainer_ViewModel AppContainerViewModel { get; private set; }
+    private Dictionary<StudyCollectionItem, AppContainer_ViewModel> _map;
 
-    private void UpdateAppContainer(Study_ViewModel studyViewModel) {
-        StudyAppMappingObj obj = MainEntry_ModelFacade.GetInstance().GetMappingObjByStudy(studyViewModel._studyCollectionItem);
-        
+    
+    private AppContainer_ViewModel _selectedAppContainer;
+    
+    public AppContainer_ViewModel SelectedAppContainer {
+        get {
+            return _selectedAppContainer;
+        }
+        set {
+            if(_selectedAppContainer == value) return;
+            _selectedAppContainer = value;
+            RisePropertyChanged(nameof(SelectedAppContainer));
+        }
+    }
+    
+    
+    private void PutInMap(StudyAppMappingObj studyAppMappingObj) {
+        AppContainer_ViewModel appContainerViewModel = new AppContainer_ViewModel(studyAppMappingObj);
+        studyAppMappingObj.RegisterObserver(appContainerViewModel);
+        _map.Add(studyAppMappingObj.StudyCollectionItem, appContainerViewModel);
+    }
+
+    private void RemoveFromMap(StudyAppMappingObj studyAppMappingObj) {
+        _map.Remove(studyAppMappingObj.StudyCollectionItem);
+    }
+
+    private void SwapSelectedAppContainer(StudyCollectionItem studyCollectionItem) {
+        SelectedAppContainer = _map[studyCollectionItem];
     }
 
     public override void UpdateByEvent(string propertyName, object o) {
         if (propertyName.Equals(nameof(StudyContainer_ViewModel.SelectedStudy))) {
             Study_ViewModel studyViewModel = (Study_ViewModel)o;
+            SwapSelectedAppContainer(studyViewModel._studyCollectionItem);
             
+        }
+
+        if (propertyName.Equals(nameof(StudyAppMappingManager.PutStudyAppMapObj))) {
+            StudyAppMappingObj studyAppMappingObj = (StudyAppMappingObj)o;
+            PutInMap(studyAppMappingObj);
+        }
+
+        if (propertyName.Equals(nameof(StudyAppMappingManager.RemoveStudyAppMapObj))) {
+            StudyAppMappingObj studyAppMappingObj = (StudyAppMappingObj)o;
+            this.RemoveFromMap(studyAppMappingObj);
         }
     }
 }

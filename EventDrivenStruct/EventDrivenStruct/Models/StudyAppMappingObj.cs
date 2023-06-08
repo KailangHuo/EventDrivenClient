@@ -15,11 +15,17 @@ public class StudyAppMappingObj : AbstractEventDrivenObject {
     private List<AppModel> AppList;
 
     public void AddAppModel(AppModel appModel) {
-        if(!this.AppList.Contains(appModel))this.AppList.Add(appModel);
+        if (!this.AppList.Contains(appModel)) {
+            this.AppList.Add(appModel);
+            PublishEvent(nameof(AddAppModel), appModel);
+        }
     }
 
     public void RemoveAppModel(AppModel appModel) {
-        if(this.AppList.Contains(appModel))this.AppList.Remove(appModel);
+        if (this.AppList.Contains(appModel)) {
+            this.AppList.Remove(appModel);
+            PublishEvent(nameof(RemoveAppModel), appModel);
+        }
     }
 
 }

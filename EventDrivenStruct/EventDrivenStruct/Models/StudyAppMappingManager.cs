@@ -32,6 +32,7 @@ public class StudyAppMappingManager : AbstractEventDrivenObject{
             obj.StudyCollectionItem = studyItem;
             obj.AddAppModel(appModel); 
             _map.Add(studyItem, obj);
+            PublishEvent(nameof(PutStudyAppMapObj), obj);
         }
         else {
             _map[studyItem].AddAppModel(appModel);
@@ -39,8 +40,10 @@ public class StudyAppMappingManager : AbstractEventDrivenObject{
     }
 
 
-    public void RemoveStudyAppMapObj(StudyCollectionItem studyItem) { 
+    public void RemoveStudyAppMapObj(StudyCollectionItem studyItem) {
+        StudyAppMappingObj studyAppMappingObj = _map[studyItem];
         _map.Remove(studyItem);
+        PublishEvent(nameof(RemoveStudyAppMapObj), studyAppMappingObj);
     }
 
     public void RemoveAppFromStudyAppObj(StudyCollectionItem studyCollectionItem, AppModel appModel) {

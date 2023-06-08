@@ -30,8 +30,10 @@ public class StudyContainer_ViewModel : AbstractEventDrivenViewModel{
 
     private void AddStudyViewModel(StudyCollectionItem item) {
         Study_ViewModel studyViewModel = new Study_ViewModel(item);
+        item.RegisterObserver(studyViewModel);
         // 不用判断是否存在, 因为在Model层处理好了
         this._studyViewModels.Add(studyViewModel);
+        SelectedStudy = studyViewModel;
     }
 
     private void RemoveStudyViewModel(StudyCollectionItem item) {

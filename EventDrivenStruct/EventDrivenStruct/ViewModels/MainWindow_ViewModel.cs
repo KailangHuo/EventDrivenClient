@@ -13,10 +13,10 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel{
     #region CONSTRUCTION
 
     public MainWindow_ViewModel() {
-        ApplicationContainerViewModel = new ApplicationContainer_ViewModel();
-        ExamContainerViewModel = new ExamContainer_ViewModel();
-        HostingWindowViewModel = new HostingWindow_ViewModel();
-
+        StudyContainerViewModel = new StudyContainer_ViewModel();
+        AppTabViewModel = new AppTab_ViewModel();
+        StudyContainerViewModel.RegisterObserver(AppTabViewModel);
+        
         RegisterObserver(PopupManager.GetInstance());
         SetupCommands();
     }
@@ -30,47 +30,10 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel{
 
     #region NOTIFIABLE_VIEW_MODELS
 
-    private ExamContainer_ViewModel _examContainerViewModel;
+    public StudyContainer_ViewModel StudyContainerViewModel { get; private set; }
 
-    public ExamContainer_ViewModel ExamContainerViewModel {
-        get {
-            return this._examContainerViewModel;
-        }
-        set {
-            if(this._examContainerViewModel == value) return;
-            this._examContainerViewModel = value;
-            PublishEvent(nameof(ExamContainerViewModel), this._examContainerViewModel);
-            RisePropertyChanged(nameof(ExamContainerViewModel));
-        }
-    }
+    public AppTab_ViewModel AppTabViewModel { get; private set; }
 
-    private ApplicationContainer_ViewModel _applicationContainerViewModel;
-
-    public ApplicationContainer_ViewModel ApplicationContainerViewModel {
-        get {
-            return this._applicationContainerViewModel;
-        }
-        set {
-            if(this._applicationContainerViewModel == value) return;
-            this._applicationContainerViewModel = value;
-            PublishEvent(nameof(ApplicationContainerViewModel), this._applicationContainerViewModel);
-            RisePropertyChanged(nameof(ApplicationContainerViewModel));
-        }
-    }
-
-    private HostingWindow_ViewModel _hostingWindowViewModel;
-
-    public HostingWindow_ViewModel HostingWindowViewModel {
-        get {
-            return this._hostingWindowViewModel;
-        }
-        set {
-            if(_hostingWindowViewModel == value) return;
-            _hostingWindowViewModel = value;
-            PublishEvent(nameof(HostingWindowViewModel), this._hostingWindowViewModel);
-            RisePropertyChanged(nameof(HostingWindowViewModel));
-        }
-    }
 
     #endregion
 
@@ -97,7 +60,12 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel{
     public override void UpdateByEvent(string propertyName, object o) {
         if (propertyName.Equals(nameof(MainEntry_ModelFacade.StudyCollection))) {
             StudyCollection studyCollection = (StudyCollection)o;
-            studyCollection.RegisterObserver(ExamContainerViewModel);
+            studyCollection.RegisterObserver(StudyContainerViewModel);
+        }
+
+        if (propertyName.Equals(nameof(MainEntry_ModelFacade.StudyAppMappingManager))) {
+            StudyAppMappingManager studyAppMappingManager = (StudyAppMappingManager)o;
+            studyAppMappingManager.RegisterObserver(AppTabViewModel);
         }
     }
 }

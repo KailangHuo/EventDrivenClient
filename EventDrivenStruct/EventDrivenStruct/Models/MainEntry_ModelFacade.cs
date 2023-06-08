@@ -9,6 +9,7 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
 
     private MainEntry_ModelFacade() {
         StudyCollection = new StudyCollection();
+        StudyAppMappingManager = StudyAppMappingManager.GetInstance();
     }
 
     public static MainEntry_ModelFacade GetInstance() {
@@ -43,7 +44,7 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
         }
         set {
             if(_studyAppMappingManager == value) return;
-            _studyAppMappingManager = StudyAppMappingManager.GetInstance();
+            _studyAppMappingManager = value;
             PublishEvent(nameof(StudyAppMappingManager), _studyAppMappingManager);
         }
     }
@@ -73,8 +74,5 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
             StudyAppMappingManager.RemoveAppFromStudyAppObj(studyCollectionItem, appModel);
         }
     }
-
-    public StudyAppMappingObj GetMappingObjByStudy(StudyCollectionItem studyCollectionItem) {
-        
-    }
+    
 }
