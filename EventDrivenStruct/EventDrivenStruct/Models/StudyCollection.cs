@@ -54,4 +54,11 @@ public class StudyCollection : AbstractEventDrivenObject{
         }
     }
 
+    public override void UpdateByEvent(string propertyName, object o) {
+        if (propertyName.Equals(nameof(StudyAppMappingManager.RemoveStudyAppMapObj))) {
+            StudyAppMappingObj obj = (StudyAppMappingObj)o;
+            StudyCollectionItem studyCollectionItem = obj.StudyCollectionItem;
+            DeleteStudyCollectionItem(studyCollectionItem);
+        }
+    }
 }

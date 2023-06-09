@@ -13,7 +13,11 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
 
     private Dictionary<StudyCollectionItem, AppContainer_ViewModel> _map;
 
-    
+
+    //TODO: 有待于实现
+    public AppContainerManager_ViewModel AppContainerManager { get; private set; }
+
+
     private AppContainer_ViewModel _selectedAppContainer;
     
     public AppContainer_ViewModel SelectedAppContainer {
@@ -29,6 +33,9 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
     
     
     private void PutInMap(StudyAppMappingObj studyAppMappingObj) {
+        //TODO:有待于实现
+        
+        
         AppContainer_ViewModel appContainerViewModel = new AppContainer_ViewModel(studyAppMappingObj);
         studyAppMappingObj.RegisterObserver(appContainerViewModel);
         _map.Add(studyAppMappingObj.StudyCollectionItem, appContainerViewModel);
@@ -38,14 +45,14 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
         _map.Remove(studyAppMappingObj.StudyCollectionItem);
     }
 
-    private void SwapSelectedAppContainer(StudyCollectionItem studyCollectionItem) {
-        SelectedAppContainer = _map[studyCollectionItem];
+    private void SwapSelectedAppContainer(StudyCollectionItem? studyCollectionItem) {
+        SelectedAppContainer = studyCollectionItem == null ? null : _map[studyCollectionItem];
     }
 
     public override void UpdateByEvent(string propertyName, object o) {
         if (propertyName.Equals(nameof(StudyContainer_ViewModel.SelectedStudy))) {
             Study_ViewModel studyViewModel = (Study_ViewModel)o;
-            SwapSelectedAppContainer(studyViewModel._studyCollectionItem);
+            SwapSelectedAppContainer(studyViewModel?._studyCollectionItem);
             
         }
 

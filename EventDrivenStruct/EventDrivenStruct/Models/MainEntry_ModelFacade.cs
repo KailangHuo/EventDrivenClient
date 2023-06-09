@@ -10,6 +10,8 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
     private MainEntry_ModelFacade() {
         StudyCollection = new StudyCollection();
         StudyAppMappingManager = StudyAppMappingManager.GetInstance();
+        StudyCollection.RegisterObserver(StudyAppMappingManager);
+        StudyAppMappingManager.RegisterObserver(StudyCollection);
     }
 
     public static MainEntry_ModelFacade GetInstance() {
@@ -50,29 +52,18 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
     }
 
     public void AddStudyItemWithApp(StudyCollectionItem studyItem, AppModel appModel) {
-        AddStudyItem(studyItem); 
-        AddAppToStudy(studyItem, appModel);
-    }
-
-    private void AddStudyItem(StudyCollectionItem studyCollectionItem) {
-        StudyCollection.AddStudyCollectionItem(studyCollectionItem);
-    }
-
-    public void AddAppToStudy(StudyCollectionItem studyCollectionItem, AppModel appModel) {
-        if(StudyCollection.Contains(studyCollectionItem))StudyAppMappingManager.PutStudyAppMapObj(studyCollectionItem, appModel);
+        StudyCollection.AddStudyCollectionItem(studyItem);
+        StudyAppMappingManager.AddAppToMapObj(studyItem, appModel);
     }
 
     public void DeleteStudyItem(StudyCollectionItem studyItem) {
-        if (StudyCollection.Contains(studyItem)) {
-            StudyAppMappingManager.RemoveStudyAppMapObj(studyItem);
-            StudyCollection.DeleteStudyCollectionItem(studyItem);
-        }
+        StudyCollection.DeleteStudyCollectionItem(studyItem);
     }
 
     public void DeleteAppFromStudy(StudyCollectionItem studyCollectionItem, AppModel appModel) {
-        if (StudyCollection.Contains(studyCollectionItem)) {
-            StudyAppMappingManager.RemoveAppFromStudyAppObj(studyCollectionItem, appModel);
-        }
+        StudyAppMappingManager.RemoveAppFromStudyAppObj(studyCollectionItem, appModel);
     }
+    
+    
     
 }

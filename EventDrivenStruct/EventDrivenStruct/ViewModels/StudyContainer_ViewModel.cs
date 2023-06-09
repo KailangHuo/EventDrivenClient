@@ -32,13 +32,19 @@ public class StudyContainer_ViewModel : AbstractEventDrivenViewModel{
         Study_ViewModel studyViewModel = new Study_ViewModel(item);
         item.RegisterObserver(studyViewModel);
         // 不用判断是否存在, 因为在Model层处理好了
-        this._studyViewModels.Add(studyViewModel);
-        SelectedStudy = studyViewModel;
+        this._studyViewModels.Insert(0,studyViewModel);
+        UpdateSelectedStudy();
     }
 
     private void RemoveStudyViewModel(StudyCollectionItem item) {
         Study_ViewModel studyViewModel = new Study_ViewModel(item);
         this._studyViewModels.Remove(studyViewModel);
+        UpdateSelectedStudy();
+    }
+
+    private void UpdateSelectedStudy() {
+        if (_studyViewModels.Count > 0) SelectedStudy = _studyViewModels[0];
+        else SelectedStudy = null;
     }
 
     public override void UpdateByEvent(string propertyName, object o) {

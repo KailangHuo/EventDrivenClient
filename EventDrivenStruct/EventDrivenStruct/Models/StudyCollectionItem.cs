@@ -18,4 +18,14 @@ public class StudyCollectionItem : AbstractEventDrivenObject{
     public void AddInStudyComposition(Study study) {
         this.studyComposition.Add(study);
     }
+
+    public override string ToString() {
+        string s = "";
+
+        for (int i = 0; i < studyComposition.Count; i++) {
+            s += studyComposition[i].ToString() + ", ";
+        }
+
+        return s;
+    }
 }

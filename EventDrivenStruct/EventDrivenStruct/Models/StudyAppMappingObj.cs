@@ -25,7 +25,12 @@ public class StudyAppMappingObj : AbstractEventDrivenObject {
         if (this.AppList.Contains(appModel)) {
             this.AppList.Remove(appModel);
             PublishEvent(nameof(RemoveAppModel), appModel);
+            if (AppList.Count == 0) AppListEmpty();
         }
+    }
+
+    public void AppListEmpty() {
+        PublishEvent(nameof(AppListEmpty), this);
     }
 
 }

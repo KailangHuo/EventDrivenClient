@@ -26,24 +26,27 @@ public class StudyAppMappingManager : AbstractEventDrivenObject{
 
     private Dictionary<StudyCollectionItem, StudyAppMappingObj> _map;
     
-    public void PutStudyAppMapObj(StudyCollectionItem studyItem, AppModel appModel) {
-        if (!_map.ContainsKey(studyItem)) {
-            StudyAppMappingObj obj = new StudyAppMappingObj();
-            obj.StudyCollectionItem = studyItem;
-            obj.AddAppModel(appModel); 
-            _map.Add(studyItem, obj);
-            PublishEvent(nameof(PutStudyAppMapObj), obj);
-        }
-        else {
-            _map[studyItem].AddAppModel(appModel);
-        }
+    public void PutStudyAppMapObj(StudyCollectionItem studyCollectionItem) {
+        if(_map.ContainsKey(studyCollectionItem)) return;
+        StudyAppMappingObj obj = new StudyAppMappingObj();
+        obj.StudyCollectionItem = studyCollectionItem;
+        _map.Add(studyCollectionItem, obj);
+        obj.RegisterObserver(this);
+        PublishEvent(nameof(PutStudyAppMapObj), obj);
+    }
+
+    public void AddAppToMapObj(StudyCollectionItem studyItem, AppModel appModel) {
+        if(!_map.ContainsKey(studyItem)) return;
+        _map[studyItem].AddAppModel((appModel));
     }
 
 
     public void RemoveStudyAppMapObj(StudyCollectionItem studyItem) {
-        StudyAppMappingObj studyAppMappingObj = _map[studyItem];
-        _map.Remove(studyItem);
-        PublishEvent(nameof(RemoveStudyAppMapObj), studyAppMappingObj);
+        if (_map.ContainsKey(studyItem)) {
+            StudyAppMappingObj studyAppMappingObj = _map[studyItem];
+            _map.Remove(studyItem);
+            PublishEvent(nameof(RemoveStudyAppMapObj), studyAppMappingObj);
+        }
     }
 
     public void RemoveAppFromStudyAppObj(StudyCollectionItem studyCollectionItem, AppModel appModel) {
@@ -51,4 +54,20 @@ public class StudyAppMappingManager : AbstractEventDrivenObject{
         _map[studyCollectionItem].RemoveAppModel(appModel);
     }
 
+    public override void UpdateByEvent(string propertyName, object o) {
+        if (propertyName.Equals(nameof(StudyCollection.AddStudyCollectionItem))) {
+            StudyCollectionItem item = (StudyCollectionItem)o; 
+            PutStudyAppMapObj(item);
+        }
+
+        if (propertyName.Equals(nameof(StudyCollection.DeleteStudyCollectionItem))) {
+            StudyCollectionItem item = (StudyCollectionItem)o;
+            RemoveStudyAppMapObj(item);
+        }
+
+        if (propertyName.Equals(nameof(StudyAppMappingObj.AppListEmpty))) {
+            StudyAppMappingObj obj = (StudyAppMappingObj)o;
+            RemoveStudyAppMapObj(obj.StudyCollectionItem);
+        }
+    }
 }

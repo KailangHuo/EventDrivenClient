@@ -10,6 +10,15 @@ using EventDrivenElements;
 using EventDrivenStruct.Models;
 using EventDrivenStruct.ViewModels;
 
+/**
+ * 原则:
+ * 1. 真实更新发生后, 必须立刻广播更新事件, 这两者是原子动作
+ *
+ * 优势
+ * 1. 可以支持前所未有的多屏处理
+ */
+
+
 namespace EventDrivenStruct {
     /// <summary>
     /// Interaction logic for App.xaml
@@ -53,6 +62,8 @@ namespace EventDrivenStruct {
             AppModel review2D = new AppModel("Review 2D");
             
             facade.AddStudyItemWithApp(laoWangColl, review2D); // 添加 老王 2d -> 成功
+            
+            facade.DeleteAppFromStudy(laoWangColl, review2D);
 
             StudyCollectionItem laoZhangColl = MakeItem("老张", 2);
 
