@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using EventDrivenElements;
 using EventDrivenStruct.Models;
 
@@ -8,7 +9,7 @@ namespace EventDrivenStruct.ViewModels;
 public class AppContainer_ViewModel : AbstractEventDrivenViewModel {
 
     public AppContainer_ViewModel(StudyAppMappingObj mappingObj) {
-        AppSequenceManagerList = new ObservableCollection<AppSequenceManager_ViewModel>();
+        AppSequenceManagerCollection = new ObservableCollection<AppSequenceManager_ViewModel>();
         StudyAppMappingObj = mappingObj;
         AppList = new ObservableCollection<AdvancedApp_ViewModel>();
         InitializeContainerNumber();
@@ -17,52 +18,59 @@ public class AppContainer_ViewModel : AbstractEventDrivenViewModel {
 
     public StudyAppMappingObj StudyAppMappingObj;
 
-    private int _containerNumber;
+    private int _sequenceManagerNumber;
 
     private void InitializeContainerNumber() {
-        _containerNumber = 2;
-        for (int i = 0; i < _containerNumber; i++) {
-            AppSequenceManagerList.Add(new AppSequenceManager_ViewModel());
+        _sequenceManagerNumber = 2;
+        for (int i = 0; i < _sequenceManagerNumber; i++) {
+            AppSequenceManagerCollection.Add(new AppSequenceManager_ViewModel());
         }
     }
 
     private void InitializeConstantApps() {
-        ConstantAppList = new List<AdvancedApp_ViewModel>();
-        
+        AppList.Add(new AdvancedApp_ViewModel(new AppModel("Review2D")));
+        AppList.Add(new AdvancedApp_ViewModel(new AppModel("Review3D")));
+        AppList.Add(new AdvancedApp_ViewModel(new AppModel("MMFusion")));
+        AppList.Add(new AdvancedApp_ViewModel(new AppModel("Filming")));
+
+        ConstantAppSet = new HashSet<AdvancedApp_ViewModel>();
+        for (int i = 0; i < AppList.Count; i++) {
+            ConstantAppSet.Add(AppList[i]);
+        }
     }
 
-    public ObservableCollection<AppSequenceManager_ViewModel> AppSequenceManagerList;
+    public ObservableCollection<AppSequenceManager_ViewModel> AppSequenceManagerCollection;
 
     private ObservableCollection<AdvancedApp_ViewModel> AppList;
 
-    private List<AdvancedApp_ViewModel> ConstantAppList;
+    private HashSet<AdvancedApp_ViewModel> ConstantAppSet;
 
 
     private void AddAdvancedAppViewModel(AppModel appModel) {
         AdvancedApp_ViewModel advancedAppViewModel = new AdvancedApp_ViewModel(appModel);
         appModel.RegisterObserver(advancedAppViewModel);
-        AppListAddItem();
-        this.AppList.Add(advancedAppViewModel);
-        for (int i = 0; i < AppSequenceManagerList.Count; i++) {
-            AppSequenceManagerList[i].AddApp(advancedAppViewModel);
+        AppListAddItem(appModel);
+        for (int i = 0; i < AppSequenceManagerCollection.Count; i++) {
+            AppSequenceManagerCollection[i].AddApp(advancedAppViewModel);
         }
     }
 
     public void RemoveAdvancedAppViewModel(AppModel appModel) {
         AdvancedApp_ViewModel advancedAppViewModel = new AdvancedApp_ViewModel(appModel);
-        AppListRemoveItem();
-        this.AppList.Remove(advancedAppViewModel);
-        for (int i = 0; i < AppSequenceManagerList.Count; i++) {
-            AppSequenceManagerList[i].RemoveApp(advancedAppViewModel);
+        AppListRemoveItem(appModel);
+        for (int i = 0; i < AppSequenceManagerCollection.Count; i++) {
+            AppSequenceManagerCollection[i].RemoveApp(advancedAppViewModel);
         }
     }
 
-    private void AppListAddItem() {
-        
+    private void AppListAddItem(AppModel appModel) {
+        if (ConstantAppSet.Contains(new AdvancedApp_ViewModel(appModel))) return;
+        AppList.Add(new AdvancedApp_ViewModel(appModel));
     }
 
-    private void AppListRemoveItem() {
-        
+    private void AppListRemoveItem(AppModel appModel) {
+        if(ConstantAppSet.Contains(new AdvancedApp_ViewModel(appModel))) return;
+        AppList.Remove(new AdvancedApp_ViewModel(appModel));
     }
 
     public override void UpdateByEvent(string propertyName, object o) {

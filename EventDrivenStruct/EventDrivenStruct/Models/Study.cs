@@ -40,7 +40,7 @@ public class Study : AbstractEventDrivenObject{
     }
 
     public override int GetHashCode() {
-        return this.StudyInstanceId.GetHashCode();
+        return this.PatientName.GetHashCode();
     }
 
     #endregion

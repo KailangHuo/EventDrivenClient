@@ -54,31 +54,28 @@ namespace EventDrivenStruct {
             
             var studies = mainWindowViewModel.StudyContainerViewModel;
             var screen1 = mainWindowViewModel.AppTabViewModel.SelectedAppContainer?.
-                AppSequenceManagerList[0];
+                AppSequenceManagerCollection[0];
             var screen2 = mainWindowViewModel.AppTabViewModel.SelectedAppContainer?.
-                AppSequenceManagerList[1];
+                AppSequenceManagerCollection[1];
             
             MainEntry_ModelFacade facade = MainEntry_ModelFacade.GetInstance();
             AppModel review2d = new AppModel("Review2D");
+            AppModel review3d = new AppModel("Review3D");
+            AppModel mmfusion = new AppModel("MMFusion");
             AppModel filming = new AppModel("Filming");
-            AppModel report = new AppModel("Report");
-            AppModel oncology = new AppModel("OnCology");
 
             StudyCollectionItem laoWang = MakeItem("老王",2);
             StudyCollectionItem laoLi = MakeItem("老李", 3);
                 
             
             facade.AddStudyItemWithApp(laoWang, review2d);
-            facade.AddStudyItemWithApp(laoWang, review2d);
-            facade.AddStudyItemWithApp(laoWang, filming);
-            facade.AddStudyItemWithApp(laoLi, report);
-            facade.AddStudyItemWithApp(laoLi, oncology);
+            facade.AddStudyItemWithApp(laoWang, mmfusion);
 
-            studies.SelectedStudy = new Study_ViewModel(laoWang);
-            AdvancedApp_ViewModel advancedAppViewModel = new AdvancedApp_ViewModel(review2d);
-            mainWindowViewModel.AppTabViewModel.SelectedAppContainer?.AppSequenceManagerList[0].ChangedSelection(advancedAppViewModel);
-            mainWindowViewModel.AppTabViewModel.SelectedAppContainer.RemoveAdvancedAppViewModel(review2d);
-            studies.SelectedStudy = new Study_ViewModel(laoLi);
+
+            mainWindowViewModel.AppTabViewModel.SelectedAppContainer.AppSequenceManagerCollection[0].ChangedSelection(new AdvancedApp_ViewModel(review2d));
+            AppModel oncology = new AppModel("Oncology");
+            facade.AddStudyItemWithApp(laoWang, oncology);
+
         }
 
         private StudyCollectionItem MakeItem(string param1, int times) {

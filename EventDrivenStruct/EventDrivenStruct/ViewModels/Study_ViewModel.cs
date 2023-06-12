@@ -5,7 +5,7 @@ namespace EventDrivenStruct.ViewModels;
 
 public class Study_ViewModel : AbstractEventDrivenViewModel{
 
-    public Study_ViewModel(StudyCollectionItem studyCollectionItem) {
+    public Study_ViewModel(StudyCollectionItem studyCollectionItem) : base(studyCollectionItem){
         this.StudyCollectionItem = studyCollectionItem;
         this.PatientName = studyCollectionItem.GetStudyComposition()[0].PatientName;
         this.PatientAge = studyCollectionItem.GetStudyComposition()[0].PatientAge;
@@ -72,21 +72,5 @@ public class Study_ViewModel : AbstractEventDrivenViewModel{
             PublishEvent(nameof(TryDelete), this);
         }
     }
-    
-    
-    #region HASH_AND_EQUALS
-
-    public override bool Equals(object? obj) {
-        if (this == obj) return true;
-        if (obj == null || GetType() != obj.GetType()) return false;
-        Study_ViewModel t = (Study_ViewModel)obj;
-        return this.StudyCollectionItem == t.StudyCollectionItem;
-    }
-
-    public override int GetHashCode() {
-        return this.StudyCollectionItem.GetHashCode();
-    }
-
-    #endregion
 
 }
