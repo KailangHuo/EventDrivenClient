@@ -53,10 +53,10 @@ namespace EventDrivenStruct {
         private void UnitTest1(MainWindow_ViewModel mainWindowViewModel) {
             
             var studies = mainWindowViewModel.StudyContainerViewModel;
-            var screen1 = mainWindowViewModel.AppTabViewModel.SelectedAppContainerManager?.
-                AppContainerList[0];
-            var screen2 = mainWindowViewModel.AppTabViewModel.SelectedAppContainerManager?.
-                AppContainerList[1];
+            var screen1 = mainWindowViewModel.AppTabViewModel.SelectedAppContainer?.
+                AppSequenceManagerList[0];
+            var screen2 = mainWindowViewModel.AppTabViewModel.SelectedAppContainer?.
+                AppSequenceManagerList[1];
             
             MainEntry_ModelFacade facade = MainEntry_ModelFacade.GetInstance();
             AppModel review2d = new AppModel("Review2D");
@@ -74,9 +74,11 @@ namespace EventDrivenStruct {
             facade.AddStudyItemWithApp(laoLi, report);
             facade.AddStudyItemWithApp(laoLi, oncology);
 
-            studies.SelectedStudy = ConvertToViewModel(laoWang);
-
-
+            studies.SelectedStudy = new Study_ViewModel(laoWang);
+            AdvancedApp_ViewModel advancedAppViewModel = new AdvancedApp_ViewModel(review2d);
+            mainWindowViewModel.AppTabViewModel.SelectedAppContainer?.AppSequenceManagerList[0].ChangedSelection(advancedAppViewModel);
+            mainWindowViewModel.AppTabViewModel.SelectedAppContainer.RemoveAdvancedAppViewModel(review2d);
+            studies.SelectedStudy = new Study_ViewModel(laoLi);
         }
 
         private StudyCollectionItem MakeItem(string param1, int times) {
@@ -89,11 +91,7 @@ namespace EventDrivenStruct {
             
             return studyCollectionItem;
         }
-
-        private Study_ViewModel ConvertToViewModel(StudyCollectionItem studyCollectionItem) {
-            Study_ViewModel studyViewModel = new Study_ViewModel(studyCollectionItem);
-            return studyViewModel;
-        }
+        
 
     }
 }

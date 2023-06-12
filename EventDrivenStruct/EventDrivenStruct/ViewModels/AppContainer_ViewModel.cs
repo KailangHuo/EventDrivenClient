@@ -1,62 +1,81 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using EventDrivenElements;
 using EventDrivenStruct.Models;
 
 namespace EventDrivenStruct.ViewModels; 
 
-public class AppContainer_ViewModel : AbstractEventDrivenViewModel{
+public class AppContainer_ViewModel : AbstractEventDrivenViewModel {
 
-    public AppContainer_ViewModel( ) {
-        _advancedAppViewModels = new ObservableCollection<AdvancedApp_ViewModel>();
-        _appSequenceStack = new List<AdvancedApp_ViewModel>();
+    public AppContainer_ViewModel(StudyAppMappingObj mappingObj) {
+        AppSequenceManagerList = new ObservableCollection<AppSequenceManager_ViewModel>();
+        StudyAppMappingObj = mappingObj;
+        AppList = new ObservableCollection<AdvancedApp_ViewModel>();
+        InitializeContainerNumber();
+        InitializeConstantApps();
     }
 
-    private ObservableCollection<AdvancedApp_ViewModel> _advancedAppViewModels;
+    public StudyAppMappingObj StudyAppMappingObj;
 
-    private List<AdvancedApp_ViewModel> _appSequenceStack;
+    private int _containerNumber;
 
-    private AdvancedApp_ViewModel _selectedApp;
-
-    public AdvancedApp_ViewModel SelectedApp {
-        get {
-            return _selectedApp;
-        }
-        set {
-            if(_selectedApp == value)return;
-            _selectedApp = value;
-            MaintainAppSequece(_selectedApp);
-            //PublishEvent...
-            RisePropertyChanged(nameof(SelectedApp));
+    private void InitializeContainerNumber() {
+        _containerNumber = 2;
+        for (int i = 0; i < _containerNumber; i++) {
+            AppSequenceManagerList.Add(new AppSequenceManager_ViewModel());
         }
     }
 
-    public void AddApp(AppModel appModel) {
+    private void InitializeConstantApps() {
+        ConstantAppList = new List<AdvancedApp_ViewModel>();
+        
+    }
+
+    public ObservableCollection<AppSequenceManager_ViewModel> AppSequenceManagerList;
+
+    private ObservableCollection<AdvancedApp_ViewModel> AppList;
+
+    private List<AdvancedApp_ViewModel> ConstantAppList;
+
+
+    private void AddAdvancedAppViewModel(AppModel appModel) {
         AdvancedApp_ViewModel advancedAppViewModel = new AdvancedApp_ViewModel(appModel);
-        _appSequenceStack.Insert(0,advancedAppViewModel);
         appModel.RegisterObserver(advancedAppViewModel);
-        this._advancedAppViewModels.Add(advancedAppViewModel);
-        RefreshSelectedApp();
+        AppListAddItem();
+        this.AppList.Add(advancedAppViewModel);
+        for (int i = 0; i < AppSequenceManagerList.Count; i++) {
+            AppSequenceManagerList[i].AddApp(advancedAppViewModel);
+        }
     }
 
-    public void RemoveApp(AppModel appModel) {
+    public void RemoveAdvancedAppViewModel(AppModel appModel) {
         AdvancedApp_ViewModel advancedAppViewModel = new AdvancedApp_ViewModel(appModel);
-        this._advancedAppViewModels.Remove(advancedAppViewModel);
-        this._appSequenceStack.Remove(advancedAppViewModel);
-        RefreshSelectedApp();
+        AppListRemoveItem();
+        this.AppList.Remove(advancedAppViewModel);
+        for (int i = 0; i < AppSequenceManagerList.Count; i++) {
+            AppSequenceManagerList[i].RemoveApp(advancedAppViewModel);
+        }
     }
 
-    private void RefreshSelectedApp() {
-        if (_advancedAppViewModels.Count > 0) SelectedApp = _advancedAppViewModels[0];
-        else SelectedApp = null; 
+    private void AppListAddItem() {
+        
     }
 
-    private void MaintainAppSequece(AdvancedApp_ViewModel appViewModel) {
-        if(appViewModel == null) return;
-        _appSequenceStack.Remove(appViewModel);
-        _appSequenceStack.Insert(0, appViewModel);
+    private void AppListRemoveItem() {
+        
     }
 
+    public override void UpdateByEvent(string propertyName, object o) {
+        if (propertyName.Equals(nameof(StudyAppMappingObj.AddAppModel))){
+            AppModel appModel = (AppModel)o;
+            AddAdvancedAppViewModel(appModel);
+        }
+
+        if (propertyName.Equals(nameof(StudyAppMappingObj.RemoveAppModel))) {
+            AppModel appModel = (AppModel)o;
+            RemoveAdvancedAppViewModel(appModel);
+        }
+    }
     
+
 }

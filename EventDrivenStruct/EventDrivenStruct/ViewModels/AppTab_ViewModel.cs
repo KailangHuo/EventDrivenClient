@@ -7,29 +7,29 @@ namespace EventDrivenStruct.ViewModels;
 public class AppTab_ViewModel : AbstractEventDrivenViewModel{
 
     public AppTab_ViewModel() {
-        _map = new Dictionary<StudyCollectionItem, AppContainerManager_ViewModel>();
+        _map = new Dictionary<StudyCollectionItem, AppContainer_ViewModel>();
     }
 
-    private Dictionary<StudyCollectionItem, AppContainerManager_ViewModel> _map;
+    private Dictionary<StudyCollectionItem, AppContainer_ViewModel> _map;
 
-    private AppContainerManager_ViewModel _selectedAppContainerManager;
+    private AppContainer_ViewModel _selectedAppContainer;
     
-    public AppContainerManager_ViewModel SelectedAppContainerManager {
+    public AppContainer_ViewModel SelectedAppContainer {
         get {
-            return _selectedAppContainerManager;
+            return _selectedAppContainer;
         }
         set {
-            if(_selectedAppContainerManager == value) return;
-            _selectedAppContainerManager = value;
-            RisePropertyChanged(nameof(SelectedAppContainerManager));
+            if(_selectedAppContainer == value) return;
+            _selectedAppContainer = value;
+            RisePropertyChanged(nameof(SelectedAppContainer));
         }
     }
     
     
     private void PutInMap(StudyAppMappingObj studyAppMappingObj) {
-        AppContainerManager_ViewModel appContainerManager = new AppContainerManager_ViewModel(studyAppMappingObj);
-        studyAppMappingObj.RegisterObserver(appContainerManager);
-        _map.Add(studyAppMappingObj.StudyCollectionItem, appContainerManager);
+        AppContainer_ViewModel appContainer = new AppContainer_ViewModel(studyAppMappingObj);
+        studyAppMappingObj.RegisterObserver(appContainer);
+        _map.Add(studyAppMappingObj.StudyCollectionItem, appContainer);
     }
 
     private void RemoveFromMap(StudyAppMappingObj studyAppMappingObj) {
@@ -37,7 +37,7 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
     }
 
     private void SwapSelectedAppContainer(StudyCollectionItem? studyCollectionItem) {
-        SelectedAppContainerManager = studyCollectionItem == null ? null : _map[studyCollectionItem];
+        SelectedAppContainer = studyCollectionItem == null ? null : _map[studyCollectionItem];
     }
 
     public override void UpdateByEvent(string propertyName, object o) {
