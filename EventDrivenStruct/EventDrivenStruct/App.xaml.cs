@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using EventDrivenElements;
+using EventDrivenStruct.ConfigurationLoader;
 using EventDrivenStruct.Models;
 using EventDrivenStruct.ViewModels;
 
@@ -35,7 +36,7 @@ namespace EventDrivenStruct {
             MainWindow_ViewModel mainWindowViewModel = new MainWindow_ViewModel();
             MainEntry_ModelFacade facade = MainEntry_ModelFacade.GetInstance();
             facade.RegisterObserver(mainWindowViewModel);
-            
+
             UnitTest1(mainWindowViewModel);
             /*GlobalContext.GetInstance().RegisterModelFacade(MainEntry_ModelFacade.GetInstance());
             Current.Dispatcher.BeginInvoke(() => {

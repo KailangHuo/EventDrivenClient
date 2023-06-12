@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using EventDrivenElements;
+using EventDrivenStruct.ConfigurationLoader;
 using EventDrivenStruct.Models;
 
 namespace EventDrivenStruct.ViewModels; 
@@ -21,29 +22,22 @@ public class AppContainer_ViewModel : AbstractEventDrivenViewModel {
     private int _sequenceManagerNumber;
 
     private void InitializeContainerNumber() {
-        _sequenceManagerNumber = 2;
+        _sequenceManagerNumber = SystemConfiguration.GetInstance().GetScreenNumber();
         for (int i = 0; i < _sequenceManagerNumber; i++) {
             AppSequenceManagerCollection.Add(new AppSequenceManager_ViewModel());
         }
     }
 
     private void InitializeConstantApps() {
-        AppList.Add(new AdvancedApp_ViewModel(new AppModel("Review2D")));
-        AppList.Add(new AdvancedApp_ViewModel(new AppModel("Review3D")));
-        AppList.Add(new AdvancedApp_ViewModel(new AppModel("MMFusion")));
-        AppList.Add(new AdvancedApp_ViewModel(new AppModel("Filming")));
-
-        ConstantAppSet = new HashSet<AdvancedApp_ViewModel>();
-        for (int i = 0; i < AppList.Count; i++) {
-            ConstantAppSet.Add(AppList[i]);
+        List<string> ConstantApplist = SystemConfiguration.GetInstance().GetConstantAppList();
+        for (int i = 0; i < ConstantApplist.Count; i++) {
+            AppList.Add(new AdvancedApp_ViewModel(new AppModel(ConstantApplist[i])));
         }
     }
 
     public ObservableCollection<AppSequenceManager_ViewModel> AppSequenceManagerCollection;
 
-    private ObservableCollection<AdvancedApp_ViewModel> AppList;
-
-    private HashSet<AdvancedApp_ViewModel> ConstantAppSet;
+    public ObservableCollection<AdvancedApp_ViewModel> AppList;
 
 
     private void AddAdvancedAppViewModel(AppModel appModel) {
@@ -64,12 +58,12 @@ public class AppContainer_ViewModel : AbstractEventDrivenViewModel {
     }
 
     private void AppListAddItem(AppModel appModel) {
-        if (ConstantAppSet.Contains(new AdvancedApp_ViewModel(appModel))) return;
+        if (SystemConfiguration.GetInstance().IsConstantApp(appModel.AppName))  return;
         AppList.Add(new AdvancedApp_ViewModel(appModel));
     }
 
     private void AppListRemoveItem(AppModel appModel) {
-        if(ConstantAppSet.Contains(new AdvancedApp_ViewModel(appModel))) return;
+        if (SystemConfiguration.GetInstance().IsConstantApp(appModel.AppName))  return;
         AppList.Remove(new AdvancedApp_ViewModel(appModel));
     }
 

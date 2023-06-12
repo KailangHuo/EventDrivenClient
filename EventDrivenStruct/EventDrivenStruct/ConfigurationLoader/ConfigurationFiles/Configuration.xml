@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<Root>
+    <ScreenNumber>2</ScreenNumber>
+
+    <ConstantAppList>
+        <App Name="Review2D"/>
+        <App Name="Review3D"/>
+        <App Name="MMFusion"/>
+        <App Name="Filming"/>
+
+    </ConstantAppList>
+
+    <AppConfiguration>
+        <App Name="Review2D" MaxConfigScreenNumber ="2"/>
+        <App Name="Review3D" MaxConfigScreenNumber ="2"/>
+        <App Name="MMFusion" MaxConfigScreenNumber ="2"/>
+        <App Name="Filming" MaxConfigScreenNumber ="1"/>
+
+        <App Name="Oncology" MaxConfigScreenNumber ="1"/>
+        <App Name="Dental" MaxConfigScreenNumber ="1"/>
+        <App Name="MAXTEST" MaxConfigScreenNumber ="5"/>
+    </AppConfiguration>
+    
+</Root>

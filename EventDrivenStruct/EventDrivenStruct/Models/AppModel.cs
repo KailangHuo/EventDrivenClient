@@ -1,4 +1,5 @@
 using EventDrivenElements;
+using EventDrivenStruct.ConfigurationLoader;
 
 namespace EventDrivenStruct.Models; 
 
@@ -10,9 +11,12 @@ public class AppModel : AbstractEventDrivenObject{
 
     public AppModel(string name) {
         AppName = name;
+        MaxScreenConfigNumber = SystemConfiguration.GetInstance().GetAppConfigInfo(AppName).MaxConfigScreenNumber;
     }
 
     public string AppName { get; private set; }
+
+    public int MaxScreenConfigNumber { get; private set; }
 
     public override string ToString() {
         return AppName;
