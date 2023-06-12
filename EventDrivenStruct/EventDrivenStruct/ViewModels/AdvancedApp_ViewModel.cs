@@ -40,4 +40,7 @@ public class AdvancedApp_ViewModel : AbstractEventDrivenViewModel{
 
     #endregion
 
+    public override string ToString() {
+        return this.AppName;
+    }
 }

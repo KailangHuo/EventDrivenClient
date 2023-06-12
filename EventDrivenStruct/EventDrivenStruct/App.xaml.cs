@@ -52,42 +52,31 @@ namespace EventDrivenStruct {
 
         private void UnitTest1(MainWindow_ViewModel mainWindowViewModel) {
             
-            var x = mainWindowViewModel.StudyContainerViewModel;
-            var y = mainWindowViewModel.AppTabViewModel;
+            var studies = mainWindowViewModel.StudyContainerViewModel;
+            var screen1 = mainWindowViewModel.AppTabViewModel.SelectedAppContainerManager?.
+                AppContainerList[0];
+            var screen2 = mainWindowViewModel.AppTabViewModel.SelectedAppContainerManager?.
+                AppContainerList[1];
             
             MainEntry_ModelFacade facade = MainEntry_ModelFacade.GetInstance();
-
-            StudyCollectionItem laoWangColl = MakeItem("老王", 2);
-
-            AppModel review2D = new AppModel("Review 2D");
-            
-            facade.AddStudyItemWithApp(laoWangColl, review2D); // 添加 老王 2d -> 成功
-            
-            facade.DeleteAppFromStudy(laoWangColl, review2D);
-
-            StudyCollectionItem laoZhangColl = MakeItem("老张", 2);
-
-            AppModel review3D = new AppModel("Review 3D");
-            
-            facade.AddStudyItemWithApp(laoZhangColl, review3D);// 添加 老张 3D -> 成功
-            
-            facade.AddStudyItemWithApp(laoWangColl, review2D);// 再次添加 老王 2d -> 不能添加应用
-            
-            facade.AddStudyItemWithApp(laoWangColl, review3D);// 添加 老王 3d -> 成功添加新的应用
-
+            AppModel review2d = new AppModel("Review2D");
+            AppModel filming = new AppModel("Filming");
+            AppModel report = new AppModel("Report");
             AppModel oncology = new AppModel("OnCology");
 
-            facade.AddStudyItemWithApp(laoWangColl, oncology); // 添加老王 onco -> 成功添加应用
+            StudyCollectionItem laoWang = MakeItem("老王",2);
+            StudyCollectionItem laoLi = MakeItem("老李", 3);
+                
             
-            facade.DeleteStudyItem(laoZhangColl);
+            facade.AddStudyItemWithApp(laoWang, review2d);
+            facade.AddStudyItemWithApp(laoWang, review2d);
+            facade.AddStudyItemWithApp(laoWang, filming);
+            facade.AddStudyItemWithApp(laoLi, report);
+            facade.AddStudyItemWithApp(laoLi, oncology);
 
-            StudyCollectionItem laoZhangRedundant = new StudyCollectionItem();
-            Study study = new Study("One" + " " + "老张");
-            laoZhangRedundant.GetStudyComposition().Add(study);
-            
-            facade.AddStudyItemWithApp(laoZhangRedundant, review3D);// 添加 老王残 3d -> 不能
-            facade.DeleteStudyItem(laoZhangRedundant);// 移除 老王残 -> 不能
-            facade.DeleteStudyItem(laoWangColl);// 移除 老王 -> 成功
+            studies.SelectedStudy = ConvertToViewModel(laoWang);
+
+
         }
 
         private StudyCollectionItem MakeItem(string param1, int times) {
@@ -99,6 +88,11 @@ namespace EventDrivenStruct {
             }
             
             return studyCollectionItem;
+        }
+
+        private Study_ViewModel ConvertToViewModel(StudyCollectionItem studyCollectionItem) {
+            Study_ViewModel studyViewModel = new Study_ViewModel(studyCollectionItem);
+            return studyViewModel;
         }
 
     }

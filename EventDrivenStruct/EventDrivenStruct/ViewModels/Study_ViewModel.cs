@@ -6,14 +6,14 @@ namespace EventDrivenStruct.ViewModels;
 public class Study_ViewModel : AbstractEventDrivenViewModel{
 
     public Study_ViewModel(StudyCollectionItem studyCollectionItem) {
-        this._studyCollectionItem = studyCollectionItem;
+        this.StudyCollectionItem = studyCollectionItem;
         this.PatientName = studyCollectionItem.GetStudyComposition()[0].PatientName;
         this.PatientAge = studyCollectionItem.GetStudyComposition()[0].PatientAge;
         this.PatientGender = studyCollectionItem.GetStudyComposition()[0].PatientGender;
         this.StudyUid = studyCollectionItem.GetStudyComposition()[0].StudyInstanceId;
     }
 
-    public StudyCollectionItem _studyCollectionItem;
+    public StudyCollectionItem StudyCollectionItem;
 
     private string _patientName;
 
@@ -68,7 +68,7 @@ public class Study_ViewModel : AbstractEventDrivenViewModel{
     }
 
     public void TryDelete(StudyCollectionItem item) {
-        if (item == this._studyCollectionItem) {
+        if (item == this.StudyCollectionItem) {
             PublishEvent(nameof(TryDelete), this);
         }
     }
@@ -80,11 +80,11 @@ public class Study_ViewModel : AbstractEventDrivenViewModel{
         if (this == obj) return true;
         if (obj == null || GetType() != obj.GetType()) return false;
         Study_ViewModel t = (Study_ViewModel)obj;
-        return this._studyCollectionItem == t._studyCollectionItem;
+        return this.StudyCollectionItem == t.StudyCollectionItem;
     }
 
     public override int GetHashCode() {
-        return this._studyCollectionItem.GetHashCode();
+        return this.StudyCollectionItem.GetHashCode();
     }
 
     #endregion

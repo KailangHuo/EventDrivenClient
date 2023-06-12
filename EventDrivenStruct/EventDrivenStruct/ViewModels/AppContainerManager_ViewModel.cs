@@ -17,14 +17,38 @@ public class AppContainerManager_ViewModel : AbstractEventDrivenViewModel {
     private int _containerNumber;
 
     private void InitializeContainerNumber() {
-        _containerNumber = 1;
+        _containerNumber = 2;
         for (int i = 0; i < _containerNumber; i++) {
-            AppContainerList.Add(new AppContainer_ViewModel(StudyAppMappingObj));
+            AppContainerList.Add(new AppContainer_ViewModel());
         }
     }
 
     public ObservableCollection<AppContainer_ViewModel> AppContainerList;
-    
+
+
+    private void AddAdvancedAppViewModel(AppModel appModel) {
+        for (int i = 0; i < AppContainerList.Count; i++) {
+            AppContainerList[i].AddApp(appModel);
+        }
+    }
+
+    private void RemoveAdvancedAppViewModel(AppModel appModel) {
+        for (int i = 0; i < AppContainerList.Count; i++) {
+            AppContainerList[i].RemoveApp(appModel);
+        }
+    }
+
+    public override void UpdateByEvent(string propertyName, object o) {
+        if (propertyName.Equals(nameof(StudyAppMappingObj.AddAppModel))){
+            AppModel appModel = (AppModel)o;
+            AddAdvancedAppViewModel(appModel);
+        }
+
+        if (propertyName.Equals(nameof(StudyAppMappingObj.RemoveAppModel))) {
+            AppModel appModel = (AppModel)o;
+            RemoveAdvancedAppViewModel(appModel);
+        }
+    }
     
 
 }

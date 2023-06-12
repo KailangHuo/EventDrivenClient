@@ -57,6 +57,12 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel{
 
     #endregion
 
+    #region UNIT_TEST
+
+    
+
+    #endregion
+
     public override void UpdateByEvent(string propertyName, object o) {
         if (propertyName.Equals(nameof(MainEntry_ModelFacade.StudyCollection))) {
             StudyCollection studyCollection = (StudyCollection)o;

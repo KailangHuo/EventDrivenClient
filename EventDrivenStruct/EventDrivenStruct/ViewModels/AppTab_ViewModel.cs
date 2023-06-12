@@ -7,38 +7,29 @@ namespace EventDrivenStruct.ViewModels;
 public class AppTab_ViewModel : AbstractEventDrivenViewModel{
 
     public AppTab_ViewModel() {
-        _map = new Dictionary<StudyCollectionItem, AppContainer_ViewModel>();
-        
+        _map = new Dictionary<StudyCollectionItem, AppContainerManager_ViewModel>();
     }
 
-    private Dictionary<StudyCollectionItem, AppContainer_ViewModel> _map;
+    private Dictionary<StudyCollectionItem, AppContainerManager_ViewModel> _map;
 
-
-    //TODO: 有待于实现
-    public AppContainerManager_ViewModel AppContainerManager { get; private set; }
-
-
-    private AppContainer_ViewModel _selectedAppContainer;
+    private AppContainerManager_ViewModel _selectedAppContainerManager;
     
-    public AppContainer_ViewModel SelectedAppContainer {
+    public AppContainerManager_ViewModel SelectedAppContainerManager {
         get {
-            return _selectedAppContainer;
+            return _selectedAppContainerManager;
         }
         set {
-            if(_selectedAppContainer == value) return;
-            _selectedAppContainer = value;
-            RisePropertyChanged(nameof(SelectedAppContainer));
+            if(_selectedAppContainerManager == value) return;
+            _selectedAppContainerManager = value;
+            RisePropertyChanged(nameof(SelectedAppContainerManager));
         }
     }
     
     
     private void PutInMap(StudyAppMappingObj studyAppMappingObj) {
-        //TODO:有待于实现
-        
-        
-        AppContainer_ViewModel appContainerViewModel = new AppContainer_ViewModel(studyAppMappingObj);
-        studyAppMappingObj.RegisterObserver(appContainerViewModel);
-        _map.Add(studyAppMappingObj.StudyCollectionItem, appContainerViewModel);
+        AppContainerManager_ViewModel appContainerManager = new AppContainerManager_ViewModel(studyAppMappingObj);
+        studyAppMappingObj.RegisterObserver(appContainerManager);
+        _map.Add(studyAppMappingObj.StudyCollectionItem, appContainerManager);
     }
 
     private void RemoveFromMap(StudyAppMappingObj studyAppMappingObj) {
@@ -46,13 +37,13 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
     }
 
     private void SwapSelectedAppContainer(StudyCollectionItem? studyCollectionItem) {
-        SelectedAppContainer = studyCollectionItem == null ? null : _map[studyCollectionItem];
+        SelectedAppContainerManager = studyCollectionItem == null ? null : _map[studyCollectionItem];
     }
 
     public override void UpdateByEvent(string propertyName, object o) {
         if (propertyName.Equals(nameof(StudyContainer_ViewModel.SelectedStudy))) {
             Study_ViewModel studyViewModel = (Study_ViewModel)o;
-            SwapSelectedAppContainer(studyViewModel?._studyCollectionItem);
+            SwapSelectedAppContainer(studyViewModel?.StudyCollectionItem);
             
         }
 
