@@ -23,7 +23,7 @@ public class AppSequenceManager_ViewModel : AbstractEventDrivenViewModel{
         set {
             if(_selectedApp == value )return;
             _selectedApp = value;
-            if(!_appSequenceStack.Contains(value)) AddApp(_selectedApp);
+            if(!_appSequenceStack.Contains(value) && _selectedApp != null) AddApp(_selectedApp);
             else {
                 PlaceElementToTop(_selectedApp);
             }
@@ -66,6 +66,7 @@ public class AppSequenceManager_ViewModel : AbstractEventDrivenViewModel{
     }
 
     private void PlaceElementToTop(AdvancedApp_ViewModel appViewModel) {
+        if(appViewModel.Equals(_appSequenceStack[0])) return;
         if(!_appSequenceStack.Contains(appViewModel)) return;
         if(appViewModel == null) return;
         _appSequenceStack.Remove(appViewModel);
