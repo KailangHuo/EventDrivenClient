@@ -21,37 +21,56 @@ public class AppSequenceManager_ViewModel : AbstractEventDrivenViewModel{
             return _selectedApp;
         }
         set {
-            if(_selectedApp == value || !this._appSequenceStack.Contains(value))return;
+            if(_selectedApp == value )return;
             _selectedApp = value;
-            MaintainAppSequece(_selectedApp);
-            //PublishEvent to hosting window...
-            RisePropertyChanged(nameof(SelectedApp));
+            if(!_appSequenceStack.Contains(value)) AddApp(_selectedApp);
+            else {
+                PlaceElementToTop(_selectedApp);
+            }
+            PublishEvent(nameof(SelectedApp), this);
         }
     }
+    
+    private void RefreshSelectedApp() {
+        if (_appSequenceStack.Count > 0) _selectedApp = _appSequenceStack[0];
+        else _selectedApp = null; 
+        RisePropertyChanged(nameof(SelectedApp));
+    }
 
-    public void ChangedSelection(AdvancedApp_ViewModel advancedAppViewModel) {
-        SelectedApp = advancedAppViewModel;
+    /// <summary>
+    /// TEST ONLY
+    /// </summary>
+    /// <param name="appModel"></param>
+    public void ChangedSelection(AppModel appModel) {
+        SelectedApp = new AdvancedApp_ViewModel(appModel);
+    }
+
+    /// <summary>
+    /// TEST ONLY
+    /// </summary>
+    /// <param name="appModel"></param>
+    public void SelectToOpen(AppModel appModel) {
+        ChangedSelection(appModel);
     }
 
     public void AddApp(AdvancedApp_ViewModel advancedAppViewModel) {
+        if(_appSequenceStack.Contains(advancedAppViewModel)) return;
         _appSequenceStack.Insert(0,advancedAppViewModel);
         RefreshSelectedApp();
     }
 
     public void RemoveApp(AdvancedApp_ViewModel advancedAppViewModel) {
+        if(!_appSequenceStack.Contains(advancedAppViewModel)) return;
         this._appSequenceStack.Remove(advancedAppViewModel);
         RefreshSelectedApp();
     }
 
-    private void RefreshSelectedApp() {
-        if (_appSequenceStack.Count > 0) SelectedApp = _appSequenceStack[0];
-        else SelectedApp = null; 
-    }
-
-    private void MaintainAppSequece(AdvancedApp_ViewModel appViewModel) {
+    private void PlaceElementToTop(AdvancedApp_ViewModel appViewModel) {
+        if(!_appSequenceStack.Contains(appViewModel)) return;
         if(appViewModel == null) return;
         _appSequenceStack.Remove(appViewModel);
         _appSequenceStack.Insert(0, appViewModel);
+        RefreshSelectedApp();
     }
 
     

@@ -65,17 +65,21 @@ namespace EventDrivenStruct {
             AppModel mmfusion = new AppModel("MMFusion");
             AppModel filming = new AppModel("Filming");
 
-            StudyCollectionItem laoWang = MakeItem("老王",2);
+            AppModel maxtest = new AppModel("MAXTEST");
+
+            StudyCollectionItem laoWang = MakeItem("老王",1);
             StudyCollectionItem laoLi = MakeItem("老李", 3);
                 
             
+            facade.AddStudyItemWithApp(laoWang, maxtest);
             facade.AddStudyItemWithApp(laoWang, review2d);
-            facade.AddStudyItemWithApp(laoWang, mmfusion);
+            
+            mainWindowViewModel.AppTabViewModel.SelectedAppContainer.AppSequenceManagerCollection[4].SelectToOpen(filming);
+            mainWindowViewModel.AppTabViewModel.SelectedAppContainer.AppSequenceManagerCollection[3].ChangedSelection(maxtest);
+            
+            facade.AddStudyItemWithApp(laoLi, review2d);
 
-
-            mainWindowViewModel.AppTabViewModel.SelectedAppContainer.AppSequenceManagerCollection[0].ChangedSelection(new AdvancedApp_ViewModel(review2d));
-            AppModel oncology = new AppModel("Oncology");
-            facade.AddStudyItemWithApp(laoWang, oncology);
+            mainWindowViewModel.StudyContainerViewModel.SelectedStudy = new Study_ViewModel(laoWang);
 
         }
 

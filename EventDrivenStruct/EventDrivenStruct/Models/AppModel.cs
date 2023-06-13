@@ -11,7 +11,6 @@ public class AppModel : AbstractEventDrivenObject{
 
     public AppModel(string name) {
         AppName = name;
-        MaxScreenConfigNumber = SystemConfiguration.GetInstance().GetAppConfigInfo(AppName).MaxConfigScreenNumber;
     }
 
     public string AppName { get; private set; }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <Root>
-    <ScreenNumber>2</ScreenNumber>
+    <ScreenNumber>5</ScreenNumber>
 
     <ConstantAppList>
         <App Name="Review2D"/>
@@ -18,7 +18,7 @@
 
         <App Name="Oncology" MaxConfigScreenNumber ="1"/>
         <App Name="Dental" MaxConfigScreenNumber ="1"/>
-        <App Name="MAXTEST" MaxConfigScreenNumber ="5"/>
+        <App Name="MAXTEST" MaxConfigScreenNumber ="3"/>
     </AppConfiguration>
     
 </Root>
