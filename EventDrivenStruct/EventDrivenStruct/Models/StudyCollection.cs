@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using EventDrivenElements;
+using EventDrivenStruct.ConfigurationLoader;
 
 namespace EventDrivenStruct.Models; 
 
@@ -9,16 +10,21 @@ public class StudyCollection : AbstractEventDrivenObject{
     public StudyCollection() {
         StudyCollectionItems = new List<StudyCollectionItem>();
         _studyHashSet = new HashSet<Study>();
+        MaxStudyNumber = SystemConfiguration.GetInstance().GetMaxStudyNumber();
     }
 
     private List<StudyCollectionItem> StudyCollectionItems;
 
     private HashSet<Study> _studyHashSet;
 
+    private int MaxStudyNumber;
+
     public bool AddStudyCollectionItem(StudyCollectionItem studyCollectionItem) {
         if (this.ContainsAnyStudy(studyCollectionItem.GetStudyComposition())) {
             return false;
         }
+        if (this.StudyCollectionItems.Count == MaxStudyNumber) return false;
+        
         StudyCollectionItems.Add(studyCollectionItem);
         AddStudiesInHashSet(studyCollectionItem.GetStudyComposition());
         PublishEvent(nameof(AddStudyCollectionItem), studyCollectionItem);

@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Input;
 using EventDrivenElements;
 using EventDrivenStruct.Models;
+using EventDrivenStruct.ViewModels.ViewModelAssistants;
 
 namespace EventDrivenStruct.ViewModels; 
 
@@ -16,7 +17,8 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel{
         StudyContainerViewModel = new StudyContainer_ViewModel();
         AppTabViewModel = new AppTab_ViewModel();
         StudyContainerViewModel.RegisterObserver(AppTabViewModel);
-        
+        AppTabViewModel.RegisterObserver(AppContentLoadingManager.GetInstance());
+
         RegisterObserver(PopupManager.GetInstance());
         SetupCommands();
     }

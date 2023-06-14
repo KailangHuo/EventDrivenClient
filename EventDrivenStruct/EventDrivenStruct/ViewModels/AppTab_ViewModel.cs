@@ -21,6 +21,7 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
         set {
             if(_selectedAppContainer == value) return;
             _selectedAppContainer = value;
+            PublishEvent(nameof(SelectedAppContainer), _selectedAppContainer);
             RisePropertyChanged(nameof(SelectedAppContainer));
         }
     }

@@ -16,6 +16,9 @@ public class AppSequenceManager_ViewModel : AbstractEventDrivenViewModel{
 
     private AdvancedApp_ViewModel _selectedApp;
 
+    /// <summary>
+    /// TODO:有大问题 -> 点击触发新增App时不可能再viewmodel层做, 你需要向facade发送命令来处理!!
+    /// </summary>
     public AdvancedApp_ViewModel SelectedApp {
         get {
             return _selectedApp;
@@ -74,5 +77,8 @@ public class AppSequenceManager_ViewModel : AbstractEventDrivenViewModel{
         RefreshSelectedApp();
     }
 
-    
+    public override string ToString() {
+        if (SelectedApp == null) return "Empty";
+        return SelectedApp.AppName;
+    }
 }

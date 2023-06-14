@@ -37,6 +37,8 @@ public class SystemConfiguration {
 
     private int ScreenNumber;
 
+    private int StudyNumber;
+
     private Dictionary<String, AppConfigInfo> AppInfoMap;
 
     private void init() {
@@ -46,6 +48,9 @@ public class SystemConfiguration {
         _document.Load(configFilePath);
         XmlNode ScreenNumberNode = _document.SelectSingleNode(@"/Root/ScreenNumber");
         ScreenNumber = Convert.ToInt32(ScreenNumberNode.FirstChild.Value);
+
+        XmlNode StudyNumberNode = _document.SelectSingleNode(@"/Root/StudyNumber");
+        StudyNumber = Convert.ToInt32(StudyNumberNode.FirstChild.Value);
 
         XmlNode constantAppListNode = _document.SelectSingleNode(@"/Root/ConstantAppList");
         XmlNodeList childNodes = constantAppListNode.ChildNodes;
@@ -92,6 +97,10 @@ public class SystemConfiguration {
 
     public List<string> GetConstantAppList() {
         return this.ConstantAppList;
+    }
+
+    public int GetMaxStudyNumber() {
+        return this.StudyNumber;
     }
 
 }

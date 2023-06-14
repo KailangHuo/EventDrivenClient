@@ -76,6 +76,7 @@ namespace EventDrivenStruct {
             
             mainWindowViewModel.AppTabViewModel.SelectedAppContainer.AppSequenceManagerCollection[4].SelectToOpen(filming);
             mainWindowViewModel.AppTabViewModel.SelectedAppContainer.AppSequenceManagerCollection[3].ChangedSelection(maxtest);
+            mainWindowViewModel.AppTabViewModel.SelectedAppContainer.AppSequenceManagerCollection[1].ChangedSelection(maxtest);
             
             facade.AddStudyItemWithApp(laoLi, review2d);
 
