@@ -56,6 +56,11 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
         StudyAppMappingManager.AddAppToMapObj(studyItem, appModel);
     }
 
+    public void AddAppToStudy(StudyCollectionItem studyItem, AppModel appModel) {
+        if(!StudyCollection.Contains(studyItem) || studyItem == null) return;
+        StudyAppMappingManager.AddAppToMapObj(studyItem, appModel);
+    }
+
     public void DeleteStudyItem(StudyCollectionItem studyItem) {
         StudyCollection.DeleteStudyCollectionItem(studyItem);
     }

@@ -8,9 +8,12 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
 
     public AppTab_ViewModel() {
         _map = new Dictionary<StudyCollectionItem, AppContainer_ViewModel>();
+        CurrentSelectedStudyCollectionItem = null;
     }
 
     private Dictionary<StudyCollectionItem, AppContainer_ViewModel> _map;
+
+    private StudyCollectionItem CurrentSelectedStudyCollectionItem;
 
     private AppContainer_ViewModel _selectedAppContainer;
     
@@ -39,6 +42,7 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
 
     private void SwapSelectedAppContainer(StudyCollectionItem? studyCollectionItem) {
         SelectedAppContainer = studyCollectionItem == null ? null : _map[studyCollectionItem];
+        CurrentSelectedStudyCollectionItem = studyCollectionItem;
     }
 
     public override void UpdateByEvent(string propertyName, object o) {
@@ -56,6 +60,11 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
         if (propertyName.Equals(nameof(StudyAppMappingManager.RemoveStudyAppMapObj))) {
             StudyAppMappingObj studyAppMappingObj = (StudyAppMappingObj)o;
             this.RemoveFromMap(studyAppMappingObj);
+        }
+
+        if (propertyName.Equals(nameof(AppContainer_ViewModel.SequenceManagerAppSelected))) {
+            AdvancedApp_ViewModel appViewModel = (AdvancedApp_ViewModel)o;
+            MainEntry_ModelFacade.GetInstance().AddStudyItemWithApp(CurrentSelectedStudyCollectionItem, (AppModel)appViewModel.HashReferenceContext);
         }
     }
 }
