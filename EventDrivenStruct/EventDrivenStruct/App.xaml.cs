@@ -17,6 +17,7 @@ using EventDrivenStruct.ViewModels;
  *
  * 优势
  * 1. 可以支持前所未有的多屏处理
+ * 2. 及其简洁的插拔屏幕逻辑处理
  */
 
 

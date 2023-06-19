@@ -45,11 +45,15 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
         CurrentSelectedStudyCollectionItem = studyCollectionItem;
     }
 
+    private void NotifyOpenApp(AdvancedApp_ViewModel appViewModel, int screenIndex) {
+        TCP_Sender tcpSender = new TCP_Sender();
+        tcpSender.Send(CurrentSelectedStudyCollectionItem.GetStudyUidComposition(), appViewModel.AppName, screenIndex);
+    }
+
     public override void UpdateByEvent(string propertyName, object o) {
         if (propertyName.Equals(nameof(StudyContainer_ViewModel.SelectedStudy))) {
             Study_ViewModel studyViewModel = (Study_ViewModel)o;
             SwapSelectedAppContainer(studyViewModel?.StudyCollectionItem);
-            
         }
 
         if (propertyName.Equals(nameof(StudyAppMappingManager.PutStudyAppMapObj))) {
@@ -64,7 +68,15 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
 
         if (propertyName.Equals(nameof(AppContainer_ViewModel.SequenceManagerAppSelected))) {
             AdvancedApp_ViewModel appViewModel = (AdvancedApp_ViewModel)o;
+            //执行添加
             MainEntry_ModelFacade.GetInstance().AddStudyItemWithApp(CurrentSelectedStudyCollectionItem, (AppModel)appViewModel.HashReferenceContext);
+        }
+
+        if (propertyName.Equals(nameof(AppContainer_ViewModel.PublishSelectionFinished))) {
+            Dictionary<AdvancedApp_ViewModel, int> appMap = (Dictionary<AdvancedApp_ViewModel, int>)o;
+            foreach (KeyValuePair<AdvancedApp_ViewModel,int> pair in appMap) {
+                NotifyOpenApp(pair.Key, pair.Value);
+            }
         }
     }
 }

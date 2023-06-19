@@ -25,7 +25,6 @@ public class AppSequenceManager_ViewModel : AbstractEventDrivenViewModel{
         }
         set {
             if(_selectedApp == value )return;
-            _selectedApp = value;
             PublishEvent(nameof(SelectedApp), this);
         }
     }
@@ -53,7 +52,7 @@ public class AppSequenceManager_ViewModel : AbstractEventDrivenViewModel{
     }
 
     public void AddApp(AdvancedApp_ViewModel advancedAppViewModel) {
-        if(_appSequenceStack.Contains(advancedAppViewModel)) return;
+        if(_appSequenceStack[0] == advancedAppViewModel) return;
         _appSequenceStack.Insert(0,advancedAppViewModel);
         RefreshSelectedApp();
     }

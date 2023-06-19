@@ -14,10 +14,9 @@ public class AppContainer_ViewModel : AbstractEventDrivenViewModel {
         StudyAppMappingObj = mappingObj;
         VisibleAppModelList = new ObservableCollection<AdvancedApp_ViewModel>();
         RunningAppList = new List<AdvancedApp_ViewModel>();
-        SelectedCollection = new List<AdvancedApp_ViewModel>();
+        SelectedInfoMap = new Dictionary<AdvancedApp_ViewModel, int>();
         InitializeSequenceManagers();
         InitializeConstantApps();
-        InitializeSelectedCollection();
     }
 
     public StudyAppMappingObj StudyAppMappingObj;
@@ -40,25 +39,20 @@ public class AppContainer_ViewModel : AbstractEventDrivenViewModel {
         }
     }
 
-    private void InitializeSelectedCollection() {
-        for (int i = 0; i < _sequenceManagerNumber; i++) {
-            SelectedCollection.Add(null);
-        }
-    }
-
     public ObservableCollection<AppSequenceManager_ViewModel> AppSequenceManagerCollection;
 
     public ObservableCollection<AdvancedApp_ViewModel> VisibleAppModelList;
 
     private List<AdvancedApp_ViewModel> RunningAppList;
 
-    private List<AdvancedApp_ViewModel> SelectedCollection;
+    private Dictionary<AdvancedApp_ViewModel, int> SelectedInfoMap;
 
 
     private void AddAdvancedAppViewModel(AdvancedApp_ViewModel appModel) {
         appModel.RegisterObserver(this);
         RunningAppList.Add(appModel);
         VisibleAppModelListAddItem(appModel);
+        
         SequenceMangersAddItem(appModel);
     }
 
@@ -79,8 +73,7 @@ public class AppContainer_ViewModel : AbstractEventDrivenViewModel {
         VisibleAppModelList.Remove(appModel);
     }
 
-    private void SequenceMangersAddItem(AdvancedApp_ViewModel appModel) {
-        int triggerIndex = GetAppTriggerIndex(appModel);
+    private void SequenceMangersAddItem(AdvancedApp_ViewModel appModel, int triggerIndex) {
         int endTriggerNumber = triggerIndex + appModel.MaxScreenConfigNumber;
         
         // 如果屏幕右界面超出屏幕数量, 矫正到最后一个屏幕
@@ -105,10 +98,7 @@ public class AppContainer_ViewModel : AbstractEventDrivenViewModel {
             AppSequenceManagerCollection[i].RemoveApp(appModel);
         }
     }
-
-    private int GetAppTriggerIndex(AdvancedApp_ViewModel appViewModel) {
-        
-    }
+    
 
     
     /// <summary>
@@ -121,14 +111,31 @@ public class AppContainer_ViewModel : AbstractEventDrivenViewModel {
     /// </summary>
     /// <param name="appSequenceManager"></param>
     public void SequenceManagerAppSelected(AppSequenceManager_ViewModel appSequenceManager) {
-        if (!RunningAppList.Contains(appSequenceManager.SelectedApp)) {
-            PublishEvent(nameof(SequenceManagerAppSelected), appSequenceManager.SelectedApp);
-            return;
-        }
         AdvancedApp_ViewModel appViewModel = appSequenceManager.SelectedApp;
         int sequenceManagerIndex = AppSequenceManagerCollection.IndexOf(appSequenceManager);
+        if (!RunningAppList.Contains(appSequenceManager.SelectedApp)) {
+            PublishEvent(nameof(SequenceManagerAppSelected), appSequenceManager.SelectedApp);
+        }
+        //触发添加重排序
+        // 先全部移除
         SequenceManagersRemoveItem(appViewModel);
+        //再添加到具体的seqMana里面
         SequenceMangersAddItem(appViewModel, sequenceManagerIndex);
+        
+        //广播调起应用
+        PublishSelectionFinished();
+    }
+
+    public void PublishSelectionFinished() {
+        Dictionary<AdvancedApp_ViewModel, int> tempMap = new Dictionary<AdvancedApp_ViewModel, int>();
+        for (int i = 0; i < AppSequenceManagerCollection.Count; i++) {
+            if (!tempMap.ContainsKey(AppSequenceManagerCollection[i].SelectedApp)) {
+                tempMap.Add(AppSequenceManagerCollection[i].SelectedApp, i);
+            }
+        }
+        if(tempMap.Equals(SelectedInfoMap)) return;
+        SelectedInfoMap = tempMap;
+        PublishEvent(nameof(PublishSelectionFinished), SelectedInfoMap);
     }
 
     public override void UpdateByEvent(string propertyName, object o) {
