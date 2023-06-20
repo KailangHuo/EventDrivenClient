@@ -5,7 +5,6 @@ using System.Windows;
 using System.Windows.Input;
 using EventDrivenElements;
 using EventDrivenStruct.Models;
-using EventDrivenStruct.ViewModels.ViewModelAssistants;
 
 namespace EventDrivenStruct.ViewModels; 
 
