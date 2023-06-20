@@ -52,6 +52,8 @@ public class AppContainer_ViewModel : AbstractEventDrivenViewModel {
         appItemModel.RegisterObserver(this);
         RunningAppList.Add(appItemModel);
         VisibleAppModelListAddItem(appItemModel);
+        if (aaaMap.contains(appItemModel)) return;
+        AppSequenceManagerCollection[0].PeekNodeAppItem = appItemModel;
     }
 
     public void RemoveAdvancedAppViewModel(AppItem_ViewModel appItemModel) {
@@ -111,15 +113,17 @@ public class AppContainer_ViewModel : AbstractEventDrivenViewModel {
     public void SequenceManagerAppSelected(AppSequenceManager_ViewModel appSequenceManager) {
         AppItem_ViewModel appItemViewModel = appSequenceManager.PeekNodeAppItem;
         int sequenceManagerIndex = AppSequenceManagerCollection.IndexOf(appSequenceManager);
-        if (!RunningAppList.Contains(appSequenceManager.PeekNodeAppItem)) {
-            PublishEvent(nameof(SequenceManagerAppSelected), appSequenceManager.PeekNodeAppItem);
-        }
         // 触发添加重排序
         // 先全部移除
         SequenceManagersRemoveItem(appItemViewModel);
         //再添加到具体的seqMana里面
         SequenceMangersAddItem(appItemViewModel, sequenceManagerIndex);
+        //  维护一个map包含 Top展示的应用与屏幕的映射表
+        aaaMap<AppContainer_ViewModel, int>
         
+        if (!RunningAppList.Contains(appSequenceManager.PeekNodeAppItem)) {
+            PublishEvent(nameof(SequenceManagerAppSelected), appSequenceManager.PeekNodeAppItem);
+        }
         //广播调起应用
         PublishSelectionFinished();
     }
