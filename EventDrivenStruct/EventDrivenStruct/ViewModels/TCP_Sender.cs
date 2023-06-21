@@ -5,7 +5,7 @@ using System.Diagnostics;
 namespace EventDrivenStruct.ViewModels; 
 
 public class TCP_Sender {
-    
+    //更新详见github推送信息
     private volatile static TCP_Sender _instance;
 
     private TCP_Sender() {
