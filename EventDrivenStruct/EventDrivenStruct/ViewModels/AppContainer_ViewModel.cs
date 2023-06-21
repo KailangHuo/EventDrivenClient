@@ -14,7 +14,6 @@ public class AppContainer_ViewModel : AbstractEventDrivenViewModel {
         StudyAppMappingObj = mappingObj;
         VisibleAppModelList = new ObservableCollection<AppItem_ViewModel>();
         RunningAppList = new List<AppItem_ViewModel>();
-        SelectedInfoMap = new Dictionary<AppItem_ViewModel, int>();
         InitializeSequenceManagers();
         InitializeConstantApps();
     }
@@ -45,14 +44,12 @@ public class AppContainer_ViewModel : AbstractEventDrivenViewModel {
 
     private List<AppItem_ViewModel> RunningAppList;
 
-    private Dictionary<AppItem_ViewModel, int> SelectedInfoMap;
-
 
     private void AddAdvancedAppViewModel(AppItem_ViewModel appItemModel) {
         appItemModel.RegisterObserver(this);
         RunningAppList.Add(appItemModel);
         VisibleAppModelListAddItem(appItemModel);
-        if (aaaMap.contains(appItemModel)) return;
+        if (SelectionsContains(appItemModel)) return;
         AppSequenceManagerCollection[0].PeekNodeAppItem = appItemModel;
     }
 
@@ -98,46 +95,35 @@ public class AppContainer_ViewModel : AbstractEventDrivenViewModel {
             AppSequenceManagerCollection[i].RemoveApp(appItemModel);
         }
     }
-    
-
-    
-    /// <summary>
-    /// TODO: appSequenceMana 触发新应用的selec后 要先修改所有的顺序呢? 还是先添加?
-    /// 先维护/修改顺序 -> 会通知应用管理器通知应用换屏, 但是新应用还没有打开过
-    /// 先添加 -> 新应用进来后会面临不知道去哪个屏
-    ///
-    /// 先修改顺序 -> 但是不发送更新命令, 
-    /// 可能要方法拆分 
-    /// </summary>
-    /// <param name="appSequenceManager"></param>
     public void SequenceManagerAppSelected(AppSequenceManager_ViewModel appSequenceManager) {
         AppItem_ViewModel appItemViewModel = appSequenceManager.PeekNodeAppItem;
         int sequenceManagerIndex = AppSequenceManagerCollection.IndexOf(appSequenceManager);
-        // 触发添加重排序
-        // 先全部移除
+        // 重排序, 全部移除再全部添加
         SequenceManagersRemoveItem(appItemViewModel);
-        //再添加到具体的seqMana里面
         SequenceMangersAddItem(appItemViewModel, sequenceManagerIndex);
-        //  维护一个map包含 Top展示的应用与屏幕的映射表
-        aaaMap<AppContainer_ViewModel, int>
-        
         if (!RunningAppList.Contains(appSequenceManager.PeekNodeAppItem)) {
             PublishEvent(nameof(SequenceManagerAppSelected), appSequenceManager.PeekNodeAppItem);
         }
         //广播调起应用
-        PublishSelectionFinished();
+        List<object> args = new List<object>();
+        args.Add(appItemViewModel);
+        args.Add(sequenceManagerIndex); 
+        PublishSelectionFinished(args);
     }
 
-    public void PublishSelectionFinished() {
-        Dictionary<AppItem_ViewModel, int> tempMap = new Dictionary<AppItem_ViewModel, int>();
+    private bool SelectionsContains(AppItem_ViewModel appItemViewModel) {
         for (int i = 0; i < AppSequenceManagerCollection.Count; i++) {
-            if (!tempMap.ContainsKey(AppSequenceManagerCollection[i].PeekNodeAppItem)) {
-                tempMap.Add(AppSequenceManagerCollection[i].PeekNodeAppItem, i);
+            if(AppSequenceManagerCollection[i].PeekNodeAppItem == null) continue;
+            if (AppSequenceManagerCollection[i].PeekNodeAppItem.Equals(appItemViewModel)) {
+                return true;
             }
         }
-        if(tempMap.Equals(SelectedInfoMap)) return;
-        SelectedInfoMap = tempMap;
-        PublishEvent(nameof(PublishSelectionFinished), SelectedInfoMap);
+
+        return false;
+    }
+
+    public void PublishSelectionFinished(List<object> args) {
+        PublishEvent(nameof(PublishSelectionFinished), args);
     }
 
     public override void UpdateByEvent(string propertyName, object o) {
@@ -157,9 +143,5 @@ public class AppContainer_ViewModel : AbstractEventDrivenViewModel {
             AppSequenceManager_ViewModel appSequenceManager = (AppSequenceManager_ViewModel)o;
             SequenceManagerAppSelected(appSequenceManager);
         }
-        
-        
     }
-    
-
 }

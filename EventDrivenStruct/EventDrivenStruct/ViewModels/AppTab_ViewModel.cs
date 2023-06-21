@@ -13,9 +13,10 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
 
     private Dictionary<StudyCollectionItem, AppContainer_ViewModel> _map;
 
-    private StudyCollectionItem CurrentSelectedStudyCollectionItem;
-
     private AppContainer_ViewModel _selectedAppContainer;
+
+    //TEST ONLY
+    private int times;
     
     public AppContainer_ViewModel SelectedAppContainer {
         get {
@@ -29,10 +30,24 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
         }
     }
     
-    
+    private StudyCollectionItem _currentSelectedStudyCollectionItem;
+
+    public StudyCollectionItem CurrentSelectedStudyCollectionItem {
+        get {
+            return _currentSelectedStudyCollectionItem;
+        }
+        set {
+            if(_currentSelectedStudyCollectionItem == value) return;
+            _currentSelectedStudyCollectionItem = value;
+            RisePropertyChanged(nameof(CurrentSelectedStudyCollectionItem));
+        }
+    }
+
+
     private void PutInMap(StudyAppMappingObj studyAppMappingObj) {
         AppContainer_ViewModel appContainer = new AppContainer_ViewModel(studyAppMappingObj);
         studyAppMappingObj.RegisterObserver(appContainer);
+        appContainer.RegisterObserver(this);
         _map.Add(studyAppMappingObj.StudyCollectionItem, appContainer);
     }
 
@@ -41,13 +56,27 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
     }
 
     private void SwapSelectedAppContainer(StudyCollectionItem? studyCollectionItem) {
+        if (studyCollectionItem == null) {
+            SelectedAppContainer = null;
+        }
+        else {
+            SelectedAppContainer = _map[studyCollectionItem];
+        }
+
         SelectedAppContainer = studyCollectionItem == null ? null : _map[studyCollectionItem];
         CurrentSelectedStudyCollectionItem = studyCollectionItem;
     }
 
     private void NotifyOpenApp(AppItem_ViewModel appItemViewModel, int screenIndex) {
-        TCP_Sender tcpSender = new TCP_Sender();
-        tcpSender.Send(CurrentSelectedStudyCollectionItem.GetStudyUidComposition(), appItemViewModel.AppName, screenIndex);
+        TCP_Sender.GetInstance().SendOpen(CurrentSelectedStudyCollectionItem.GetStudyUidComposition(), appItemViewModel.AppName, screenIndex, times);
+    }
+
+    private void NotifyHideApp(AppItem_ViewModel appItemViewModel) {
+        TCP_Sender.GetInstance().SendHide(CurrentSelectedStudyCollectionItem.GetStudyUidComposition(), appItemViewModel.AppName, times);
+    }
+
+    private void NotifyCloseApp(AppItem_ViewModel appItemViewModel) {
+        TCP_Sender.GetInstance().SendClose(CurrentSelectedStudyCollectionItem.GetStudyUidComposition(), appItemViewModel.AppName,  times);
     }
 
     public override void UpdateByEvent(string propertyName, object o) {
@@ -73,10 +102,11 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
         }
 
         if (propertyName.Equals(nameof(AppContainer_ViewModel.PublishSelectionFinished))) {
-            Dictionary<AppItem_ViewModel, int> appMap = (Dictionary<AppItem_ViewModel, int>)o;
-            foreach (KeyValuePair<AppItem_ViewModel,int> pair in appMap) {
-                NotifyOpenApp(pair.Key, pair.Value);
-            }
+            List<object> args = (List<object>)o;
+            AppItem_ViewModel appItemViewModel = (AppItem_ViewModel)args[0];
+            int index = (int)args[1];
+            NotifyOpenApp(appItemViewModel, index);
+            times++;
         }
     }
 }

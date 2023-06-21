@@ -89,7 +89,7 @@ namespace EventDrivenStruct {
             StudyCollectionItem studyCollectionItem = new StudyCollectionItem();
 
             for (int i = 0; i < times; i++) {
-                Study study = new Study(i + ". " + param1);
+                Study study = new Study(param1+ i + ". " );
                 studyCollectionItem.AddInStudyComposition(study);
             }
             

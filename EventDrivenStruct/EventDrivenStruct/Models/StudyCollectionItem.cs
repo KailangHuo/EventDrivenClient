@@ -27,6 +27,7 @@ public class StudyCollectionItem : AbstractEventDrivenObject{
 
     public void AddInStudyComposition(Study study) {
         this.studyComposition.Add(study);
+        studyUidComposition.Add(study.StudyInstanceId);
     }
 
     public List<string> GetStudyUidComposition() {
