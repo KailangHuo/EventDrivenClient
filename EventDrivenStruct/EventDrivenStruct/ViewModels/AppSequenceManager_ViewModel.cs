@@ -15,10 +15,7 @@ public class AppSequenceManager_ViewModel : AbstractEventDrivenViewModel{
     private List<AppItem_ViewModel> _appSequenceStack;
 
     private AppItem_ViewModel _peekNodeAppItem;
-
-    /// <summary>
-    /// TODO:有大问题 -> 点击触发新增App时不可能再viewmodel层做, 你需要向facade发送命令来处理!!
-    /// </summary>
+    
     public AppItem_ViewModel PeekNodeAppItem {
         get {
             return _peekNodeAppItem;
