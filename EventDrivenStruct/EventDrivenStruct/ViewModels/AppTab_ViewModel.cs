@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using EventDrivenElements;
 using EventDrivenStruct.Models;
 
@@ -102,9 +103,7 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
         }
 
         if (propertyName.Equals(nameof(AppContainer_ViewModel.PublishSelectionFinished))) {
-            List<object> args = (List<object>)o;
-            AppItem_ViewModel appItemViewModel = (AppItem_ViewModel)args[0];
-            int index = (int)args[1];
+            List<AppItem_ViewModel> appList = (List<AppItem_ViewModel>)o;
             NotifyOpenApp(appItemViewModel, index);
             times++;
         }

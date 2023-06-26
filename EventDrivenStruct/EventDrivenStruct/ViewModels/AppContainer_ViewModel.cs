@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using EventDrivenElements;
 using EventDrivenStruct.ConfigurationLoader;
@@ -11,6 +12,7 @@ public class AppContainer_ViewModel : AbstractEventDrivenViewModel {
 
     public AppContainer_ViewModel(StudyAppMappingObj mappingObj) {
         AppSequenceManagerCollection = new ObservableCollection<AppSequenceManager_ViewModel>();
+        SelectedCollection = new List<AppItem_ViewModel>();
         StudyAppMappingObj = mappingObj;
         VisibleAppModelList = new ObservableCollection<AppItem_ViewModel>();
         RunningAppList = new List<AppItem_ViewModel>();
@@ -28,6 +30,7 @@ public class AppContainer_ViewModel : AbstractEventDrivenViewModel {
             AppSequenceManager_ViewModel appSequenceManager = new AppSequenceManager_ViewModel();
             AppSequenceManagerCollection.Add(appSequenceManager);
             appSequenceManager.RegisterObserver(this);
+            SelectedCollection.Add(null);
         }
     }
 
@@ -44,12 +47,14 @@ public class AppContainer_ViewModel : AbstractEventDrivenViewModel {
 
     private List<AppItem_ViewModel> RunningAppList;
 
+    private List<AppItem_ViewModel> SelectedCollection;
+
 
     private void AddAdvancedAppViewModel(AppItem_ViewModel appItemModel) {
         appItemModel.RegisterObserver(this);
         RunningAppList.Add(appItemModel);
         VisibleAppModelListAddItem(appItemModel);
-        if (SelectionsContains(appItemModel)) return;
+        if (SelectedCollection.Contains(appItemModel)) return;
         AppSequenceManagerCollection[0].PeekNodeAppItem = appItemModel;
     }
 
@@ -105,25 +110,19 @@ public class AppContainer_ViewModel : AbstractEventDrivenViewModel {
             PublishEvent(nameof(SequenceManagerAppSelected), appSequenceManager.PeekNodeAppItem);
         }
         //广播调起应用
-        List<object> args = new List<object>();
-        args.Add(appItemViewModel);
-        args.Add(sequenceManagerIndex); 
-        PublishSelectionFinished(args);
+        PublishSelectionFinished();
     }
 
-    private bool SelectionsContains(AppItem_ViewModel appItemViewModel) {
+    private void SelectedCollectionChanged(AppSequenceManager_ViewModel appSequenceManagerViewModel) {
         for (int i = 0; i < AppSequenceManagerCollection.Count; i++) {
-            if(AppSequenceManagerCollection[i].PeekNodeAppItem == null) continue;
-            if (AppSequenceManagerCollection[i].PeekNodeAppItem.Equals(appItemViewModel)) {
-                return true;
+            if (AppSequenceManagerCollection[i].Equals(appSequenceManagerViewModel)) {
+                SelectedCollection[i] = appSequenceManagerViewModel.PeekNodeAppItem;
             }
         }
-
-        return false;
     }
 
-    public void PublishSelectionFinished(List<object> args) {
-        PublishEvent(nameof(PublishSelectionFinished), args);
+    public void PublishSelectionFinished() {
+        PublishEvent(nameof(PublishSelectionFinished), SelectedCollection);
     }
 
     public override void UpdateByEvent(string propertyName, object o) {
@@ -142,6 +141,11 @@ public class AppContainer_ViewModel : AbstractEventDrivenViewModel {
         if (propertyName.Equals(nameof(AppSequenceManager_ViewModel.PeekNodeAppItem))) {
             AppSequenceManager_ViewModel appSequenceManager = (AppSequenceManager_ViewModel)o;
             SequenceManagerAppSelected(appSequenceManager);
+        }
+
+        if (propertyName.Equals(nameof(AppSequenceManager_ViewModel.TryUpdatePeekNode))) {
+            AppSequenceManager_ViewModel appSequenceManager = (AppSequenceManager_ViewModel)o;
+            SelectedCollectionChanged(appSequenceManager);
         }
     }
 }
