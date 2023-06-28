@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using EventDrivenElements;
 using EventDrivenStruct.ConfigurationLoader;
 using EventDrivenStruct.Models;
@@ -10,6 +11,8 @@ public class AppItem_ViewModel : AbstractEventDrivenViewModel{
         this._appModel = appModel;
         this.AppName = appModel.AppName;
         MaxScreenConfigNumber = SystemConfiguration.GetInstance().GetAppConfigInfo(AppName).MaxConfigScreenNumber;
+        InitMap();
+        
     }
 
     private AppModel _appModel;
@@ -27,7 +30,17 @@ public class AppItem_ViewModel : AbstractEventDrivenViewModel{
         }
     }
 
-    public int MaxScreenConfigNumber { get; private set; } 
+    private Dictionary<int, int> _appPartialSequenceMap;
+
+    public int MaxScreenConfigNumber { get; private set; }
+
+
+    private void InitMap() {
+        _appPartialSequenceMap = new Dictionary<int, int>();
+        for (int i = 0; i < MaxScreenConfigNumber; i++) {
+            _appPartialSequenceMap.Add(i, -1);
+        }
+    }
 
     public override string ToString() {
         return this.AppName;

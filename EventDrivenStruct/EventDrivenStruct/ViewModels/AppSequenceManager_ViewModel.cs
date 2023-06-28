@@ -63,14 +63,6 @@ public class AppSequenceManager_ViewModel : AbstractEventDrivenViewModel{
         TryUpdatePeekNode();
     }
 
-    private void PlaceElementToTop(AppItem_ViewModel appItemViewModel) {
-        if(_appSequenceStack.Count > 0 && _appSequenceStack[0].Equals(appItemViewModel)) return;
-        if(appItemViewModel == null) return;
-        _appSequenceStack.Remove(appItemViewModel);
-        _appSequenceStack.Insert(0, appItemViewModel);
-        TryUpdatePeekNode();
-    }
-
     public override string ToString() {
         if (PeekNodeAppItem == null) return "Empty";
         return PeekNodeAppItem.AppName;

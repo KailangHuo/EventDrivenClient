@@ -87,6 +87,7 @@ public class AppContainer_ViewModel : AbstractEventDrivenViewModel {
         for (int i = 0; i < AppSequenceManagerCollection.Count; i++) {
             if (i == triggerIndex) {
                 for (int j = 0; j < appItemModel.MaxScreenConfigNumber; j++) {
+                    appItemModel.partialSequenceArray[j] = i;
                     AppSequenceManagerCollection[i+j].AddApp(appItemModel);
                 }
                 break;
