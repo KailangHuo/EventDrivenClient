@@ -77,23 +77,20 @@ public class AppContainer_ViewModel : AbstractEventDrivenViewModel {
 
     private void SequenceMangersAddItem(AppItem_ViewModel appItemModel, int triggerIndex) {
         int endTriggerNumber = triggerIndex + appItemModel.MaxScreenConfigNumber;
-        
         // 如果屏幕右界面超出屏幕数量, 矫正到最后一个屏幕
         int maxNumber = SystemConfiguration.GetInstance().GetScreenNumber();
         if (endTriggerNumber > maxNumber) {
             triggerIndex = maxNumber - appItemModel.MaxScreenConfigNumber;
         }
-
         for (int i = 0; i < AppSequenceManagerCollection.Count; i++) {
             if (i == triggerIndex) {
                 for (int j = 0; j < appItemModel.MaxScreenConfigNumber; j++) {
-                    appItemModel.partialSequenceArray[j] = i;
-                    AppSequenceManagerCollection[i+j].AddApp(appItemModel);
+                    AppSequenceItem appSequenceItem = new AppSequenceItem(appItemModel, j);
+                    AppSequenceManagerCollection[i+j].AddApp(appSequenceItem);
                 }
                 break;
             }
         }
-        
     }
 
     private void SequenceManagersRemoveItem(AppItem_ViewModel appItemModel) {

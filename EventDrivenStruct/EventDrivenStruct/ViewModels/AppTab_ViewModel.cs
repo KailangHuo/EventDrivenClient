@@ -104,7 +104,7 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
 
         if (propertyName.Equals(nameof(AppContainer_ViewModel.PublishSelectionFinished))) {
             List<AppItem_ViewModel> appList = (List<AppItem_ViewModel>)o;
-            NotifyOpenApp(appItemViewModel, index);
+            //NotifyOpenApp(appItemViewModel, index);
             times++;
         }
     }

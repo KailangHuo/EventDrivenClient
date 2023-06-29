@@ -9,10 +9,10 @@ namespace EventDrivenStruct.ViewModels;
 public class AppSequenceManager_ViewModel : AbstractEventDrivenViewModel{
 
     public AppSequenceManager_ViewModel( ) {
-        _appSequenceStack = new List<AppItem_ViewModel>();
+        _appSequenceStack = new List<AppSequenceItem>();
     }
 
-    private List<AppItem_ViewModel> _appSequenceStack;
+    private List<AppSequenceItem> _appSequenceStack;
 
     private AppItem_ViewModel _peekNodeAppItem;
     
@@ -28,7 +28,7 @@ public class AppSequenceManager_ViewModel : AbstractEventDrivenViewModel{
     }
     
     public void TryUpdatePeekNode() {
-        if (_appSequenceStack.Count > 0) _peekNodeAppItem = _appSequenceStack[0];
+        if (_appSequenceStack.Count > 0) _peekNodeAppItem = _appSequenceStack[0].AppItemViewModel;
         else _peekNodeAppItem = null; 
         PublishEvent(nameof(TryUpdatePeekNode), this);
         RisePropertyChanged(nameof(PeekNodeAppItem));
@@ -51,16 +51,20 @@ public class AppSequenceManager_ViewModel : AbstractEventDrivenViewModel{
         ChangedSelection(appModel);
     }
 
-    public void AddApp(AppItem_ViewModel appItemViewModel) {
-        if(_appSequenceStack.Count > 0 && _appSequenceStack[0].Equals(appItemViewModel)) return;
-        _appSequenceStack.Insert(0,appItemViewModel);
+    public void AddApp(AppSequenceItem appSequenceItem) {
+        if(_appSequenceStack.Count > 0 && _appSequenceStack[0].Equals(appSequenceItem)) return;
+        _appSequenceStack.Insert(0,appSequenceItem);
         TryUpdatePeekNode();
     }
 
     public void RemoveApp(AppItem_ViewModel appItemViewModel) {
-        if(!_appSequenceStack.Contains(appItemViewModel)) return;
-        this._appSequenceStack.Remove(appItemViewModel);
-        TryUpdatePeekNode();
+        for (int i = 0; i < _appSequenceStack.Count; i++) {
+            if (_appSequenceStack[i].AppItemViewModel.Equals(appItemViewModel)) {
+                _appSequenceStack.Remove(_appSequenceStack[i]);
+                TryUpdatePeekNode();
+                break;
+            }
+        }
     }
 
     public override string ToString() {
