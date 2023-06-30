@@ -55,7 +55,7 @@ public class AppContainer_ViewModel : AbstractEventDrivenViewModel {
         RunningAppList.Add(appItemModel);
         VisibleAppModelListAddItem(appItemModel);
         if (SelectedCollection.Contains(appItemModel)) return;
-        AppSequenceManagerCollection[0].PeekNodeAppItem = appItemModel;
+        AppSequenceManagerCollection[0].SelectedAppItem = appItemModel;
     }
 
     public void RemoveAdvancedAppViewModel(AppItem_ViewModel appItemModel) {
@@ -85,7 +85,8 @@ public class AppContainer_ViewModel : AbstractEventDrivenViewModel {
         for (int i = 0; i < AppSequenceManagerCollection.Count; i++) {
             if (i == triggerIndex) {
                 for (int j = 0; j < appItemModel.MaxScreenConfigNumber; j++) {
-                    AppSequenceItem appSequenceItem = new AppSequenceItem(appItemModel, j);
+                    AppSequenceItem appSequenceItem 
+                        = new AppSequenceItem(this.StudyAppMappingObj.StudyCollectionItem,appItemModel, j);
                     AppSequenceManagerCollection[i+j].AddApp(appSequenceItem);
                 }
                 break;
@@ -99,13 +100,13 @@ public class AppContainer_ViewModel : AbstractEventDrivenViewModel {
         }
     }
     public void SequenceManagerAppSelected(AppSequenceManager_ViewModel appSequenceManager) {
-        AppItem_ViewModel appItemViewModel = appSequenceManager.PeekNodeAppItem;
+        AppItem_ViewModel appItemViewModel = appSequenceManager.SelectedAppItem;
         int sequenceManagerIndex = AppSequenceManagerCollection.IndexOf(appSequenceManager);
         // 重排序, 全部移除再全部添加
         SequenceManagersRemoveItem(appItemViewModel);
         SequenceMangersAddItem(appItemViewModel, sequenceManagerIndex);
-        if (!RunningAppList.Contains(appSequenceManager.PeekNodeAppItem)) {
-            PublishEvent(nameof(SequenceManagerAppSelected), appSequenceManager.PeekNodeAppItem);
+        if (!RunningAppList.Contains(appSequenceManager.SelectedAppItem)) {
+            PublishEvent(nameof(SequenceManagerAppSelected), appSequenceManager.SelectedAppItem);
         }
         //广播调起应用
         PublishSelectionFinished();
@@ -114,7 +115,7 @@ public class AppContainer_ViewModel : AbstractEventDrivenViewModel {
     private void SelectedCollectionChanged(AppSequenceManager_ViewModel appSequenceManagerViewModel) {
         for (int i = 0; i < AppSequenceManagerCollection.Count; i++) {
             if (AppSequenceManagerCollection[i].Equals(appSequenceManagerViewModel)) {
-                SelectedCollection[i] = appSequenceManagerViewModel.PeekNodeAppItem;
+                SelectedCollection[i] = appSequenceManagerViewModel.SelectedAppItem;
             }
         }
     }
@@ -136,7 +137,7 @@ public class AppContainer_ViewModel : AbstractEventDrivenViewModel {
             RemoveAdvancedAppViewModel(appItemViewModel);
         }
 
-        if (propertyName.Equals(nameof(AppSequenceManager_ViewModel.PeekNodeAppItem))) {
+        if (propertyName.Equals(nameof(AppSequenceManager_ViewModel.SelectedAppItem))) {
             AppSequenceManager_ViewModel appSequenceManager = (AppSequenceManager_ViewModel)o;
             SequenceManagerAppSelected(appSequenceManager);
         }

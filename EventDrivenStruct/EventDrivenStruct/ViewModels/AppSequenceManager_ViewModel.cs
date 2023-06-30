@@ -10,28 +10,33 @@ public class AppSequenceManager_ViewModel : AbstractEventDrivenViewModel{
 
     public AppSequenceManager_ViewModel( ) {
         _appSequenceStack = new List<AppSequenceItem>();
+        _selectedAppItem = null;
     }
 
     private List<AppSequenceItem> _appSequenceStack;
 
-    private AppItem_ViewModel _peekNodeAppItem;
+    private AppSequenceItem _peekAppSeqItem;
+
+    private AppItem_ViewModel _selectedAppItem;
     
-    public AppItem_ViewModel PeekNodeAppItem {
+    public AppItem_ViewModel SelectedAppItem {
         get {
-            return _peekNodeAppItem;
+            return _selectedAppItem;
         }
         set {
-            if(_peekNodeAppItem == value )return;
-            _peekNodeAppItem = value;
-            PublishEvent(nameof(PeekNodeAppItem), this);
+            if(_selectedAppItem == value )return;
+            _selectedAppItem = value;
+            PublishEvent(nameof(SelectedAppItem), this);
         }
     }
     
     public void TryUpdatePeekNode() {
-        if (_appSequenceStack.Count > 0) _peekNodeAppItem = _appSequenceStack[0].AppItemViewModel;
-        else _peekNodeAppItem = null; 
+        if (_appSequenceStack.Count > 0) {
+            _selectedAppItem = _appSequenceStack[0].AppItemViewModel;
+        }
+        else _selectedAppItem = null; 
         PublishEvent(nameof(TryUpdatePeekNode), this);
-        RisePropertyChanged(nameof(PeekNodeAppItem));
+        RisePropertyChanged(nameof(SelectedAppItem));
         
     }
 
@@ -40,7 +45,7 @@ public class AppSequenceManager_ViewModel : AbstractEventDrivenViewModel{
     /// </summary>
     /// <param name="appModel"></param>
     public void ChangedSelection(AppModel appModel) {
-        PeekNodeAppItem = new AppItem_ViewModel(appModel);
+        SelectedAppItem = new AppItem_ViewModel(appModel);
     }
 
     /// <summary>
@@ -52,7 +57,7 @@ public class AppSequenceManager_ViewModel : AbstractEventDrivenViewModel{
     }
 
     public void AddApp(AppSequenceItem appSequenceItem) {
-        if(_appSequenceStack.Count > 0 && _appSequenceStack[0].Equals(appSequenceItem)) return;
+        if(_appSequenceStack.Count > 0 && _appSequenceStack[0].AppItemViewModel.Equals(appSequenceItem.AppItemViewModel)) return;
         _appSequenceStack.Insert(0,appSequenceItem);
         TryUpdatePeekNode();
     }
@@ -68,7 +73,7 @@ public class AppSequenceManager_ViewModel : AbstractEventDrivenViewModel{
     }
 
     public override string ToString() {
-        if (PeekNodeAppItem == null) return "Empty";
-        return PeekNodeAppItem.AppName;
+        if (SelectedAppItem == null) return "Empty";
+        return SelectedAppItem.AppName +"'s " + _appSequenceStack[0].AppSequenceNumber;
     }
 }
