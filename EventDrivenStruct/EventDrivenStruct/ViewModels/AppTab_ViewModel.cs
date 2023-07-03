@@ -68,16 +68,8 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
         CurrentSelectedStudyCollectionItem = studyCollectionItem;
     }
 
-    private void NotifyOpenApp(AppItem_ViewModel appItemViewModel, int screenIndex) {
-        TCP_Sender.GetInstance().SendOpen(CurrentSelectedStudyCollectionItem.GetStudyUidComposition(), appItemViewModel.AppName, screenIndex, times);
-    }
-
-    private void NotifyHideApp(AppItem_ViewModel appItemViewModel) {
-        TCP_Sender.GetInstance().SendHide(CurrentSelectedStudyCollectionItem.GetStudyUidComposition(), appItemViewModel.AppName, times);
-    }
-
-    private void NotifyCloseApp(AppItem_ViewModel appItemViewModel) {
-        TCP_Sender.GetInstance().SendClose(CurrentSelectedStudyCollectionItem.GetStudyUidComposition(), appItemViewModel.AppName,  times);
+    private void AppConSeqItemsSelectedChanged(List<AppSequenceItem> appSequenceItems) {
+        
     }
 
     public override void UpdateByEvent(string propertyName, object o) {
@@ -103,9 +95,8 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
         }
 
         if (propertyName.Equals(nameof(AppContainer_ViewModel.PublishSelectionFinished))) {
-            List<AppItem_ViewModel> appList = (List<AppItem_ViewModel>)o;
-            //NotifyOpenApp(appItemViewModel, index);
-            times++;
+            List<AppSequenceItem> list = (List<AppSequenceItem>)o;
+            AppConSeqItemsSelectedChanged(list);
         }
     }
 }

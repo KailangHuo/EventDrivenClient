@@ -16,11 +16,9 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel{
         StudyContainerViewModel = new StudyContainer_ViewModel();
         AppTabViewModel = new AppTab_ViewModel();
         StudyContainerViewModel.RegisterObserver(AppTabViewModel);
+        ScreenContentContainerViewModel = new ScreenContentContainer_ViewModel();
+        AppTabViewModel.RegisterObserver(ScreenContentContainerViewModel);
 
-        ApplicationLoadingManger = new ApplicationLoadingManger();
-        StudyContainerViewModel.RegisterObserver(ApplicationLoadingManger);
-        AppTabViewModel.RegisterObserver(ApplicationLoadingManger);
-        
         RegisterObserver(PopupManager.GetInstance());
         SetupCommands();
     }
@@ -63,7 +61,7 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel{
 
     #region PROPERTIES
 
-    private ApplicationLoadingManger ApplicationLoadingManger;
+    private ScreenContentContainer_ViewModel ScreenContentContainerViewModel;
 
     #endregion
 

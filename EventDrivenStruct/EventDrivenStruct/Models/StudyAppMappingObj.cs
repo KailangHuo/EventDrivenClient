@@ -16,7 +16,7 @@ public class StudyAppMappingObj : AbstractEventDrivenObject {
 
     public void AddAppModel(AppModel appModel) {
         if (!this.AppList.Contains(appModel)) {
-            this.AppList.Add(appModel);
+            this.AppList.Add(appModel); 
             PublishEvent(nameof(AddAppModel), appModel);
         }
     }

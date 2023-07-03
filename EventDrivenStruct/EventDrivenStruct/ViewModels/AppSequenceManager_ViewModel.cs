@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using EventDrivenElements;
 using EventDrivenStruct.Models;
@@ -8,14 +9,18 @@ namespace EventDrivenStruct.ViewModels;
 
 public class AppSequenceManager_ViewModel : AbstractEventDrivenViewModel{
 
-    public AppSequenceManager_ViewModel( ) {
-        _appSequenceStack = new List<AppSequenceItem>();
+    public AppSequenceManager_ViewModel(int sequenceNumber) {
+        _appSequenceItemStack = new List<AppSequenceItem>();
         _selectedAppItem = null;
+        this.SequenceNumber = sequenceNumber;
+        this._currentShowingAppSequenceItem = null;
     }
 
-    private List<AppSequenceItem> _appSequenceStack;
+    private AppSequenceItem _currentShowingAppSequenceItem;
 
-    private AppSequenceItem _peekAppSeqItem;
+    public int SequenceNumber;
+
+    private List<AppSequenceItem> _appSequenceItemStack;
 
     private AppItem_ViewModel _selectedAppItem;
     
@@ -30,14 +35,25 @@ public class AppSequenceManager_ViewModel : AbstractEventDrivenViewModel{
         }
     }
     
-    public void TryUpdatePeekNode() {
-        if (_appSequenceStack.Count > 0) {
-            _selectedAppItem = _appSequenceStack[0].AppItemViewModel;
+    private void TryUpdatePeekNode() {
+        if (_appSequenceItemStack.Count > 0) {
+            _selectedAppItem = _appSequenceItemStack[0].AppItemViewModel;
         }
         else _selectedAppItem = null; 
-        PublishEvent(nameof(TryUpdatePeekNode), this);
+        PeekNodeChanged();
         RisePropertyChanged(nameof(SelectedAppItem));
-        
+    }
+
+    public void PeekNodeChanged() {
+        PublishEvent(nameof(PeekNodeChanged), this);
+    }
+
+    public AppSequenceItem GetPeekAppSeqItem() {
+        if (_appSequenceItemStack.Count > 0) {
+            return _appSequenceItemStack[0];
+        }
+
+        return null;
     }
 
     /// <summary>
@@ -56,24 +72,25 @@ public class AppSequenceManager_ViewModel : AbstractEventDrivenViewModel{
         ChangedSelection(appModel);
     }
 
-    public void AddApp(AppSequenceItem appSequenceItem) {
-        if(_appSequenceStack.Count > 0 && _appSequenceStack[0].AppItemViewModel.Equals(appSequenceItem.AppItemViewModel)) return;
-        _appSequenceStack.Insert(0,appSequenceItem);
+    public void AddAppSequenceItem(AppSequenceItem appSequenceItem) {
+        if(_appSequenceItemStack.Count > 0 && _appSequenceItemStack[0].AppItemViewModel.Equals(appSequenceItem.AppItemViewModel)) return;
+        _appSequenceItemStack.Insert(0,appSequenceItem);
         TryUpdatePeekNode();
     }
 
     public void RemoveApp(AppItem_ViewModel appItemViewModel) {
-        for (int i = 0; i < _appSequenceStack.Count; i++) {
-            if (_appSequenceStack[i].AppItemViewModel.Equals(appItemViewModel)) {
-                _appSequenceStack.Remove(_appSequenceStack[i]);
+        for (int i = 0; i < _appSequenceItemStack.Count; i++) {
+            if (_appSequenceItemStack[i].AppItemViewModel.Equals(appItemViewModel)) {
+                _appSequenceItemStack.Remove(_appSequenceItemStack[i]);
                 TryUpdatePeekNode();
                 break;
             }
         }
     }
+    
 
     public override string ToString() {
         if (SelectedAppItem == null) return "Empty";
-        return SelectedAppItem.AppName +"'s " + _appSequenceStack[0].AppSequenceNumber;
+        return SelectedAppItem.AppName +"'s " + _appSequenceItemStack[0].AppSequenceNumber;
     }
 }
