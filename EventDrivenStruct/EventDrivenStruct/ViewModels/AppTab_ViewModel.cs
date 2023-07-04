@@ -68,8 +68,13 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
         CurrentSelectedStudyCollectionItem = studyCollectionItem;
     }
 
-    private void AppConSeqItemsSelectedChanged(List<AppSequenceItem> appSequenceItems) {
+    public void AppConSeqItemsSelectedChanged(List<AppSequenceItem> appSequenceItems) {
+        List<ScreenContentObject> screenContentObjects = new List<ScreenContentObject>();
+        for (int i = 0; i < appSequenceItems.Count; i++) {
+            screenContentObjects.Add(new ScreenContentObject(CurrentSelectedStudyCollectionItem, appSequenceItems[i]));
+        }
         
+        PublishEvent(nameof(AppConSeqItemsSelectedChanged), screenContentObjects);
     }
 
     public override void UpdateByEvent(string propertyName, object o) {

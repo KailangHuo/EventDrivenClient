@@ -13,7 +13,7 @@ public class AppContainer_ViewModel : AbstractEventDrivenViewModel {
 
     public AppContainer_ViewModel(StudyAppMappingObj mappingObj) {
         AppSequenceManagerCollection = new ObservableCollection<AppSequenceManager_ViewModel>();
-        SelectedCollection = new List<AppItem_ViewModel>();
+        SelectedCollection = new List<AppSequenceItem>();
         StudyAppMappingObj = mappingObj;
         VisibleAppModelList = new ObservableCollection<AppItem_ViewModel>();
         RunningAppList = new List<AppItem_ViewModel>();
@@ -48,14 +48,14 @@ public class AppContainer_ViewModel : AbstractEventDrivenViewModel {
 
     private List<AppItem_ViewModel> RunningAppList;
 
-    private List<AppItem_ViewModel> SelectedCollection;
+    private List<AppSequenceItem> SelectedCollection;
 
 
     private void AddAdvancedAppViewModel(AppItem_ViewModel appItemModel) {
         appItemModel.RegisterObserver(this);
         RunningAppList.Add(appItemModel);
         VisibleAppModelListAddItem(appItemModel);
-        if (SelectedCollection.Contains(appItemModel)) return;
+        if (AppAlreadySelected(appItemModel)) return;
         AppSequenceManagerCollection[0].SelectedAppItem = appItemModel;
     }
 
@@ -118,11 +118,22 @@ public class AppContainer_ViewModel : AbstractEventDrivenViewModel {
             return;
         }
 
-        SelectedCollection[seqIndex] = appSequenceManagerViewModel.SelectedAppItem;
+        SelectedCollection[seqIndex] = appSequenceManagerViewModel.GetPeekAppSeqItem();
     }
 
     public void PublishSelectionFinished() {
         PublishEvent(nameof(PublishSelectionFinished), SelectedCollection);
+    }
+
+    private bool AppAlreadySelected(AppItem_ViewModel appItemViewModel) {
+        for (int i = 0; i < AppSequenceManagerCollection.Count; i++) {
+            if(AppSequenceManagerCollection[i].GetPeekAppSeqItem() == null) continue;
+            if (AppSequenceManagerCollection[i].GetPeekAppSeqItem().AppItemViewModel.Equals(appItemViewModel)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public override void UpdateByEvent(string propertyName, object o) {
