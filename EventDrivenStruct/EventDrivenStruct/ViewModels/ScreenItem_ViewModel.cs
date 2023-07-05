@@ -44,7 +44,7 @@ public class ScreenItem_ViewModel : AbstractEventDrivenViewModel{
                         + ScreenContentObject.AppSequenceItem.AppItemViewModel.AppName 
                         + "'s " + ScreenContentObject.AppSequenceItem.AppSequenceNumber
                         + " at " + ScreenIndex
-                        + " with " + ScreenContentObject.StudyCollectionItem.ToString());
+                        + " with " + ScreenContentObject.StudyCollectionStrs.ToString());
     }
 
     private void Hide() {
@@ -52,7 +52,7 @@ public class ScreenItem_ViewModel : AbstractEventDrivenViewModel{
                         + ScreenContentObject.AppSequenceItem.AppItemViewModel.AppName 
                         + "'s " + ScreenContentObject.AppSequenceItem.AppSequenceNumber
                         + " at " + ScreenIndex
-                        + " with " + ScreenContentObject.StudyCollectionItem.ToString());
+                        + " with " + ScreenContentObject.StudyCollectionStrs.ToString());
     }
 
     private void Close() {
@@ -60,7 +60,7 @@ public class ScreenItem_ViewModel : AbstractEventDrivenViewModel{
                         + ScreenContentObject.AppSequenceItem.AppItemViewModel.AppName 
                         + "'s " + ScreenContentObject.AppSequenceItem.AppSequenceNumber
                         + " at " + ScreenIndex
-                        + " with " + ScreenContentObject.StudyCollectionItem.ToString());
+                        + " with " + ScreenContentObject.StudyCollectionStrs.ToString());
     }
     
     private void NothigHappend() {
