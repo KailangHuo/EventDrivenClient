@@ -5,11 +5,11 @@ namespace EventDrivenStruct.ViewModels;
 
 public class ScreenContentObject {
 
-    public ScreenContentObject(StudyCollectionItem studyCollectionItem, AppSequenceItem appSequenceItem) {
+    public ScreenContentObject(StudyCollectionItem studyCollectionItem, AppTitleSequenceItem appTitleSequenceItem) {
         this.StudyCollectionSet = new HashSet<string>(studyCollectionItem.GetStudyUidComposition());
-        if(appSequenceItem == null) return;
-        this.AppName = appSequenceItem.AppItemViewModel.AppName;
-        this.AppSeqNumber = appSequenceItem.AppSequenceNumber;
+        if(appTitleSequenceItem == null) return;
+        this.AppName = appTitleSequenceItem.AppTitleItemViewModel.AppName;
+        this.AppSeqNumber = appTitleSequenceItem.AppSequenceNumber;
     }
 
     public HashSet<string> StudyCollectionSet { get; private set; }

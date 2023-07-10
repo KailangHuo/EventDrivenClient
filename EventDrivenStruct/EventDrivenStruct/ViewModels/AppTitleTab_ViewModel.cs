@@ -5,29 +5,29 @@ using EventDrivenStruct.Models;
 
 namespace EventDrivenStruct.ViewModels; 
 
-public class AppTab_ViewModel : AbstractEventDrivenViewModel{
+public class AppTitleTab_ViewModel : AbstractEventDrivenViewModel{
 
-    public AppTab_ViewModel() {
-        _map = new Dictionary<StudyCollectionItem, AppContainer_ViewModel>();
+    public AppTitleTab_ViewModel() {
+        _map = new Dictionary<StudyCollectionItem, AppTitleItemContainer_ViewModel>();
         CurrentSelectedStudyCollectionItem = null;
     }
 
-    private Dictionary<StudyCollectionItem, AppContainer_ViewModel> _map;
+    private Dictionary<StudyCollectionItem, AppTitleItemContainer_ViewModel> _map;
 
-    private AppContainer_ViewModel _selectedAppContainer;
+    private AppTitleItemContainer_ViewModel _selectedAppTitleItemContainer;
 
     //TEST ONLY
     private int times;
     
-    public AppContainer_ViewModel SelectedAppContainer {
+    public AppTitleItemContainer_ViewModel SelectedAppTitleItemContainer {
         get {
-            return _selectedAppContainer;
+            return _selectedAppTitleItemContainer;
         }
         set {
-            if(_selectedAppContainer == value) return;
-            _selectedAppContainer = value;
-            PublishEvent(nameof(SelectedAppContainer), _selectedAppContainer);
-            RisePropertyChanged(nameof(SelectedAppContainer));
+            if(_selectedAppTitleItemContainer == value) return;
+            _selectedAppTitleItemContainer = value;
+            PublishEvent(nameof(SelectedAppTitleItemContainer), _selectedAppTitleItemContainer);
+            RisePropertyChanged(nameof(SelectedAppTitleItemContainer));
         }
     }
     
@@ -46,10 +46,10 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
 
 
     private void PutInMap(StudyAppMappingObj studyAppMappingObj) {
-        AppContainer_ViewModel appContainer = new AppContainer_ViewModel(studyAppMappingObj);
-        studyAppMappingObj.RegisterObserver(appContainer);
-        appContainer.RegisterObserver(this);
-        _map.Add(studyAppMappingObj.StudyCollectionItem, appContainer);
+        AppTitleItemContainer_ViewModel appTitleItemContainer = new AppTitleItemContainer_ViewModel(studyAppMappingObj);
+        studyAppMappingObj.RegisterObserver(appTitleItemContainer);
+        appTitleItemContainer.RegisterObserver(this);
+        _map.Add(studyAppMappingObj.StudyCollectionItem, appTitleItemContainer);
     }
 
     private void RemoveFromMap(StudyAppMappingObj studyAppMappingObj) {
@@ -58,17 +58,17 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
 
     private void SwapSelectedAppContainer(StudyCollectionItem? studyCollectionItem) {
         if (studyCollectionItem == null) {
-            SelectedAppContainer = null;
+            SelectedAppTitleItemContainer = null;
         }
         else {
-            SelectedAppContainer = _map[studyCollectionItem];
+            SelectedAppTitleItemContainer = _map[studyCollectionItem];
         }
 
-        SelectedAppContainer = studyCollectionItem == null ? null : _map[studyCollectionItem];
+        SelectedAppTitleItemContainer = studyCollectionItem == null ? null : _map[studyCollectionItem];
         CurrentSelectedStudyCollectionItem = studyCollectionItem;
     }
 
-    public void AppConSeqItemsSelectedChanged(List<AppSequenceItem> appSequenceItems) {
+    public void AppConSeqItemsSelectedChanged(List<AppTitleSequenceItem> appSequenceItems) {
         List<ScreenContentObject> screenContentObjects = new List<ScreenContentObject>();
         for (int i = 0; i < appSequenceItems.Count; i++) {
             screenContentObjects.Add(new ScreenContentObject(CurrentSelectedStudyCollectionItem, appSequenceItems[i]));
@@ -93,14 +93,14 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
             this.RemoveFromMap(studyAppMappingObj);
         }
 
-        if (propertyName.Equals(nameof(AppContainer_ViewModel.SequenceManagerAppSelected))) {
-            AppItem_ViewModel appItemViewModel = (AppItem_ViewModel)o;
+        if (propertyName.Equals(nameof(AppTitleItemContainer_ViewModel.SequenceManagerAppSelected))) {
+            AppTitleItem_ViewModel appTitleItemViewModel = (AppTitleItem_ViewModel)o;
             //执行添加
-            MainEntry_ModelFacade.GetInstance().AddStudyItemWithApp(CurrentSelectedStudyCollectionItem, (AppModel)appItemViewModel.HashReferenceContext);
+            MainEntry_ModelFacade.GetInstance().AddStudyItemWithApp(CurrentSelectedStudyCollectionItem, (AppModel)appTitleItemViewModel.HashReferenceContext);
         }
 
-        if (propertyName.Equals(nameof(AppContainer_ViewModel.PublishSelectionFinished))) {
-            List<AppSequenceItem> list = (List<AppSequenceItem>)o;
+        if (propertyName.Equals(nameof(AppTitleItemContainer_ViewModel.PublishSelectionFinished))) {
+            List<AppTitleSequenceItem> list = (List<AppTitleSequenceItem>)o;
             AppConSeqItemsSelectedChanged(list);
         }
     }
