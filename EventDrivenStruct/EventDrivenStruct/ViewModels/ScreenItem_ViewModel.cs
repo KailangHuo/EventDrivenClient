@@ -30,37 +30,42 @@ public class ScreenItem_ViewModel : AbstractEventDrivenViewModel{
     }
 
     private void SwapContent(ScreenContentObject screenContentObject) {
-        if(ScreenContentObject?.AppSequenceItem?.AppItemViewModel != null) Hide();
-        this.ScreenContentObject = screenContentObject;
-        if (this.ScreenContentObject?.AppSequenceItem?.AppItemViewModel == null) {
+        if(ScreenContentObject != null) Hide();
+        
+        if (string.IsNullOrEmpty(screenContentObject.AppName) || (ScreenContentObject != null &&ScreenContentObject.Equals(screenContentObject))) {
             NothigHappend();
             return;
         }
+        
+        if (!string.IsNullOrEmpty(screenContentObject.AppName) ) {
+            this.ScreenContentObject = screenContentObject;
+        }
+
         Awake();
     }
     
     private void Awake() {
         Debug.WriteLine("AWAKE >>> " 
-                        + ScreenContentObject.AppSequenceItem.AppItemViewModel.AppName 
-                        + "'s " + ScreenContentObject.AppSequenceItem.AppSequenceNumber
+                        + ScreenContentObject.AppName 
+                        + "'s " + ScreenContentObject.AppSeqNumber
                         + " at " + ScreenIndex
-                        + " with " + ScreenContentObject.StudyCollectionStrs.ToString());
+                        + " with " + ScreenContentObject.StudyCollectionSet.ToString());
     }
 
     private void Hide() {
         Debug.WriteLine("HIDE >>> " 
-                        + ScreenContentObject.AppSequenceItem.AppItemViewModel.AppName 
-                        + "'s " + ScreenContentObject.AppSequenceItem.AppSequenceNumber
+                        + ScreenContentObject.AppName 
+                        + "'s " + ScreenContentObject.AppSeqNumber
                         + " at " + ScreenIndex
-                        + " with " + ScreenContentObject.StudyCollectionStrs.ToString());
+                        + " with " + ScreenContentObject.StudyCollectionSet.ToString());
     }
 
     private void Close() {
         Debug.WriteLine("CLOSE >>> " 
-                        + ScreenContentObject.AppSequenceItem.AppItemViewModel.AppName 
-                        + "'s " + ScreenContentObject.AppSequenceItem.AppSequenceNumber
+                        + ScreenContentObject.AppName 
+                        + "'s " + ScreenContentObject.AppSeqNumber
                         + " at " + ScreenIndex
-                        + " with " + ScreenContentObject.StudyCollectionStrs.ToString());
+                        + " with " + ScreenContentObject.StudyCollectionSet.ToString());
     }
     
     private void NothigHappend() {
