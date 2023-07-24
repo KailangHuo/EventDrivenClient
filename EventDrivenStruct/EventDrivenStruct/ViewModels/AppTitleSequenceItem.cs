@@ -4,12 +4,12 @@ namespace EventDrivenStruct.ViewModels;
 
 public class AppTitleSequenceItem {
 
-    public AppTitleSequenceItem(AppTitleItem_ViewModel appTitleItemViewModel, int appSequenceNumber) {
-        this.AppTitleItemViewModel = appTitleItemViewModel;
+    public AppTitleSequenceItem(AppItem_ViewModel appItemViewModel, int appSequenceNumber) {
+        this.AppItemViewModel = appItemViewModel;
         this.AppSequenceNumber = appSequenceNumber;
     }
 
-    public AppTitleItem_ViewModel AppTitleItemViewModel { get; private set; }
+    public AppItem_ViewModel AppItemViewModel { get; private set; }
 
     public int AppSequenceNumber{ get; private set; }
 
@@ -17,11 +17,11 @@ public class AppTitleSequenceItem {
         if (this == obj) return true;
         if (obj == null || GetType() != obj.GetType()) return false;
         AppTitleSequenceItem appTitleSequenceItem = (AppTitleSequenceItem)obj;
-        return this.AppTitleItemViewModel.Equals(appTitleSequenceItem.AppTitleItemViewModel)
+        return this.AppItemViewModel.Equals(appTitleSequenceItem.AppItemViewModel)
                && this.AppSequenceNumber == appTitleSequenceItem.AppSequenceNumber;
     }
 
     public override int GetHashCode() {
-        return (AppTitleItemViewModel.ToString() + AppSequenceNumber.ToString() + "").GetHashCode();
+        return (AppItemViewModel.ToString() + AppSequenceNumber.ToString() + "").GetHashCode();
     }
 }

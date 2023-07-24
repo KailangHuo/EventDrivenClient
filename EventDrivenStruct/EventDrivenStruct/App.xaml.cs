@@ -55,9 +55,9 @@ namespace EventDrivenStruct {
         private void UnitTest1(MainWindow_ViewModel mainWindowViewModel) {
             
             var studies = mainWindowViewModel.StudyContainerViewModel;
-            var screen1 = mainWindowViewModel.AppTitleTabViewModel.SelectedAppTitleItemContainer?.
+            var screen1 = mainWindowViewModel.AppTabViewModel.SelectedAppItemContainer?.
                 AppSequenceManagerCollection[0];
-            var screen2 = mainWindowViewModel.AppTitleTabViewModel.SelectedAppTitleItemContainer?.
+            var screen2 = mainWindowViewModel.AppTabViewModel.SelectedAppItemContainer?.
                 AppSequenceManagerCollection[1];
             
             MainEntry_ModelFacade facade = MainEntry_ModelFacade.GetInstance();
@@ -75,9 +75,9 @@ namespace EventDrivenStruct {
             facade.AddStudyItemWithApp(laoWang, maxtest);
             facade.AddStudyItemWithApp(laoWang, review2d);
             
-            mainWindowViewModel.AppTitleTabViewModel.SelectedAppTitleItemContainer.AppSequenceManagerCollection[4].SelectToOpen(filming);
-            mainWindowViewModel.AppTitleTabViewModel.SelectedAppTitleItemContainer.AppSequenceManagerCollection[3].ChangedSelection(maxtest);
-            mainWindowViewModel.AppTitleTabViewModel.SelectedAppTitleItemContainer.AppSequenceManagerCollection[1].ChangedSelection(maxtest);
+            mainWindowViewModel.AppTabViewModel.SelectedAppItemContainer.AppSequenceManagerCollection[4].SelectToOpen(filming);
+            mainWindowViewModel.AppTabViewModel.SelectedAppItemContainer.AppSequenceManagerCollection[3].ChangedSelection(maxtest);
+            mainWindowViewModel.AppTabViewModel.SelectedAppItemContainer.AppSequenceManagerCollection[1].ChangedSelection(maxtest);
             
             facade.AddStudyItemWithApp(laoLi, review2d);
 

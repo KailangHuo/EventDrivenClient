@@ -45,7 +45,7 @@ namespace EventDrivenStruct {
         /// </summary>
         [System.STAThreadAttribute()]
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "6.0.18.0")]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "6.0.20.0")]
         public static void Main() {
             EventDrivenStruct.App app = new EventDrivenStruct.App();
             app.Run();

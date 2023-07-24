@@ -8,7 +8,7 @@ public class ScreenContentObject {
     public ScreenContentObject(StudyCollectionItem studyCollectionItem, AppTitleSequenceItem appTitleSequenceItem) {
         this.StudyCollectionSet = new HashSet<string>(studyCollectionItem.GetStudyUidComposition());
         if(appTitleSequenceItem == null) return;
-        this.AppName = appTitleSequenceItem.AppTitleItemViewModel.AppName;
+        this.AppName = appTitleSequenceItem.AppItemViewModel.AppName;
         this.AppSeqNumber = appTitleSequenceItem.AppSequenceNumber;
     }
 

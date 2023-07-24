@@ -5,9 +5,9 @@ using EventDrivenStruct.Models;
 
 namespace EventDrivenStruct.ViewModels; 
 
-public class AppTitleItem_ViewModel : AbstractEventDrivenViewModel{
+public class AppItem_ViewModel : AbstractEventDrivenViewModel{
 
-    public AppTitleItem_ViewModel(AppModel appModel) : base(appModel){
+    public AppItem_ViewModel(AppModel appModel) : base(appModel){
         this.AppModel = appModel;
         this.AppName = appModel.AppName;
         MaxScreenConfigNumber = SystemConfiguration.GetInstance().GetAppConfigInfo(AppName).MaxConfigScreenNumber;

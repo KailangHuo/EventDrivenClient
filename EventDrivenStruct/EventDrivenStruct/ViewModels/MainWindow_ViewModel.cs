@@ -14,10 +14,10 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel{
 
     public MainWindow_ViewModel() {
         StudyContainerViewModel = new StudyContainer_ViewModel();
-        AppTitleTabViewModel = new AppTitleTab_ViewModel();
-        StudyContainerViewModel.RegisterObserver(AppTitleTabViewModel);
+        AppTabViewModel = new AppTab_ViewModel();
+        StudyContainerViewModel.RegisterObserver(AppTabViewModel);
         _screenItemContainerViewModel = new ScreenItemContainer_ViewModel();
-        AppTitleTabViewModel.RegisterObserver(_screenItemContainerViewModel);
+        AppTabViewModel.RegisterObserver(_screenItemContainerViewModel);
 
         RegisterObserver(PopupManager.GetInstance());
         SetupCommands();
@@ -34,7 +34,7 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel{
 
     public StudyContainer_ViewModel StudyContainerViewModel { get; private set; }
 
-    public AppTitleTab_ViewModel AppTitleTabViewModel { get; private set; }
+    public AppTab_ViewModel AppTabViewModel { get; private set; }
 
 
     #endregion
@@ -73,7 +73,7 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel{
 
         if (propertyName.Equals(nameof(MainEntry_ModelFacade.StudyAppMappingManager))) {
             StudyAppMappingManager studyAppMappingManager = (StudyAppMappingManager)o;
-            studyAppMappingManager.RegisterObserver(AppTitleTabViewModel);
+            studyAppMappingManager.RegisterObserver(AppTabViewModel);
         }
     }
 }

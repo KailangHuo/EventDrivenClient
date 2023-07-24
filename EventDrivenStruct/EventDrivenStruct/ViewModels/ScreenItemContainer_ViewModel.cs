@@ -32,7 +32,7 @@ public class ScreenItemContainer_ViewModel : AbstractEventDrivenViewModel{
     }
 
     public override void UpdateByEvent(string propertyName, object o) {
-        if (propertyName.Equals(nameof(AppTitleTab_ViewModel.AppConSeqItemsSelectedChanged))) {
+        if (propertyName.Equals(nameof(AppTab_ViewModel.AppConSeqItemsSelectedChanged))) {
             List<ScreenContentObject> list = (List<ScreenContentObject>)o;
             UpdateScreenContent(list);
         }

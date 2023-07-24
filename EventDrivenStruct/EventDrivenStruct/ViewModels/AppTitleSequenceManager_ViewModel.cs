@@ -11,7 +11,7 @@ public class AppTitleSequenceManager_ViewModel : AbstractEventDrivenViewModel{
 
     public AppTitleSequenceManager_ViewModel(int sequenceNumber) {
         _appSequenceItemStack = new List<AppTitleSequenceItem>();
-        _selectedAppTitleItem = null;
+        _selectedAppItem = null;
         this.SequenceNumber = sequenceNumber;
         this._currentShowingAppTitleSequenceItem = null;
     }
@@ -22,26 +22,26 @@ public class AppTitleSequenceManager_ViewModel : AbstractEventDrivenViewModel{
 
     private List<AppTitleSequenceItem> _appSequenceItemStack;
 
-    private AppTitleItem_ViewModel _selectedAppTitleItem;
+    private AppItem_ViewModel _selectedAppItem;
     
-    public AppTitleItem_ViewModel SelectedAppTitleItem {
+    public AppItem_ViewModel SelectedAppItem {
         get {
-            return _selectedAppTitleItem;
+            return _selectedAppItem;
         }
         set {
-            if(_selectedAppTitleItem == value )return;
-            _selectedAppTitleItem = value;
-            PublishEvent(nameof(SelectedAppTitleItem), this);
+            if(_selectedAppItem == value )return;
+            _selectedAppItem = value;
+            PublishEvent(nameof(SelectedAppItem), this);
         }
     }
     
     private void TryUpdatePeekNode() {
         if (_appSequenceItemStack.Count > 0) {
-            _selectedAppTitleItem = _appSequenceItemStack[0].AppTitleItemViewModel;
+            _selectedAppItem = _appSequenceItemStack[0].AppItemViewModel;
         }
-        else _selectedAppTitleItem = null; 
+        else _selectedAppItem = null; 
         PeekNodeChanged();
-        RisePropertyChanged(nameof(SelectedAppTitleItem));
+        RisePropertyChanged(nameof(SelectedAppItem));
     }
 
     public void PeekNodeChanged() {
@@ -61,7 +61,7 @@ public class AppTitleSequenceManager_ViewModel : AbstractEventDrivenViewModel{
     /// </summary>
     /// <param name="appModel"></param>
     public void ChangedSelection(AppModel appModel) {
-        SelectedAppTitleItem = new AppTitleItem_ViewModel(appModel);
+        SelectedAppItem = new AppItem_ViewModel(appModel);
     }
 
     /// <summary>
@@ -73,14 +73,14 @@ public class AppTitleSequenceManager_ViewModel : AbstractEventDrivenViewModel{
     }
 
     public void AddAppSequenceItem(AppTitleSequenceItem appTitleSequenceItem) {
-        if(_appSequenceItemStack.Count > 0 && _appSequenceItemStack[0].AppTitleItemViewModel.Equals(appTitleSequenceItem.AppTitleItemViewModel)) return;
+        if(_appSequenceItemStack.Count > 0 && _appSequenceItemStack[0].AppItemViewModel.Equals(appTitleSequenceItem.AppItemViewModel)) return;
         _appSequenceItemStack.Insert(0,appTitleSequenceItem);
         TryUpdatePeekNode();
     }
 
-    public void RemoveApp(AppTitleItem_ViewModel appTitleItemViewModel) {
+    public void RemoveApp(AppItem_ViewModel appItemViewModel) {
         for (int i = 0; i < _appSequenceItemStack.Count; i++) {
-            if (_appSequenceItemStack[i].AppTitleItemViewModel.Equals(appTitleItemViewModel)) {
+            if (_appSequenceItemStack[i].AppItemViewModel.Equals(appItemViewModel)) {
                 _appSequenceItemStack.Remove(_appSequenceItemStack[i]);
                 TryUpdatePeekNode();
                 break;
@@ -90,7 +90,7 @@ public class AppTitleSequenceManager_ViewModel : AbstractEventDrivenViewModel{
     
 
     public override string ToString() {
-        if (SelectedAppTitleItem == null) return "Empty";
-        return SelectedAppTitleItem.AppName +"'s " + _appSequenceItemStack[0].AppSequenceNumber;
+        if (SelectedAppItem == null) return "Empty";
+        return SelectedAppItem.AppName +"'s " + _appSequenceItemStack[0].AppSequenceNumber;
     }
 }
