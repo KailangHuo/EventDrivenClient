@@ -68,7 +68,7 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
         CurrentSelectedStudyCollectionItem = studyCollectionItem;
     }
 
-    public void AppConSeqItemsSelectedChanged(List<AppTitleSequenceItem> appSequenceItems) {
+    public void AppConSeqItemsSelectedChanged(List<AppSequenceItem> appSequenceItems) {
         List<ScreenContentObject> screenContentObjects = new List<ScreenContentObject>();
         for (int i = 0; i < appSequenceItems.Count; i++) {
             screenContentObjects.Add(new ScreenContentObject(CurrentSelectedStudyCollectionItem, appSequenceItems[i]));
@@ -100,7 +100,7 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
         }
 
         if (propertyName.Equals(nameof(AppItemContainer_ViewModel.PublishSelectionFinished))) {
-            List<AppTitleSequenceItem> list = (List<AppTitleSequenceItem>)o;
+            List<AppSequenceItem> list = (List<AppSequenceItem>)o;
             AppConSeqItemsSelectedChanged(list);
         }
     }

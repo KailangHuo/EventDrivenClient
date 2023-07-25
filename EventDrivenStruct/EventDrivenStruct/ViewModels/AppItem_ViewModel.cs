@@ -31,6 +31,6 @@ public class AppItem_ViewModel : AbstractEventDrivenViewModel{
     
 
     public override string ToString() {
-        return this.AppName;
+        return this.AppModel.ToString() + "_VM";
     }
 }

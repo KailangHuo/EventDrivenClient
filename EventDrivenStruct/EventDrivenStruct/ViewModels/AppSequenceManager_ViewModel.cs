@@ -7,20 +7,20 @@ using EventDrivenStruct.Models;
 
 namespace EventDrivenStruct.ViewModels; 
 
-public class AppTitleSequenceManager_ViewModel : AbstractEventDrivenViewModel{
+public class AppSequenceManager_ViewModel : AbstractEventDrivenViewModel{
 
-    public AppTitleSequenceManager_ViewModel(int sequenceNumber) {
-        _appSequenceItemStack = new List<AppTitleSequenceItem>();
+    public AppSequenceManager_ViewModel(int sequenceNumber) {
+        _appSequenceItemStack = new List<AppSequenceItem>();
         _selectedAppItem = null;
         this.SequenceNumber = sequenceNumber;
-        this._currentShowingAppTitleSequenceItem = null;
+        this._currentShowingAppSequenceItem = null;
     }
 
-    private AppTitleSequenceItem _currentShowingAppTitleSequenceItem;
+    private AppSequenceItem _currentShowingAppSequenceItem;
 
     public int SequenceNumber;
 
-    private List<AppTitleSequenceItem> _appSequenceItemStack;
+    private List<AppSequenceItem> _appSequenceItemStack;
 
     private AppItem_ViewModel _selectedAppItem;
     
@@ -48,7 +48,7 @@ public class AppTitleSequenceManager_ViewModel : AbstractEventDrivenViewModel{
         PublishEvent(nameof(PeekNodeChanged), this);
     }
 
-    public AppTitleSequenceItem GetPeekAppSeqItem() {
+    public AppSequenceItem GetPeekAppSeqItem() {
         if (_appSequenceItemStack.Count > 0) {
             return _appSequenceItemStack[0];
         }
@@ -72,9 +72,9 @@ public class AppTitleSequenceManager_ViewModel : AbstractEventDrivenViewModel{
         ChangedSelection(appModel);
     }
 
-    public void AddAppSequenceItem(AppTitleSequenceItem appTitleSequenceItem) {
-        if(_appSequenceItemStack.Count > 0 && _appSequenceItemStack[0].AppItemViewModel.Equals(appTitleSequenceItem.AppItemViewModel)) return;
-        _appSequenceItemStack.Insert(0,appTitleSequenceItem);
+    public void AddAppSequenceItem(AppSequenceItem appSequenceItem) {
+        if(_appSequenceItemStack.Count > 0 && _appSequenceItemStack[0].AppItemViewModel.Equals(appSequenceItem.AppItemViewModel)) return;
+        _appSequenceItemStack.Insert(0,appSequenceItem);
         TryUpdatePeekNode();
     }
 

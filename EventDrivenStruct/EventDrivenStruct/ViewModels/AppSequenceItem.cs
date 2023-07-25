@@ -2,9 +2,9 @@ using EventDrivenStruct.Models;
 
 namespace EventDrivenStruct.ViewModels; 
 
-public class AppTitleSequenceItem {
+public class AppSequenceItem {
 
-    public AppTitleSequenceItem(AppItem_ViewModel appItemViewModel, int appSequenceNumber) {
+    public AppSequenceItem(AppItem_ViewModel appItemViewModel, int appSequenceNumber) {
         this.AppItemViewModel = appItemViewModel;
         this.AppSequenceNumber = appSequenceNumber;
     }
@@ -16,9 +16,9 @@ public class AppTitleSequenceItem {
     public override bool Equals(object? obj) {
         if (this == obj) return true;
         if (obj == null || GetType() != obj.GetType()) return false;
-        AppTitleSequenceItem appTitleSequenceItem = (AppTitleSequenceItem)obj;
-        return this.AppItemViewModel.Equals(appTitleSequenceItem.AppItemViewModel)
-               && this.AppSequenceNumber == appTitleSequenceItem.AppSequenceNumber;
+        AppSequenceItem appSequenceItem = (AppSequenceItem)obj;
+        return this.AppItemViewModel.Equals(appSequenceItem.AppItemViewModel)
+               && this.AppSequenceNumber == appSequenceItem.AppSequenceNumber;
     }
 
     public override int GetHashCode() {

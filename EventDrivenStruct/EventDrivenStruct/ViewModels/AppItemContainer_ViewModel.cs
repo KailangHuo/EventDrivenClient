@@ -12,8 +12,8 @@ namespace EventDrivenStruct.ViewModels;
 public class AppItemContainer_ViewModel : AbstractEventDrivenViewModel {
 
     public AppItemContainer_ViewModel(StudyAppMappingObj mappingObj) {
-        AppSequenceManagerCollection = new ObservableCollection<AppTitleSequenceManager_ViewModel>();
-        SelectedCollection = new List<AppTitleSequenceItem>();
+        AppSequenceManagerCollection = new ObservableCollection<AppSequenceManager_ViewModel>();
+        SelectedCollection = new List<AppSequenceItem>();
         StudyAppMappingObj = mappingObj;
         VisibleAppModelList = new ObservableCollection<AppItem_ViewModel>();
         RunningAppList = new List<AppItem_ViewModel>();
@@ -28,9 +28,9 @@ public class AppItemContainer_ViewModel : AbstractEventDrivenViewModel {
     private void InitializeSequenceManagers() {
         _sequenceManagerNumber = SystemConfiguration.GetInstance().GetScreenNumber();
         for (int i = 0; i < _sequenceManagerNumber; i++) {
-            AppTitleSequenceManager_ViewModel appTitleSequenceManager = new AppTitleSequenceManager_ViewModel(i);
-            AppSequenceManagerCollection.Add(appTitleSequenceManager);
-            appTitleSequenceManager.RegisterObserver(this);
+            AppSequenceManager_ViewModel appSequenceManager = new AppSequenceManager_ViewModel(i);
+            AppSequenceManagerCollection.Add(appSequenceManager);
+            appSequenceManager.RegisterObserver(this);
             SelectedCollection.Add(null);
         }
     }
@@ -42,13 +42,13 @@ public class AppItemContainer_ViewModel : AbstractEventDrivenViewModel {
         }
     }
 
-    public ObservableCollection<AppTitleSequenceManager_ViewModel> AppSequenceManagerCollection;
+    public ObservableCollection<AppSequenceManager_ViewModel> AppSequenceManagerCollection;
 
     public ObservableCollection<AppItem_ViewModel> VisibleAppModelList;
 
     private List<AppItem_ViewModel> RunningAppList;
 
-    private List<AppTitleSequenceItem> SelectedCollection;
+    private List<AppSequenceItem> SelectedCollection;
 
 
     private void AddAdvancedAppViewModel(AppItem_ViewModel appItemModel) {
@@ -86,7 +86,7 @@ public class AppItemContainer_ViewModel : AbstractEventDrivenViewModel {
         for (int i = 0; i < AppSequenceManagerCollection.Count; i++) {
             if (i == triggerIndex) {
                 for (int j = 0; j < appItemModel.MaxScreenConfigNumber; j++) {
-                    AppSequenceManagerCollection[i+j].AddAppSequenceItem(new AppTitleSequenceItem(appItemModel, j));
+                    AppSequenceManagerCollection[i+j].AddAppSequenceItem(new AppSequenceItem(appItemModel, j));
                 }
                 break;
             }
@@ -98,27 +98,27 @@ public class AppItemContainer_ViewModel : AbstractEventDrivenViewModel {
             AppSequenceManagerCollection[i].RemoveApp(appItemModel);
         }
     }
-    public void SequenceManagerAppSelected(AppTitleSequenceManager_ViewModel appTitleSequenceManager) {
-        AppItem_ViewModel appItemViewModel = appTitleSequenceManager.SelectedAppItem;
-        int sequenceManagerIndex = appTitleSequenceManager.SequenceNumber;
+    public void SequenceManagerAppSelected(AppSequenceManager_ViewModel appSequenceManager) {
+        AppItem_ViewModel appItemViewModel = appSequenceManager.SelectedAppItem;
+        int sequenceManagerIndex = appSequenceManager.SequenceNumber;
         // 重排序, 全部移除再全部添加
         SequenceManagersRemoveItem(appItemViewModel);
         SequenceMangersAddItem(appItemViewModel, sequenceManagerIndex);
-        if (!RunningAppList.Contains(appTitleSequenceManager.SelectedAppItem)) {
-            PublishEvent(nameof(SequenceManagerAppSelected), appTitleSequenceManager.SelectedAppItem);
+        if (!RunningAppList.Contains(appSequenceManager.SelectedAppItem)) {
+            PublishEvent(nameof(SequenceManagerAppSelected), appSequenceManager.SelectedAppItem);
         }
         //广播调起应用
         PublishSelectionFinished();
     }
 
-    private void SelectedCollectionChanged(AppTitleSequenceManager_ViewModel appTitleSequenceManagerViewModel) {
-        int seqIndex = appTitleSequenceManagerViewModel.SequenceNumber;
+    private void SelectedCollectionChanged(AppSequenceManager_ViewModel appSequenceManagerViewModel) {
+        int seqIndex = appSequenceManagerViewModel.SequenceNumber;
         if (seqIndex < 0 || seqIndex > SelectedCollection.Count) {
             throw new IndexOutOfRangeException();
             return;
         }
 
-        SelectedCollection[seqIndex] = appTitleSequenceManagerViewModel.GetPeekAppSeqItem();
+        SelectedCollection[seqIndex] = appSequenceManagerViewModel.GetPeekAppSeqItem();
     }
 
     public void PublishSelectionFinished() {
@@ -149,14 +149,14 @@ public class AppItemContainer_ViewModel : AbstractEventDrivenViewModel {
             RemoveAdvancedAppViewModel(appItemViewModel);
         }
 
-        if (propertyName.Equals(nameof(AppTitleSequenceManager_ViewModel.SelectedAppItem))) {
-            AppTitleSequenceManager_ViewModel appTitleSequenceManager = (AppTitleSequenceManager_ViewModel)o;
-            SequenceManagerAppSelected(appTitleSequenceManager);
+        if (propertyName.Equals(nameof(AppSequenceManager_ViewModel.SelectedAppItem))) {
+            AppSequenceManager_ViewModel appSequenceManager = (AppSequenceManager_ViewModel)o;
+            SequenceManagerAppSelected(appSequenceManager);
         }
 
-        if (propertyName.Equals(nameof(AppTitleSequenceManager_ViewModel.PeekNodeChanged))) {
-            AppTitleSequenceManager_ViewModel appTitleSequenceManager = (AppTitleSequenceManager_ViewModel)o;
-            SelectedCollectionChanged(appTitleSequenceManager);
+        if (propertyName.Equals(nameof(AppSequenceManager_ViewModel.PeekNodeChanged))) {
+            AppSequenceManager_ViewModel appSequenceManager = (AppSequenceManager_ViewModel)o;
+            SelectedCollectionChanged(appSequenceManager);
         }
     }
 }
