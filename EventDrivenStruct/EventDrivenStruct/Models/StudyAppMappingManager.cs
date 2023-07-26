@@ -44,6 +44,7 @@ public class StudyAppMappingManager : AbstractEventDrivenObject{
     public void RemoveStudyAppMapObj(StudyCollectionItem studyItem) {
         if (_map.ContainsKey(studyItem)) {
             StudyAppMappingObj studyAppMappingObj = _map[studyItem];
+            _map[studyItem].Kill();
             _map.Remove(studyItem);
             PublishEvent(nameof(RemoveStudyAppMapObj), studyAppMappingObj);
         }

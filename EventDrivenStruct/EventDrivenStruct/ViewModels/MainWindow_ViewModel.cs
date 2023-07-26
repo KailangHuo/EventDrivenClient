@@ -16,8 +16,8 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel{
         StudyContainerViewModel = new StudyContainer_ViewModel();
         AppTabViewModel = new AppTab_ViewModel();
         StudyContainerViewModel.RegisterObserver(AppTabViewModel);
-        _screenItemContainerViewModel = new ScreenItemContainer_ViewModel();
-        AppTabViewModel.RegisterObserver(_screenItemContainerViewModel);
+        /*_screenItemContainerViewModel = new ScreenItemContainer_ViewModel();
+        AppTabViewModel.RegisterObserver(_screenItemContainerViewModel);*/
 
         RegisterObserver(PopupManager.GetInstance());
         SetupCommands();

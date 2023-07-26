@@ -61,6 +61,14 @@ namespace EventDrivenStruct {
                 AppSequenceManagerCollection[1];
             
             MainEntry_ModelFacade facade = MainEntry_ModelFacade.GetInstance();
+            StudyCollectionItem laoWang = MakeItem("老王",1);
+            StudyCollectionItem laoLi = MakeItem("老李", 3);
+
+
+            AppModel laowang_review2D = new AppModel("Review2D", laoWang);
+            AppModel laowang_maxTest = new AppModel("MAXTEST", laoWang);
+            AppModel laownag_filming = new AppModel("Filming", laoWang);
+            
             AppModel review2d = new AppModel("Review2D");
             AppModel review3d = new AppModel("Review3D");
             AppModel mmfusion = new AppModel("MMFusion");
@@ -68,16 +76,15 @@ namespace EventDrivenStruct {
 
             AppModel maxtest = new AppModel("MAXTEST");
 
-            StudyCollectionItem laoWang = MakeItem("老王",1);
-            StudyCollectionItem laoLi = MakeItem("老李", 3);
+            
                 
             
-            facade.AddStudyItemWithApp(laoWang, maxtest);
-            facade.AddStudyItemWithApp(laoWang, review2d);
+            facade.AddStudyItemWithApp(laoWang, laowang_maxTest);
+            facade.AddStudyItemWithApp(laoWang, laowang_review2D);
             
-            mainWindowViewModel.AppTabViewModel.SelectedAppItemContainer.AppSequenceManagerCollection[4].SelectToOpen(filming);
-            mainWindowViewModel.AppTabViewModel.SelectedAppItemContainer.AppSequenceManagerCollection[3].ChangedSelection(maxtest);
-            mainWindowViewModel.AppTabViewModel.SelectedAppItemContainer.AppSequenceManagerCollection[1].ChangedSelection(maxtest);
+            mainWindowViewModel.AppTabViewModel.SelectedAppItemContainer.AppSequenceManagerCollection[4].SelectToOpen(laownag_filming);
+            mainWindowViewModel.AppTabViewModel.SelectedAppItemContainer.AppSequenceManagerCollection[3].ChangedSelection(laowang_maxTest);
+            mainWindowViewModel.AppTabViewModel.SelectedAppItemContainer.AppSequenceManagerCollection[1].ChangedSelection(laowang_maxTest);
             
             facade.AddStudyItemWithApp(laoLi, review2d);
 

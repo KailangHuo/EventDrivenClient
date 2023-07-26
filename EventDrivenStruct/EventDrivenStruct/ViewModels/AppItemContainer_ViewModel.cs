@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Diagnostics;
 using System.Linq;
 using EventDrivenElements;
 using EventDrivenStruct.ConfigurationLoader;
@@ -48,7 +49,19 @@ public class AppItemContainer_ViewModel : AbstractEventDrivenViewModel {
 
     private List<AppItem_ViewModel> RunningAppList;
 
-    private List<AppSequenceItem> SelectedCollection;
+    private List<AppSequenceItem> _selectedCollection;
+
+    private List<AppSequenceItem> SelectedCollection {
+        get {
+            return _selectedCollection;
+        }
+        set {
+            if(_selectedCollection == value) return;
+            HideAllSelected();
+            _selectedCollection = value;
+            PublishSelectionFinished();
+        }
+    }
 
 
     private void AddAdvancedAppViewModel(AppItem_ViewModel appItemModel) {
@@ -121,8 +134,19 @@ public class AppItemContainer_ViewModel : AbstractEventDrivenViewModel {
         SelectedCollection[seqIndex] = appSequenceManagerViewModel.GetPeekAppSeqItem();
     }
 
+    public void HideAllSelected() {
+        for (int i = 0; i < AppSequenceManagerCollection.Count; i++) {
+            Debug.Write("[SCREEN " + i + "]:");
+            AppSequenceManagerCollection[i].HidePeekApp();
+        }
+    }
+
     public void PublishSelectionFinished() {
-        PublishEvent(nameof(PublishSelectionFinished), SelectedCollection);
+        for (int i = 0; i < AppSequenceManagerCollection.Count; i++) {
+            Debug.Write("[SCREEN " + i + "]:");
+            AppSequenceManagerCollection[i].InvokePeekApp();
+        }
+        //PublishEvent(nameof(PublishSelectionFinished), SelectedCollection);
     }
 
     private bool AppAlreadySelected(AppItem_ViewModel appItemViewModel) {

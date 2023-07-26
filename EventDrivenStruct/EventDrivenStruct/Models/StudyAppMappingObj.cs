@@ -23,9 +23,16 @@ public class StudyAppMappingObj : AbstractEventDrivenObject {
 
     public void RemoveAppModel(AppModel appModel) {
         if (this.AppList.Contains(appModel)) {
+            appModel.Kill();
             this.AppList.Remove(appModel);
             PublishEvent(nameof(RemoveAppModel), appModel);
             if (AppList.Count == 0) AppListEmpty();
+        }
+    }
+
+    public void Kill() {
+        for (int i = 0; i < AppList.Count; i++) {
+            AppList[i].Kill();
         }
     }
 
