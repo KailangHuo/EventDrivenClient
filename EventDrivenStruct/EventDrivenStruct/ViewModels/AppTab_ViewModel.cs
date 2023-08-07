@@ -64,17 +64,11 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
             SelectedAppItemContainer = _map[studyCollectionItem];
         }
 
-        SelectedAppItemContainer = studyCollectionItem == null ? null : _map[studyCollectionItem];
         CurrentSelectedStudyCollectionItem = studyCollectionItem;
     }
-
-    public void AppConSeqItemsSelectedChanged(List<AppSequenceItem> appSequenceItems) {
-        List<ScreenContentObject> screenContentObjects = new List<ScreenContentObject>();
-        for (int i = 0; i < appSequenceItems.Count; i++) {
-            screenContentObjects.Add(new ScreenContentObject(CurrentSelectedStudyCollectionItem, appSequenceItems[i]));
-        }
-        
-        PublishEvent(nameof(AppConSeqItemsSelectedChanged), screenContentObjects);
+    
+    public void SelectedAppContainerSelectionChanged() {
+        PublishEvent(nameof(SelectedAppContainerSelectionChanged), SelectedAppItemContainer);
     }
 
     public override void UpdateByEvent(string propertyName, object o) {
@@ -93,15 +87,15 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
             this.RemoveFromMap(studyAppMappingObj);
         }
 
-        if (propertyName.Equals(nameof(AppItemContainer_ViewModel.SequenceManagerAppSelected))) {
+        if (propertyName.Equals(nameof(AppItemContainer_ViewModel.AppSeqSelected))) {
             AppItem_ViewModel appItemViewModel = (AppItem_ViewModel)o;
             //执行添加
             MainEntry_ModelFacade.GetInstance().AddStudyItemWithApp(CurrentSelectedStudyCollectionItem, (AppModel)appItemViewModel.HashReferenceContext);
         }
 
-        if (propertyName.Equals(nameof(AppItemContainer_ViewModel.PublishSelectionFinished))) {
-            List<AppSequenceItem> list = (List<AppSequenceItem>)o;
-            AppConSeqItemsSelectedChanged(list);
+        if (propertyName.Equals(nameof(AppItemContainer_ViewModel.SelectionFinished))) {
+            SelectedAppContainerSelectionChanged();
+            //AppConSeqItemsSelectedChanged(list);
         }
     }
 }

@@ -68,15 +68,15 @@ namespace EventDrivenStruct {
             AppModel laowang_review2D = new AppModel("Review2D", laoWang);
             AppModel laowang_maxTest = new AppModel("MAXTEST", laoWang);
             AppModel laownag_filming = new AppModel("Filming", laoWang);
+            AppModel laoli_MMFusion = new AppModel("MMFusion", laoLi);
             
             AppModel review2d = new AppModel("Review2D");
             AppModel review3d = new AppModel("Review3D");
             AppModel mmfusion = new AppModel("MMFusion");
             AppModel filming = new AppModel("Filming");
-
             AppModel maxtest = new AppModel("MAXTEST");
 
-            
+            var screenManager = mainWindowViewModel.ScreenManagerViewModel.ScreenCollection;
                 
             
             facade.AddStudyItemWithApp(laoWang, laowang_maxTest);
@@ -85,10 +85,17 @@ namespace EventDrivenStruct {
             mainWindowViewModel.AppTabViewModel.SelectedAppItemContainer.AppSequenceManagerCollection[4].SelectToOpen(laownag_filming);
             mainWindowViewModel.AppTabViewModel.SelectedAppItemContainer.AppSequenceManagerCollection[3].ChangedSelection(laowang_maxTest);
             mainWindowViewModel.AppTabViewModel.SelectedAppItemContainer.AppSequenceManagerCollection[1].ChangedSelection(laowang_maxTest);
+            AppModel appModel = mainWindowViewModel.AppTabViewModel.SelectedAppItemContainer
+                .AppSequenceManagerCollection[1].AppItemSelected.AppModel;
+            mainWindowViewModel.AppTabViewModel.SelectedAppItemContainer.AppSequenceManagerCollection[1].CloseApp(appModel);
             
-            facade.AddStudyItemWithApp(laoLi, review2d);
+            facade.AddStudyItemWithApp(laoLi, laoli_MMFusion);
 
             mainWindowViewModel.StudyContainerViewModel.SelectedStudy = new Study_ViewModel(laoWang);
+            
+            mainWindowViewModel.StudyContainerViewModel.SelectedStudy = new Study_ViewModel(laoLi);
+            
+            //TODO: 接下来测试删去当前选中Study, 删去当前未选中检查, 删去当前选中应用, 删去当前未选中应用
 
         }
 

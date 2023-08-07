@@ -29,7 +29,6 @@ public class AppItem_ViewModel : AbstractEventDrivenViewModel{
     }
     public int MaxScreenConfigNumber { get; private set; }
     
-
     public override string ToString() {
         return this.AppModel.ToString() + "_VM";
     }

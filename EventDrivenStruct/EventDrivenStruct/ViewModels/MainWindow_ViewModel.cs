@@ -1,7 +1,3 @@
-
-
-using System.Net.Mime;
-using System.Windows;
 using System.Windows.Input;
 using EventDrivenElements;
 using EventDrivenStruct.Models;
@@ -15,11 +11,12 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel{
     public MainWindow_ViewModel() {
         StudyContainerViewModel = new StudyContainer_ViewModel();
         AppTabViewModel = new AppTab_ViewModel();
+        ScreenManagerViewModel = new ScreenManager_ViewModel();
+        
         StudyContainerViewModel.RegisterObserver(AppTabViewModel);
-        /*_screenItemContainerViewModel = new ScreenItemContainer_ViewModel();
-        AppTabViewModel.RegisterObserver(_screenItemContainerViewModel);*/
+        AppTabViewModel.RegisterObserver(ScreenManagerViewModel);
 
-        RegisterObserver(PopupManager.GetInstance());
+        this.RegisterObserver(PopupManager.GetInstance());
         SetupCommands();
     }
 
@@ -61,7 +58,7 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel{
 
     #region PROPERTIES
 
-    private ScreenItemContainer_ViewModel _screenItemContainerViewModel;
+    public ScreenManager_ViewModel ScreenManagerViewModel;
 
     #endregion
 
