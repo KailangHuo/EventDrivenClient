@@ -69,26 +69,8 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
         StudyAppMappingManager.RemoveAppFromStudyAppObj(studyCollectionItem, appModel);
     }
 
-    public void InvokeApp(AppModel appModel) {
-        
+    public void DeleteApp(AppModel appModel) {
+        StudyAppMappingManager.RemoveAppFromStudyAppObj(appModel.StudyCollectionItem, appModel);
     }
-
-    public void InvokePartialAppAt(AppModel appModel, int appSeq, int screenSeq) {
-        
-    }
-
-    public void ShowApp(AppModel appModel) {
-        
-    }
-
-    public void HideApp(AppModel appModel) {
-        
-    }
-
-    public void CloseApp(AppModel appModel) {
-        
-    }
-
-
 
 }

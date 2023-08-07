@@ -24,33 +24,7 @@ public class AppModel : AbstractEventDrivenObject{
     public string AppName { get; private set; }
 
     public int MaxScreenConfigNumber { get; private set; }
-    
-    public void SetupStudies(StudyCollectionItem studyCollectionItem) {
-        this.StudyCollectionItem = studyCollectionItem;
-    }
 
-    public void InvokePartialAt(int appSequence, int screenSequence) {
-        Debug.WriteLine("AWAKE >>> " 
-                        + ToString() 
-                        + "'s " + appSequence
-                        + " at " + screenSequence);
-    }
-    
-    public void HidePartialAt(int appSequence, int screenSequence) {
-        Debug.WriteLine("HIDE >>> " 
-                        + ToString() 
-                        + "'s " + appSequence
-                        + " at " + screenSequence);
-    }
-
-    public void Kill() {
-        Debug.WriteLine("KILL_APP >>>" +ToString());
-    }
-
-    public void HideAll() {
-        Debug.WriteLine("HIDE_APP >>>" +ToString());
-    }
-    
     public override string ToString() {
         return this.AppName + " | " + this.StudyCollectionItem.ToString();
     }

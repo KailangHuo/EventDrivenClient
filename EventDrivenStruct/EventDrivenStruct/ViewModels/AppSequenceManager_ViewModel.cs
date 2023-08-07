@@ -77,12 +77,7 @@ public class AppSequenceManager_ViewModel : AbstractEventDrivenViewModel{
     /// </summary>
     /// <param name="appModel"></param>
     public void CloseApp(AppModel appModel) {
-        for (int i = 0; i < _appSequenceItemStack.Count; i++) {
-            if (_appSequenceItemStack[i].AppItemViewModel.AppModel.Equals(appModel)) {
-                PublishEvent(nameof(CloseApp), appModel);
-                break;
-            }
-        }
+        MainEntry_ModelFacade.GetInstance().DeleteApp(appModel);
     }
 
     public void AddAppSequenceItem(AppSequenceItem appSequenceItem) {

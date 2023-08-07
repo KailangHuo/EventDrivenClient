@@ -85,9 +85,14 @@ namespace EventDrivenStruct {
             mainWindowViewModel.AppTabViewModel.SelectedAppItemContainer.AppSequenceManagerCollection[4].SelectToOpen(laownag_filming);
             mainWindowViewModel.AppTabViewModel.SelectedAppItemContainer.AppSequenceManagerCollection[3].ChangedSelection(laowang_maxTest);
             mainWindowViewModel.AppTabViewModel.SelectedAppItemContainer.AppSequenceManagerCollection[1].ChangedSelection(laowang_maxTest);
+            
+            // 通过前端点击按钮关闭
             AppModel appModel = mainWindowViewModel.AppTabViewModel.SelectedAppItemContainer
-                .AppSequenceManagerCollection[1].AppItemSelected.AppModel;
+                .AppSequenceManagerCollection[1].AppItemSelected.AppModel; // laowang_maxTest
             mainWindowViewModel.AppTabViewModel.SelectedAppItemContainer.AppSequenceManagerCollection[1].CloseApp(appModel);
+            
+            // 通过facade后端关闭App
+            facade.DeleteApp(laowang_maxTest);
             
             facade.AddStudyItemWithApp(laoLi, laoli_MMFusion);
 
@@ -95,7 +100,12 @@ namespace EventDrivenStruct {
             
             mainWindowViewModel.StudyContainerViewModel.SelectedStudy = new Study_ViewModel(laoLi);
             
-            //TODO: 接下来测试删去当前选中Study, 删去当前未选中检查, 删去当前选中应用, 删去当前未选中应用
+            //TODO:
+            // 1.分别测试从facade删去和前端删去
+            // 接下来测试删去当前选中Study, 删去当前未选中检查, 删去当前选中应用, 删去当前未选中应用
+            
+            //facade.DeleteStudyItem(laoWang);
+            
 
         }
 

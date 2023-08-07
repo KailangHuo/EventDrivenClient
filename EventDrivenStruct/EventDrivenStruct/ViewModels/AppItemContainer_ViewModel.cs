@@ -170,11 +170,5 @@ public class AppItemContainer_ViewModel : AbstractEventDrivenViewModel {
             AppSequenceManager_ViewModel appSequenceManager = (AppSequenceManager_ViewModel)o;
             SelectedCollectionChanged(appSequenceManager);
         }
-
-        if (propertyName.Equals(nameof(AppSequenceManager_ViewModel.CloseApp))) {
-            AppModel appModel = (AppModel)o;
-            AppItem_ViewModel appItemViewModel = new AppItem_ViewModel(appModel);
-            RemoveAdvancedAppViewModel(appItemViewModel);
-        }
     }
 }
