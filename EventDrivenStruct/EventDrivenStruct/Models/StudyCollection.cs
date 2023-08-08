@@ -36,6 +36,7 @@ public class StudyCollection : AbstractEventDrivenObject{
             StudyCollectionItems.Remove(studyCollectionItem);
             RemoveStudiesFromHashSet(studyCollectionItem.GetStudyComposition());
             PublishEvent(nameof(DeleteStudyCollectionItem), studyCollectionItem);
+            // TODO: Delete完成后必须要终止对应的进程
         }
     }
 

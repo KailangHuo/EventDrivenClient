@@ -78,35 +78,40 @@ namespace EventDrivenStruct {
 
             var screenManager = mainWindowViewModel.ScreenManagerViewModel.ScreenCollection;
                 
-            
+            // facade添加一个Study并打开应用
             facade.AddStudyItemWithApp(laoWang, laowang_maxTest);
+            
+            // facade添加一个Study并打开应用
             facade.AddStudyItemWithApp(laoWang, laowang_review2D);
             
+            // 在laowang的Study下切换应用
             mainWindowViewModel.AppTabViewModel.SelectedAppItemContainer.AppSequenceManagerCollection[4].SelectToOpen(laownag_filming);
             mainWindowViewModel.AppTabViewModel.SelectedAppItemContainer.AppSequenceManagerCollection[3].ChangedSelection(laowang_maxTest);
             mainWindowViewModel.AppTabViewModel.SelectedAppItemContainer.AppSequenceManagerCollection[1].ChangedSelection(laowang_maxTest);
             
-            // 通过前端点击按钮关闭
+            // 在前端点击按钮关闭app -> 当前或者背景app
             AppModel appModel = mainWindowViewModel.AppTabViewModel.SelectedAppItemContainer
                 .AppSequenceManagerCollection[1].AppItemSelected.AppModel; // laowang_maxTest
             mainWindowViewModel.AppTabViewModel.SelectedAppItemContainer.AppSequenceManagerCollection[1].CloseApp(appModel);
             
-            // 通过facade后端关闭App
+            // 在facade关闭App -> 当前app或者背景app
             facade.DeleteApp(laowang_maxTest);
             
+            // 在facade添加一条Study并打开对应的app
             facade.AddStudyItemWithApp(laoLi, laoli_MMFusion);
 
+            // 在前端选择并切换Study
             mainWindowViewModel.StudyContainerViewModel.SelectedStudy = new Study_ViewModel(laoWang);
             
+            // 在前端选择并切换Study
             mainWindowViewModel.StudyContainerViewModel.SelectedStudy = new Study_ViewModel(laoLi);
             
-            //TODO:
-            // 1.分别测试从facade删去和前端删去
-            // 接下来测试删去当前选中Study, 删去当前未选中检查, 删去当前选中应用, 删去当前未选中应用
-            
-            //facade.DeleteStudyItem(laoWang);
-            
+            // 在前端点击关闭Study -> 当前或者背景
+            mainWindowViewModel.StudyContainerViewModel.StudyViewModels[0].CloseStudy();
 
+            // 在facade关闭Study -> 当前和背景Study
+            facade.DeleteStudyItem(laoWang);
+            
         }
 
         private StudyCollectionItem MakeItem(string param1, int times) {

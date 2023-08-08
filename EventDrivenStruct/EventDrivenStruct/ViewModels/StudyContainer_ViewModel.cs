@@ -9,10 +9,10 @@ namespace EventDrivenStruct.ViewModels;
 public class StudyContainer_ViewModel : AbstractEventDrivenViewModel{
 
     public StudyContainer_ViewModel() {
-        _studyViewModels = new ObservableCollection<Study_ViewModel>();
+        StudyViewModels = new ObservableCollection<Study_ViewModel>();
     }
 
-    private ObservableCollection<Study_ViewModel> _studyViewModels;
+    public ObservableCollection<Study_ViewModel> StudyViewModels;
 
     private Study_ViewModel _selectedStudy;
 
@@ -32,18 +32,18 @@ public class StudyContainer_ViewModel : AbstractEventDrivenViewModel{
         Study_ViewModel studyViewModel = new Study_ViewModel(item);
         item.RegisterObserver(studyViewModel);
         // 不用判断是否存在, 因为在Model层处理好了
-        this._studyViewModels.Insert(0,studyViewModel);
+        this.StudyViewModels.Insert(0,studyViewModel);
         UpdateSelectedStudy();
     }
 
     private void RemoveStudyViewModel(StudyCollectionItem item) {
         Study_ViewModel studyViewModel = new Study_ViewModel(item);
-        this._studyViewModels.Remove(studyViewModel);
+        this.StudyViewModels.Remove(studyViewModel);
         UpdateSelectedStudy();
     }
 
     private void UpdateSelectedStudy() {
-        if (_studyViewModels.Count > 0) SelectedStudy = _studyViewModels[0];
+        if (StudyViewModels.Count > 0) SelectedStudy = StudyViewModels[0];
         else SelectedStudy = null;
     }
 

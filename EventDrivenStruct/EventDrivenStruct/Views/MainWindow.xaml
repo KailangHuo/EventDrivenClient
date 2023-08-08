@@ -61,7 +61,7 @@
             <Border Grid.ColumnSpan="5"/>
             <Button Margin="2" 
                 Command="{Binding GotoPaTabCommand}" 
-                Height="55" Content="PA List" FontSize="12" 
+                Height="55" Content="PA" FontSize="12" 
                 Visibility="Visible" 
                 Name="btnMFPATab" 
                 Focusable="False" 

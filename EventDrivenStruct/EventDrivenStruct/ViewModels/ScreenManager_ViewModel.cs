@@ -22,8 +22,15 @@ public class ScreenManager_ViewModel : AbstractEventDrivenViewModel{
     }
 
     private void TryUpdateScreens(AppItemContainer_ViewModel appItemContainerViewModel) {
-        for (int i = 0; i < ScreenCollection.Count; i++) {
-            ScreenCollection[i].TryUpdateContent(appItemContainerViewModel.SelectedSequenceApps[i]);
+        if (appItemContainerViewModel == null) {
+            for (int i = 0; i < ScreenCollection.Count; i++) {
+                ScreenCollection[i].TryUpdateContent(null);
+            }
+        }
+        else {
+            for (int i = 0; i < ScreenCollection.Count; i++) {
+                ScreenCollection[i].TryUpdateContent(appItemContainerViewModel.SelectedSequenceApps[i]);
+            }   
         }
     }
 

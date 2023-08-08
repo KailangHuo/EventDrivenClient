@@ -67,10 +67,8 @@ public class Study_ViewModel : AbstractEventDrivenViewModel{
         }
     }
 
-    public void TryDelete(StudyCollectionItem item) {
-        if (item == this.StudyCollectionItem) {
-            PublishEvent(nameof(TryDelete), this);
-        }
+    public void CloseStudy() {
+        MainEntry_ModelFacade.GetInstance().DeleteStudyItem(this.StudyCollectionItem);
     }
 
 }
