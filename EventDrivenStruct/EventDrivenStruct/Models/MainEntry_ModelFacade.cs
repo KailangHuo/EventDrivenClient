@@ -73,4 +73,36 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
         StudyAppMappingManager.RemoveAppFromStudyAppObj(appModel.StudyCollectionItem, appModel);
     }
 
+    private int number;
+    public void TestAdd() {
+        if (number == 0) {
+            StudyCollectionItem laoWang = MakeItem("老王",1);
+            AppModel laowang_maxTest = new AppModel("MAXTEST", laoWang);
+            AddStudyItemWithApp(laoWang, laowang_maxTest);
+        }
+        if (number == 1) {
+            StudyCollectionItem laoWang = MakeItem("老王",1);
+            AppModel laowang_OnOlogy = new AppModel("Oncology", laoWang);
+            AddStudyItemWithApp(laoWang, laowang_OnOlogy);
+        }
+        if (number == 2) {
+            StudyCollectionItem laoLi = MakeItem("li",2);
+            AppModel laoLi_Dental = new AppModel("Dental", laoLi);
+            AddStudyItemWithApp(laoLi, laoLi_Dental);
+        }
+
+        number++;
+    }
+    
+    private StudyCollectionItem MakeItem(string param1, int times) {
+        StudyCollectionItem studyCollectionItem = new StudyCollectionItem();
+
+        for (int i = 0; i < times; i++) {
+            Study study = new Study(param1+ i + ". " );
+            studyCollectionItem.AddInStudyComposition(study);
+        }
+            
+        return studyCollectionItem;
+    }
+
 }

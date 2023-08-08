@@ -4,8 +4,8 @@ using EventDrivenStruct.Models;
 
 namespace EventDrivenStruct.ViewModels; 
 
-public class MainWindow_ViewModel : AbstractEventDrivenViewModel{
-
+public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
+    
     #region CONSTRUCTION
 
     public MainWindow_ViewModel() {
@@ -23,6 +23,7 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel{
     private void SetupCommands() {
         GotoPaViewCommand = new CommonCommand(GotoPaView);
         AddExamCommand = new CommonCommand(AddExam);
+        TEST_COMMAND = new CommonCommand(TEST_COMMAND_METHOD);
     }
 
     #endregion
@@ -42,9 +43,15 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel{
 
     public ICommand AddExamCommand { get; private set; }
 
+    public ICommand TEST_COMMAND { get; private set; }
+
     #endregion
 
     #region COMMAND_BINDING_METHODS
+
+    public void TEST_COMMAND_METHOD(object o = null) {
+        MainEntry_ModelFacade.GetInstance().TestAdd();
+    }
 
     public void GotoPaView(object o = null) {
         PublishEvent(nameof(GotoPaView), o);
@@ -73,4 +80,5 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel{
             studyAppMappingManager.RegisterObserver(AppTabViewModel);
         }
     }
+
 }

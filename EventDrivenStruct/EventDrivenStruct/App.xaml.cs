@@ -38,21 +38,22 @@ namespace EventDrivenStruct {
             MainEntry_ModelFacade facade = MainEntry_ModelFacade.GetInstance();
             facade.RegisterObserver(mainWindowViewModel);
 
-            UnitTest1(mainWindowViewModel);
-            /*GlobalContext.GetInstance().RegisterModelFacade(MainEntry_ModelFacade.GetInstance());
+            
+            GlobalContext.GetInstance().RegisterModelFacade(MainEntry_ModelFacade.GetInstance());
             Current.Dispatcher.BeginInvoke(() => {
                 MainWindow mainWindow = new MainWindow();
-                MainWindow_ViewModel mainWindowViewModel = new MainWindow_ViewModel();
+                //MainWindow_ViewModel mainWindowViewModel = new MainWindow_ViewModel();
                 
                 GlobalContext.GetInstance().RegisterMainWindow(mainWindow);
                 GlobalContext.GetInstance().RegisterMainWindowViewModel(mainWindowViewModel);
                 
                 mainWindow.DataContext = mainWindowViewModel;
                 mainWindow.Show();
-            });*/
+            });
+            //UnitTest1(mainWindowViewModel);
         }
 
-        private void UnitTest1(MainWindow_ViewModel mainWindowViewModel) {
+        public void UnitTest1(MainWindow_ViewModel mainWindowViewModel) {
             
             var studies = mainWindowViewModel.StudyContainerViewModel;
             var screen1 = mainWindowViewModel.AppTabViewModel.SelectedAppItemContainer?.

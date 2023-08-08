@@ -39,13 +39,13 @@ public class AppItemContainer_ViewModel : AbstractEventDrivenViewModel {
     private void InitializeConstantApps() {
         List<string> ConstantApplist = SystemConfiguration.GetInstance().GetConstantAppList();
         for (int i = 0; i < ConstantApplist.Count; i++) {
-            VisibleAppModelList.Add(new AppItem_ViewModel(new AppModel(ConstantApplist[i])));
+            VisibleAppModelList.Add(new AppItem_ViewModel(new AppModel(ConstantApplist[i], StudyAppMappingObj.StudyCollectionItem)));
         }
     }
 
-    public ObservableCollection<AppSequenceManager_ViewModel> AppSequenceManagerCollection;
+    public ObservableCollection<AppSequenceManager_ViewModel> AppSequenceManagerCollection { get; private set; }
 
-    public ObservableCollection<AppItem_ViewModel> VisibleAppModelList;
+    public ObservableCollection<AppItem_ViewModel> VisibleAppModelList { get; private set; }
 
     private List<AppItem_ViewModel> RunningAppList;
 

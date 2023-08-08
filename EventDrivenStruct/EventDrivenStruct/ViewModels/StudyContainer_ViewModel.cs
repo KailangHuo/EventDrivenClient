@@ -12,7 +12,7 @@ public class StudyContainer_ViewModel : AbstractEventDrivenViewModel{
         StudyViewModels = new ObservableCollection<Study_ViewModel>();
     }
 
-    public ObservableCollection<Study_ViewModel> StudyViewModels;
+    public ObservableCollection<Study_ViewModel> StudyViewModels { get; private set; }
 
     private Study_ViewModel _selectedStudy;
 

@@ -9,15 +9,14 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
 
     public AppTab_ViewModel() {
         _map = new Dictionary<StudyCollectionItem, AppItemContainer_ViewModel>();
+        HasContainer = false;
+        SelectedAppItemContainer = null;
         CurrentSelectedStudyCollectionItem = null;
     }
 
     private Dictionary<StudyCollectionItem, AppItemContainer_ViewModel> _map;
 
     private AppItemContainer_ViewModel _selectedAppItemContainer;
-
-    //TEST ONLY
-    private int times;
     
     public AppItemContainer_ViewModel SelectedAppItemContainer {
         get {
@@ -26,11 +25,25 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
         set {
             if(_selectedAppItemContainer == value) return;
             _selectedAppItemContainer = value;
+            HasContainer = _selectedAppItemContainer != null;
             PublishEvent(nameof(SelectedAppItemContainer), _selectedAppItemContainer);
             RisePropertyChanged(nameof(SelectedAppItemContainer));
         }
     }
-    
+
+    private bool _hasContainer;
+
+    public bool HasContainer {
+        get {
+            return _hasContainer;
+        }
+        private set {
+            if(_hasContainer == value) return;
+            _hasContainer = value;
+            RisePropertyChanged(nameof(HasContainer));
+        }
+    } 
+
     private StudyCollectionItem _currentSelectedStudyCollectionItem;
 
     public StudyCollectionItem CurrentSelectedStudyCollectionItem {

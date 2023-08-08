@@ -4,9 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EventDrivenStruct"
+        xmlns:converter="clr-namespace:EventDrivenStruct.ViewModels.Converter"
         mc:Ignorable="d"
         Title="MainWindow" Height="900" Width="1600" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Window.Resources>
+        <converter:BoolToVisibilityConverter x:Key = "BooltoVisibilityConverter"/>
+        
         <DataTemplate x:Key="Study_ComboBox_Template">
             <Grid>
                 <Grid.RowDefinitions>
@@ -16,12 +19,12 @@
                 
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Name="PatientNameLabel" Content="{Binding Name}" HorizontalAlignment="Left"  VerticalAlignment="Top"/>
-                    <Label Grid.Column="2"  Name="PatientGenderLabel" Content="{Binding Gender}" HorizontalAlignment="Right" VerticalAlignment="Top" />
+                    <Label Grid.Column="0" Name="PatientNameLabel" Content="{Binding PatientName}" HorizontalAlignment="Left"  VerticalAlignment="Top"/>
+                    <Label Grid.Column="2"  Name="PatientGenderLabel" Content="{Binding PatientGender}" HorizontalAlignment="Right" VerticalAlignment="Top" />
                 </Grid>
                 
                 <Grid Grid.Row="1">
@@ -30,16 +33,15 @@
                         <ColumnDefinition Width="100"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0"  Name="PatientAgeLabel" Content="{Binding Age}" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
-                    <Label Grid.Column="2"   Name="PatientUidLabel" Content="{Binding Uid}" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                    <Label Grid.Column="0"  Name="PatientAgeLabel" Content="{Binding PatientAge}" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                    <Label Grid.Column="2"   Name="PatientUidLabel" Content="{Binding StudyUid}" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
                 </Grid>
             </Grid>
         </DataTemplate>
         
         <DataTemplate x:Key="App_ListBox_Template">
             <StackPanel Orientation="Vertical" >
-                <Button Content="x" Height="10" Width="10" HorizontalAlignment="Right" FontSize="10" HorizontalContentAlignment="Center" VerticalContentAlignment="Top"/>
-                <Label Width="85" Content="{Binding Type}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+                <Label Width="85" Content="{Binding AppName}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
             </StackPanel>
         </DataTemplate>
     </Window.Resources>
@@ -56,7 +58,6 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Border Grid.ColumnSpan="5"/>
             <Button Margin="2" 
@@ -86,29 +87,40 @@
                     </ContextMenu>
                 </ComboBox.ContextMenu>
             </ComboBox>-->
-            <ComboBox Grid.Column="1" Name="StudiesComboBox"
-                      Margin="2"
-                      Cursor="Hand"
-                      AllowDrop="False"
-                      Height="55"
-                      Width="255"
-                      IsReadOnly="True"
-                      ItemTemplate="{StaticResource Study_ComboBox_Template}"
-                      ItemsSource="{Binding StudyTabContainer.StudyTabs}"
-                      SelectedItem="{Binding StudyTabContainer.CurrentSelectedTab}"
-            >
-            </ComboBox>
-            <Button Grid.Column="2" Name="CurrentStudySelection"
-                    Margin="2"
-                    Height="55"
-                    Width="60"
-                    Cursor="Hand"
-                    HorizontalAlignment="Left"
-                    Content="CurTrig"
-                    Command="{Binding HostingWindowViewModel.TriggerCurrentCommand}"
-                    CommandParameter="{Binding ApplicationTabContainer.CurrentSelectedApplicationTab.ApplicationDto}"
-                    />
-            <Button Grid.Column="3" Name="Lock"
+            <Grid Grid.Column="1" Name = "StudiesComboGrid"
+                  Margin="2"
+                  Height="55"
+                  Width="255"
+                  >
+                <ComboBox Name="StudiesComboBox"
+                          AllowDrop="False"
+                          Cursor="Hand"
+                          Height="55"
+                          Width="255"
+                          IsReadOnly="True"
+                          ItemTemplate="{StaticResource Study_ComboBox_Template}"
+                          ItemsSource="{Binding StudyContainerViewModel.StudyViewModels}"
+                          SelectedItem="{Binding StudyContainerViewModel.SelectedStudy}"
+                          >
+                    
+                </ComboBox>
+                <Button Width="240" Height="50" 
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="2,1,20,0"
+                        ContentTemplate="{StaticResource Study_ComboBox_Template}"
+                        Content="{Binding StudyContainerViewModel.SelectedStudy, Mode=TwoWay}"
+                        Background="White"
+                        ToolTip="TBA"
+                        BorderThickness="0"
+                        Command="{Binding StudyContainerViewModel.SelectedStudy.SelectThisCommand}"
+                        >
+                    
+                </Button>
+                
+            </Grid>
+            
+            <Button Grid.Column="2" Name="Lock"
                     Margin="2"
                     Height="55"
                     Width="60"
@@ -116,14 +128,14 @@
                     HorizontalAlignment="Left"
                     Content="LOCK"
                     />
-            <ListBox Grid.Column="4" Name="AppsListBox"
-                     Visibility="{Binding ApplicationTabContainer.IsTabContained}"
+            <ListBox Grid.Column="3" Name="AppsListBox"
+                     Visibility="{Binding AppTabViewModel.HasContainer, Converter={StaticResource BooltoVisibilityConverter}}"
                      Height="55"
                      HorizontalAlignment="Left"
                      ItemTemplate="{StaticResource App_ListBox_Template}"
-                     ItemsSource="{Binding ApplicationTabContainer.ApplicationTabs}"
-                     SelectedItem="{Binding ApplicationTabContainer.CurrentSelectedApplicationTab, Mode=TwoWay}"
-                     
+                     ItemsSource="{Binding AppTabViewModel.SelectedAppItemContainer.VisibleAppModelList}"
+                     SelectedItem="{Binding AppTabViewModel.SelectedAppItemContainer.AppSequenceManagerCollection[0].AppItemSelected, Mode=TwoWay}"
+
             >
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -132,18 +144,21 @@
                 </ListBox.ItemsPanel>
             </ListBox>
         </Grid>
-        <Button Grid.Row="1" Name="GetPatientButton"
+        <Button Grid.Row="1" Name="AddPatientButton"
                 Height="30"
                 Width="180"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Left"
-                Content="单击添加Study"
-                Command="{Binding InitOpenStudyWindowCommand}"
+                Content="Action"
+                Command="{Binding TEST_COMMAND}"
                 />
-        <TextBlock Grid.Row="2" Name="PAandAppWindow"
+        <Grid Grid.Row="2" Margin="0,33,0,0">
+            
+        </Grid>
+        <!--<TextBlock Grid.Row="2" Name="PAandAppWindow"
                    TextAlignment="Center"
                    VerticalAlignment="Center"
                    FontSize="30"
-                   Text="{Binding HostingWindowViewModel.Content}"></TextBlock>
+                   Text="PLACE HOLDER"></TextBlock>-->
     </Grid>
 </Window>
