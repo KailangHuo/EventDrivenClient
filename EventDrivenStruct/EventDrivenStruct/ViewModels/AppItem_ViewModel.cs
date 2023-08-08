@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Windows.Input;
 using EventDrivenElements;
 using EventDrivenStruct.ConfigurationLoader;
 using EventDrivenStruct.Models;
@@ -11,7 +12,27 @@ public class AppItem_ViewModel : AbstractEventDrivenViewModel{
         this.AppModel = appModel;
         this.AppName = appModel.AppName;
         MaxScreenConfigNumber = SystemConfiguration.GetInstance().GetAppConfigInfo(AppName).MaxConfigScreenNumber;
+        SetupCommand();
     }
+
+    private void SetupCommand() {
+        CloseThisAppCommand = new CommonCommand(CloseThisApp);
+    }
+
+    #region COMMANDS
+
+    public ICommand CloseThisAppCommand { get; private set; }
+
+    #endregion
+
+    #region COMMAND_BINDING_METHODS
+
+    public void CloseThisApp(object o = null) {
+        MainEntry_ModelFacade.GetInstance().DeleteApp(this.AppModel);
+    }
+
+    #endregion
+    
 
     public AppModel AppModel;
 

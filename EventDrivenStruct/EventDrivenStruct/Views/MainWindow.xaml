@@ -48,6 +48,11 @@
                        VerticalAlignment="Center" 
                        FontSize="18" 
                        FontWeight="Bold"/>
+                <StackPanel.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="关闭该应用" Command="{Binding CloseThisAppCommand}"/>
+                    </ContextMenu>
+                </StackPanel.ContextMenu>
             </StackPanel>
         </DataTemplate>
     </Window.Resources>
