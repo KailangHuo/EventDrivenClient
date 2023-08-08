@@ -34,6 +34,8 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
 
     public AppTab_ViewModel AppTabViewModel { get; private set; }
 
+    public ScreenManager_ViewModel ScreenManagerViewModel { get; private set; }
+
 
     #endregion
 
@@ -64,8 +66,6 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
     #endregion
 
     #region PROPERTIES
-
-    public ScreenManager_ViewModel ScreenManagerViewModel;
 
     #endregion
 

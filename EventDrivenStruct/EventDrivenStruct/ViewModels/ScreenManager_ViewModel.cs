@@ -11,7 +11,7 @@ public class ScreenManager_ViewModel : AbstractEventDrivenViewModel{
         
     }
 
-    public List<Screen_ViewModel> ScreenCollection;
+    public List<Screen_ViewModel> ScreenCollection { get; private set; }
 
     private void InitScreens() {
         ScreenCollection = new List<Screen_ViewModel>();

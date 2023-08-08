@@ -7,10 +7,40 @@ public class Screen_ViewModel : AbstractEventDrivenViewModel{
 
     public Screen_ViewModel(int index) {
         _screenIndex = index;
+        ShowContent();
     }
 
     private int _screenIndex;
-    
+
+    private string _studyText;
+
+    public string StudyText {
+        get {
+            return _studyText;
+        }
+        set {
+            if (_studyText == value) return;
+            _studyText = value;
+            RisePropertyChanged(nameof(StudyText));
+        }
+    }
+
+
+
+    private string _appText;
+
+    public string AppText {
+        get {
+            return _appText;
+        }
+        set {
+            if(_appText == value) return;
+            _appText = value;
+            RisePropertyChanged(nameof(AppText));
+        }
+    }
+
+
     private AppSequenceItem _content;
 
     public AppSequenceItem Content {
@@ -35,14 +65,21 @@ public class Screen_ViewModel : AbstractEventDrivenViewModel{
 
     private void HideContent() {
         if(_content == null) return;
+        AppText = "NULL";
+        StudyText = "";
         PrintToDebugConsole(Content.GetSequenceInformation() + " HIDE");
     }
 
     private void ShowContent() {
         if (_content == null) {
+            AppText = "NULL";
+            StudyText = "";
             PrintToDebugConsole("SHOW NULL");
             return;
         }
+
+        AppText = _content.AppItemViewModel.AppName + " | " + _content.AppSequenceNumber;
+        StudyText = _content.AppItemViewModel.AppModel.StudyCollectionItem.ToString();
         PrintToDebugConsole(Content.GetSequenceInformation() + " SHOW");
     }
     

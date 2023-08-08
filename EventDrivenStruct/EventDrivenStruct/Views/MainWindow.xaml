@@ -41,7 +41,13 @@
         
         <DataTemplate x:Key="App_ListBox_Template">
             <StackPanel Orientation="Vertical" >
-                <Label Width="85" Content="{Binding AppName}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+                <Label Width="85" 
+                       Margin="10,0,10,0"
+                       Content="{Binding AppName}"  
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" 
+                       FontSize="18" 
+                       FontWeight="Bold"/>
             </StackPanel>
         </DataTemplate>
     </Window.Resources>
@@ -69,24 +75,7 @@
                 Cursor="Hand"
                 HorizontalAlignment="Left" Width="60">
             </Button>
-            <!--<ComboBox Grid.Column="1" Name="StudiesComboBox"
-                      Margin="2"
-                      Cursor="Hand"
-                      AllowDrop="False"
-                      Height="55"
-                      Width="255"
-                      IsReadOnly="True"
-                      ItemTemplate="{StaticResource Study_ComboBox_Template}"
-                      ItemsSource="{Binding StudyTabContainer.StudyTabs}"
-                      SelectedItem="{Binding StudyTabContainer.CurrentSelectedTab}"
-            >
-                <ComboBox.ContextMenu>
-                    <ContextMenu >
-                        <MenuItem Header="删除" Command="{Binding StudyTabContainer.RemoveStudyTabCommand}" CommandParameter="{Binding }"/>
-                        <MenuItem Header="删除所有" Command="{Binding StudyTabContainer.RemoveAllStudyTabsCommand}"/>
-                    </ContextMenu>
-                </ComboBox.ContextMenu>
-            </ComboBox>-->
+            
             <Grid Grid.Column="1" Name = "StudiesComboGrid"
                   Margin="2"
                   Height="55"
@@ -105,6 +94,7 @@
                     
                 </ComboBox>
                 <Button Width="240" Height="50" 
+                        Cursor="Hand"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Margin="2,1,20,0"
@@ -120,15 +110,7 @@
                 
             </Grid>
             
-            <Button Grid.Column="2" Name="Lock"
-                    Margin="2"
-                    Height="55"
-                    Width="60"
-                    Cursor="Hand"
-                    HorizontalAlignment="Left"
-                    Content="LOCK"
-                    />
-            <ListBox Grid.Column="3" Name="AppsListBox"
+            <ListBox Grid.Column="2" Name="AppsListBox"
                      Visibility="{Binding AppTabViewModel.HasContainer, Converter={StaticResource BooltoVisibilityConverter}}"
                      Height="55"
                      HorizontalAlignment="Left"
@@ -145,6 +127,7 @@
             </ListBox>
         </Grid>
         <Button Grid.Row="1" Name="AddPatientButton"
+                Margin="0,-20,0,0"
                 Height="30"
                 Width="180"
                 VerticalAlignment="Top"
@@ -152,8 +135,173 @@
                 Content="Action"
                 Command="{Binding TEST_COMMAND}"
                 />
-        <Grid Grid.Row="2" Margin="0,33,0,0">
+        <Grid Grid.Row="2" Margin="0,15,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
             
+            <Grid Name="PrimaryWindowPreview" Width="300" HorizontalAlignment="Center">
+                <Grid VerticalAlignment="Top" Margin="0,0,0,0" >
+                    <Border BorderBrush="Black" BorderThickness="1"></Border>
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="屏幕1" Height="50" FontSize="30" />
+                        <TextBlock Text="{Binding ScreenManagerViewModel.ScreenCollection[0].AppText}" FontSize="40" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding ScreenManagerViewModel.ScreenCollection[0].StudyText}" FontSize="25" HorizontalAlignment="Center" Margin="0,0,0,30"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+            
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <Grid Grid.Column="0" Name="scdWindowPreview" Width="300" HorizontalAlignment="Left">
+                    <Grid VerticalAlignment="Top" Margin="0,0,0,0" >
+                        <Border BorderBrush="Black" BorderThickness="1"></Border>
+                        <StackPanel Orientation="Vertical">
+                            <Label Content="屏幕2" Height="50" FontSize="30" />
+                            <TextBlock Text="{Binding ScreenManagerViewModel.ScreenCollection[1].AppText}" FontSize="40" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{Binding ScreenManagerViewModel.ScreenCollection[1].StudyText}" FontSize="25" HorizontalAlignment="Center" Margin="0,0,0,30"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+                
+                <ListBox Grid.Column="1" Name="ScdAppList"
+                         Visibility="{Binding AppTabViewModel.HasContainer, Converter={StaticResource BooltoVisibilityConverter}}"
+                         Height="55"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Top"
+                         ItemTemplate="{StaticResource App_ListBox_Template}"
+                         ItemsSource="{Binding AppTabViewModel.SelectedAppItemContainer.VisibleAppModelList}"
+                         SelectedItem="{Binding AppTabViewModel.SelectedAppItemContainer.AppSequenceManagerCollection[1].AppItemSelected, Mode=TwoWay}"
+
+                >
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"></StackPanel>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
+                
+            </Grid>
+            
+            
+            
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <Grid Grid.Column="0" Name="ThirdWindowPreview" Width="300" HorizontalAlignment="Left">
+                    <Grid VerticalAlignment="Top" Margin="0,0,0,0" >
+                        <Border BorderBrush="Black" BorderThickness="1"></Border>
+                        <StackPanel Orientation="Vertical">
+                            <Label Content="屏幕3" Height="50" FontSize="30" />
+                            <TextBlock Text="{Binding ScreenManagerViewModel.ScreenCollection[2].AppText}" FontSize="40" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{Binding ScreenManagerViewModel.ScreenCollection[2].StudyText}" FontSize="25" HorizontalAlignment="Center" Margin="0,0,0,30"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+                
+                <ListBox Grid.Column="1" Name="ThirdAppList"
+                         Visibility="{Binding AppTabViewModel.HasContainer, Converter={StaticResource BooltoVisibilityConverter}}"
+                         Height="55"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Top"
+                         ItemTemplate="{StaticResource App_ListBox_Template}"
+                         ItemsSource="{Binding AppTabViewModel.SelectedAppItemContainer.VisibleAppModelList}"
+                         SelectedItem="{Binding AppTabViewModel.SelectedAppItemContainer.AppSequenceManagerCollection[2].AppItemSelected, Mode=TwoWay}"
+
+                >
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"></StackPanel>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
+                
+            </Grid>
+            
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <Grid Grid.Column="0" Name="FourthWindowPreview" Width="300" HorizontalAlignment="Left">
+                    <Grid VerticalAlignment="Top" Margin="0,0,0,0" >
+                        <Border BorderBrush="Black" BorderThickness="1"></Border>
+                        <StackPanel Orientation="Vertical">
+                            <Label Content="屏幕4" Height="50" FontSize="30" />
+                            <TextBlock Text="{Binding ScreenManagerViewModel.ScreenCollection[3].AppText}" FontSize="40" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{Binding ScreenManagerViewModel.ScreenCollection[3].StudyText}" FontSize="25" HorizontalAlignment="Center" Margin="0,0,0,30"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+                
+                <ListBox Grid.Column="1" Name="FourthAppList"
+                         Visibility="{Binding AppTabViewModel.HasContainer, Converter={StaticResource BooltoVisibilityConverter}}"
+                         Height="55"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Top"
+                         ItemTemplate="{StaticResource App_ListBox_Template}"
+                         ItemsSource="{Binding AppTabViewModel.SelectedAppItemContainer.VisibleAppModelList}"
+                         SelectedItem="{Binding AppTabViewModel.SelectedAppItemContainer.AppSequenceManagerCollection[3].AppItemSelected, Mode=TwoWay}"
+
+                >
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"></StackPanel>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
+                
+            </Grid>
+            
+            <Grid Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <Grid Grid.Column="0" Name="FifthWindowPreview" Width="300" HorizontalAlignment="Left">
+                    <Grid VerticalAlignment="Top" Margin="0,0,0,0" >
+                        <Border BorderBrush="Black" BorderThickness="1"></Border>
+                        <StackPanel Orientation="Vertical">
+                            <Label Content="屏幕5" Height="50" FontSize="30" />
+                            <TextBlock Text="{Binding ScreenManagerViewModel.ScreenCollection[4].AppText}" FontSize="40" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{Binding ScreenManagerViewModel.ScreenCollection[4].StudyText}" FontSize="25" HorizontalAlignment="Center" Margin="0,0,0,30"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+                
+                <ListBox Grid.Column="1" Name="FifthAppList"
+                         Visibility="{Binding AppTabViewModel.HasContainer, Converter={StaticResource BooltoVisibilityConverter}}"
+                         Height="55"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Top"
+                         ItemTemplate="{StaticResource App_ListBox_Template}"
+                         ItemsSource="{Binding AppTabViewModel.SelectedAppItemContainer.VisibleAppModelList}"
+                         SelectedItem="{Binding AppTabViewModel.SelectedAppItemContainer.AppSequenceManagerCollection[4].AppItemSelected, Mode=TwoWay}"
+
+                >
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"></StackPanel>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
+                
+            </Grid>
+            
+          
         </Grid>
         <!--<TextBlock Grid.Row="2" Name="PAandAppWindow"
                    TextAlignment="Center"
