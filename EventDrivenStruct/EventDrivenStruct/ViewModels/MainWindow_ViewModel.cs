@@ -22,7 +22,7 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
 
     private void SetupCommands() {
         GotoPaViewCommand = new CommonCommand(GotoPaView);
-        AddExamCommand = new CommonCommand(AddExam);
+        TEST_ADD_COMMAND = new CommonCommand(TEST_ADD);
         TEST_COMMAND = new CommonCommand(TEST_COMMAND_METHOD);
     }
 
@@ -43,7 +43,7 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
 
     public ICommand GotoPaViewCommand { get; private set; }
 
-    public ICommand AddExamCommand { get; private set; }
+    public ICommand TEST_ADD_COMMAND { get; private set; }
 
     public ICommand TEST_COMMAND { get; private set; }
 
@@ -59,8 +59,8 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
         PublishEvent(nameof(GotoPaView), o);
     }
 
-    public void AddExam(object o = null) {
-        PublishEvent(nameof(AddExam), o);
+    public void TEST_ADD(object o = null) {
+        PopupManager.GetInstance().MainWindow_AddWindowPopup();
     } 
 
     #endregion

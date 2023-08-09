@@ -40,6 +40,14 @@ public class StudyCollection : AbstractEventDrivenObject{
         }
     }
 
+    public void DeleteAllStudyCollectionItem() {
+        if (this.StudyCollectionItems.Count > 0) {
+            StudyCollectionItems = new List<StudyCollectionItem>();
+            _studyHashSet = new HashSet<Study>();
+            PublishEvent(nameof(DeleteAllStudyCollectionItem), null);
+        }
+    }
+
     public bool Contains(StudyCollectionItem studyCollectionItem) {
         return this.StudyCollectionItems.Contains(studyCollectionItem);
     }

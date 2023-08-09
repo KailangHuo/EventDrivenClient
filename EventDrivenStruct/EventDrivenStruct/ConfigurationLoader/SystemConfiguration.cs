@@ -10,7 +10,11 @@ public class SystemConfiguration {
     private static SystemConfiguration _instance;
 
     private SystemConfiguration() {
+        // 研发环境
         configFilePath = @"..\..\..\ConfigurationLoader\ConfigurationFiles\Configuration.xml";
+        
+        // 产品环境
+        //configFilePath = @"..\ConfigurationLoader\ConfigurationFiles\Configuration.xml";
         _document = new XmlDocument();
         init();
     }
@@ -35,6 +39,8 @@ public class SystemConfiguration {
 
     private List<string> ConstantAppList;
 
+    private List<string> AppList;
+
     private int ScreenNumber;
 
     private int StudyNumber;
@@ -45,6 +51,7 @@ public class SystemConfiguration {
         ConstantAppSet = new HashSet<string>();
         AppInfoMap = new Dictionary<String, AppConfigInfo>();
         ConstantAppList = new List<string>();
+        AppList = new List<string>();
         _document.Load(configFilePath);
         XmlNode ScreenNumberNode = _document.SelectSingleNode(@"/Root/ScreenNumber");
         ScreenNumber = Convert.ToInt32(ScreenNumberNode.FirstChild.Value);
@@ -74,6 +81,7 @@ public class SystemConfiguration {
                     appConfigInfo.MaxConfigScreenNumber = Convert.ToInt32(attribute.Value);
             }
             AppInfoMap.Add(appConfigInfo.AppName, appConfigInfo);
+            AppList.Add(appConfigInfo.AppName);
             
         }
         
@@ -101,6 +109,10 @@ public class SystemConfiguration {
 
     public int GetMaxStudyNumber() {
         return this.StudyNumber;
+    }
+
+    public List<string> GetAppList() {
+        return this.AppList;
     }
 
 }

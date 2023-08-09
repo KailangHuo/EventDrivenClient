@@ -65,6 +65,12 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
         StudyCollection.DeleteStudyCollectionItem(studyItem);
     }
 
+    public void DeleteAllStudy() {
+        StudyCollection.DeleteAllStudyCollectionItem();
+        // TEST_ONLY
+        number = 0;
+    }
+
     public void DeleteAppFromStudy(StudyCollectionItem studyCollectionItem, AppModel appModel) {
         StudyAppMappingManager.RemoveAppFromStudyAppObj(studyCollectionItem, appModel);
     }

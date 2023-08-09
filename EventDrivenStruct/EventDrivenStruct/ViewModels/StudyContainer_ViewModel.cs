@@ -10,6 +10,12 @@ public class StudyContainer_ViewModel : AbstractEventDrivenViewModel{
 
     public StudyContainer_ViewModel() {
         StudyViewModels = new ObservableCollection<Study_ViewModel>();
+        SetupCommands();
+    }
+
+    private void SetupCommands() {
+        CloseSelectedCommand = new CommonCommand(CloseSelected);
+        ClearAllCommand = new CommonCommand(ClearAll);
     }
 
     public ObservableCollection<Study_ViewModel> StudyViewModels { get; private set; }
@@ -28,6 +34,26 @@ public class StudyContainer_ViewModel : AbstractEventDrivenViewModel{
         }
     }
 
+    #region COMMANDS
+
+    public ICommand CloseSelectedCommand { get; private set; }
+
+    public ICommand ClearAllCommand { get; private set; }
+
+    #endregion
+
+    #region COMMAND_BINDING_METHODS
+
+    public void CloseSelected(object o = null) {
+        MainEntry_ModelFacade.GetInstance().DeleteStudyItem(SelectedStudy.StudyCollectionItem);
+    }
+
+    public void ClearAll(object o = null) {
+        MainEntry_ModelFacade.GetInstance().DeleteAllStudy();
+    }
+
+    #endregion
+
     private void AddStudyViewModel(StudyCollectionItem item) {
         Study_ViewModel studyViewModel = new Study_ViewModel(item);
         item.RegisterObserver(studyViewModel);
@@ -39,6 +65,11 @@ public class StudyContainer_ViewModel : AbstractEventDrivenViewModel{
     private void RemoveStudyViewModel(StudyCollectionItem item) {
         Study_ViewModel studyViewModel = new Study_ViewModel(item);
         this.StudyViewModels.Remove(studyViewModel);
+        UpdateSelectedStudy();
+    }
+
+    private void RemoveAllStudyViewModels() {
+        this.StudyViewModels = new ObservableCollection<Study_ViewModel>();
         UpdateSelectedStudy();
     }
 
@@ -57,6 +88,9 @@ public class StudyContainer_ViewModel : AbstractEventDrivenViewModel{
             StudyCollectionItem item = (StudyCollectionItem)o;
             this.RemoveStudyViewModel(item);
         }
-        
+
+        if (propertyName.Equals(nameof(StudyCollection.DeleteAllStudyCollectionItem))) {
+            RemoveAllStudyViewModels();
+        }
     }
 }

@@ -4,11 +4,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:EventDrivenStruct"
+        xmlns:converter="clr-namespace:EventDrivenStruct.ViewModels.Converter"
         mc:Ignorable="d"
         Title="Add Exam" 
         Height="270" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize"
         ShowInTaskbar="False"
         >
+    <Window.Resources>
+        <converter:ReverseBoolConverter x:Key="ReverseBoolConverter"/>
+    </Window.Resources>
+    
     <Grid x:Name="mainGrid">
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -21,21 +26,21 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="新建并打开病患资料" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Width="250" Height="25">
-            <TextBlock Text="ExamId" VerticalAlignment="Center" Margin="3" Width="60"/>
-            <TextBox  Width="170" Height="20" HorizontalAlignment="Right" Text="{Binding ExamID}"/>
+            <TextBlock Text="Uid" VerticalAlignment="Center" Margin="3" Width="60"/>
+            <TextBox  Width="170" Height="20" HorizontalAlignment="Right" Text="{Binding StudyInstanceId}"/>
         </StackPanel>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Width="250" Height="25">
             <TextBlock Text="Name" VerticalAlignment="Center" Margin="3" Width="60"/>
-            <TextBox x:Name="name_Box" Width="170" Height="20" HorizontalAlignment="Right" Text="{Binding Name}"/>
+            <TextBox x:Name="name_Box" Width="170" Height="20" HorizontalAlignment="Right" Text="{Binding PatientName}"/>
             
         </StackPanel>
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Width="250" Height="25">
             <TextBlock Text="Gender" VerticalAlignment="Center" HorizontalAlignment="Center" Width="60" Margin="3"/>
-            <TextBox x:Name="gender_Box" Width="170" Height="20" HorizontalAlignment="Right" Text="{Binding Gender}"/>
+            <TextBox x:Name="gender_Box" Width="170" Height="20" HorizontalAlignment="Right" Text="{Binding PatientGender}"/>
         </StackPanel>
         <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Width="250" Height="25">
             <TextBlock Text="Age" VerticalAlignment="Center" HorizontalAlignment="Center" Width="60" Margin="3"/>
-            <TextBox x:Name="age_Box" Width="170" Height="20" HorizontalAlignment="Right" Text="{Binding Age}"/>
+            <TextBox x:Name="age_Box" Width="170" Height="20" HorizontalAlignment="Right" Text="{Binding PatientAge}"/>
         </StackPanel>
         <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center" Width="250" Height="25">
             <TextBlock Text="AppType" VerticalAlignment="Center" HorizontalAlignment="Center" Width="60" Margin="3"/>
@@ -47,9 +52,13 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Button x:Name="confirm_button" Content="确定"  Width="65" HorizontalAlignment="Left"
+                    IsEnabled="{Binding IsLifeCycleEnd, Converter={StaticResource ReverseBoolConverter}}"
+                    IsEnabledChanged="Button_OnIsEnabledChanged"
                     Command="{Binding ConfirmCommand}">
             </Button>
             <Button Grid.Column="1" x:Name="cancle_button" Content="取消"  Width="65" HorizontalAlignment="Right"
+                    IsEnabled="{Binding IsLifeCycleEnd, Converter={StaticResource ReverseBoolConverter}}"
+                    IsEnabledChanged="Button_OnIsEnabledChanged"
                     Command="{Binding CancleCommand}" />
         </Grid>
     </Grid>

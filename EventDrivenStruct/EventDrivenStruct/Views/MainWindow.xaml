@@ -110,6 +110,12 @@
                         BorderThickness="0"
                         Command="{Binding StudyContainerViewModel.SelectedStudy.SelectThisCommand}"
                         >
+                    <Button.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="关闭当前检查" Command = "{Binding StudyContainerViewModel.CloseSelectedCommand}"/>
+                            <MenuItem Header="关闭所有检查" Command = "{Binding StudyContainerViewModel.ClearAllCommand}"/>
+                        </ContextMenu>
+                    </Button.ContextMenu>
                     
                 </Button>
                 
@@ -131,15 +137,27 @@
                 </ListBox.ItemsPanel>
             </ListBox>
         </Grid>
-        <Button Grid.Row="1" Name="AddPatientButton"
-                Margin="0,-20,0,0"
-                Height="30"
-                Width="180"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Left"
-                Content="Action"
-                Command="{Binding TEST_COMMAND}"
-                />
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Button  Name="ActionButton"
+                    Margin="0,-20, 7,0"
+                    Height="30"
+                    Width="180"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    Content="Action"
+                    Command="{Binding TEST_COMMAND}"
+            />
+            <Button Name="AddPatientButton"
+                    Margin="0,-20,0,0"
+                    Height="30"
+                    Width="180"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    Content="Add Patient"
+                    Command="{Binding TEST_ADD_COMMAND}"
+            />
+        </StackPanel>
+        
         <Grid Grid.Row="2" Margin="0,15,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -149,7 +167,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             
-            <Grid Name="PrimaryWindowPreview" Width="300" HorizontalAlignment="Center">
+            <Grid Name="PrimaryWindowPreview" Width="300" HorizontalAlignment="Left">
                 <Grid VerticalAlignment="Top" Margin="0,0,0,0" >
                     <Border BorderBrush="Black" BorderThickness="1"></Border>
                     <StackPanel Orientation="Vertical">

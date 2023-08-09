@@ -69,6 +69,10 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
         _map.Remove(studyAppMappingObj.StudyCollectionItem);
     }
 
+    private void RemoveAllFromMap() {
+        _map = new Dictionary<StudyCollectionItem, AppItemContainer_ViewModel>();
+    }
+
     private void SwapSelectedAppContainer(StudyCollectionItem? studyCollectionItem) {
         if (studyCollectionItem == null) {
             SelectedAppItemContainer = null;
@@ -100,15 +104,19 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
             this.RemoveFromMap(studyAppMappingObj);
         }
 
-        if (propertyName.Equals(nameof(AppItemContainer_ViewModel.AppSeqSelected))) {
+        /*if (propertyName.Equals(nameof(AppItemContainer_ViewModel.AppSeqSelected))) {
             AppItem_ViewModel appItemViewModel = (AppItem_ViewModel)o;
             //执行添加
-            MainEntry_ModelFacade.GetInstance().AddStudyItemWithApp(CurrentSelectedStudyCollectionItem, (AppModel)appItemViewModel.HashReferenceContext);
-        }
+           
+        }*/
 
         if (propertyName.Equals(nameof(AppItemContainer_ViewModel.SelectionFinished))) {
             SelectedAppContainerSelectionChanged();
             //AppConSeqItemsSelectedChanged(list);
+        }
+
+        if (propertyName.Equals(nameof(StudyAppMappingManager.RemoveAllStudyAppObj))) {
+            RemoveAllFromMap();
         }
     }
 }

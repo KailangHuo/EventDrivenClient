@@ -54,6 +54,11 @@ public class StudyAppMappingManager : AbstractEventDrivenObject{
         _map[studyCollectionItem].RemoveAppModel(appModel);
     }
 
+    public void RemoveAllStudyAppObj() {
+        _map = new Dictionary<StudyCollectionItem, StudyAppMappingObj>();
+        PublishEvent(nameof(RemoveAllStudyAppObj), null);
+    }
+
     public override void UpdateByEvent(string propertyName, object o) {
         if (propertyName.Equals(nameof(StudyCollection.AddStudyCollectionItem))) {
             StudyCollectionItem item = (StudyCollectionItem)o; 
@@ -69,5 +74,10 @@ public class StudyAppMappingManager : AbstractEventDrivenObject{
             StudyAppMappingObj obj = (StudyAppMappingObj)o;
             RemoveStudyAppMapObj(obj.StudyCollectionItem);
         }
+
+        if (propertyName.Equals(nameof(StudyCollection.DeleteAllStudyCollectionItem))) {
+            RemoveAllStudyAppObj();
+        }
+
     }
 }
