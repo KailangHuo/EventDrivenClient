@@ -5,13 +5,9 @@ using EventDrivenStruct.ConfigurationLoader;
 namespace EventDrivenStruct.Models; 
 
 public class AppModel : AbstractEventDrivenObject{
-
-    public AppModel() {
-    }
-
+    
     public AppModel(string name) {
         AppName = name;
-        MaxScreenConfigNumber = SystemConfiguration.GetInstance().GetAppConfigInfo(AppName).MaxConfigScreenNumber;
     }
 
     public AppModel(string name, StudyCollectionItem studyCollectionItem) {
@@ -22,9 +18,7 @@ public class AppModel : AbstractEventDrivenObject{
     public StudyCollectionItem StudyCollectionItem;
 
     public string AppName { get; private set; }
-
-    public int MaxScreenConfigNumber { get; private set; }
-
+    
     public override string ToString() {
         return this.AppName + " | " + this.StudyCollectionItem.ToString();
     }
