@@ -144,7 +144,7 @@
                     Width="180"
                     VerticalAlignment="Top"
                     HorizontalAlignment="Left"
-                    Content="Action"
+                    Content="{Binding ActionButtonContent}"
                     Command="{Binding TEST_COMMAND}"
             />
             <Button Name="AddPatientButton"

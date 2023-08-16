@@ -70,6 +70,7 @@ public class StudyContainer_ViewModel : AbstractEventDrivenViewModel{
 
     private void RemoveAllStudyViewModels() {
         this.StudyViewModels = new ObservableCollection<Study_ViewModel>();
+        RisePropertyChanged(nameof(StudyViewModels));
         UpdateSelectedStudy();
     }
 

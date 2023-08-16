@@ -1,3 +1,4 @@
+using System.Windows;
 using System.Windows.Input;
 using EventDrivenElements;
 using EventDrivenStruct.Models;
@@ -21,7 +22,7 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
     }
 
     private void SetupCommands() {
-        GotoPaViewCommand = new CommonCommand(GotoPaView);
+        GotoPaTabCommand = new CommonCommand(GotoPaView);
         TEST_ADD_COMMAND = new CommonCommand(TEST_ADD);
         TEST_COMMAND = new CommonCommand(TEST_COMMAND_METHOD);
     }
@@ -36,17 +37,30 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
 
     public ScreenManager_ViewModel ScreenManagerViewModel { get; private set; }
 
+    private string _actionButtonContent;
+
+    public string ActionButtonContent {
+        get {
+            return _actionButtonContent;
+        }
+        set {
+            if(_actionButtonContent == value) return;
+            _actionButtonContent = value;
+            RisePropertyChanged(nameof(ActionButtonContent));
+        }
+    }
+
 
     #endregion
 
     #region COMMANDS
 
-    public ICommand GotoPaViewCommand { get; private set; }
+    public ICommand GotoPaTabCommand { get; private set; }
 
     public ICommand TEST_ADD_COMMAND { get; private set; }
 
     public ICommand TEST_COMMAND { get; private set; }
-
+    
     #endregion
 
     #region COMMAND_BINDING_METHODS
@@ -56,17 +70,20 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
     }
 
     public void GotoPaView(object o = null) {
-        PublishEvent(nameof(GotoPaView), o);
+        MessageBox.Show("you clicked PA button");
     }
 
     public void TEST_ADD(object o = null) {
         PopupManager.GetInstance().MainWindow_AddWindowPopup();
-    } 
+    }
+    
 
     #endregion
 
     #region PROPERTIES
 
+    
+    
     #endregion
 
     public override void UpdateByEvent(string propertyName, object o) {
@@ -78,6 +95,11 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
         if (propertyName.Equals(nameof(MainEntry_ModelFacade.StudyAppMappingManager))) {
             StudyAppMappingManager studyAppMappingManager = (StudyAppMappingManager)o;
             studyAppMappingManager.RegisterObserver(AppTabViewModel);
+        }
+
+        if (propertyName.Equals(nameof(MainEntry_ModelFacade.ActionString))) {
+            string str = (string)o;
+            ActionButtonContent = str;
         }
     }
 

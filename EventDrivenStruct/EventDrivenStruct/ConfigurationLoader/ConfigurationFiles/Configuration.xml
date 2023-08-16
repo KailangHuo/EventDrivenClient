@@ -20,7 +20,7 @@
 
         <App Name="Oncology" MaxConfigScreenNumber ="1"/>
         <App Name="Dental" MaxConfigScreenNumber ="1"/>
-        <App Name="MAXTEST" MaxConfigScreenNumber ="3"/>
+        <App Name="三屏应用" MaxConfigScreenNumber ="3"/>
     </AppConfiguration>
     
 </Root>

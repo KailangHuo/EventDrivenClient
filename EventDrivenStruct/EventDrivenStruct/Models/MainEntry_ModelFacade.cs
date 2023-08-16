@@ -12,6 +12,8 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
         StudyAppMappingManager = StudyAppMappingManager.GetInstance();
         StudyCollection.RegisterObserver(StudyAppMappingManager);
         StudyAppMappingManager.RegisterObserver(StudyCollection);
+        //TEST
+        ActionString = "点击添加老王 三屏应用";
     }
 
     public static MainEntry_ModelFacade GetInstance() {
@@ -69,6 +71,7 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
         StudyCollection.DeleteAllStudyCollectionItem();
         // TEST_ONLY
         number = 0;
+        ActionString = "点击添加老王 三屏应用";
     }
 
     public void DeleteAppFromStudy(StudyCollectionItem studyCollectionItem, AppModel appModel) {
@@ -80,21 +83,38 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
     }
 
     private int number;
+    
+    public string _actionString;
+
+    public string ActionString {
+        get {
+            return _actionString;
+        }
+        set {
+            if(_actionString == value) return;
+            _actionString = value;
+            PublishEvent(nameof(ActionString), _actionString);
+        }
+    }
+
     public void TestAdd() {
         if (number == 0) {
             StudyCollectionItem laoWang = MakeItem("老王",1);
-            AppModel laowang_maxTest = new AppModel("MAXTEST", laoWang);
+            AppModel laowang_maxTest = new AppModel("三屏应用", laoWang);
             AddStudyItemWithApp(laoWang, laowang_maxTest);
+            ActionString = "点击添加老王 Oncology应用";
         }
         if (number == 1) {
             StudyCollectionItem laoWang = MakeItem("老王",1);
             AppModel laowang_OnOlogy = new AppModel("Oncology", laoWang);
             AddStudyItemWithApp(laoWang, laowang_OnOlogy);
+            ActionString = "点击添加老李 Dental应用";
         }
         if (number == 2) {
             StudyCollectionItem laoLi = MakeItem("li",2);
             AppModel laoLi_Dental = new AppModel("Dental", laoLi);
             AddStudyItemWithApp(laoLi, laoLi_Dental);
+            ActionString = "清除所有检查后才可使用";
         }
 
         number++;
