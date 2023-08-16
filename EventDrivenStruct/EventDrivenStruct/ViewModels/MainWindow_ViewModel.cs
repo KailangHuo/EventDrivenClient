@@ -13,11 +13,13 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
         StudyContainerViewModel = new StudyContainer_ViewModel();
         AppTabViewModel = new AppTab_ViewModel();
         ScreenManagerViewModel = new ScreenManager_ViewModel();
+        PatientAdminCenterViewModel = new PatientAdminCenter_ViewModel();
         
         StudyContainerViewModel.RegisterObserver(AppTabViewModel);
         AppTabViewModel.RegisterObserver(ScreenManagerViewModel);
 
         this.RegisterObserver(PopupManager.GetInstance());
+        
         SetupCommands();
     }
 
@@ -36,6 +38,8 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
     public AppTab_ViewModel AppTabViewModel { get; private set; }
 
     public ScreenManager_ViewModel ScreenManagerViewModel { get; private set; }
+
+    public PatientAdminCenter_ViewModel PatientAdminCenterViewModel { get; private set; }
 
     private string _actionButtonContent;
 
@@ -70,7 +74,8 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
     }
 
     public void GotoPaView(object o = null) {
-        MessageBox.Show("you clicked PA button");
+        int screenNumber = (int)o;
+        MainEntry_ModelFacade.GetInstance().InvokePatientAdminCenter(screenNumber);
     }
 
     public void TEST_ADD(object o = null) {
@@ -95,6 +100,11 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
         if (propertyName.Equals(nameof(MainEntry_ModelFacade.StudyAppMappingManager))) {
             StudyAppMappingManager studyAppMappingManager = (StudyAppMappingManager)o;
             studyAppMappingManager.RegisterObserver(AppTabViewModel);
+        }
+
+        if (propertyName.Equals(nameof(MainEntry_ModelFacade.PatientAdminCenter))) {
+            PatientAdminCenter patientAdminCenter = (PatientAdminCenter)o;
+            patientAdminCenter.RegisterObserver(PatientAdminCenterViewModel);
         }
 
         if (propertyName.Equals(nameof(MainEntry_ModelFacade.ActionString))) {

@@ -53,6 +53,19 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
         }
     }
 
+    private PatientAdminCenter _patientAdminCenter;
+
+    public PatientAdminCenter PatientAdminCenter {
+        get {
+            return _patientAdminCenter;
+        }
+        set {
+            if(_patientAdminCenter == value) return;
+            _patientAdminCenter = value;
+            PublishEvent(nameof(PatientAdminCenter), _patientAdminCenter);
+        }
+    }
+
     public void AddStudyItemWithApp(StudyCollectionItem studyItem, AppModel appModel) {
         StudyCollection.AddStudyCollectionItem(studyItem);
         StudyAppMappingManager.AddAppToMapObj(studyItem, appModel);
@@ -81,6 +94,13 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
     public void DeleteApp(AppModel appModel) {
         StudyAppMappingManager.RemoveAppFromStudyAppObj(appModel.StudyCollectionItem, appModel);
     }
+
+
+    public void InvokePatientAdminCenter(int screenNumber) {
+        this.PatientAdminCenter.Invoke();
+    }
+
+
 
     private int number;
     
