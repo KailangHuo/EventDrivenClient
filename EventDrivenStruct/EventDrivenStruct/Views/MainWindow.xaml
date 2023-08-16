@@ -122,7 +122,7 @@
             </Grid>
             
             <ListBox Grid.Column="2" Name="AppsListBox"
-                     Visibility="{Binding AppTabViewModel.HasContainer, Converter={StaticResource BooltoVisibilityConverter}}"
+                     Visibility="{Binding AppTabViewModel.IsExpanded, Converter={StaticResource BooltoVisibilityConverter}}"
                      Height="55"
                      HorizontalAlignment="Left"
                      ItemTemplate="{StaticResource App_ListBox_Template}"
@@ -196,7 +196,7 @@
                 </Grid>
                 
                 <ListBox Grid.Column="1" Name="ScdAppList"
-                         Visibility="{Binding AppTabViewModel.HasContainer, Converter={StaticResource BooltoVisibilityConverter}}"
+                         Visibility="{Binding AppTabViewModel.IsExpanded, Converter={StaticResource BooltoVisibilityConverter}}"
                          Height="55"
                          HorizontalAlignment="Left"
                          VerticalAlignment="Top"
@@ -234,7 +234,7 @@
                 </Grid>
                 
                 <ListBox Grid.Column="1" Name="ThirdAppList"
-                         Visibility="{Binding AppTabViewModel.HasContainer, Converter={StaticResource BooltoVisibilityConverter}}"
+                         Visibility="{Binding AppTabViewModel.IsExpanded, Converter={StaticResource BooltoVisibilityConverter}}"
                          Height="55"
                          HorizontalAlignment="Left"
                          VerticalAlignment="Top"
@@ -270,7 +270,7 @@
                 </Grid>
                 
                 <ListBox Grid.Column="1" Name="FourthAppList"
-                         Visibility="{Binding AppTabViewModel.HasContainer, Converter={StaticResource BooltoVisibilityConverter}}"
+                         Visibility="{Binding AppTabViewModel.IsExpanded, Converter={StaticResource BooltoVisibilityConverter}}"
                          Height="55"
                          HorizontalAlignment="Left"
                          VerticalAlignment="Top"
@@ -306,7 +306,7 @@
                 </Grid>
                 
                 <ListBox Grid.Column="1" Name="FifthAppList"
-                         Visibility="{Binding AppTabViewModel.HasContainer, Converter={StaticResource BooltoVisibilityConverter}}"
+                         Visibility="{Binding AppTabViewModel.IsExpanded, Converter={StaticResource BooltoVisibilityConverter}}"
                          Height="55"
                          HorizontalAlignment="Left"
                          VerticalAlignment="Top"

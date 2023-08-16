@@ -4,9 +4,23 @@ using EventDrivenStruct.ConfigurationLoader;
 
 namespace EventDrivenStruct.ViewModels; 
 
-public class ScreenManager_ViewModel : AbstractEventDrivenViewModel{
+public class ScreenManager_ViewModel : AbstractEventDrivenViewModel {
 
-    public ScreenManager_ViewModel() {
+    private static ScreenManager_ViewModel _instance;
+
+    public static ScreenManager_ViewModel GetInstance() {
+        if (_instance == null) {
+            lock (typeof(ScreenManager_ViewModel)) {
+                if (_instance == null) {
+                    _instance = new ScreenManager_ViewModel();
+                }
+            }
+        }
+
+        return _instance;
+    }
+
+    private ScreenManager_ViewModel() {
         InitScreens();
         
     }

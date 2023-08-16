@@ -12,7 +12,7 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
     public MainWindow_ViewModel() {
         StudyContainerViewModel = new StudyContainer_ViewModel();
         AppTabViewModel = new AppTab_ViewModel();
-        ScreenManagerViewModel = new ScreenManager_ViewModel();
+        ScreenManagerViewModel = ScreenManager_ViewModel.GetInstance();
         PatientAdminCenterViewModel = new PatientAdminCenter_ViewModel();
         
         StudyContainerViewModel.RegisterObserver(AppTabViewModel);
@@ -75,7 +75,10 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
 
     public void GotoPaView(object o = null) {
         int screenNumber = (int)o;
-        MainEntry_ModelFacade.GetInstance().InvokePatientAdminCenter(screenNumber);
+        this.AppTabViewModel.IsExpanded = false;
+        this.ScreenManagerViewModel.InvokePaAt(screenNumber);
+        MainEntry_ModelFacade.GetInstance().InvokePatientAdminCenter();
+        
     }
 
     public void TEST_ADD(object o = null) {

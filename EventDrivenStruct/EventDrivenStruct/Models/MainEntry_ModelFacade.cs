@@ -96,7 +96,7 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
     }
 
 
-    public void InvokePatientAdminCenter(int screenNumber) {
+    public void InvokePatientAdminCenter() {
         this.PatientAdminCenter.Invoke();
     }
 

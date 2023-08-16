@@ -9,7 +9,7 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
 
     public AppTab_ViewModel() {
         _map = new Dictionary<StudyCollectionItem, AppItemContainer_ViewModel>();
-        HasContainer = false;
+        IsExpanded = false;
         SelectedAppItemContainer = null;
         CurrentSelectedStudyCollectionItem = null;
     }
@@ -25,22 +25,22 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
         set {
             if(_selectedAppItemContainer == value) return;
             _selectedAppItemContainer = value;
-            HasContainer = _selectedAppItemContainer != null;
+            IsExpanded = _selectedAppItemContainer != null;
             PublishEvent(nameof(SelectedAppItemContainer), _selectedAppItemContainer);
             RisePropertyChanged(nameof(SelectedAppItemContainer));
         }
     }
 
-    private bool _hasContainer;
+    private bool _isExpanded;
 
-    public bool HasContainer {
+    public bool IsExpanded {
         get {
-            return _hasContainer;
+            return _isExpanded;
         }
-        private set {
-            if(_hasContainer == value) return;
-            _hasContainer = value;
-            RisePropertyChanged(nameof(HasContainer));
+        set {
+            if(_isExpanded == value) return;
+            _isExpanded = value;
+            RisePropertyChanged(nameof(IsExpanded));
         }
     } 
 
