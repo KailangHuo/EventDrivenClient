@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Windows.Input;
 using EventDrivenElements;
 using EventDrivenStruct.Models;
 
@@ -17,7 +18,9 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
     private Dictionary<StudyCollectionItem, AppItemContainer_ViewModel> _map;
 
     private AppItemContainer_ViewModel _selectedAppItemContainer;
-    
+
+    #region NOTIFIABLE_PROPERTIES
+
     public AppItemContainer_ViewModel SelectedAppItemContainer {
         get {
             return _selectedAppItemContainer;
@@ -41,6 +44,8 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
             if(_isExpanded == value) return;
             _isExpanded = value;
             RisePropertyChanged(nameof(IsExpanded));
+            if (_isExpanded) PublishEvent(nameof(SelectedAppItemContainer), _selectedAppItemContainer);
+            PublishEvent(nameof(IsExpanded), _isExpanded);
         }
     } 
 
@@ -57,6 +62,19 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
         }
     }
 
+    #endregion
+
+    #region COMMANDS
+
+
+
+    #endregion
+
+    #region COMMAND_BINDING_METHODS
+
+
+
+    #endregion
 
     private void PutInMap(StudyAppMappingObj studyAppMappingObj) {
         AppItemContainer_ViewModel appItemContainer = new AppItemContainer_ViewModel(studyAppMappingObj);
@@ -104,11 +122,9 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
             this.RemoveFromMap(studyAppMappingObj);
         }
 
-        /*if (propertyName.Equals(nameof(AppItemContainer_ViewModel.AppSeqSelected))) {
-            AppItem_ViewModel appItemViewModel = (AppItem_ViewModel)o;
-            //执行添加
-           
-        }*/
+        if (propertyName.Equals(nameof(StudyContainer_ViewModel.TriggerSelected))) {
+            IsExpanded = true;
+        }
 
         if (propertyName.Equals(nameof(AppItemContainer_ViewModel.SelectionFinished))) {
             SelectedAppContainerSelectionChanged();

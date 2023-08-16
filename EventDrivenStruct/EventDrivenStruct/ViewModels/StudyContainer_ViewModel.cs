@@ -16,6 +16,7 @@ public class StudyContainer_ViewModel : AbstractEventDrivenViewModel{
     private void SetupCommands() {
         CloseSelectedCommand = new CommonCommand(CloseSelected);
         ClearAllCommand = new CommonCommand(ClearAll);
+        TriggerSelectedCommand = new CommonCommand(TriggerSelected);
     }
 
     public ObservableCollection<Study_ViewModel> StudyViewModels { get; private set; }
@@ -40,6 +41,8 @@ public class StudyContainer_ViewModel : AbstractEventDrivenViewModel{
 
     public ICommand ClearAllCommand { get; private set; }
 
+    public ICommand TriggerSelectedCommand { get; private set; }
+
     #endregion
 
     #region COMMAND_BINDING_METHODS
@@ -50,6 +53,10 @@ public class StudyContainer_ViewModel : AbstractEventDrivenViewModel{
 
     public void ClearAll(object o = null) {
         MainEntry_ModelFacade.GetInstance().DeleteAllStudy();
+    }
+
+    public void TriggerSelected(object o = null) {
+        PublishEvent(nameof(TriggerSelected), null);
     }
 
     #endregion

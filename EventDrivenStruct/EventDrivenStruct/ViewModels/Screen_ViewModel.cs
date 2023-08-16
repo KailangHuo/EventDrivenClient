@@ -67,7 +67,7 @@ public class Screen_ViewModel : AbstractEventDrivenViewModel{
         if(_content == null) return;
         AppText = "NULL";
         StudyText = "";
-        PrintToDebugConsole(Content.GetSequenceInformation() + " HIDE");
+        PrintToDebugConsole( " HIDE" + Content.GetSequenceInformation() );
     }
 
     private void ShowContent() {
@@ -80,7 +80,7 @@ public class Screen_ViewModel : AbstractEventDrivenViewModel{
 
         AppText = _content.AppItemViewModel.AppName + " | " + _content.AppSequenceNumber;
         StudyText = _content.AppItemViewModel.AppModel.StudyCollectionItem.ToString();
-        PrintToDebugConsole(Content.GetSequenceInformation() + " SHOW");
+        PrintToDebugConsole(" SHOW" + Content.GetSequenceInformation()  );
     }
     
     public void TryUpdateContent(AppSequenceItem appSequenceItem) {

@@ -17,21 +17,14 @@ public class Study_ViewModel : AbstractEventDrivenViewModel{
     }
 
     private void SetupCommand() {
-        SelectThisCommand = new CommonCommand(SelectThis);
     }
 
     #region COMMANDS
-
-    public ICommand SelectThisCommand { get; private set; }
-
+    
     #endregion
 
     #region COMMAND_BINDING_METHODS
-
-    public void SelectThis(object o = null) {
-        MessageBox.Show("You just clicked current Study: " + PatientName);
-    }
-
+    
     #endregion
 
     public StudyCollectionItem StudyCollectionItem;

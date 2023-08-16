@@ -73,6 +73,7 @@
             <Border Grid.ColumnSpan="5"/>
             <Button Margin="2" 
                 Command="{Binding GotoPaTabCommand}" 
+                CommandParameter="{Binding TestNumber}"
                 Height="55" Content="PA" FontSize="12" 
                 Visibility="Visible" 
                 Name="btnMFPATab" 
@@ -108,7 +109,7 @@
                         Background="White"
                         ToolTip="TBA"
                         BorderThickness="0"
-                        Command="{Binding StudyContainerViewModel.SelectedStudy.SelectThisCommand}"
+                        Command="{Binding StudyContainerViewModel.TriggerSelectedCommand}"
                         >
                     <Button.ContextMenu>
                         <ContextMenu>

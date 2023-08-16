@@ -10,6 +10,9 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
     #region CONSTRUCTION
 
     public MainWindow_ViewModel() {
+
+        TestNumber = 0;
+        
         StudyContainerViewModel = new StudyContainer_ViewModel();
         AppTabViewModel = new AppTab_ViewModel();
         ScreenManagerViewModel = ScreenManager_ViewModel.GetInstance();
@@ -54,6 +57,19 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
         }
     }
 
+    private int _testNumber;
+
+    public int TestNumber {
+        get {
+            return _testNumber;
+        }
+        set {
+            if(_testNumber == value) return;
+            _testNumber = value;
+            RisePropertyChanged(nameof(TestNumber));
+        }
+    }
+
 
     #endregion
 
@@ -76,9 +92,7 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
     public void GotoPaView(object o = null) {
         int screenNumber = (int)o;
         this.AppTabViewModel.IsExpanded = false;
-        this.ScreenManagerViewModel.InvokePaAt(screenNumber);
-        MainEntry_ModelFacade.GetInstance().InvokePatientAdminCenter();
-        
+        this.ScreenManagerViewModel.InvokePatientAdmin(screenNumber);
     }
 
     public void TEST_ADD(object o = null) {

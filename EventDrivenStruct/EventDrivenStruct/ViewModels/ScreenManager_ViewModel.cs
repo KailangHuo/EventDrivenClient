@@ -35,6 +35,10 @@ public class ScreenManager_ViewModel : AbstractEventDrivenViewModel {
         }
     }
 
+    public void InvokePatientAdmin(int screenNumber) {
+        
+    }
+
     private void TryUpdateScreens(AppItemContainer_ViewModel appItemContainerViewModel) {
         if (appItemContainerViewModel == null) {
             for (int i = 0; i < ScreenCollection.Count; i++) {
@@ -46,6 +50,10 @@ public class ScreenManager_ViewModel : AbstractEventDrivenViewModel {
                 ScreenCollection[i].TryUpdateContent(appItemContainerViewModel.SelectedSequenceApps[i]);
             }   
         }
+    }
+
+    private void ResetScreens() {
+        TryUpdateScreens(null);
     }
 
 
@@ -60,5 +68,9 @@ public class ScreenManager_ViewModel : AbstractEventDrivenViewModel {
             TryUpdateScreens(appItemContainerViewModel);
         }
 
+        if (propertyName.Equals(nameof(AppTab_ViewModel.IsExpanded))) {
+            bool isExpanded = (bool)o;
+            if(!isExpanded) ResetScreens();  
+        }
     }
 }

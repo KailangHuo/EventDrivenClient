@@ -131,7 +131,7 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
             ActionString = "点击添加老李 Dental应用";
         }
         if (number == 2) {
-            StudyCollectionItem laoLi = MakeItem("li",2);
+            StudyCollectionItem laoLi = MakeItem("老李",2);
             AppModel laoLi_Dental = new AppModel("Dental", laoLi);
             AddStudyItemWithApp(laoLi, laoLi_Dental);
             ActionString = "清除所有检查后才可使用";
