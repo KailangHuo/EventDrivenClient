@@ -49,6 +49,7 @@ namespace EventDrivenStruct {
                 
                 mainWindow.DataContext = mainWindowViewModel;
                 mainWindow.Show();
+                //接下来, 将PA按钮添加到每一个屏幕上, 然后提供双屏的参考,
             });
             //UnitTest1(mainWindowViewModel);
         }
