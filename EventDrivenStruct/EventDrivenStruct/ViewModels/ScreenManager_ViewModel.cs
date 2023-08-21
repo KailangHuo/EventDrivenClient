@@ -39,15 +39,15 @@ public class ScreenManager_ViewModel : AbstractEventDrivenViewModel {
         
     }
 
-    private void TryUpdateScreens(AppItemContainer_ViewModel appItemContainerViewModel) {
-        if (appItemContainerViewModel == null) {
+    private void TryUpdateScreens(List<AppSequenceItem> appList) {
+        if (appList == null) {
             for (int i = 0; i < ScreenCollection.Count; i++) {
                 ScreenCollection[i].TryUpdateContent(null);
             }
         }
         else {
             for (int i = 0; i < ScreenCollection.Count; i++) {
-                ScreenCollection[i].TryUpdateContent(appItemContainerViewModel.SelectedSequenceApps[i]);
+                ScreenCollection[i].TryUpdateContent(appList[i]);
             }   
         }
     }
@@ -60,17 +60,29 @@ public class ScreenManager_ViewModel : AbstractEventDrivenViewModel {
     public override void UpdateByEvent(string propertyName, object o) {
         if (propertyName.Equals(nameof(AppTab_ViewModel.SelectedAppContainerSelectionChanged))) {
             AppItemContainer_ViewModel appItemContainerViewModel = (AppItemContainer_ViewModel)o;
-            TryUpdateScreens(appItemContainerViewModel);
+            List<AppSequenceItem> list = appItemContainerViewModel == null
+                ? null
+                : appItemContainerViewModel.SelectedSequenceApps;
+            TryUpdateScreens(list);
         }
 
         if (propertyName.Equals(nameof(AppTab_ViewModel.SelectedAppItemContainer))) {
             AppItemContainer_ViewModel appItemContainerViewModel = (AppItemContainer_ViewModel)o;
-            TryUpdateScreens(appItemContainerViewModel);
+            List<AppSequenceItem> list = appItemContainerViewModel == null
+                ? null
+                : appItemContainerViewModel.SelectedSequenceApps;
+            TryUpdateScreens(list);
         }
 
         if (propertyName.Equals(nameof(AppTab_ViewModel.IsExpanded))) {
             bool isExpanded = (bool)o;
             if(!isExpanded) ResetScreens();  
         }
+
+        if (propertyName.Equals(nameof(PatientAdminAppManager_ViewModel.SelectionFinished))) {
+            List<AppSequenceItem> list = (List<AppSequenceItem>)o;
+            TryUpdateScreens(list);
+        }
+
     }
 }

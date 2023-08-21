@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <Root>
-    <ScreenNumber>5</ScreenNumber>
+    <ScreenNumber>2</ScreenNumber>
     
     <StudyNumber>5</StudyNumber>
 
@@ -13,6 +13,7 @@
     </ConstantAppList>
 
     <AppConfiguration>
+        <App Name="PatientAdmin" MaxConfigScreenNumber ="0"/>
         <App Name="Review2D" MaxConfigScreenNumber ="2"/>
         <App Name="Review3D" MaxConfigScreenNumber ="2"/>
         <App Name="MMFusion" MaxConfigScreenNumber ="2"/>

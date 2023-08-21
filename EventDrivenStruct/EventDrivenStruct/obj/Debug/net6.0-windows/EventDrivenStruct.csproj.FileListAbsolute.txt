@@ -47,8 +47,10 @@ D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\Event
 D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\Views\AddExamWindow.baml
 D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\Views\MainWindow.baml
 D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\Views\AddExamWindow.g.cs
-D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\Views\MainWindow.g.cs
 D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\Views\AddExamWindow.baml
-D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\Views\MainWindow.baml
 D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
 D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
+D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\Views\MainWindow_Five.g.cs
+D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\Views\MainWindow_Two.g.cs
+D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\Views\MainWindow_Five.baml
+D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\Views\MainWindow_Two.baml

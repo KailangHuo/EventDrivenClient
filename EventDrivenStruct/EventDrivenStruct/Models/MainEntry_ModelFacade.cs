@@ -10,6 +10,8 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
     private MainEntry_ModelFacade() {
         StudyCollection = new StudyCollection();
         StudyAppMappingManager = StudyAppMappingManager.GetInstance();
+        PatientAdminCenterApp = PatientAdminCenterApp.GetInstance();
+        
         StudyCollection.RegisterObserver(StudyAppMappingManager);
         StudyAppMappingManager.RegisterObserver(StudyCollection);
         //TEST
@@ -50,6 +52,19 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
             if(_studyAppMappingManager == value) return;
             _studyAppMappingManager = value;
             PublishEvent(nameof(StudyAppMappingManager), _studyAppMappingManager);
+        }
+    }
+
+    private PatientAdminCenterApp _patientAdminCenterApp;
+
+    public PatientAdminCenterApp PatientAdminCenterApp {
+        get {
+            return _patientAdminCenterApp;
+        }
+        set {
+            if (_patientAdminCenterApp == value) return;
+            _patientAdminCenterApp = value;
+            PublishEvent(nameof(PatientAdminCenterApp), _patientAdminCenterApp);
         }
     }
 

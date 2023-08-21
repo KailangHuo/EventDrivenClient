@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using EventDrivenElements;
+using EventDrivenStruct.Models;
 
 namespace EventDrivenStruct.ViewModels; 
 
@@ -78,8 +79,15 @@ public class Screen_ViewModel : AbstractEventDrivenViewModel{
             return;
         }
 
-        AppText = _content.AppItemViewModel.AppName + " | " + _content.AppSequenceNumber;
-        StudyText = _content.AppItemViewModel.AppModel.StudyCollectionItem.ToString();
+        if (_content.AppItemViewModel is PatientAdminCenterApp_ViewModel) {
+            PatientAdminCenterApp_ViewModel appViewModel = (PatientAdminCenterApp_ViewModel)_content.AppItemViewModel;
+            AppText = appViewModel.Content;
+            StudyText = "";
+        }
+        else {
+            AppText = _content.AppItemViewModel.AppName + " | " + _content.AppSequenceNumber;
+            StudyText = _content.AppItemViewModel.AppModel.StudyCollectionItem.ToString();
+        }
         PrintToDebugConsole(" SHOW" + Content.GetSequenceInformation()  );
     }
     

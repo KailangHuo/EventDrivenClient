@@ -1,3 +1,4 @@
+using System.Windows;
 using EventDrivenStruct.Models;
 using EventDrivenStruct.ViewModels;
 
@@ -19,13 +20,13 @@ public class GlobalContext {
         return _globalContext;
     }
 
-    public MainWindow MainWindow { get; private set; }
+    public Window MainWindow { get; private set; }
 
     public MainWindow_ViewModel MainWindowViewModel { get; private set; }
 
     public MainEntry_ModelFacade MainEntryModelFacade { get; private set; }
 
-    public void RegisterMainWindow(MainWindow mainWindow) {
+    public void RegisterMainWindow(Window mainWindow) {
         this.MainWindow = mainWindow;
     }
 

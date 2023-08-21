@@ -1,6 +1,7 @@
 using System.Windows;
 using System.Windows.Input;
 using EventDrivenElements;
+using EventDrivenStruct.ConfigurationLoader;
 using EventDrivenStruct.Models;
 
 namespace EventDrivenStruct.ViewModels; 
@@ -16,13 +17,17 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
         StudyContainerViewModel = new StudyContainer_ViewModel();
         AppTabViewModel = new AppTab_ViewModel();
         ScreenManagerViewModel = ScreenManager_ViewModel.GetInstance();
+        PatientAdminAppManagerViewModel = new PatientAdminAppManager_ViewModel();
         
         StudyContainerViewModel.RegisterObserver(AppTabViewModel);
         AppTabViewModel.RegisterObserver(ScreenManagerViewModel);
+        PatientAdminAppManagerViewModel.RegisterObserver(ScreenManagerViewModel);
 
         this.RegisterObserver(PopupManager.GetInstance());
         
         SetupCommands();
+        IsFiveWindow = SystemConfiguration.GetInstance().GetScreenNumber() == 5;
+        IsTwoWindow = SystemConfiguration.GetInstance().GetScreenNumber() == 2;
     }
 
     private void SetupCommands() {
@@ -33,7 +38,7 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
 
     #endregion
 
-    #region NOTIFIABLE_VIEW_MODELS
+    #region NOTIFIABLE_PROPERTIES
 
     public StudyContainer_ViewModel StudyContainerViewModel { get; private set; }
 
@@ -67,6 +72,10 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
         }
     }
 
+    public bool IsFiveWindow { get; private set; }
+
+    public bool IsTwoWindow { get; private set; }
+
 
     #endregion
 
@@ -87,9 +96,10 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
     }
 
     public void GotoPaView(object o = null) {
-        int screenNumber = (int)o;
+        string str = (string)o;
+        int screenNumber = int.Parse(str);
         this.AppTabViewModel.IsExpanded = false;
-        // invoke Pa here
+        this.PatientAdminAppManagerViewModel.InvokePaAt(screenNumber);
     }
 
     public void TEST_ADD(object o = null) {
@@ -101,8 +111,8 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
 
     #region PROPERTIES
 
-    
-    
+    public PatientAdminAppManager_ViewModel PatientAdminAppManagerViewModel { get; private set; }
+
     #endregion
 
     public override void UpdateByEvent(string propertyName, object o) {
@@ -120,6 +130,15 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
             string str = (string)o;
             ActionButtonContent = str;
         }
+
+        if (propertyName.Equals(nameof(MainEntry_ModelFacade.PatientAdminCenterApp))) {
+            PatientAdminCenterApp patientAdminCenterApp = (PatientAdminCenterApp)o;
+            PatientAdminCenterApp_ViewModel patientAdminCenterAppViewModel =
+                new PatientAdminCenterApp_ViewModel(patientAdminCenterApp);
+            patientAdminCenterAppViewModel.RegisterObserver(patientAdminCenterApp);
+            PatientAdminAppManagerViewModel.InitPaCenter(patientAdminCenterAppViewModel);
+        }
+
     }
 
 }

@@ -10,6 +10,7 @@ using EventDrivenElements;
 using EventDrivenStruct.ConfigurationLoader;
 using EventDrivenStruct.Models;
 using EventDrivenStruct.ViewModels;
+using EventDrivenStruct.Views;
 
 /**
  * 原则:
@@ -41,7 +42,10 @@ namespace EventDrivenStruct {
             
             GlobalContext.GetInstance().RegisterModelFacade(MainEntry_ModelFacade.GetInstance());
             Current.Dispatcher.BeginInvoke(() => {
-                MainWindow mainWindow = new MainWindow();
+                Window mainWindow = SystemConfiguration.GetInstance().GetScreenNumber() == 5
+                    ? new MainWindow_Five()
+                    : new MainWindow_Two();
+                //MainWindow_Five mainWindow = new MainWindow_Five();
                 //MainWindow_ViewModel mainWindowViewModel = new MainWindow_ViewModel();
                 
                 GlobalContext.GetInstance().RegisterMainWindow(mainWindow);
