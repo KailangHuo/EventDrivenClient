@@ -12,7 +12,9 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
 
     public MainWindow_ViewModel() {
 
+        //TEST ONLY
         TestNumber = 0;
+        SystemInfoCollector = SystemInfoCollector.GetInstance();
         
         StudyContainerViewModel = new StudyContainer_ViewModel();
         AppTabViewModel = new AppTab_ViewModel();
@@ -20,6 +22,7 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
         PatientAdminAppManagerViewModel = new PatientAdminAppManager_ViewModel();
         
         StudyContainerViewModel.RegisterObserver(AppTabViewModel);
+        StudyContainerViewModel.RegisterObserver(PatientAdminAppManagerViewModel);
         AppTabViewModel.RegisterObserver(ScreenManagerViewModel);
         PatientAdminAppManagerViewModel.RegisterObserver(ScreenManagerViewModel);
 
@@ -45,6 +48,8 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
     public AppTab_ViewModel AppTabViewModel { get; private set; }
 
     public ScreenManager_ViewModel ScreenManagerViewModel { get; private set; }
+
+    public SystemInfoCollector SystemInfoCollector { get; private set; }
 
     private string _actionButtonContent;
 

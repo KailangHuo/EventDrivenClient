@@ -7,6 +7,8 @@ namespace EventDrivenStruct.ViewModels;
 
 public class Study_ViewModel : AbstractEventDrivenViewModel{
 
+    #region CONSTRUCTION
+
     public Study_ViewModel(StudyCollectionItem studyCollectionItem) : base(studyCollectionItem){
         this.StudyCollectionItem = studyCollectionItem;
         this.PatientName = studyCollectionItem.GetStudyComposition()[0].PatientName;
@@ -19,6 +21,8 @@ public class Study_ViewModel : AbstractEventDrivenViewModel{
     private void SetupCommand() {
     }
 
+    #endregion
+    
     #region COMMANDS
     
     #endregion
@@ -27,7 +31,13 @@ public class Study_ViewModel : AbstractEventDrivenViewModel{
     
     #endregion
 
+    #region PROPERTIES
+
     public StudyCollectionItem StudyCollectionItem;
+
+    #endregion
+    
+    #region NOTIFIABLE_PROPERTIES
 
     private string _patientName;
 
@@ -81,6 +91,8 @@ public class Study_ViewModel : AbstractEventDrivenViewModel{
         }
     }
 
+    #endregion
+    
     public void CloseStudy() {
         MainEntry_ModelFacade.GetInstance().DeleteStudyItem(this.StudyCollectionItem);
     }

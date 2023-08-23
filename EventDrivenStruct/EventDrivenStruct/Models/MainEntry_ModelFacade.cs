@@ -15,7 +15,7 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
         StudyCollection.RegisterObserver(StudyAppMappingManager);
         StudyAppMappingManager.RegisterObserver(StudyCollection);
         //TEST
-        ActionString = "点击添加老王 三屏应用";
+        ActionString = "点击添加老王 Review2D";
     }
 
     public static MainEntry_ModelFacade GetInstance() {
@@ -86,7 +86,7 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
         StudyCollection.DeleteAllStudyCollectionItem();
         // TEST_ONLY
         number = 0;
-        ActionString = "点击添加老王 三屏应用";
+        ActionString = "点击添加老王 Review2D";
     }
 
     public void DeleteAppFromStudy(StudyCollectionItem studyCollectionItem, AppModel appModel) {
@@ -117,7 +117,7 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
     public void TestAdd() {
         if (number == 0) {
             StudyCollectionItem laoWang = MakeItem("老王",1);
-            AppModel laowang_maxTest = new AppModel("三屏应用", laoWang);
+            AppModel laowang_maxTest = new AppModel("Review2D", laoWang);
             AddStudyItemWithApp(laoWang, laowang_maxTest);
             ActionString = "点击添加老王 Oncology应用";
         }

@@ -28,7 +28,7 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
         set {
             if(_selectedAppItemContainer == value) return;
             _selectedAppItemContainer = value;
-            IsExpanded = _selectedAppItemContainer != null;
+            IsExpanded = !(_selectedAppItemContainer == null);
             PublishEvent(nameof(SelectedAppItemContainer), _selectedAppItemContainer);
             RisePropertyChanged(nameof(SelectedAppItemContainer));
         }
@@ -103,7 +103,9 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
     }
     
     public void SelectedAppContainerSelectionChanged() {
-        PublishEvent(nameof(SelectedAppContainerSelectionChanged), SelectedAppItemContainer);
+        if (IsExpanded) {
+            PublishEvent(nameof(SelectedAppContainerSelectionChanged), SelectedAppItemContainer);
+        }
     }
 
     public override void UpdateByEvent(string propertyName, object o) {
@@ -134,5 +136,10 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
         if (propertyName.Equals(nameof(StudyAppMappingManager.RemoveAllStudyAppObj))) {
             RemoveAllFromMap();
         }
+
+        if (propertyName.Equals(nameof(StudyContainer_ViewModel.RemoveStudyEvent))) {
+            IsExpanded = false;
+        }
+
     }
 }

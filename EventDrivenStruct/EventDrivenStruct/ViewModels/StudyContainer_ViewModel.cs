@@ -8,6 +8,8 @@ namespace EventDrivenStruct.ViewModels;
 
 public class StudyContainer_ViewModel : AbstractEventDrivenViewModel{
 
+    #region CONSTRUCTION
+
     public StudyContainer_ViewModel() {
         StudyViewModels = new ObservableCollection<Study_ViewModel>();
         SetupCommands();
@@ -19,10 +21,26 @@ public class StudyContainer_ViewModel : AbstractEventDrivenViewModel{
         TriggerSelectedCommand = new CommonCommand(TriggerSelected);
     }
 
+    #endregion
+
+    #region NOTIFIABLE_PROPERTIES
+
     public ObservableCollection<Study_ViewModel> StudyViewModels { get; private set; }
 
-    private Study_ViewModel _selectedStudy;
+    private bool _hasItem;
 
+    public bool HasItem {
+        get {
+            return _hasItem;
+        }
+        set {
+            if(_hasItem == value) return;
+            _hasItem = value;
+            RisePropertyChanged(nameof(HasItem));
+        }
+    }
+
+    private Study_ViewModel _selectedStudy;
     public Study_ViewModel SelectedStudy {
         get { 
             return _selectedStudy;
@@ -30,11 +48,18 @@ public class StudyContainer_ViewModel : AbstractEventDrivenViewModel{
         set {
             if(_selectedStudy == value) return;
             _selectedStudy = value;
+            HasItem = !(_selectedStudy == null);
             PublishEvent(nameof(SelectedStudy), _selectedStudy);
             RisePropertyChanged(nameof(SelectedStudy));
         }
     }
 
+    public void RemoveStudyEvent() {
+        PublishEvent(nameof(RemoveStudyEvent), null);
+    }
+
+    #endregion
+    
     #region COMMANDS
 
     public ICommand CloseSelectedCommand { get; private set; }
@@ -56,6 +81,7 @@ public class StudyContainer_ViewModel : AbstractEventDrivenViewModel{
     }
 
     public void TriggerSelected(object o = null) {
+        if(SelectedStudy == null) return;
         PublishEvent(nameof(TriggerSelected), null);
     }
 
@@ -73,6 +99,7 @@ public class StudyContainer_ViewModel : AbstractEventDrivenViewModel{
         Study_ViewModel studyViewModel = new Study_ViewModel(item);
         this.StudyViewModels.Remove(studyViewModel);
         UpdateSelectedStudy();
+        RemoveStudyEvent();
     }
 
     private void RemoveAllStudyViewModels() {

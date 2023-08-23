@@ -5,13 +5,11 @@ C:\Users\kailang.huo\Desktop\EDA_Struct\net6.0-windows\EventDrivenStruct.dll
 C:\Users\kailang.huo\Desktop\EDA_Struct\net6.0-windows\EventDrivenStruct.pdb
 D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Release\net6.0-windows\EventDrivenStruct.csproj.AssemblyReference.cache
 D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Release\net6.0-windows\Views\AddExamWindow.g.cs
-D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Release\net6.0-windows\Views\MainWindow.g.cs
 D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Release\net6.0-windows\App.g.cs
 D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Release\net6.0-windows\GeneratedInternalTypeHelper.g.cs
 D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Release\net6.0-windows\EventDrivenStruct_MarkupCompile.cache
 D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Release\net6.0-windows\EventDrivenStruct_MarkupCompile.lref
 D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Release\net6.0-windows\Views\AddExamWindow.baml
-D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Release\net6.0-windows\Views\MainWindow.baml
 D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Release\net6.0-windows\EventDrivenStruct.g.resources
 D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Release\net6.0-windows\EventDrivenStruct.GeneratedMSBuildEditorConfig.editorconfig
 D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Release\net6.0-windows\EventDrivenStruct.AssemblyInfoInputs.cache
@@ -35,3 +33,7 @@ C:\Users\kailang.huo\Desktop\EDA_Struct\EDA_Client\net6.0-windows\EventDrivenStr
 C:\Users\kailang.huo\Desktop\EDA_Struct\EDA_Client\net6.0-windows\EventDrivenStruct.runtimeconfig.json
 C:\Users\kailang.huo\Desktop\EDA_Struct\EDA_Client\net6.0-windows\EventDrivenStruct.dll
 C:\Users\kailang.huo\Desktop\EDA_Struct\EDA_Client\net6.0-windows\EventDrivenStruct.pdb
+D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Release\net6.0-windows\Views\MainWindow_Five.g.cs
+D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Release\net6.0-windows\Views\MainWindow_Two.g.cs
+D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Release\net6.0-windows\Views\MainWindow_Five.baml
+D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Release\net6.0-windows\Views\MainWindow_Two.baml

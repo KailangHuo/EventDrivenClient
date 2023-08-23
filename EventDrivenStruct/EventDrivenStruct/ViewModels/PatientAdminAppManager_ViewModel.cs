@@ -25,10 +25,21 @@ public class PatientAdminAppManager_ViewModel : AbstractEventDrivenViewModel{
 
     public void InvokePaAt(int number) {
         if(number >= SystemConfiguration.GetInstance().GetScreenNumber() || number < 0) return;
-        for (int i = 0; i < _paAppSequenceItems.Count; i++) {
-            _paAppSequenceItems[i] = null;
+        
+        // TODO:不要再重新装填了, 直接发送
+        
+        AppSequenceItem paAqqSeq = new AppSequenceItem(PatientAdminCenterAppViewModel, 0);
+        if (_paAppSequenceItems[number] == null) {
+            for (int i = 0; i < _paAppSequenceItems.Count; i++) {
+                if (_paAppSequenceItems[i] != null) {
+                    _paAppSequenceItems = null;
+                    break;
+                }
+            }
+
+            _paAppSequenceItems[number] = paAqqSeq;
         }
-        _paAppSequenceItems[number] = new AppSequenceItem(PatientAdminCenterAppViewModel, 0);
+        
         SelectionFinished();
     }
 
@@ -42,6 +53,8 @@ public class PatientAdminAppManager_ViewModel : AbstractEventDrivenViewModel{
     }
 
     public override void UpdateByEvent(string propertyName, object o) {
-        base.UpdateByEvent(propertyName, o);
+        if (propertyName.Equals(nameof(StudyContainer_ViewModel.RemoveStudyEvent))) {
+            InvokePaAt(0);
+        }
     }
 }

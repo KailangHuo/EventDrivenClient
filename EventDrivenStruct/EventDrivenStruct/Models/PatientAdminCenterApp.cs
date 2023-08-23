@@ -24,7 +24,7 @@ public class PatientAdminCenterApp : AppModel{
     public string Content;
 
     public override string ToString() {
-        return this.AppName + " | " + this.Content.ToString();
+        return this.AppName ;
     }
     
     #region HASH_AND_EQUALS

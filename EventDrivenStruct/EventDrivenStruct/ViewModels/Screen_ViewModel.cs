@@ -61,7 +61,7 @@ public class Screen_ViewModel : AbstractEventDrivenViewModel{
     }
 
     private void IgnoreAction() {
-        PrintToDebugConsole("IGNORED...");
+        PrintToDebugConsole(" IGNORED. Same with previous -> " + AppText);
     }
 
     private void HideContent() {
@@ -83,12 +83,15 @@ public class Screen_ViewModel : AbstractEventDrivenViewModel{
             PatientAdminCenterApp_ViewModel appViewModel = (PatientAdminCenterApp_ViewModel)_content.AppItemViewModel;
             AppText = appViewModel.Content;
             StudyText = "";
+            for (int i = 0; i < 6; i++) {
+                StudyText += "[PA CONTENT " + i + " ... *studyInfo, *patientInfo]\n";
+            }
         }
         else {
             AppText = _content.AppItemViewModel.AppName + " | " + _content.AppSequenceNumber;
             StudyText = _content.AppItemViewModel.AppModel.StudyCollectionItem.ToString();
         }
-        PrintToDebugConsole(" SHOW" + Content.GetSequenceInformation()  );
+        PrintToDebugConsole(" SHOW " + Content.GetSequenceInformation()  );
     }
     
     public void TryUpdateContent(AppSequenceItem appSequenceItem) {
@@ -96,7 +99,8 @@ public class Screen_ViewModel : AbstractEventDrivenViewModel{
     }
 
     public void PrintToDebugConsole(string str) {
-        Debug.WriteLine(this + str);
+        //Debug.WriteLine(this + str);
+        SystemInfoCollector.GetInstance().AddToSystemInfo( this + str);
     }
 
     public override string ToString() {
