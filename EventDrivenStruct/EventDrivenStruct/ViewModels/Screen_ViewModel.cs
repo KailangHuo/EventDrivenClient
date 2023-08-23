@@ -68,7 +68,7 @@ public class Screen_ViewModel : AbstractEventDrivenViewModel{
         if(_content == null) return;
         AppText = "NULL";
         StudyText = "";
-        PrintToDebugConsole( " HIDE" + Content.GetSequenceInformation() );
+        PrintToDebugConsole( " HIDE " + Content.GetSequenceInformation() );
     }
 
     private void ShowContent() {

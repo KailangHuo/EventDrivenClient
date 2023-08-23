@@ -137,7 +137,7 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
             RemoveAllFromMap();
         }
 
-        if (propertyName.Equals(nameof(StudyContainer_ViewModel.RemoveStudyEvent))) {
+        if (propertyName.Equals(nameof(StudyContainer_ViewModel.RemoveStudyBroadCast))) {
             IsExpanded = false;
         }
 

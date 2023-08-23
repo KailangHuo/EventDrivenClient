@@ -8,10 +8,11 @@ namespace EventDrivenStruct.ViewModels;
 public class PatientAdminAppManager_ViewModel : AbstractEventDrivenViewModel{
 
     public PatientAdminAppManager_ViewModel() {
-        initPaSeq();
+        currentPaCenterNumber = -1;
+        resetPaSeqList();
     }
 
-    private void initPaSeq() {
+    private void resetPaSeqList() {
         _paAppSequenceItems = new List<AppSequenceItem>();
         int screenNumber = SystemConfiguration.GetInstance().GetScreenNumber();
         for (int i = 0; i < screenNumber; i++) {
@@ -23,23 +24,15 @@ public class PatientAdminAppManager_ViewModel : AbstractEventDrivenViewModel{
 
     private List<AppSequenceItem> _paAppSequenceItems;
 
-    public void InvokePaAt(int number) {
-        if(number >= SystemConfiguration.GetInstance().GetScreenNumber() || number < 0) return;
-        
-        // TODO:不要再重新装填了, 直接发送
-        
-        AppSequenceItem paAqqSeq = new AppSequenceItem(PatientAdminCenterAppViewModel, 0);
-        if (_paAppSequenceItems[number] == null) {
-            for (int i = 0; i < _paAppSequenceItems.Count; i++) {
-                if (_paAppSequenceItems[i] != null) {
-                    _paAppSequenceItems = null;
-                    break;
-                }
-            }
+    private int currentPaCenterNumber;
 
-            _paAppSequenceItems[number] = paAqqSeq;
-        }
-        
+    public void InvokePaAt(int number) {
+        // TODO: 关闭当前检查和所有的时候出发了remove event, 因为curNumber == 默认的0, 所以没有显示, 需要修复 
+        if(number >= SystemConfiguration.GetInstance().GetScreenNumber() || number < 0) return;
+        if(currentPaCenterNumber == number) return;
+        currentPaCenterNumber = number;
+        resetPaSeqList();
+        _paAppSequenceItems[number] = new AppSequenceItem(PatientAdminCenterAppViewModel, 0);
         SelectionFinished();
     }
 
@@ -53,7 +46,11 @@ public class PatientAdminAppManager_ViewModel : AbstractEventDrivenViewModel{
     }
 
     public override void UpdateByEvent(string propertyName, object o) {
-        if (propertyName.Equals(nameof(StudyContainer_ViewModel.RemoveStudyEvent))) {
+        if (propertyName.Equals(nameof(StudyContainer_ViewModel.RemoveStudyBroadCast))) {
+            InvokePaAt(0);
+        }
+
+        if (propertyName.Equals(nameof(StudyContainer_ViewModel.ClearAll))) {
             InvokePaAt(0);
         }
     }

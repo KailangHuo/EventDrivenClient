@@ -54,8 +54,8 @@ public class StudyContainer_ViewModel : AbstractEventDrivenViewModel{
         }
     }
 
-    public void RemoveStudyEvent() {
-        PublishEvent(nameof(RemoveStudyEvent), null);
+    public void RemoveStudyBroadCast() {
+        PublishEvent(nameof(RemoveStudyBroadCast), null);
     }
 
     #endregion
@@ -74,10 +74,12 @@ public class StudyContainer_ViewModel : AbstractEventDrivenViewModel{
 
     public void CloseSelected(object o = null) {
         MainEntry_ModelFacade.GetInstance().DeleteStudyItem(SelectedStudy.StudyCollectionItem);
+        RemoveStudyBroadCast();
     }
 
     public void ClearAll(object o = null) {
         MainEntry_ModelFacade.GetInstance().DeleteAllStudy();
+        RemoveStudyBroadCast();
     }
 
     public void TriggerSelected(object o = null) {
@@ -99,7 +101,7 @@ public class StudyContainer_ViewModel : AbstractEventDrivenViewModel{
         Study_ViewModel studyViewModel = new Study_ViewModel(item);
         this.StudyViewModels.Remove(studyViewModel);
         UpdateSelectedStudy();
-        RemoveStudyEvent();
+        RemoveStudyBroadCast();
     }
 
     private void RemoveAllStudyViewModels() {
