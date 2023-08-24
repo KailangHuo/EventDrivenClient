@@ -37,6 +37,7 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
         GotoPaTabCommand = new CommonCommand(GotoPaView);
         TEST_ADD_COMMAND = new CommonCommand(TEST_ADD);
         TEST_COMMAND = new CommonCommand(TEST_COMMAND_METHOD);
+        TEST_CLEARALL_COMMAND = new CommonCommand(TEST_CLEARALL);
     }
 
     #endregion
@@ -61,6 +62,19 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
             if(_actionButtonContent == value) return;
             _actionButtonContent = value;
             RisePropertyChanged(nameof(ActionButtonContent));
+        }
+    }
+    
+    private bool _triggeredActionBool;
+
+    public bool TriggeredActionBool {
+        get {
+            return _triggeredActionBool;
+        }
+        set {
+            if(_triggeredActionBool == value) return;
+            _triggeredActionBool = value;
+            RisePropertyChanged(nameof(TriggeredActionBool));
         }
     }
 
@@ -91,7 +105,9 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
     public ICommand TEST_ADD_COMMAND { get; private set; }
 
     public ICommand TEST_COMMAND { get; private set; }
-    
+
+    public ICommand TEST_CLEARALL_COMMAND { get; private set; }
+
     #endregion
 
     #region COMMAND_BINDING_METHODS
@@ -101,8 +117,7 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
     }
 
     public void GotoPaView(object o = null) {
-        string str = (string)o;
-        int screenNumber = int.Parse(str);
+        int screenNumber = int.Parse((string)o);
         if(this.PatientAdminAppManagerViewModel.GetCurrentPaScreenNumber() == screenNumber) return;
         this.AppTabViewModel.IsExpanded = false;
         this.PatientAdminAppManagerViewModel.InvokePaAt(screenNumber);
@@ -111,7 +126,11 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
     public void TEST_ADD(object o = null) {
         PopupManager.GetInstance().MainWindow_AddWindowPopup();
     }
-    
+
+    public void TEST_CLEARALL(object o = null) {
+        this.StudyContainerViewModel.ClearAll(o);
+    }
+
 
     #endregion
 
@@ -143,6 +162,10 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
                 new PatientAdminCenterApp_ViewModel(patientAdminCenterApp);
             patientAdminCenterAppViewModel.RegisterObserver(patientAdminCenterApp);
             PatientAdminAppManagerViewModel.InitPaCenter(patientAdminCenterAppViewModel);
+        }
+
+        if (propertyName.Equals(nameof(MainEntry_ModelFacade.TriggeredActionBool))) {
+            this.TriggeredActionBool = (bool)o;
         }
 
     }

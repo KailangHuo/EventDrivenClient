@@ -76,13 +76,23 @@
                      Command="{Binding TEST_COMMAND}"
             />
             <Button Name="AddPatientButton"
-                    Margin="0,30,0,0"
+                    Margin="0,30,7,0"
                     Height="30"
                     Width="180"
                     VerticalAlignment="Top"
                     HorizontalAlignment="Left"
                     Content="Add Patient"
                     Command="{Binding TEST_ADD_COMMAND}"
+            />
+            <Button Name="TriggeredActionButton"
+                    Visibility="{Binding TriggeredActionBool, Converter={StaticResource BooltoVisibilityConverter}}"
+                    Margin="0,30,0,0"
+                    Height="30"
+                    Width="180"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    Content="清除所有检查"
+                    Command="{Binding TEST_CLEARALL_COMMAND}"
             />
         </StackPanel>
         

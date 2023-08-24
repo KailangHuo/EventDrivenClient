@@ -38,7 +38,7 @@ namespace EventDrivenStruct {
             MainWindow_ViewModel mainWindowViewModel = new MainWindow_ViewModel();
             MainEntry_ModelFacade facade = MainEntry_ModelFacade.GetInstance();
             
-            //在UI线程发生过了
+            //会在后续的UI线程发生
             //facade.RegisterObserver(mainWindowViewModel);
 
             

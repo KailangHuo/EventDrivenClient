@@ -87,6 +87,7 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
         // TEST_ONLY
         number = 0;
         ActionString = "点击添加老王 Review2D";
+        TriggeredActionBool = false;
     }
 
     public void DeleteAppFromStudy(StudyCollectionItem studyCollectionItem, AppModel appModel) {
@@ -101,7 +102,7 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
 
     private int number;
     
-    public string _actionString;
+    private string _actionString;
 
     public string ActionString {
         get {
@@ -114,19 +115,32 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
         }
     }
 
+    private bool _triggeredActionBool;
+
+    public bool TriggeredActionBool {
+        get {
+            return _triggeredActionBool;
+        }
+        set {
+            if(_triggeredActionBool == value) return;
+            _triggeredActionBool = value;
+            PublishEvent(nameof(TriggeredActionBool), _triggeredActionBool);
+        }
+    }
+
     public void TestAdd() {
         if (number == 0) {
             StudyCollectionItem laoWang = MakeItem("老王",1);
             AppModel laowang_maxTest = new AppModel("Review2D", laoWang);
             AddStudyItemWithApp(laoWang, laowang_maxTest);
             ActionString = "点击添加老王 Oncology应用";
-        }
+        }else
         if (number == 1) {
             StudyCollectionItem laoWang = MakeItem("老王",1);
             AppModel laowang_OnOlogy = new AppModel("Oncology", laoWang);
             AddStudyItemWithApp(laoWang, laowang_OnOlogy);
             ActionString = "点击添加老李 Dental应用";
-        }
+        }else
         if (number == 2) {
             StudyCollectionItem laoLi = MakeItem("老李",2);
             AppModel laoLi_Dental = new AppModel("Dental", laoLi);
@@ -134,6 +148,7 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
             ActionString = "清除所有检查后才可使用";
         }
 
+        TriggeredActionBool = !(number < 3);
         number++;
     }
     
