@@ -88,6 +88,8 @@ public class StudyContainer_ViewModel : AbstractEventDrivenViewModel{
     }
 
     #endregion
+    
+    #region METHODS
 
     private void AddStudyViewModel(StudyCollectionItem item) {
         Study_ViewModel studyViewModel = new Study_ViewModel(item);
@@ -115,6 +117,9 @@ public class StudyContainer_ViewModel : AbstractEventDrivenViewModel{
         else SelectedStudy = null;
     }
 
+    #endregion
+
+    
     public override void UpdateByEvent(string propertyName, object o) {
         if (propertyName.Equals(nameof(StudyCollection.AddStudyCollectionItem))) {
             StudyCollectionItem item = (StudyCollectionItem)o;

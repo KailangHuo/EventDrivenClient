@@ -7,6 +7,8 @@ using EventDrivenStruct.Models;
 namespace EventDrivenStruct.ViewModels; 
 
 public class AppTab_ViewModel : AbstractEventDrivenViewModel{
+    
+    #region CONSTRUCTION
 
     public AppTab_ViewModel() {
         _map = new Dictionary<StudyCollectionItem, AppItemContainer_ViewModel>();
@@ -15,9 +17,7 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
         CurrentSelectedStudyCollectionItem = null;
     }
 
-    private Dictionary<StudyCollectionItem, AppItemContainer_ViewModel> _map;
-
-    private AppItemContainer_ViewModel _selectedAppItemContainer;
+    #endregion
 
     #region NOTIFIABLE_PROPERTIES
 
@@ -61,6 +61,21 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
             RisePropertyChanged(nameof(CurrentSelectedStudyCollectionItem));
         }
     }
+    
+    public void SelectedAppContainerSelectionChanged() {
+        if (IsExpanded) {
+            PublishEvent(nameof(SelectedAppContainerSelectionChanged), SelectedAppItemContainer);
+        }
+    }
+
+    #endregion
+    
+    #region PROPERTIES
+
+    
+    private Dictionary<StudyCollectionItem, AppItemContainer_ViewModel> _map;
+
+    private AppItemContainer_ViewModel _selectedAppItemContainer;
 
     #endregion
 
@@ -75,6 +90,8 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
 
 
     #endregion
+
+    #region METHODS
 
     private void PutInMap(StudyAppMappingObj studyAppMappingObj) {
         AppItemContainer_ViewModel appItemContainer = new AppItemContainer_ViewModel(studyAppMappingObj);
@@ -101,12 +118,8 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
 
         CurrentSelectedStudyCollectionItem = studyCollectionItem;
     }
-    
-    public void SelectedAppContainerSelectionChanged() {
-        if (IsExpanded) {
-            PublishEvent(nameof(SelectedAppContainerSelectionChanged), SelectedAppItemContainer);
-        }
-    }
+
+    #endregion
 
     public override void UpdateByEvent(string propertyName, object o) {
         if (propertyName.Equals(nameof(StudyContainer_ViewModel.SelectedStudy))) {

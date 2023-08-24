@@ -12,6 +12,8 @@ namespace EventDrivenStruct.ViewModels;
 
 public class AppItemContainer_ViewModel : AbstractEventDrivenViewModel {
 
+    #region CONSTRUCTION
+    
     public AppItemContainer_ViewModel(StudyAppMappingObj mappingObj) {
         AppSequenceManagerCollection = new ObservableCollection<AppSequenceManager_ViewModel>();
         SelectedSequenceApps = new List<AppSequenceItem>();
@@ -21,11 +23,8 @@ public class AppItemContainer_ViewModel : AbstractEventDrivenViewModel {
         InitializeSequenceManagers();
         InitializeConstantApps();
     }
-
-    public StudyAppMappingObj StudyAppMappingObj;
-
-    private int _sequenceManagerNumber;
-
+    
+    
     private void InitializeSequenceManagers() {
         _sequenceManagerNumber = SystemConfiguration.GetInstance().GetScreenNumber();
         for (int i = 0; i < _sequenceManagerNumber; i++) {
@@ -43,14 +42,16 @@ public class AppItemContainer_ViewModel : AbstractEventDrivenViewModel {
         }
     }
 
+    #endregion
+    
+    #region NOTIFIABLE_PROPERTIES
+
     public ObservableCollection<AppSequenceManager_ViewModel> AppSequenceManagerCollection { get; private set; }
 
     public ObservableCollection<AppItem_ViewModel> VisibleAppModelList { get; private set; }
-
-    private List<AppItem_ViewModel> RunningAppList;
-
+    
     private List<AppSequenceItem> _selectedSequenceApps;
-
+    
     public List<AppSequenceItem> SelectedSequenceApps {
         get {
             return _selectedSequenceApps;
@@ -60,8 +61,26 @@ public class AppItemContainer_ViewModel : AbstractEventDrivenViewModel {
             _selectedSequenceApps = value;
         }
     }
+    
+    public void SelectionFinished() {
+        PublishEvent(nameof(SelectionFinished), SelectedSequenceApps);
+    }
 
+    #endregion
+    
+    #region PROPERTIES
 
+    public StudyAppMappingObj StudyAppMappingObj;
+
+    private int _sequenceManagerNumber;
+
+    private List<AppItem_ViewModel> RunningAppList;
+
+    #endregion
+
+    #region METHODS
+
+        
     private void AddAdvancedAppViewModel(AppItem_ViewModel appItemModel) {
         appItemModel.RegisterObserver(this);
         RunningAppList.Add(appItemModel);
@@ -133,10 +152,6 @@ public class AppItemContainer_ViewModel : AbstractEventDrivenViewModel {
         SelectedSequenceApps[seqIndex] = appSequenceManagerViewModel.GetPeekAppSeqItem();
     }
 
-    public void SelectionFinished() {
-        PublishEvent(nameof(SelectionFinished), SelectedSequenceApps);
-    }
-
     private bool AppAlreadySelected(AppItem_ViewModel appItemViewModel) {
         for (int i = 0; i < AppSequenceManagerCollection.Count; i++) {
             if(AppSequenceManagerCollection[i].GetPeekAppSeqItem() == null) continue;
@@ -148,6 +163,8 @@ public class AppItemContainer_ViewModel : AbstractEventDrivenViewModel {
         return false;
     }
 
+    #endregion
+    
     public override void UpdateByEvent(string propertyName, object o) {
         if (propertyName.Equals(nameof(StudyAppMappingObj.AddAppModel))){
             AppModel appModel = (AppModel)o;

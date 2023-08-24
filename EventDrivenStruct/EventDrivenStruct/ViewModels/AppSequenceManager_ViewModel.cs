@@ -8,6 +8,8 @@ using EventDrivenStruct.Models;
 namespace EventDrivenStruct.ViewModels; 
 
 public class AppSequenceManager_ViewModel : AbstractEventDrivenViewModel{
+    
+    #region CONSTRUCTION
 
     public AppSequenceManager_ViewModel(int sequenceNumber) {
         _appSequenceItemStack = new List<AppSequenceItem>();
@@ -16,11 +18,9 @@ public class AppSequenceManager_ViewModel : AbstractEventDrivenViewModel{
         this._currentShowingAppSequenceItem = null;
     }
 
-    private AppSequenceItem _currentShowingAppSequenceItem;
+    #endregion
 
-    public int SequenceNumber;
-
-    private List<AppSequenceItem> _appSequenceItemStack;
+    #region NOTIFIABLE_PROPERTIES
 
     private AppItem_ViewModel _appItemSelected;
     
@@ -34,7 +34,21 @@ public class AppSequenceManager_ViewModel : AbstractEventDrivenViewModel{
             PublishEvent(nameof(AppItemSelected), this);
         }
     }
+
+    #endregion
     
+    #region PROPERTIES
+
+    private AppSequenceItem _currentShowingAppSequenceItem;
+
+    public int SequenceNumber;
+
+    private List<AppSequenceItem> _appSequenceItemStack;
+
+    #endregion
+    
+    #region METHODS
+
     private void TryUpdatePeekNode() {
         if (_appSequenceItemStack.Count > 0) {
             _appItemSelected = _appSequenceItemStack[0].AppItemViewModel;
@@ -55,6 +69,26 @@ public class AppSequenceManager_ViewModel : AbstractEventDrivenViewModel{
 
         return null;
     }
+
+    public void AddAppSequenceItem(AppSequenceItem appSequenceItem) {
+        if(_appSequenceItemStack.Count > 0 && _appSequenceItemStack[0].AppItemViewModel.Equals(appSequenceItem.AppItemViewModel)) return;
+        _appSequenceItemStack.Insert(0,appSequenceItem);
+        TryUpdatePeekNode();
+    }
+
+    public void RemoveApp(AppItem_ViewModel appItemViewModel) {
+        for (int i = 0; i < _appSequenceItemStack.Count; i++) {
+            if (_appSequenceItemStack[i].AppItemViewModel.Equals(appItemViewModel)) {
+                _appSequenceItemStack.Remove(_appSequenceItemStack[i]);
+                TryUpdatePeekNode();
+                break;
+            }
+        }
+    }
+
+    #endregion
+    
+    #region |||TEST_ONLY|||
 
     /// <summary>
     /// TEST ONLY
@@ -80,23 +114,8 @@ public class AppSequenceManager_ViewModel : AbstractEventDrivenViewModel{
         MainEntry_ModelFacade.GetInstance().DeleteApp(appModel);
     }
 
-    public void AddAppSequenceItem(AppSequenceItem appSequenceItem) {
-        if(_appSequenceItemStack.Count > 0 && _appSequenceItemStack[0].AppItemViewModel.Equals(appSequenceItem.AppItemViewModel)) return;
-        _appSequenceItemStack.Insert(0,appSequenceItem);
-        TryUpdatePeekNode();
-    }
-
-    public void RemoveApp(AppItem_ViewModel appItemViewModel) {
-        for (int i = 0; i < _appSequenceItemStack.Count; i++) {
-            if (_appSequenceItemStack[i].AppItemViewModel.Equals(appItemViewModel)) {
-                _appSequenceItemStack.Remove(_appSequenceItemStack[i]);
-                TryUpdatePeekNode();
-                break;
-            }
-        }
-    }
+    #endregion
     
-
     public override string ToString() {
         if (AppItemSelected == null) return "Empty";
         return AppItemSelected.AppName +"'s " + _appSequenceItemStack[0].AppSequenceNumber;
