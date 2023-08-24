@@ -26,10 +26,12 @@ public class PatientAdminAppManager_ViewModel : AbstractEventDrivenViewModel{
 
     private int currentPaCenterNumber;
 
+    public int GetCurrentPaScreenNumber() {
+        return currentPaCenterNumber;
+    }
+
     public void InvokePaAt(int number) {
-        // TODO: 关闭当前检查和所有的时候出发了remove event, 因为curNumber == 默认的0, 所以没有显示, 需要修复 
         if(number >= SystemConfiguration.GetInstance().GetScreenNumber() || number < 0) return;
-        if(currentPaCenterNumber == number) return;
         currentPaCenterNumber = number;
         resetPaSeqList();
         _paAppSequenceItems[number] = new AppSequenceItem(PatientAdminCenterAppViewModel, 0);

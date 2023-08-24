@@ -20,6 +20,7 @@ public class AppItemContainer_ViewModel : AbstractEventDrivenViewModel {
         StudyAppMappingObj = mappingObj;
         VisibleAppModelList = new ObservableCollection<AppItem_ViewModel>();
         RunningAppList = new List<AppItem_ViewModel>();
+        HasRunningApp = false;
         InitializeSequenceManagers();
         InitializeConstantApps();
     }
@@ -61,9 +62,24 @@ public class AppItemContainer_ViewModel : AbstractEventDrivenViewModel {
             _selectedSequenceApps = value;
         }
     }
-    
+
+    private bool _hasRunningApp;
+
+    public bool HasRunningApp {
+        get {
+            return _hasRunningApp;
+        }
+        set {
+            if(_hasRunningApp == value) return;
+            _hasRunningApp = value;
+            RisePropertyChanged(nameof(HasRunningApp));
+        }
+    }
+
     public void SelectionFinished() {
-        PublishEvent(nameof(SelectionFinished), SelectedSequenceApps);
+        if (this.HasRunningApp) {
+            PublishEvent(nameof(SelectionFinished), SelectedSequenceApps);
+        }
     }
 
     #endregion
@@ -84,6 +100,7 @@ public class AppItemContainer_ViewModel : AbstractEventDrivenViewModel {
     private void AddAdvancedAppViewModel(AppItem_ViewModel appItemModel) {
         appItemModel.RegisterObserver(this);
         RunningAppList.Add(appItemModel);
+        HasRunningApp = true;
         VisibleAppModelListAddItem(appItemModel);
         if (AppAlreadySelected(appItemModel)) return;
         AppSequenceManagerCollection[0].AppItemSelected = appItemModel;
@@ -92,6 +109,7 @@ public class AppItemContainer_ViewModel : AbstractEventDrivenViewModel {
     public void RemoveAdvancedAppViewModel(AppItem_ViewModel appItemModel) {
         appItemModel.DeregisterObserver(this);
         RunningAppList.Remove(appItemModel);
+        if (RunningAppList.Count == 0) HasRunningApp = false;
         VisibleAppModelListRemoveItem(appItemModel);
         SequenceManagersRemoveItem(appItemModel);
         SelectionFinished();

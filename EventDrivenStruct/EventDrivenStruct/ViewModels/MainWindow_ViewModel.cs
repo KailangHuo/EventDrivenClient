@@ -103,6 +103,7 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
     public void GotoPaView(object o = null) {
         string str = (string)o;
         int screenNumber = int.Parse(str);
+        if(this.PatientAdminAppManagerViewModel.GetCurrentPaScreenNumber() == screenNumber) return;
         this.AppTabViewModel.IsExpanded = false;
         this.PatientAdminAppManagerViewModel.InvokePaAt(screenNumber);
     }

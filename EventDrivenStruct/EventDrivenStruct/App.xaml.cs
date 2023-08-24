@@ -37,7 +37,9 @@ namespace EventDrivenStruct {
         protected override void OnStartup(StartupEventArgs e) {
             MainWindow_ViewModel mainWindowViewModel = new MainWindow_ViewModel();
             MainEntry_ModelFacade facade = MainEntry_ModelFacade.GetInstance();
-            facade.RegisterObserver(mainWindowViewModel);
+            
+            //在UI线程发生过了
+            //facade.RegisterObserver(mainWindowViewModel);
 
             
             GlobalContext.GetInstance().RegisterModelFacade(MainEntry_ModelFacade.GetInstance());

@@ -35,10 +35,6 @@ public class ScreenManager_ViewModel : AbstractEventDrivenViewModel {
         }
     }
 
-    public void InvokePatientAdmin(int screenNumber) {
-        
-    }
-
     private void TryUpdateScreens(List<AppSequenceItem> appList) {
         if (appList == null) {
             for (int i = 0; i < ScreenCollection.Count; i++) {
@@ -58,20 +54,19 @@ public class ScreenManager_ViewModel : AbstractEventDrivenViewModel {
 
 
     public override void UpdateByEvent(string propertyName, object o) {
-        if (propertyName.Equals(nameof(AppTab_ViewModel.SelectedAppContainerSelectionChanged))) {
+        if (propertyName.Equals(nameof(AppTab_ViewModel.SelectedAppContainerAppSelectionChanged))) {
             AppItemContainer_ViewModel appItemContainerViewModel = (AppItemContainer_ViewModel)o;
-            List<AppSequenceItem> list = appItemContainerViewModel == null
-                ? null
-                : appItemContainerViewModel.SelectedSequenceApps;
-            TryUpdateScreens(list);
+            if (appItemContainerViewModel != null && appItemContainerViewModel.HasRunningApp) {
+                TryUpdateScreens(appItemContainerViewModel.SelectedSequenceApps);
+            }
         }
 
         if (propertyName.Equals(nameof(AppTab_ViewModel.SelectedAppItemContainer))) {
             AppItemContainer_ViewModel appItemContainerViewModel = (AppItemContainer_ViewModel)o;
-            List<AppSequenceItem> list = appItemContainerViewModel == null
-                ? null
-                : appItemContainerViewModel.SelectedSequenceApps;
-            TryUpdateScreens(list);
+            if (appItemContainerViewModel != null && appItemContainerViewModel.HasRunningApp) {
+                TryUpdateScreens(appItemContainerViewModel.SelectedSequenceApps);
+            }
+            
         }
 
         if (propertyName.Equals(nameof(AppTab_ViewModel.IsExpanded))) {

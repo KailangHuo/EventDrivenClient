@@ -62,9 +62,9 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
         }
     }
     
-    public void SelectedAppContainerSelectionChanged() {
+    public void SelectedAppContainerAppSelectionChanged() {
         if (IsExpanded) {
-            PublishEvent(nameof(SelectedAppContainerSelectionChanged), SelectedAppItemContainer);
+            PublishEvent(nameof(SelectedAppContainerAppSelectionChanged), SelectedAppItemContainer);
         }
     }
 
@@ -142,7 +142,7 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
         }
 
         if (propertyName.Equals(nameof(AppItemContainer_ViewModel.SelectionFinished))) {
-            SelectedAppContainerSelectionChanged();
+            SelectedAppContainerAppSelectionChanged();
             //AppConSeqItemsSelectedChanged(list);
         }
 
