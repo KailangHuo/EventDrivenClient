@@ -130,15 +130,18 @@ public class StudyContainer_ViewModel : AbstractEventDrivenViewModel{
         if (propertyName.Equals(nameof(StudyCollection.AddStudyCollectionItem))) {
             StudyCollectionItem item = (StudyCollectionItem)o;
             this.AddStudyViewModel(item);
+            return;
         }
 
         if (propertyName.Equals(nameof(StudyCollection.DeleteStudyCollectionItem))) {
             StudyCollectionItem item = (StudyCollectionItem)o;
             this.RemoveStudyViewModel(item);
+            return;
         }
 
         if (propertyName.Equals(nameof(StudyCollection.DeleteAllStudyCollectionItem))) {
             RemoveAllStudyViewModels();
+            return;
         }
     }
 }

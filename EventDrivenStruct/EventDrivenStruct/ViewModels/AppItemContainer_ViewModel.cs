@@ -188,22 +188,26 @@ public class AppItemContainer_ViewModel : AbstractEventDrivenViewModel {
             AppModel appModel = (AppModel)o;
             AppItem_ViewModel appItemViewModel = new AppItem_ViewModel(appModel);
             AddAdvancedAppViewModel(appItemViewModel);
+            return;
         }
 
         if (propertyName.Equals(nameof(StudyAppMappingObj.RemoveAppModel))) {
             AppModel appModel = (AppModel)o;
             AppItem_ViewModel appItemViewModel = new AppItem_ViewModel(appModel);
             RemoveAdvancedAppViewModel(appItemViewModel);
+            return;
         }
 
         if (propertyName.Equals(nameof(AppSequenceManager_ViewModel.AppItemSelected))) {
             AppSequenceManager_ViewModel appSequenceManager = (AppSequenceManager_ViewModel)o;
             AppSeqSelected(appSequenceManager);
+            return;
         }
 
         if (propertyName.Equals(nameof(AppSequenceManager_ViewModel.PeekNodeChanged))) {
             AppSequenceManager_ViewModel appSequenceManager = (AppSequenceManager_ViewModel)o;
             SelectedCollectionChanged(appSequenceManager);
+            return;
         }
     }
 }

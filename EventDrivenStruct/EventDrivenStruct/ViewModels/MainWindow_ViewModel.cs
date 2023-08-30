@@ -146,16 +146,19 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
         if (propertyName.Equals(nameof(MainEntry_ModelFacade.StudyCollection))) {
             StudyCollection studyCollection = (StudyCollection)o;
             studyCollection.RegisterObserver(StudyContainerViewModel);
+            return;
         }
 
         if (propertyName.Equals(nameof(MainEntry_ModelFacade.StudyAppMappingManager))) {
             StudyAppMappingManager studyAppMappingManager = (StudyAppMappingManager)o;
             studyAppMappingManager.RegisterObserver(AppTabViewModel);
+            return;
         }
 
         if (propertyName.Equals(nameof(MainEntry_ModelFacade.ActionString))) {
             string str = (string)o;
             ActionButtonContent = str;
+            return;
         }
 
         if (propertyName.Equals(nameof(MainEntry_ModelFacade.PatientAdminCenterApp))) {
@@ -164,10 +167,12 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
                 new PatientAdminCenterApp_ViewModel(patientAdminCenterApp);
             patientAdminCenterAppViewModel.RegisterObserver(patientAdminCenterApp);
             PatientAdminAppManagerViewModel.InitPaCenter(patientAdminCenterAppViewModel);
+            return;
         }
 
         if (propertyName.Equals(nameof(MainEntry_ModelFacade.TriggeredActionBool))) {
             this.TriggeredActionBool = (bool)o;
+            return;
         }
 
     }

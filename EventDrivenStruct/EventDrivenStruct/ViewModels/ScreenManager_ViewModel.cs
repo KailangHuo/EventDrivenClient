@@ -68,16 +68,19 @@ public class ScreenManager_ViewModel : AbstractEventDrivenViewModel {
             AppItemContainer_ViewModel appItemContainerViewModel = (AppItemContainer_ViewModel)o;
             if(!appItemContainerViewModel.HasRunningApp) return;
             TryUpdateScreens(appItemContainerViewModel.SelectedSequenceApps);
+            return;
         }
 
         if (propertyName.Equals(nameof(AppTab_ViewModel.IsExpanded))) {
             bool isExpanded = (bool)o;
             if(!isExpanded) ResetScreens();  
+            return;
         }
 
         if (propertyName.Equals(nameof(PatientAdminAppManager_ViewModel.PaSelectionFinished))) {
             List<AppSequenceItem> list = (List<AppSequenceItem>)o;
             TryUpdateScreens(list);
+            return;
         }
 
     }
