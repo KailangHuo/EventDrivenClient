@@ -97,6 +97,7 @@ public class StudyContainer_ViewModel : AbstractEventDrivenViewModel{
         // 不用判断是否存在, 因为在Model层处理好了
         this.StudyViewModels.Insert(0,studyViewModel);
         UpdateSelectedStudy();
+        TriggerSelected();
     }
 
     private void RemoveStudyViewModel(StudyCollectionItem item) {
@@ -115,6 +116,11 @@ public class StudyContainer_ViewModel : AbstractEventDrivenViewModel{
     private void UpdateSelectedStudy() {
         if (StudyViewModels.Count > 0) SelectedStudy = StudyViewModels[0];
         else SelectedStudy = null;
+
+        // TEST
+        if (SelectedStudy == null) {
+            MainEntry_ModelFacade.GetInstance().DeleteAllStudy();
+        }
     }
 
     #endregion

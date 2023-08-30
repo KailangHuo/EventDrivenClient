@@ -41,12 +41,13 @@
         
         <DataTemplate x:Key="App_ListBox_Template">
             <StackPanel Orientation="Vertical" >
-                <Label Width="60" 
+                <TextBlock Width="60" 
                        Margin="10,0,10,0"
-                       Content="{Binding AppName}"  
+                       Text="{Binding AppName}" 
+                       TextWrapping="Wrap"
                        HorizontalAlignment="Center" 
                        VerticalAlignment="Center" 
-                       FontSize="10" 
+                       FontSize="17" 
                        FontWeight="Bold"/>
                 <StackPanel.ContextMenu>
                     <ContextMenu>

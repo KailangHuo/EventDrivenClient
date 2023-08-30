@@ -51,6 +51,9 @@ public class AddExamWindow_ViewModel : AbstractEventDrivenViewModel{
             if(_studyInstanceId == value) return;
             _studyInstanceId = value;
             _study.StudyInstanceId = value;
+            _study.PatientName = value;
+            _study.PatientGender = value;
+            _study.PatientAge = value;
             RisePropertyChanged(nameof(StudyInstanceId));
         }
     }
@@ -122,7 +125,7 @@ public class AddExamWindow_ViewModel : AbstractEventDrivenViewModel{
     #region COMMAND_BINDING_METHOD
 
     public void Confirm(object o = null) {
-        if (string.IsNullOrEmpty(this.PatientName) || string.IsNullOrEmpty(AppType)) {
+        if (string.IsNullOrEmpty(this.StudyInstanceId) || string.IsNullOrEmpty(AppType)) {
             MessageBox.Show("参数不完整！");
             return;
         }

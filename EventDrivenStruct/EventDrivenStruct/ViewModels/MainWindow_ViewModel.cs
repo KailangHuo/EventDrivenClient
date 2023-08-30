@@ -23,7 +23,10 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
         
         StudyContainerViewModel.RegisterObserver(AppTabViewModel);
         StudyContainerViewModel.RegisterObserver(PatientAdminAppManagerViewModel);
+        
         AppTabViewModel.RegisterObserver(ScreenManagerViewModel);
+        AppTabViewModel.RegisterObserver(PatientAdminAppManagerViewModel);
+        
         PatientAdminAppManagerViewModel.RegisterObserver(ScreenManagerViewModel);
 
         this.RegisterObserver(PopupManager.GetInstance());
@@ -118,7 +121,6 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
 
     public void GotoPaView(object o = null) {
         int screenNumber = int.Parse((string)o);
-        if(this.PatientAdminAppManagerViewModel.GetCurrentPaScreenNumber() == screenNumber) return;
         this.AppTabViewModel.IsExpanded = false;
         this.PatientAdminAppManagerViewModel.InvokePaAt(screenNumber);
     }

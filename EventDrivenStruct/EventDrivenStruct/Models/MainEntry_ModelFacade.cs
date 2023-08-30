@@ -148,7 +148,7 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
             ActionString = "清除所有检查后才可使用";
         }
 
-        TriggeredActionBool = !(number < 3);
+        TriggeredActionBool = !(number < 2);
         number++;
     }
     

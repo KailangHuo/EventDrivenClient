@@ -15,6 +15,7 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
         IsExpanded = false;
         SelectedAppItemContainer = null;
         CurrentSelectedStudyCollectionItem = null;
+        
     }
 
     #endregion
@@ -28,8 +29,8 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
         set {
             if(_selectedAppItemContainer == value) return;
             _selectedAppItemContainer = value;
-            IsExpanded = !(_selectedAppItemContainer == null);
-            PublishEvent(nameof(SelectedAppItemContainer), _selectedAppItemContainer);
+            IsExpanded = (_selectedAppItemContainer != null && _selectedAppItemContainer.HasRunningApp);
+            PublishSelectedAppContainerChanged();
             RisePropertyChanged(nameof(SelectedAppItemContainer));
         }
     }
@@ -43,9 +44,9 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
         set {
             if(_isExpanded == value) return;
             _isExpanded = value;
-            RisePropertyChanged(nameof(IsExpanded));
             if (_isExpanded) PublishEvent(nameof(SelectedAppItemContainer), _selectedAppItemContainer);
             PublishEvent(nameof(IsExpanded), _isExpanded);
+            RisePropertyChanged(nameof(IsExpanded));
         }
     } 
 
@@ -61,7 +62,13 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
             RisePropertyChanged(nameof(CurrentSelectedStudyCollectionItem));
         }
     }
-    
+
+    private void PublishSelectedAppContainerChanged() {
+        if (IsExpanded) {
+            PublishEvent(nameof(SelectedAppItemContainer), _selectedAppItemContainer);
+        }
+    }
+
     public void SelectedAppContainerAppSelectionChanged() {
         if (IsExpanded) {
             PublishEvent(nameof(SelectedAppContainerAppSelectionChanged), SelectedAppItemContainer);
@@ -125,33 +132,39 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
         if (propertyName.Equals(nameof(StudyContainer_ViewModel.SelectedStudy))) {
             Study_ViewModel studyViewModel = (Study_ViewModel)o;
             SwapSelectedAppContainer(studyViewModel?.StudyCollectionItem);
+            return;
         }
 
         if (propertyName.Equals(nameof(StudyAppMappingManager.PutStudyAppMapObj))) {
             StudyAppMappingObj studyAppMappingObj = (StudyAppMappingObj)o;
             PutInMap(studyAppMappingObj);
+            return;
         }
 
         if (propertyName.Equals(nameof(StudyAppMappingManager.RemoveStudyAppMapObj))) {
             StudyAppMappingObj studyAppMappingObj = (StudyAppMappingObj)o;
             this.RemoveFromMap(studyAppMappingObj);
+            return;
         }
 
         if (propertyName.Equals(nameof(StudyContainer_ViewModel.TriggerSelected))) {
             IsExpanded = true;
+            return;
         }
 
         if (propertyName.Equals(nameof(AppItemContainer_ViewModel.SelectionFinished))) {
             SelectedAppContainerAppSelectionChanged();
-            //AppConSeqItemsSelectedChanged(list);
+            return;
         }
 
         if (propertyName.Equals(nameof(StudyAppMappingManager.RemoveAllStudyAppObj))) {
             RemoveAllFromMap();
+            return;
         }
 
         if (propertyName.Equals(nameof(StudyContainer_ViewModel.RemoveStudyBroadCast))) {
             IsExpanded = false;
+            return;
         }
 
     }

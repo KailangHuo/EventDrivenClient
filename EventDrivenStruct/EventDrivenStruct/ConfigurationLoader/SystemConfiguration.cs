@@ -81,7 +81,9 @@ public class SystemConfiguration {
                     appConfigInfo.MaxConfigScreenNumber = Convert.ToInt32(attribute.Value);
             }
             AppInfoMap.Add(appConfigInfo.AppName, appConfigInfo);
-            AppList.Add(appConfigInfo.AppName);
+            if (appConfigInfo.MaxConfigScreenNumber != 0) {
+                AppList.Add(appConfigInfo.AppName);
+            }
             
         }
         
