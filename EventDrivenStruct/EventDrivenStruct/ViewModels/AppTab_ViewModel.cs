@@ -29,7 +29,9 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
         set {
             if(_selectedAppItemContainer == value) return;
             _selectedAppItemContainer = value;
-            IsExpanded = (_selectedAppItemContainer != null && _selectedAppItemContainer.HasRunningApp);
+            IsExpanded = (_selectedAppItemContainer != null 
+                          && _selectedAppItemContainer.HasRunningApp
+                          && IsExpanded);
             PublishSelectedAppContainerChanged();
             RisePropertyChanged(nameof(SelectedAppItemContainer));
         }
