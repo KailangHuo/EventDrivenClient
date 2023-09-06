@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using EventDrivenElements;
 using EventDrivenStruct.ViewModels;
 
@@ -15,7 +16,7 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
         StudyCollection.RegisterObserver(StudyAppMappingManager);
         StudyAppMappingManager.RegisterObserver(StudyCollection);
         //TEST
-        ActionString = "点击添加老王 Review2D";
+        ActionString = "点击添加王XX Review2D";
     }
 
     public static MainEntry_ModelFacade GetInstance() {
@@ -86,7 +87,7 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
         StudyCollection.DeleteAllStudyCollectionItem();
         // TEST_ONLY
         number = 0;
-        ActionString = "点击添加老王 Review2D";
+        ActionString = "点击添加王XX Review2D";
         TriggeredActionBool = false;
     }
 
@@ -130,19 +131,19 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
 
     public void TestAdd() {
         if (number == 0) {
-            StudyCollectionItem laoWang = MakeItem("老王",1);
+            StudyCollectionItem laoWang = MakeItem("王XX");
             AppModel laowang_maxTest = new AppModel("Review2D", laoWang);
             AddStudyItemWithApp(laoWang, laowang_maxTest);
-            ActionString = "点击添加老王 Oncology应用";
+            ActionString = "点击添加王XX Oncology应用";
         }else
         if (number == 1) {
-            StudyCollectionItem laoWang = MakeItem("老王",1);
+            StudyCollectionItem laoWang = MakeItem("王XX");
             AppModel laowang_OnOlogy = new AppModel("Oncology", laoWang);
             AddStudyItemWithApp(laoWang, laowang_OnOlogy);
-            ActionString = "点击添加老李 Dental应用";
+            ActionString = "点击添加李YY Dental应用";
         }else
         if (number == 2) {
-            StudyCollectionItem laoLi = MakeItem("老李",2);
+            StudyCollectionItem laoLi = MakeItem("李YY");
             AppModel laoLi_Dental = new AppModel("Dental", laoLi);
             AddStudyItemWithApp(laoLi, laoLi_Dental);
             ActionString = "清除所有检查后才可使用";
@@ -152,14 +153,10 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
         number++;
     }
     
-    private StudyCollectionItem MakeItem(string param1, int times) {
+    private StudyCollectionItem MakeItem(string param1) {
         StudyCollectionItem studyCollectionItem = new StudyCollectionItem();
-
-        for (int i = 0; i < times; i++) {
-            Study study = new Study(param1+ i + ". " );
-            studyCollectionItem.AddInStudyComposition(study);
-        }
-            
+        Study study = new Study(param1, "male","25", "1023.256576.789612391346420.1");
+        studyCollectionItem.AddInStudyComposition(study);
         return studyCollectionItem;
     }
 

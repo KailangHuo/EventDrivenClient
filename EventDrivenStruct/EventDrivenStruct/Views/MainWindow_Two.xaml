@@ -10,6 +10,7 @@
     <Window.Resources>
         <converter:BoolToVisibilityConverter x:Key = "BooltoVisibilityConverter"/>
         
+        <!--Study combobox template-->
         <DataTemplate x:Key="Study_ComboBox_Template">
             <Grid>
                 <Grid.RowDefinitions>
@@ -17,28 +18,21 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 
-                <Grid Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Name="PatientNameLabel" Content="{Binding PatientName}" HorizontalAlignment="Left"  VerticalAlignment="Top"/>
-                    <Label Grid.Column="2"  Name="PatientGenderLabel" Content="{Binding PatientGender}" HorizontalAlignment="Right" VerticalAlignment="Top" />
-                </Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
                 
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0"  Name="PatientAgeLabel" Content="{Binding PatientAge}" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
-                    <Label Grid.Column="2"   Name="PatientUidLabel" Content="{Binding StudyUid}" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
-                </Grid>
+                <Label Grid.Row="0" Grid.Column="0" Name="PatientNameLabel" Content="{Binding PatientName}" HorizontalAlignment="Left"  VerticalAlignment="Top"/>
+                <Label Grid.Row="0" Grid.Column="1"  Name="PatientGenderLabel" Content="{Binding PatientGender}" HorizontalAlignment="Right" VerticalAlignment="Top" />
+               
+                <Label Grid.Row="1" Grid.Column="0"  Name="PatientAgeLabel" Content="{Binding PatientAge}" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                <Label Grid.Row="1" Grid.Column="1"   Name="PatientUidLabel" Content="{Binding StudyUid}" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                
             </Grid>
         </DataTemplate>
         
+        <!--App ListBox template-->
         <DataTemplate x:Key="App_ListBox_Template">
             <StackPanel Orientation="Vertical" >
                 <TextBlock Width="60" 
