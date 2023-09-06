@@ -11,9 +11,12 @@ public class StudyCollection : AbstractEventDrivenObject{
         StudyCollectionItems = new List<StudyCollectionItem>();
         _studyHashSet = new HashSet<Study>();
         MaxStudyNumber = SystemConfiguration.GetInstance().GetMaxStudyNumber();
+        StudyLockManager = new StudyLockManager();
     }
 
     private List<StudyCollectionItem> StudyCollectionItems;
+
+    private StudyLockManager StudyLockManager;
 
     private HashSet<Study> _studyHashSet;
 
@@ -26,6 +29,7 @@ public class StudyCollection : AbstractEventDrivenObject{
         if (this.StudyCollectionItems.Count == MaxStudyNumber) return false;
         
         StudyCollectionItems.Add(studyCollectionItem);
+        StudyLockManager.AddItem(studyCollectionItem);
         AddStudiesInHashSet(studyCollectionItem.GetStudyComposition());
         PublishEvent(nameof(AddStudyCollectionItem), studyCollectionItem);
         return true;
@@ -34,6 +38,7 @@ public class StudyCollection : AbstractEventDrivenObject{
     public void DeleteStudyCollectionItem(StudyCollectionItem studyCollectionItem) {
         if (this.Contains(studyCollectionItem)) {
             StudyCollectionItems.Remove(studyCollectionItem);
+            StudyLockManager.RemoveItem(studyCollectionItem);
             RemoveStudiesFromHashSet(studyCollectionItem.GetStudyComposition());
             PublishEvent(nameof(DeleteStudyCollectionItem), studyCollectionItem);
             // TODO: Delete完成后必须要终止对应的进程

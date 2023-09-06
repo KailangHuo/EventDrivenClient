@@ -9,6 +9,7 @@
         Title="MainWindow_Two" Height="900" Width="1600" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <converter:BoolToVisibilityConverter x:Key = "BooltoVisibilityConverter"/>
+        <converter:ReverseBoolConverter x:Key="ReverseBoolConverter"/>
         
         <!--Study combobox template-->
         <DataTemplate x:Key="Study_ComboBox_Template">
@@ -18,30 +19,57 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
+                <!-- first row-->
+                <Grid Grid.Row="0" Name="Row1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Label Grid.Column="0" Name="PatientNameLabel" Content="{Binding PatientName}" 
+                           HorizontalContentAlignment="Left" VerticalContentAlignment="Top"
+                           HorizontalAlignment="Left"  VerticalAlignment="Top"/>
+                    <Label Grid.Column="1"  Name="PatientGenderLabel" Content="{Binding PatientGender}" 
+                           HorizontalContentAlignment="Right" VerticalContentAlignment="Top"
+                           HorizontalAlignment="Right" VerticalAlignment="Top" />
+                    
+                </Grid>
                 
-                <Label Grid.Row="0" Grid.Column="0" Name="PatientNameLabel" Content="{Binding PatientName}" HorizontalAlignment="Left"  VerticalAlignment="Top"/>
-                <Label Grid.Row="0" Grid.Column="1"  Name="PatientGenderLabel" Content="{Binding PatientGender}" HorizontalAlignment="Right" VerticalAlignment="Top" />
-               
-                <Label Grid.Row="1" Grid.Column="0"  Name="PatientAgeLabel" Content="{Binding PatientAge}" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
-                <Label Grid.Row="1" Grid.Column="1"   Name="PatientUidLabel" Content="{Binding StudyUid}" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                <!-- second row-->
+                <Grid Grid.Row="1" Name="Row2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Label Grid.Column="0"  Name="PatientAgeLabel" Content="{Binding PatientAge}" 
+                           HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom"
+                           HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                    <Label Grid.Column="1"   Name="PatientUidLabel" Content="{Binding StudyUid}" 
+                           HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom"
+                           HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                    <Button Grid.Column="2" Content="{Binding LockingStatusStr}" 
+                            Command="{Binding LockSwitchCommand}"
+                            IsEnabled="{Binding IsLockable, Converter={StaticResource ReverseBoolConverter}}"
+                            Background="#FF007FFF" Foreground="WhiteSmoke"/>
+                    
+                    
+                </Grid>
                 
             </Grid>
         </DataTemplate>
         
         <!--App ListBox template-->
         <DataTemplate x:Key="App_ListBox_Template">
-            <StackPanel Orientation="Vertical" >
-                <TextBlock Width="60" 
-                       Margin="10,0,10,0"
+            <StackPanel Orientation="Vertical" CanHorizontallyScroll="False" CanVerticallyScroll="False">
+                <TextBlock Width="50" 
+                       Margin="0,0,5,0"
                        Text="{Binding AppName}" 
                        TextWrapping="Wrap"
                        HorizontalAlignment="Center" 
                        VerticalAlignment="Center" 
-                       FontSize="17" 
+                       FontSize="10" 
                        FontWeight="Bold"/>
                 <StackPanel.ContextMenu>
                     <ContextMenu>
@@ -50,19 +78,20 @@
                 </StackPanel.ContextMenu>
             </StackPanel>
         </DataTemplate>
+        
     </Window.Resources>
     
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="35"/>
             <RowDefinition Height="580"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
         
         <!--Function Buttons-->
         <StackPanel Grid.Row="0" Orientation="Horizontal" >
             <Button  Name="ActionButton"
-                     Margin="0,30, 7,0"
+                     Margin="0,3, 7,0"
                      Height="30"
                      Width="180"
                      VerticalAlignment="Top"
@@ -71,7 +100,7 @@
                      Command="{Binding TEST_COMMAND}"
             />
             <Button Name="AddPatientButton"
-                    Margin="0,30,7,0"
+                    Margin="0,3,7,0"
                     Height="30"
                     Width="180"
                     VerticalAlignment="Top"
@@ -81,7 +110,7 @@
             />
             <Button Name="TriggeredActionButton"
                     Visibility="{Binding TriggeredActionBool, Converter={StaticResource BooltoVisibilityConverter}}"
-                    Margin="0,30,0,0"
+                    Margin="0,3,0,0"
                     Height="30"
                     Width="180"
                     VerticalAlignment="Top"
@@ -101,13 +130,13 @@
             <!--LeftCol-->
             <Grid Grid.Column="0" Name="LeftCol">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 
                 <Grid Grid.Row="0" x:Name="HeaderGridLeft">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="auto"/>
@@ -116,25 +145,27 @@
                     <Button Margin="2" 
                         Command="{Binding GotoPaTabCommand}" 
                         CommandParameter="0"
-                        Height="55" Content="PA" FontSize="12" 
+                        Height="50" Width="50"
+                        Content="PA" FontSize="20" FontWeight="Bold"
                         Visibility="Visible" 
                         Name="PaButtonLeft" 
                         Focusable="False" 
                         Cursor="Hand"
-                        HorizontalAlignment="Left" Width="60">
+                        HorizontalAlignment="Left" VerticalAlignment="Bottom">
                     </Button>
                 
                     <Grid Grid.Column="1" Name = "StudiesComboGridLeft"
                           Visibility="{Binding StudyContainerViewModel.HasItem, Converter={StaticResource BooltoVisibilityConverter}}"
-                          Margin="2"
-                          Height="55"
-                          Width="255"
+                          Margin="0,0,2,2"
+                          Height="50"
+                          Width="240"
+                          VerticalAlignment="Bottom"
                           >
                         <ComboBox Name="StudiesComboBoxLeft"
                                   AllowDrop="False"
                                   Cursor="Hand"
-                                  Height="55"
-                                  Width="255"
+                                  Height="50"
+                                  Width="240"
                                   IsReadOnly="True"
                                   ItemTemplate="{StaticResource Study_ComboBox_Template}"
                                   ItemsSource="{Binding StudyContainerViewModel.StudyViewModels}"
@@ -142,14 +173,15 @@
                         >
                             
                         </ComboBox>
-                        <Button Width="240" Height="50" 
+                        <Button Width="222" Height="50" 
                                 Cursor="Hand"
-                                HorizontalAlignment="Center"
+                                HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
-                                Margin="2,1,20,0"
+                                Margin="2,1,0,2"
                                 ContentTemplate="{StaticResource Study_ComboBox_Template}"
                                 Content="{Binding StudyContainerViewModel.SelectedStudy, Mode=TwoWay}"
-                                Background="White"
+                                HorizontalContentAlignment="Left"
+                                VerticalContentAlignment="Center"
                                 ToolTip="TBA"
                                 BorderThickness="0"
                                 Command="{Binding StudyContainerViewModel.TriggerSelectedCommand}"
@@ -163,11 +195,12 @@
                             
                         </Button>
                     </Grid>
-                
+                    
                     <ListBox Grid.Column="2" Name="AppsListBoxLeft"
+                             Margin="0,0,0,2"
                              Visibility="{Binding AppTabViewModel.IsExpanded, Converter={StaticResource BooltoVisibilityConverter}}"
-                             Height="55"
-                             HorizontalAlignment="Left"
+                             Height="50"
+                             HorizontalAlignment="Left" VerticalAlignment="Bottom"
                              ItemTemplate="{StaticResource App_ListBox_Template}"
                              ItemsSource="{Binding AppTabViewModel.SelectedAppItemContainer.VisibleAppModelList}"
                              SelectedItem="{Binding AppTabViewModel.SelectedAppItemContainer.AppSequenceManagerCollection[0].AppItemSelected, Mode=TwoWay}"
@@ -199,7 +232,7 @@
             <!--RightCol-->
             <Grid Grid.Column="1" Name="RightCol">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 
@@ -214,44 +247,46 @@
                     <Button Margin="2" 
                         Command="{Binding GotoPaTabCommand}" 
                         CommandParameter="1"
-                        Height="55" Content="PA" FontSize="12" 
+                        Height="50" Width="50"
+                        Content="PA" FontSize="20" FontWeight="Bold"
                         Visibility="Visible" 
                         Name="PaButtonRight" 
                         Focusable="False" 
                         Cursor="Hand"
-                        HorizontalAlignment="Left" Width="60">
+                        HorizontalAlignment="Left" VerticalAlignment="Bottom">
                     </Button>
                 
                     <Grid Grid.Column="1" Name = "StudiesComboGridRight"
                           Visibility="{Binding StudyContainerViewModel.HasItem, Converter={StaticResource BooltoVisibilityConverter}}"
-                          Margin="2"
-                          Height="55"
-                          Width="255"
+                          Margin="0,0,2,2"
+                          Height="50"
+                          Width="240"
+                          VerticalAlignment="Bottom"
                           >
                         <ComboBox Name="StudiesComboBoxRight"
                                   AllowDrop="False"
                                   Cursor="Hand"
-                                  Height="55"
-                                  Width="255"
+                                  Height="50"
+                                  Width="240"
                                   IsReadOnly="True"
                                   ItemTemplate="{StaticResource Study_ComboBox_Template}"
                                   ItemsSource="{Binding StudyContainerViewModel.StudyViewModels}"
                                   SelectedItem="{Binding StudyContainerViewModel.SelectedStudy}"
-                                  >
-                            
+                        >
                         </ComboBox>
-                        <Button Width="240" Height="50" 
+                        <Button Width="222" Height="50" 
                                 Cursor="Hand"
-                                HorizontalAlignment="Center"
+                                HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
-                                Margin="2,1,20,0"
+                                Margin="2,1,0,2"
                                 ContentTemplate="{StaticResource Study_ComboBox_Template}"
                                 Content="{Binding StudyContainerViewModel.SelectedStudy, Mode=TwoWay}"
-                                Background="White"
+                                HorizontalContentAlignment="Left"
+                                VerticalContentAlignment="Center"
                                 ToolTip="TBA"
                                 BorderThickness="0"
                                 Command="{Binding StudyContainerViewModel.TriggerSelectedCommand}"
-                                >
+                        >
                             <Button.ContextMenu>
                                 <ContextMenu>
                                     <MenuItem Header="关闭当前检查" Command = "{Binding StudyContainerViewModel.CloseSelectedCommand}"/>
@@ -263,9 +298,10 @@
                     </Grid>
                 
                     <ListBox Grid.Column="2" Name="AppsListBoxRight"
+                             Margin="0,0,0,2"
                              Visibility="{Binding AppTabViewModel.IsExpanded, Converter={StaticResource BooltoVisibilityConverter}}"
-                             Height="55"
-                             HorizontalAlignment="Left"
+                             Height="50"
+                             HorizontalAlignment="Left" VerticalAlignment="Bottom"
                              ItemTemplate="{StaticResource App_ListBox_Template}"
                              ItemsSource="{Binding AppTabViewModel.SelectedAppItemContainer.VisibleAppModelList}"
                              SelectedItem="{Binding AppTabViewModel.SelectedAppItemContainer.AppSequenceManagerCollection[1].AppItemSelected, Mode=TwoWay}"
@@ -297,7 +333,7 @@
         </Grid>
         
         <!--System Information-->
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="2" Margin="0,-20,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="20"/>
                 <RowDefinition Height="*"/>

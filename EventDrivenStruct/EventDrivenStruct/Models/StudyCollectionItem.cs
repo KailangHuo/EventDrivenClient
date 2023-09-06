@@ -10,6 +10,8 @@ public class StudyCollectionItem : AbstractEventDrivenObject{
         studyUidComposition = new List<string>();
         _studyUidHashSet = new HashSet<string>();
         Init();
+        IsLockable = true;
+        IsLocked = false;
     }
 
     private List<Study> studyComposition;
@@ -17,6 +19,36 @@ public class StudyCollectionItem : AbstractEventDrivenObject{
     private List<string> studyUidComposition;
 
     private HashSet<string> _studyUidHashSet;
+
+    #region NOTIFIABLE_PROPERTIES
+
+    private bool isLocked;
+
+    public bool IsLocked {
+        get {
+            return isLocked;
+        }
+        set {
+            if(isLocked == value)return;
+            isLocked = value;
+            PublishEvent(nameof(IsLocked), isLocked);
+        }
+    }
+
+    private bool isLockable;
+
+    public bool IsLockable {
+        get {
+            return isLockable;
+        }
+        set {
+            if(isLockable == value)return;
+            isLockable = value;
+            PublishEvent(nameof(IsLockable), isLockable);
+        }
+    }
+
+    #endregion
 
     private void Init() {
         for (int i = 0; i < studyComposition.Count; i++) {
@@ -27,6 +59,14 @@ public class StudyCollectionItem : AbstractEventDrivenObject{
 
     public List<Study> GetStudyComposition() {
         return studyComposition;
+    }
+
+    public void Lock() {
+        this.IsLocked = true;
+    }
+
+    public void Unlock() {
+        this.IsLocked = false;
     }
 
     /// <summary>

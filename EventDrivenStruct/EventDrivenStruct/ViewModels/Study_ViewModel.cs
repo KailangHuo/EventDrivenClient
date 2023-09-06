@@ -10,25 +10,36 @@ public class Study_ViewModel : AbstractEventDrivenViewModel{
     #region CONSTRUCTION
 
     public Study_ViewModel(StudyCollectionItem studyCollectionItem) : base(studyCollectionItem){
+        studyCollectionItem.RegisterObserver(this);
         this.StudyCollectionItem = studyCollectionItem;
         this.PatientName = studyCollectionItem.GetStudyComposition()[0].PatientName;
         this.PatientAge = studyCollectionItem.GetStudyComposition()[0].PatientAge;
         this.PatientGender = studyCollectionItem.GetStudyComposition()[0].PatientGender;
         this.StudyUid = studyCollectionItem.GetStudyComposition()[0].StudyInstanceId;
         SetupCommand();
+
+        LockingStatusStr = "lock";
     }
 
     private void SetupCommand() {
+        LockSwitchCommand = new CommonCommand(LockSwitch);
     }
 
     #endregion
     
     #region COMMANDS
-    
+
+    public ICommand LockSwitchCommand { get; private set; }
+
     #endregion
 
     #region COMMAND_BINDING_METHODS
-    
+
+    public void LockSwitch(object o = null) {
+        if (IsLocked) this.StudyCollectionItem.Lock();
+        else this.StudyCollectionItem.Unlock();
+    }
+
     #endregion
 
     #region PROPERTIES
@@ -91,10 +102,61 @@ public class Study_ViewModel : AbstractEventDrivenViewModel{
         }
     }
 
+    private bool _isLocked;
+
+    public bool IsLocked {
+        get {
+            return _isLocked;
+        }
+        set {
+            if(_isLocked == value)return;
+            _isLocked = value;
+            LockingStatusStr = _isLocked ? "lock" : "unlock";
+            RisePropertyChanged(nameof(IsLocked));
+        }
+    }
+
+    private bool _isLockable;
+
+    public bool IsLockable {
+        get {
+            return _isLockable;
+        }
+        set {
+            if(_isLockable == value)return;
+            _isLockable = value;
+            RisePropertyChanged(nameof(IsLockable));
+        }
+    }
+
+    private string _lockingStatusStr;
+
+    public string LockingStatusStr {
+        get {
+            return _lockingStatusStr;
+        }
+        set {
+            if(_lockingStatusStr == value)return;
+            _lockingStatusStr = value;
+            RisePropertyChanged(nameof(LockingStatusStr));
+        }
+    }
+
     #endregion
     
     public void CloseStudy() {
         MainEntry_ModelFacade.GetInstance().DeleteStudyItem(this.StudyCollectionItem);
     }
 
+    public override void UpdateByEvent(string propertyName, object o) {
+        if (propertyName.Equals(nameof(StudyCollectionItem.IsLocked))) {
+            bool isLocked = (bool)o;
+            IsLocked = isLocked;
+        }
+
+        if (propertyName.Equals(nameof(StudyCollectionItem.IsLockable))) {
+            bool isLockable = (bool)o;
+            IsLockable = isLockable;
+        }
+    }
 }

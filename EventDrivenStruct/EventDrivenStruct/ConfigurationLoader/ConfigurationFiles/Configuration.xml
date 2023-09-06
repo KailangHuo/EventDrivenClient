@@ -3,6 +3,8 @@
     <ScreenNumber>2</ScreenNumber>
     
     <StudyNumber>5</StudyNumber>
+    
+    <StudyRemainUnlockNummber>1</StudyRemainUnlockNummber>
 
     <ConstantAppList>
         <App Name="Review2D"/>
@@ -23,5 +25,11 @@
         <App Name="Dental" MaxConfigScreenNumber ="1"/>
         <App Name="三屏应用" MaxConfigScreenNumber ="3"/>
     </AppConfiguration>
+
+    <TestStudyData>
+        <StudyAppNode patientName="Alice" patientGender="female" patientAge="25" studyUid="1023.256576.7891340.1" AppName="Review2D"/>
+        <StudyAppNode patientName="Alice" patientGender="female" patientAge="25" studyUid="1023.256576.7891340.1" AppName="Oncology"/>
+        <StudyAppNode patientName="Bob" patientGender="male" patientAge="17" studyUid="4506.23464555.1258.3" AppName="Dental"/>
+    </TestStudyData>
     
 </Root>
