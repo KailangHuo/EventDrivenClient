@@ -1,0 +1,35 @@
+<Window x:Class="EventDrivenStruct.Views.AddAppWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:EventDrivenStruct.Views"
+        mc:Ignorable="d"
+        Title="Add Application" Height="100" Width="300"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Width="250" Height="25">
+            <TextBlock Text="Select App" VerticalAlignment="Center" HorizontalAlignment="Left" Width="70" Margin="0,0,0,0"/>
+            <ComboBox Name="AppTypeCombobox" Height="20" Width="170" ItemsSource="{Binding AppTypes}" SelectedItem="{Binding AppType, Mode=TwoWay}"/>
+        </StackPanel>
+        <Grid x:Name="button_grid" Grid.Row="1" HorizontalAlignment="Center" Width="170" Height="25">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="confirm_button" Content="确定"  Width="65" HorizontalAlignment="Left"
+                    Command="{Binding ConfirmCommand}"
+                    
+                    >
+            </Button>
+            <Button Grid.Column="1" x:Name="cancle_button" Content="取消"  Width="65" HorizontalAlignment="Right"
+                    Click="Cancle_button_OnClick"/>
+        </Grid>
+    </Grid>
+</Window>

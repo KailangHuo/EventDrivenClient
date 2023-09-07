@@ -124,7 +124,7 @@ public class AddExamWindow_ViewModel : AbstractEventDrivenViewModel{
 
     #region COMMAND_BINDING_METHOD
 
-    public void Confirm(object o = null) {
+    private void Confirm(object o = null) {
         if (string.IsNullOrEmpty(this.StudyInstanceId) || string.IsNullOrEmpty(AppType)) {
             MessageBox.Show("参数不完整！");
             return;
@@ -139,7 +139,7 @@ public class AddExamWindow_ViewModel : AbstractEventDrivenViewModel{
         IsLifeCycleEnd = true;
     }
 
-    public void Cancle(object o = null) {
+    private void Cancle(object o = null) {
         IsLifeCycleEnd = true;
     }
 

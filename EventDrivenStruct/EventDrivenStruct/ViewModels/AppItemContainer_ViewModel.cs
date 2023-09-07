@@ -154,7 +154,8 @@ public class AppItemContainer_ViewModel : AbstractEventDrivenViewModel {
         SequenceManagersRemoveItem(appItemViewModel);
         SequenceMangersAddItem(appItemViewModel, sequenceManagerIndex);
         if (!RunningAppList.Contains(appSequenceManager.AppItemSelected)) {
-            MainEntry_ModelFacade.GetInstance().AddStudyItemWithApp(appItemViewModel.AppModel.StudyCollectionItem, (AppModel)appItemViewModel.HashReferenceContext);
+            PublishEvent(nameof(AppSeqSelected), (AppModel)appItemViewModel.HashReferenceContext);
+            //MainEntry_ModelFacade.GetInstance().AddStudyItemWithApp(appItemViewModel.AppModel.StudyCollectionItem, (AppModel)appItemViewModel.HashReferenceContext);
         }
         //选择完成
         SelectionFinished();

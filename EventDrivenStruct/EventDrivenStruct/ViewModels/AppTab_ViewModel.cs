@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Windows;
 using System.Windows.Input;
 using EventDrivenElements;
 using EventDrivenStruct.Models;
@@ -15,7 +16,11 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
         IsExpanded = false;
         SelectedAppItemContainer = null;
         CurrentSelectedStudyCollectionItem = null;
-        
+        SetupCommands();
+    }
+
+    private void SetupCommands() {
+        this.AddAppCommand = new CommonCommand(AddApp);
     }
 
     #endregion
@@ -90,13 +95,16 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
 
     #region COMMANDS
 
-
+    public ICommand AddAppCommand { get; private set; }
 
     #endregion
 
     #region COMMAND_BINDING_METHODS
 
-
+    public void AddApp(object o = null) {
+        AppSequenceManager_ViewModel appSequenceManagerViewModel = (AppSequenceManager_ViewModel)o;
+        PopupManager.GetInstance().MainWindow_AddAppWindowPopup(appSequenceManagerViewModel);
+    }
 
     #endregion
 
@@ -156,6 +164,12 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
 
         if (propertyName.Equals(nameof(AppItemContainer_ViewModel.SelectionFinished))) {
             SelectedAppContainerAppSelectionChanged();
+            return;
+        }
+
+        if (propertyName.Equals(nameof(AppItemContainer_ViewModel.AppSeqSelected))) {
+            AppModel appModel = (AppModel)o;
+            MainEntry_ModelFacade.GetInstance().AddStudyItemWithApp(_currentSelectedStudyCollectionItem, appModel);
             return;
         }
 

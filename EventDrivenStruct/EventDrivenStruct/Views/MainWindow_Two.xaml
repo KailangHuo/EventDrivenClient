@@ -223,11 +223,11 @@
                     <Button Grid.Column="3" Margin="2"
                             Visibility="{Binding AppTabViewModel.IsExpanded, Converter={StaticResource BooltoVisibilityConverter}}"
                             Content="+" 
-                            Command="{Binding }"
-                            CommandParameter="0"
+                            Command="{Binding AppTabViewModel.AddAppCommand}"
+                            CommandParameter="{Binding AppTabViewModel.SelectedAppItemContainer.AppSequenceManagerCollection[0]}"
                             Background="White"
                             BorderThickness="0"
-                            Width="20" Height="20" FontSize="15" FontWeight="Bold"/>
+                            Width="40" Height="40" FontSize="30" FontWeight="Bold"/>
                     
                 </Grid>
                 
@@ -341,11 +341,11 @@
                     <Button Grid.Column="3" Margin="2"
                             Visibility="{Binding AppTabViewModel.IsExpanded, Converter={StaticResource BooltoVisibilityConverter}}"
                             Content="+" 
-                            Command="{Binding }"
-                            CommandParameter="1"
+                            Command="{Binding AppTabViewModel.AddAppCommand}"
+                            CommandParameter="{Binding AppTabViewModel.SelectedAppItemContainer.AppSequenceManagerCollection[1]}"
                             Background="White"
                             BorderThickness="0"
-                            Width="20" Height="20" FontSize="15" FontWeight="Bold"/>
+                            Width="40" Height="40" FontSize="30" FontWeight="Bold"/>
                     
                 </Grid>
                 

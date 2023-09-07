@@ -1,5 +1,7 @@
 using System.Windows;
 using EventDrivenElements;
+using EventDrivenStruct.Models;
+using EventDrivenStruct.Views;
 
 namespace EventDrivenStruct.ViewModels; 
 
@@ -28,5 +30,15 @@ public class PopupManager : AbstractEventDrivenObject{
             addExamWindow.ShowDialog();
         });
     }
-    
+
+    public void MainWindow_AddAppWindowPopup(AppSequenceManager_ViewModel appSequenceManagerViewModel) {
+        AddAppWindow addAppWindow = new AddAppWindow();
+        AddAppWindow_ViewModel addAppWindowViewModel = new AddAppWindow_ViewModel(appSequenceManagerViewModel);
+        addAppWindow.DataContext = addAppWindowViewModel;
+        addAppWindow.Owner = GlobalContext.GetInstance().MainWindow;
+        Application.Current.Dispatcher.BeginInvoke(() => {
+            addAppWindow.ShowDialog();
+        });
+    }
+
 }
