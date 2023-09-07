@@ -36,8 +36,8 @@ public class Study_ViewModel : AbstractEventDrivenViewModel{
     #region COMMAND_BINDING_METHODS
 
     public void LockSwitch(object o = null) {
-        if (IsLocked) this.StudyCollectionItem.Lock();
-        else this.StudyCollectionItem.Unlock();
+        if (IsLocked) this.StudyCollectionItem.Unlock();
+        else this.StudyCollectionItem.Lock();
     }
 
     #endregion
@@ -111,7 +111,7 @@ public class Study_ViewModel : AbstractEventDrivenViewModel{
         set {
             if(_isLocked == value)return;
             _isLocked = value;
-            LockingStatusStr = _isLocked ? "lock" : "unlock";
+            LockingStatusStr = _isLocked ? "unlock" : "lock";
             RisePropertyChanged(nameof(IsLocked));
         }
     }
@@ -152,11 +152,13 @@ public class Study_ViewModel : AbstractEventDrivenViewModel{
         if (propertyName.Equals(nameof(StudyCollectionItem.IsLocked))) {
             bool isLocked = (bool)o;
             IsLocked = isLocked;
+            return;
         }
 
         if (propertyName.Equals(nameof(StudyCollectionItem.IsLockable))) {
             bool isLockable = (bool)o;
             IsLockable = isLockable;
+            return;
         }
     }
 }

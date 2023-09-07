@@ -8,7 +8,7 @@ public class StudyLockManager : AbstractEventDrivenObject {
 
     public StudyLockManager() {
         this._studyList = new List<StudyCollectionItem>();
-        this.maxLockNumber = SystemConfiguration.GetInstance().GetScreenNumber() 
+        this.maxLockNumber = SystemConfiguration.GetInstance().GetMaxStudyNumber() 
                              - SystemConfiguration.GetInstance().GetRemainStudyUnlockNumber();
         this.currentLockNumber = 0;
     }
@@ -22,10 +22,13 @@ public class StudyLockManager : AbstractEventDrivenObject {
     public void AddItem(StudyCollectionItem studyCollectionItem) {
         this._studyList.Add(studyCollectionItem);
         studyCollectionItem.RegisterObserver(this);
+        if(isLockFull) LockFull();
+        else PermitLock();
     }
 
     public void RemoveItem(StudyCollectionItem studyCollectionItem) {
         if (this._studyList.Contains(studyCollectionItem)) {
+            studyCollectionItem.Unlock();
             this._studyList.Remove(studyCollectionItem);
             studyCollectionItem.DeregisterObserver(this);
         }
@@ -53,7 +56,7 @@ public class StudyLockManager : AbstractEventDrivenObject {
     public void AddLockNumber() {
         if (currentLockNumber == maxLockNumber) return;
         currentLockNumber++;
-        if (currentLockNumber == maxLockNumber) isLockFull = true;
+        if (currentLockNumber == maxLockNumber) IsLockFull = true;
     }
 
     public void ReduceLockNumber() {
@@ -80,7 +83,6 @@ public class StudyLockManager : AbstractEventDrivenObject {
             bool hasLockedOne = (bool)o;
             if (hasLockedOne) AddLockNumber();
             else ReduceLockNumber();
-
         }
     }
 }

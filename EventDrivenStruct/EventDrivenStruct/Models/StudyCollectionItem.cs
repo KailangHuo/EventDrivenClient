@@ -62,7 +62,8 @@ public class StudyCollectionItem : AbstractEventDrivenObject{
     }
 
     public void Lock() {
-        this.IsLocked = true;
+        if (IsLockable) this.IsLocked = true;
+        else return;
     }
 
     public void Unlock() {
