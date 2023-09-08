@@ -5,6 +5,8 @@ namespace EventDrivenStruct.Models;
 
 public class StudyCollectionItem : AbstractEventDrivenObject{
 
+    #region CONSTRUCTION
+
     public StudyCollectionItem(List<Study> studies = null) {
         studyComposition = studies == null ? new List<Study>() : studies;
         studyUidComposition = new List<string>();
@@ -13,12 +15,25 @@ public class StudyCollectionItem : AbstractEventDrivenObject{
         IsLockable = true;
         IsLocked = false;
     }
+    
+    private void Init() {
+        for (int i = 0; i < studyComposition.Count; i++) {
+            studyUidComposition.Add(studyComposition[i].StudyInstanceId);
+            _studyUidHashSet.Add(studyComposition[i].StudyInstanceId);
+        }
+    }
+
+    #endregion
+
+    #region PROPERTIES
 
     private List<Study> studyComposition;
 
     private List<string> studyUidComposition;
 
     private HashSet<string> _studyUidHashSet;
+
+    #endregion
 
     #region NOTIFIABLE_PROPERTIES
 
@@ -50,12 +65,7 @@ public class StudyCollectionItem : AbstractEventDrivenObject{
 
     #endregion
 
-    private void Init() {
-        for (int i = 0; i < studyComposition.Count; i++) {
-            studyUidComposition.Add(studyComposition[i].StudyInstanceId);
-            _studyUidHashSet.Add(studyComposition[i].StudyInstanceId);
-        }
-    }
+    #region METHODS
 
     public List<Study> GetStudyComposition() {
         return studyComposition;
@@ -69,11 +79,7 @@ public class StudyCollectionItem : AbstractEventDrivenObject{
     public void Unlock() {
         this.IsLocked = false;
     }
-
-    /// <summary>
-    /// TEST_ONLY
-    /// </summary>
-    /// <param name="study"></param>
+    
     public void AddInStudyComposition(Study study) {
         if(this._studyUidHashSet.Contains(study.StudyInstanceId)) return;
         this.studyComposition.Add(study);
@@ -84,7 +90,14 @@ public class StudyCollectionItem : AbstractEventDrivenObject{
     public List<string> GetStudyUidComposition() {
         return this.studyUidComposition;
     }
-    
+
+    #endregion
+
+    /// <summary>
+    /// TEST_ONLY
+    /// </summary>
+    /// <param name="study"></param>
+
     #region HASH_AND_EQUALS
 
     public override bool Equals(object? obj) {
