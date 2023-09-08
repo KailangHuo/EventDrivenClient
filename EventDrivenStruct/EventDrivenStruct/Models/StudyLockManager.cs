@@ -11,6 +11,7 @@ public class StudyLockManager : AbstractEventDrivenObject {
         this.maxLockNumber = SystemConfiguration.GetInstance().GetMaxStudyNumber() 
                              - SystemConfiguration.GetInstance().GetRemainStudyUnlockNumber();
         this.currentLockNumber = 0;
+        this.IsLockFull = false;
     }
 
     private int maxLockNumber;
@@ -63,6 +64,12 @@ public class StudyLockManager : AbstractEventDrivenObject {
         if(currentLockNumber == 0) return;
         currentLockNumber--;
         IsLockFull = false;
+    }
+
+    public void Clear() {
+        currentLockNumber = 0;
+        IsLockFull = false;
+        _studyList = new List<StudyCollectionItem>();
     }
 
     private void LockFull() {

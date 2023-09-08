@@ -156,6 +156,7 @@ public class AddExamWindow_ViewModel : AbstractEventDrivenViewModel{
             return _appTypes;
         }
         set {
+            if(AppTypes == value) return;
             _appTypes = value;
             RisePropertyChanged(nameof(AppTypes));
         }

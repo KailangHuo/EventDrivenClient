@@ -49,6 +49,7 @@ public class StudyCollection : AbstractEventDrivenObject{
         if (this.StudyCollectionItems.Count > 0) {
             StudyCollectionItems = new List<StudyCollectionItem>();
             _studyHashSet = new HashSet<Study>();
+            StudyLockManager.Clear();
             PublishEvent(nameof(DeleteAllStudyCollectionItem), null);
         }
     }

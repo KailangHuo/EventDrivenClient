@@ -56,3 +56,5 @@ D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\
 D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\Views\MainWindow_Two.baml
 D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\Views\AddAppWindow.g.cs
 D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\Views\AddAppWindow.baml
+D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\Views\TestWindow.g.cs
+D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\Views\TestWindow.baml

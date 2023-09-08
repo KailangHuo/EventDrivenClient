@@ -63,20 +63,24 @@ public class StudyAppMappingManager : AbstractEventDrivenObject{
         if (propertyName.Equals(nameof(StudyCollection.AddStudyCollectionItem))) {
             StudyCollectionItem item = (StudyCollectionItem)o; 
             PutStudyAppMapObj(item);
+            return;
         }
 
         if (propertyName.Equals(nameof(StudyCollection.DeleteStudyCollectionItem))) {
             StudyCollectionItem item = (StudyCollectionItem)o;
             RemoveStudyAppMapObj(item);
+            return;
         }
 
         if (propertyName.Equals(nameof(StudyAppMappingObj.AppListEmpty))) {
             StudyAppMappingObj obj = (StudyAppMappingObj)o;
             RemoveStudyAppMapObj(obj.StudyCollectionItem);
+            return;
         }
 
         if (propertyName.Equals(nameof(StudyCollection.DeleteAllStudyCollectionItem))) {
             RemoveAllStudyAppObj();
+            return;
         }
 
     }
