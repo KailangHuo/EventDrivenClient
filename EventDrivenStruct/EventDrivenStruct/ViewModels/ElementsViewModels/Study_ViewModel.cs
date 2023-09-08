@@ -18,7 +18,7 @@ public class Study_ViewModel : AbstractEventDrivenViewModel{
         this.StudyUid = studyCollectionItem.GetStudyComposition()[0].StudyInstanceId;
         SetupCommand();
 
-        LockingStatusStr = "lock";
+        LockingStatusStr = " lock ";
     }
 
     private void SetupCommand() {
@@ -111,7 +111,7 @@ public class Study_ViewModel : AbstractEventDrivenViewModel{
         set {
             if(_isLocked == value)return;
             _isLocked = value;
-            LockingStatusStr = _isLocked ? "unlock" : "lock";
+            LockingStatusStr = _isLocked ? "unlock" : " lock ";
             RisePropertyChanged(nameof(IsLocked));
         }
     }

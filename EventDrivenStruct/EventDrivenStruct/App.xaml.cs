@@ -35,6 +35,9 @@ namespace EventDrivenStruct {
         }
 
         protected override void OnStartup(StartupEventArgs e) {
+            /*TestWindowRun();
+            return;*/
+            
             MainWindow_ViewModel mainWindowViewModel = new MainWindow_ViewModel();
             MainEntry_ModelFacade facade = MainEntry_ModelFacade.GetInstance();
             
@@ -58,6 +61,15 @@ namespace EventDrivenStruct {
                 //接下来, 将PA按钮添加到每一个屏幕上, 然后提供双屏的参考,
             });
             //UnitTest1(mainWindowViewModel);
+        }
+
+        public void TestWindowRun() {
+            TestWindow window = new TestWindow();
+            TestWindow_ViewModel testWindowViewModel = new TestWindow_ViewModel();
+            window.DataContext = testWindowViewModel.StudyViewModel;
+            Current.Dispatcher.BeginInvoke(() => {
+                window.Show();
+            });
         }
 
         public void UnitTest1(MainWindow_ViewModel mainWindowViewModel) {

@@ -24,7 +24,10 @@
       <Reference Include="EvevntDrivenAbstractElements">
         <HintPath>..\..\..\EventDrivenObject\OutPut\net6.0\EvevntDrivenAbstractElements.dll</HintPath>
       </Reference>
+
     </ItemGroup>
+
+
 
 
 </Project>

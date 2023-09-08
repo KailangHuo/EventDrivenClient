@@ -31,9 +31,9 @@ public class PopupManager : AbstractEventDrivenObject{
         });
     }
 
-    public void MainWindow_AddAppWindowPopup(AppSequenceManager_ViewModel appSequenceManagerViewModel) {
+    public void MainWindow_AddAppWindowPopup(AppTab_ViewModel appTabViewModel, int screenNumber) {
         AddAppWindow addAppWindow = new AddAppWindow();
-        AddAppWindow_ViewModel addAppWindowViewModel = new AddAppWindow_ViewModel(appSequenceManagerViewModel);
+        AddAppWindow_ViewModel addAppWindowViewModel = new AddAppWindow_ViewModel(appTabViewModel, screenNumber);
         addAppWindow.DataContext = addAppWindowViewModel;
         addAppWindow.Owner = GlobalContext.GetInstance().MainWindow;
         Application.Current.Dispatcher.BeginInvoke(() => {

@@ -23,13 +23,16 @@
 
         <App Name="Oncology" MaxConfigScreenNumber ="1"/>
         <App Name="Dental" MaxConfigScreenNumber ="1"/>
-        <App Name="三屏应用" MaxConfigScreenNumber ="3"/>
+        <App Name="Liver" MaxConfigScreenNumber ="1"/>
+        <App Name="Lung" MaxConfigScreenNumber ="1"/>
+        <App Name="[TEST_3]" MaxConfigScreenNumber ="3"/>
+        <App Name="[TEST_4]" MaxConfigScreenNumber ="4"/>
     </AppConfiguration>
 
     <TestStudyData>
-        <StudyAppNode patientName="Alice" patientGender="female" patientAge="25" studyUid="1023.256576.7891340.1" AppName="Review2D"/>
-        <StudyAppNode patientName="Alice" patientGender="female" patientAge="25" studyUid="1023.256576.7891340.1" AppName="Oncology"/>
-        <StudyAppNode patientName="Bob" patientGender="male" patientAge="17" studyUid="4506.23464555.1258.3" AppName="Dental"/>
+        <StudyAppNode patientName="Alice" patientGender="female" patientAge="25Y" studyUid="1023.256576.7891340.1" AppName="Review2D"/>
+        <StudyAppNode patientName="Alice" patientGender="female" patientAge="25Y" studyUid="1023.256576.7891340.1" AppName="Oncology"/>
+        <StudyAppNode patientName="Bob" patientGender="male" patientAge="17Y" studyUid="4506.23464555.1258.3" AppName="Dental"/>
     </TestStudyData>
     
 </Root>

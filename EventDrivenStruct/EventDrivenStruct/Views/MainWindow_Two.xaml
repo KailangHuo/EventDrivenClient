@@ -26,35 +26,40 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     
-                    <Label Grid.Column="0" Name="PatientNameLabel" Content="{Binding PatientName}" 
-                           HorizontalContentAlignment="Left" VerticalContentAlignment="Top"
+                    <TextBlock Grid.Column="0" Name="PatientNameLabel" Text="{Binding PatientName}" 
+                               Margin="5"
                            HorizontalAlignment="Left"  VerticalAlignment="Top"/>
-                    <Label Grid.Column="1"  Name="PatientGenderLabel" Content="{Binding PatientGender}" 
-                           HorizontalContentAlignment="Right" VerticalContentAlignment="Top"
-                           HorizontalAlignment="Right" VerticalAlignment="Top" />
+                    <TextBlock Grid.Column="1"  Name="PatientGenderLabel" Text="{Binding PatientGender}" 
+                               Margin="5"
+                               HorizontalAlignment="Right" VerticalAlignment="Top" />
                     
                 </Grid>
                 
                 <!-- second row-->
-                <Grid Grid.Row="1" Name="Row2">
+                <Grid Grid.Row="1" Name="Row2" Width="220">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="56"/>
                     </Grid.ColumnDefinitions>
                     
-                    <Label Grid.Column="0"  Name="PatientAgeLabel" Content="{Binding PatientAge}" 
-                           HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom"
-                           HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
-                    <Label Grid.Column="1"   Name="PatientUidLabel" Content="{Binding StudyUid}" 
-                           HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom"
-                           HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
-                    <Button Grid.Column="2" Content="{Binding LockingStatusStr}" 
+                    <!-- Age and Uid Labels Stack-->
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Name="PatientAgeLabel" Text="{Binding PatientAge}" 
+                               Margin="5,0,5,0"
+                               HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <TextBlock Name="PatientUidLabel" Text="{Binding StudyUid}" 
+                                   HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    
+                    <Button Grid.Column="1" Content="{Binding LockingStatusStr}" 
+                            Margin="3"
+                            HorizontalContentAlignment="Center"
+                            HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                            Width="50"
                             Command="{Binding LockSwitchCommand}"
                             IsEnabled="{Binding IsLockable}"
                             Background="#FF007FFF" Foreground="WhiteSmoke"
                             />
-                    
                     
                 </Grid>
                 
@@ -134,6 +139,10 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
                 
                 <!-- Left header-->
                 <Grid Grid.Row="0" x:Name="HeaderGridLeft">
@@ -224,7 +233,7 @@
                             Visibility="{Binding AppTabViewModel.IsExpanded, Converter={StaticResource BooltoVisibilityConverter}}"
                             Content="+" 
                             Command="{Binding AppTabViewModel.AddAppCommand}"
-                            CommandParameter="{Binding AppTabViewModel.SelectedAppItemContainer.AppSequenceManagerCollection[0]}"
+                            CommandParameter="0"
                             Background="White"
                             BorderThickness="0"
                             Width="40" Height="40" FontSize="30" FontWeight="Bold"/>
@@ -233,7 +242,7 @@
                 
                 <!-- Left monitor-->
                 <Grid Grid.Row="1">
-                    <Grid Name="PrimaryWindowPreview"  Width="949" HorizontalAlignment="Left" >
+                    <Grid Name="PrimaryWindowPreview"  HorizontalAlignment="Stretch" >
                         <Grid VerticalAlignment="Top" Margin="0,0,0,0" >
                             <Border BorderBrush="Black" BorderThickness="1" Height="500"/>
                             <StackPanel Orientation="Vertical">
@@ -342,7 +351,7 @@
                             Visibility="{Binding AppTabViewModel.IsExpanded, Converter={StaticResource BooltoVisibilityConverter}}"
                             Content="+" 
                             Command="{Binding AppTabViewModel.AddAppCommand}"
-                            CommandParameter="{Binding AppTabViewModel.SelectedAppItemContainer.AppSequenceManagerCollection[1]}"
+                            CommandParameter="1"
                             Background="White"
                             BorderThickness="0"
                             Width="40" Height="40" FontSize="30" FontWeight="Bold"/>
@@ -351,7 +360,7 @@
                 
                 <!-- Right monitor-->
                 <Grid Grid.Row="1">
-                    <Grid Name="SecondaryWindowPreview" Width="949"  HorizontalAlignment="Left">
+                    <Grid Name="SecondaryWindowPreview"  HorizontalAlignment="Stretch">
                         <Grid VerticalAlignment="Top" Margin="0,0,0,0" >
                             <Border BorderBrush="Black" BorderThickness="1" Height="500"/>
                             <StackPanel Orientation="Vertical">

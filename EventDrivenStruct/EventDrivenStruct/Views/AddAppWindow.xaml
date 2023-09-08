@@ -4,11 +4,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:EventDrivenStruct.Views"
+        xmlns:converter="clr-namespace:EventDrivenStruct.ViewModels.Converter"
         mc:Ignorable="d"
         Title="Add Application" Height="100" Width="300"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
         ShowInTaskbar="False"
         >
+    <Window.Resources>
+        <converter:ReverseBoolConverter x:Key="ReverseBoolConverter"/>
+    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -25,11 +30,13 @@
             </Grid.ColumnDefinitions>
             <Button x:Name="confirm_button" Content="确定"  Width="65" HorizontalAlignment="Left"
                     Command="{Binding ConfirmCommand}"
-                    
-                    >
-            </Button>
+                    IsEnabled="{Binding IsLifeCycleEnd, Converter={StaticResource ReverseBoolConverter}}"
+                    IsEnabledChanged="Confirm_button_OnIsEnabledChanged"
+                    />
             <Button Grid.Column="1" x:Name="cancle_button" Content="取消"  Width="65" HorizontalAlignment="Right"
-                    Click="Cancle_button_OnClick"/>
+                    IsEnabled="{Binding IsLifeCycleEnd, Converter={StaticResource ReverseBoolConverter}}"
+                    IsEnabledChanged="Confirm_button_OnIsEnabledChanged"
+                    />
         </Grid>
     </Grid>
 </Window>

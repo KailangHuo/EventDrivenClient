@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Windows;
@@ -94,7 +95,6 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
     #endregion
 
     #region COMMANDS
-
     public ICommand AddAppCommand { get; private set; }
 
     #endregion
@@ -102,8 +102,8 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
     #region COMMAND_BINDING_METHODS
 
     public void AddApp(object o = null) {
-        AppSequenceManager_ViewModel appSequenceManagerViewModel = (AppSequenceManager_ViewModel)o;
-        PopupManager.GetInstance().MainWindow_AddAppWindowPopup(appSequenceManagerViewModel);
+        int screenNumber = Convert.ToInt32((string)o);
+        PopupManager.GetInstance().MainWindow_AddAppWindowPopup(this, screenNumber);
     }
 
     #endregion

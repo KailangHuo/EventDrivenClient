@@ -33,7 +33,6 @@ public class AppModel : AbstractEventDrivenObject{
     }
 
     public override int GetHashCode() {
-        // TODO : 新增的App这里报错, studyCollectionI null ref
         return this.AppName.GetHashCode() + this.StudyCollectionItem.GetHashCode();
     }
 

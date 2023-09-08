@@ -37,3 +37,7 @@ D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\Event
 D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Release\net6.0-windows\Views\MainWindow_Two.g.cs
 D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Release\net6.0-windows\Views\MainWindow_Five.baml
 D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Release\net6.0-windows\Views\MainWindow_Two.baml
+D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Release\net6.0-windows\Views\AddAppWindow.g.cs
+D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Release\net6.0-windows\Views\AddAppWindow.baml
+D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Release\net6.0-windows\Views\TestWindow.g.cs
+D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Release\net6.0-windows\Views\TestWindow.baml

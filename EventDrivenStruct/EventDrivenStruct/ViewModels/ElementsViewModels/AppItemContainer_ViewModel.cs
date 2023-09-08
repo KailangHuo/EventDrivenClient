@@ -126,15 +126,21 @@ public class AppItemContainer_ViewModel : AbstractEventDrivenViewModel {
     }
 
     private void SequenceMangersAddItem(AppItem_ViewModel appItemModel, int triggerIndex) {
-        int endTriggerNumber = triggerIndex + appItemModel.MaxScreenConfigNumber;
-        // 如果屏幕右界面超出屏幕数量, 矫正到最后一个屏幕
+        int appScreenAmount = appItemModel.MaxScreenConfigNumber;
         int maxNumber = SystemConfiguration.GetInstance().GetScreenNumber();
+        // 如果配置屏幕数量超过屏幕数量, 则更改配置数量为屏幕数量
+        if (appScreenAmount > maxNumber) {
+            appScreenAmount = maxNumber;
+        }
+        int endTriggerNumber = triggerIndex + appScreenAmount;
+        
+        // 如果屏幕右界面超出屏幕数量, 矫正到最后一个屏幕
         if (endTriggerNumber > maxNumber) {
-            triggerIndex = maxNumber - appItemModel.MaxScreenConfigNumber;
+            triggerIndex = maxNumber - appScreenAmount;
         }
         for (int i = 0; i < AppSequenceManagerCollection.Count; i++) {
             if (i == triggerIndex) {
-                for (int j = 0; j < appItemModel.MaxScreenConfigNumber; j++) {
+                for (int j = 0; j < appScreenAmount; j++) {
                     AppSequenceManagerCollection[i+j].AddAppSequenceItem(new AppSequenceItem(appItemModel, j));
                 }
                 break;
