@@ -34,8 +34,7 @@
                     IsEnabledChanged="Confirm_button_OnIsEnabledChanged"
                     />
             <Button Grid.Column="1" x:Name="cancle_button" Content="取消"  Width="65" HorizontalAlignment="Right"
-                    IsEnabled="{Binding IsLifeCycleEnd, Converter={StaticResource ReverseBoolConverter}}"
-                    IsEnabledChanged="Confirm_button_OnIsEnabledChanged"
+                    Click="Cancle_button_OnClick"
                     />
         </Grid>
     </Grid>

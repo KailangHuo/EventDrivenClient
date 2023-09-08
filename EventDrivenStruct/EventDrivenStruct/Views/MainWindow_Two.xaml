@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:EventDrivenStruct.Views"
         xmlns:converter="clr-namespace:EventDrivenStruct.ViewModels.Converter"
         mc:Ignorable="d"
-        Title="MainWindow_Two" Height="900" Width="1900" ResizeMode="CanResize" WindowStartupLocation="CenterScreen">
+        Title="MainWindow_Two" Height="900" Width="1600" ResizeMode="CanResize" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <converter:BoolToVisibilityConverter x:Key = "BooltoVisibilityConverter"/>
         <converter:ReverseBoolConverter x:Key="ReverseBoolConverter"/>

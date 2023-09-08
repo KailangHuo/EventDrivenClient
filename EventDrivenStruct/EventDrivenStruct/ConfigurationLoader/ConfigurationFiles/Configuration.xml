@@ -31,8 +31,10 @@
 
     <TestStudyData>
         <StudyAppNode patientName="Alice" patientGender="female" patientAge="25Y" studyUid="1023.256576.7891340.1" AppName="Review2D"/>
-        <StudyAppNode patientName="Alice" patientGender="female" patientAge="25Y" studyUid="1023.256576.7891340.1" AppName="Oncology"/>
-        <StudyAppNode patientName="Bob" patientGender="male" patientAge="17Y" studyUid="4506.23464555.1258.3" AppName="Dental"/>
+        <StudyAppNode patientName="Charlie" patientGender="male" patientAge="7Y" studyUid="5743.4592345.1.1258.3" AppName="Dental"/>
+        <StudyAppNode patientName="Denise" patientGender="female" patientAge="56Y" studyUid="692834.15479052.168.9" AppName="Filming"/>
+        <StudyAppNode patientName="Edda" patientGender="female" patientAge="30Y" studyUid="56.38409257.0030.1" AppName="Liver"/>
+        <StudyAppNode patientName="Frank" patientGender="male" patientAge="28Y" studyUid="12.32617324.1991.940" AppName="Lung"/>
     </TestStudyData>
     
 </Root>
