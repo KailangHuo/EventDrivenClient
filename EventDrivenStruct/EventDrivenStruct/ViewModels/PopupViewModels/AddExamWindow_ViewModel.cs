@@ -10,13 +10,31 @@ using EventDrivenStruct.Models;
 namespace EventDrivenStruct.ViewModels; 
 
 public class AddExamWindow_ViewModel : AbstractEventDrivenViewModel{
-    
+
+    #region CONSTRUCTION
+
     public AddExamWindow_ViewModel() {
-        _study = new Study();
-        ConfirmCommand = new CommonCommand(Confirm);
-        CancleCommand = new CommonCommand(Cancle);
+        this.StudyContainer = new ObservableCollection<Study>();
+        this.StudyContainer.Add(new Study());
+        SetupCommands();
         SetUpApplicationTypeList();
     }
+
+    private void SetupCommands() {
+        ConfirmCommand = new CommonCommand(Confirm);
+        CancleCommand = new CommonCommand(Cancle);
+    }
+
+    private void SetUpApplicationTypeList() {
+        AppTypes = new ObservableCollection<string>();
+        List<string> typeList = SystemConfiguration.GetInstance().GetAppList();
+        for (int i = 0; i < typeList.Count; i++) {
+            AppTypes.Add(typeList[i]);
+        }
+    }
+
+    #endregion
+    
 
     #region PROPERTY
 
@@ -27,6 +45,8 @@ public class AddExamWindow_ViewModel : AbstractEventDrivenViewModel{
     #endregion
 
     #region NOTIFIABLE_PROPERTIES
+
+    public ObservableCollection<Study> StudyContainer { get; private set; }
 
     private bool _isLifeCycleEnd;
 
@@ -162,11 +182,5 @@ public class AddExamWindow_ViewModel : AbstractEventDrivenViewModel{
         }
     }
 
-    public void SetUpApplicationTypeList() {
-        AppTypes = new ObservableCollection<string>();
-        List<string> typeList = SystemConfiguration.GetInstance().GetAppList();
-        for (int i = 0; i < typeList.Count; i++) {
-            AppTypes.Add(typeList[i]);
-        }
-    }
+    
 }
