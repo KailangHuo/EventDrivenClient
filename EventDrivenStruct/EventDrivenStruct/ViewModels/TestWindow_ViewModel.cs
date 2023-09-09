@@ -7,7 +7,7 @@ namespace EventDrivenStruct.ViewModels;
 public class TestWindow_ViewModel : AbstractEventDrivenViewModel{
 
     public TestWindow_ViewModel() {
-        this.StudyCollectionItem = SystemConfiguration.GetInstance().GetTestStudyList()[0].StudyCollectionItem;
+        this.StudyCollectionItem = SystemConfiguration.GetInstance().GetTestStudyList()[0].ConvertToAppModel().StudyCollectionItem;
         this.StudyViewModel = new Study_ViewModel(this.StudyCollectionItem);
     }
 

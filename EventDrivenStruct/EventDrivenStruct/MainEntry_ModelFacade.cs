@@ -18,9 +18,9 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
         StudyAppMappingManager.RegisterObserver(StudyCollection);
         //TEST
         TestStudyAppNode nextNode = SystemConfiguration.GetInstance().GetTestStudyList()[0];
-        ActionString = "点击添加" + nextNode.StudyCollectionItem.GetStudyComposition()[0].PatientName
+        ActionString = "点击添加" + nextNode.patientName
                               + " "
-                              + nextNode.AppModel.AppName;
+                              + nextNode.appName;
         TriggeredActionBool = false;
     }
 
@@ -93,9 +93,9 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
         // TEST_ONLY
         number = 0;
         TestStudyAppNode nextNode = SystemConfiguration.GetInstance().GetTestStudyList()[0];
-        ActionString = "点击添加" + nextNode.StudyCollectionItem.GetStudyComposition()[0].PatientName
+        ActionString = "点击添加" + nextNode.patientName
                               + " "
-                              + nextNode.AppModel.AppName;
+                              + nextNode.appName;
         TriggeredActionBool = false;
     }
 
@@ -142,16 +142,16 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
             return;
         }
 
-        TestStudyAppNode testStudyAppNode = SystemConfiguration.GetInstance().GetTestStudyList()[number];
-        AddStudyItemWithApp(testStudyAppNode.StudyCollectionItem, testStudyAppNode.AppModel);
+        AppModel appModel = SystemConfiguration.GetInstance().GetTestStudyList()[number].ConvertToAppModel();
+        AddStudyItemWithApp(appModel.StudyCollectionItem, appModel);
         
         number++;
 
         if (number < SystemConfiguration.GetInstance().GetTestStudyList().Count) {
             TestStudyAppNode nextNode = SystemConfiguration.GetInstance().GetTestStudyList()[number];
-            ActionString = "点击添加" + nextNode.StudyCollectionItem.GetStudyComposition()[0].PatientName
+            ActionString = "点击添加" + nextNode.patientName
                                   + " "
-                                  + nextNode.AppModel.AppName;
+                                  + nextNode.appName;
         }
         else {
             ActionString = "清除所有检查后才可使用";

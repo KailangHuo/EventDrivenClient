@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using EventDrivenElements;
@@ -20,7 +21,7 @@ public class Study_ViewModel : AbstractEventDrivenViewModel{
 
         LockingStatusStr = " lock ";
     }
-
+    
     private void SetupCommand() {
         LockSwitchCommand = new CommonCommand(LockSwitch);
     }

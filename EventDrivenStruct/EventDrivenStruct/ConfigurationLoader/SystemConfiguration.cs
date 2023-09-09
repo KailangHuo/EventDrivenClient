@@ -63,7 +63,7 @@ public class SystemConfiguration {
         initStudyNumber();
         initConstAppList();
         initAppMapAndAppList();
-        initStudyAppList();
+        initStudyAppNodeList();
     }
 
     private void initScreenNumber() {
@@ -112,48 +112,41 @@ public class SystemConfiguration {
 
     }
 
-    private void initStudyAppList() {
+    private void initStudyAppNodeList() {
         XmlNode testStudiesNode = _document.SelectSingleNode(@"Root/TestStudyData");
         foreach (XmlNode node in testStudiesNode.ChildNodes) {
             XmlAttributeCollection attributeCollection = node.Attributes;
-            Study study = new Study();
+            TestStudyAppNode studyAppNode = new TestStudyAppNode();
             AppModel appModel = null;
             foreach (XmlAttribute attribute in attributeCollection) {
                 if (attribute.Name == "patientName") {
-                    study.PatientName = attribute.Value;
+                    studyAppNode.patientName = attribute.Value;
                     continue;
                 }
 
                 if (attribute.Name == "patientGender") {
-                    study.PatientGender = attribute.Value;
+                    studyAppNode.patientGender = attribute.Value;
                     continue;
                 }
 
                 if (attribute.Name == "patientAge") {
-                    study.PatientAge = attribute.Value;
+                    studyAppNode.patientAge = attribute.Value;
                     continue;
                 }
 
                 if (attribute.Name == "studyUid") {
-                    study.StudyInstanceId = attribute.Value;
+                    studyAppNode.studyUid = attribute.Value;
                     continue;
                 }
 
                 if (attribute.Name == "AppName") {
-                    appModel = new AppModel(attribute.Value);
+                    studyAppNode.appName = attribute.Value;
                     continue;
                 }
 
             }
-            StudyCollectionItem studyCollectionItem = new StudyCollectionItem();
-            studyCollectionItem.AddInStudyComposition(study);
-            appModel.StudyCollectionItem = studyCollectionItem;
             
-            TestStudyAppNode testStudyAppNode = new TestStudyAppNode();
-            testStudyAppNode.StudyCollectionItem = studyCollectionItem;
-            testStudyAppNode.AppModel = appModel;
-            
-            TestStudyAppList.Add(testStudyAppNode);
+            TestStudyAppList.Add(studyAppNode);
         }
     }
 
@@ -191,6 +184,8 @@ public class SystemConfiguration {
     }
 
     public List<TestStudyAppNode> GetTestStudyList() {
+        TestStudyAppList = new List<TestStudyAppNode>();
+        initStudyAppNodeList();
         return this.TestStudyAppList;
     }
 
