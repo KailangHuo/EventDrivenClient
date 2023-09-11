@@ -14,8 +14,8 @@ public class AddExamWindow_ViewModel : AbstractEventDrivenViewModel{
     #region CONSTRUCTION
 
     public AddExamWindow_ViewModel() {
-        this.StudyContainer = new ObservableCollection<Study>();
-        this.StudyContainer.Add(new Study());
+        AddExamItemViewModels = new ObservableCollection<AddExamItem_ViewModel>();
+        this.Add();
         SetupCommands();
         SetUpApplicationTypeList();
     }
@@ -23,6 +23,7 @@ public class AddExamWindow_ViewModel : AbstractEventDrivenViewModel{
     private void SetupCommands() {
         ConfirmCommand = new CommonCommand(Confirm);
         CancleCommand = new CommonCommand(Cancle);
+        AddCommand = new CommonCommand(Add);
     }
 
     private void SetUpApplicationTypeList() {
@@ -35,10 +36,7 @@ public class AddExamWindow_ViewModel : AbstractEventDrivenViewModel{
 
     #endregion
     
-
     #region PROPERTY
-
-    private Study _study;
 
     private AppModel _appModel;
 
@@ -46,7 +44,7 @@ public class AddExamWindow_ViewModel : AbstractEventDrivenViewModel{
 
     #region NOTIFIABLE_PROPERTIES
 
-    public ObservableCollection<Study> StudyContainer { get; private set; }
+    public ObservableCollection<AddExamItem_ViewModel> AddExamItemViewModels { get; private set; }
 
     private bool _isLifeCycleEnd;
 
@@ -61,114 +59,6 @@ public class AddExamWindow_ViewModel : AbstractEventDrivenViewModel{
         }
     }
     
-    private string _studyInstanceId;
-
-    public string StudyInstanceId {
-        get {
-            return _studyInstanceId;
-        }
-        set {
-            if(_studyInstanceId == value) return;
-            _studyInstanceId = value;
-            _study.StudyInstanceId = value;
-            _study.PatientName = value;
-            _study.PatientGender = value;
-            _study.PatientAge = value;
-            RisePropertyChanged(nameof(StudyInstanceId));
-        }
-    }
-    
-    private string _patientName;
-
-    public string PatientName {
-        get {
-            return _patientName;
-        }
-        set {
-            if(_patientName == value) return;
-            _patientName = value;
-            _study.PatientName = _patientName;
-            RisePropertyChanged(nameof(PatientName));
-        }
-    }
-    
-    private string _patientAge;
-
-    public string PatientAge {
-        get {
-            return _patientAge;
-        }
-        set {
-            if(_patientAge == value) return;
-            _patientAge = value;
-            _study.PatientAge = _patientAge;
-            RisePropertyChanged(nameof(PatientAge));
-        }
-    }
-    
-    private string _patientGender;
-
-    public string PatientGender {
-        get {
-            return _patientGender;
-        }
-        set {
-            if(_patientGender == value) return;
-            _patientGender = value;
-            _study.PatientGender = _patientGender;
-            RisePropertyChanged(nameof(PatientGender));
-        }
-    }
-
-    private string _apptype;
-
-    public string AppType {
-        get {
-            return _apptype;
-        }
-        set {
-            if(_apptype == value)return;
-            _apptype = value;
-            RisePropertyChanged(nameof(AppType));
-        }
-    }
-
-    #endregion
-
-    #region COMMAND
-
-    public ICommand ConfirmCommand { get; private set; }
-    public ICommand CancleCommand { get; private set; }
-
-    #endregion
-
-    #region COMMAND_BINDING_METHOD
-
-    private void Confirm(object o = null) {
-        if (string.IsNullOrEmpty(this.StudyInstanceId) || string.IsNullOrEmpty(AppType)) {
-            MessageBox.Show("参数不完整！");
-            return;
-        }
-
-        List<Study> studies = new List<Study>();
-        studies.Add(_study);
-        StudyCollectionItem studyCollectionItem = new StudyCollectionItem(studies);
-        _appModel = new AppModel(_apptype, studyCollectionItem);
-        
-        MainEntry_ModelFacade.GetInstance().AddStudyItemWithApp(studyCollectionItem, _appModel);
-        IsLifeCycleEnd = true;
-    }
-
-    private void Cancle(object o = null) {
-        IsLifeCycleEnd = true;
-    }
-
-
-    #endregion
-    
-
-    
-
     private ObservableCollection<string> _appTypes;
 
     public ObservableCollection<string> AppTypes {
@@ -182,5 +72,116 @@ public class AddExamWindow_ViewModel : AbstractEventDrivenViewModel{
         }
     }
 
+    private string _appType;
+
+    public string AppType {
+        get {
+            return _appType;
+        }
+        set {
+            if(_appType == value)return;
+            _appType = value;
+            RisePropertyChanged(AppType);
+        }
+    }
+
+    private bool _onlyOneElement;
+
+    public bool OnlyOneElement {
+        get {
+            return _onlyOneElement;
+        }
+        set {
+            if (_onlyOneElement == value) return;
+            _onlyOneElement = value;
+            if (_onlyOneElement) DisableClose();
+            else EnableClose();
+            RisePropertyChanged(nameof(OnlyOneElement));
+        }
+    }
+
+
+    #endregion
+
+    #region COMMANDS
+
+    public ICommand ConfirmCommand { get; private set; }
     
+    public ICommand CancleCommand { get; private set; }
+    
+    public ICommand AddCommand { get; private set; }
+
+
+    #endregion
+
+    #region COMMAND_BINDING_METHOD
+
+    private void Confirm(object o = null) {
+        if (!CheckItemFilledFinished() || string.IsNullOrEmpty(_appType)) {
+            MessageBox.Show("参数不完整！");
+            return;
+        }
+
+        List<Study> studies = new List<Study>();
+        for (int i = 0; i < this.AddExamItemViewModels.Count; i++) {
+            studies.Add(AddExamItemViewModels[i].GetStudy());
+        }
+        
+        StudyCollectionItem studyCollectionItem = new StudyCollectionItem(studies);
+        _appModel = new AppModel(_appType, studyCollectionItem);
+        
+        MainEntry_ModelFacade.GetInstance().AddStudyItemWithApp(studyCollectionItem, _appModel);
+        IsLifeCycleEnd = true;
+    }
+
+    private void Cancle(object o = null) {
+        IsLifeCycleEnd = true;
+    }
+
+    private void Add(object o = null) {
+        AddExamItem_ViewModel addExamItemViewModel = new AddExamItem_ViewModel();
+        this.AddExamItemViewModels.Add(addExamItemViewModel);
+        addExamItemViewModel.RegisterObserver(this);
+        OnlyOneElement = this.AddExamItemViewModels.Count == 1;
+    }
+    
+    #endregion
+
+    private bool CheckItemFilledFinished() {
+        for (int i = 0; i < this.AddExamItemViewModels.Count; i++) {
+            if (!AddExamItemViewModels[i].IsBlankFilledFinished()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private void DisableClose() {
+        for (int i = 0; i < this.AddExamItemViewModels.Count; i++) {
+            AddExamItemViewModels[i].CanClose = false;
+        }
+    }
+
+    private void EnableClose() {
+        for (int i = 0; i < AddExamItemViewModels.Count; i++) {
+            AddExamItemViewModels[i].CanClose = true;
+
+        }
+    }
+
+    public void RemoveOneAddExamItem(AddExamItem_ViewModel addExamItemViewModel) {
+        if (this.AddExamItemViewModels.Contains(addExamItemViewModel)) {
+            this.AddExamItemViewModels.Remove(addExamItemViewModel);
+            addExamItemViewModel.DeregisterObserver(this);
+            OnlyOneElement = this.AddExamItemViewModels.Count == 1;
+        }
+    }
+    
+    public override void UpdateByEvent(string propertyName, object o) {
+        if (propertyName.Equals(nameof(AddExamItem_ViewModel.CloseCommand))) {
+            AddExamItem_ViewModel addExamItemViewModel = (AddExamItem_ViewModel)o;
+            RemoveOneAddExamItem(addExamItemViewModel);
+        }
+    }
 }

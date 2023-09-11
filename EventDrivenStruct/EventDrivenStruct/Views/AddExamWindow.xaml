@@ -7,44 +7,47 @@
         xmlns:converter="clr-namespace:EventDrivenStruct.ViewModels.Converter"
         mc:Ignorable="d"
         Title="Add Exam" 
-        MaxHeight="270" MinHeight="270" MinWidth="400" WindowStartupLocation="CenterScreen" ResizeMode="CanResize"
-        SizeToContent="Width"
+        MaxHeight="270" MinHeight="270" MinWidth="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        SizeToContent="Width" 
         ShowInTaskbar="False"
+        SizeChanged="AddExamWindow_OnSizeChanged"
         >
     <Window.Resources>
         <converter:ReverseBoolConverter x:Key="ReverseBoolConverter"/>
-        
+        <converter:BoolToVisibilityConverter x:Key = "BooltoVisibilityConverter"/>
         <!-- ListContentTemplate -->
         <DataTemplate x:Key="ListContentTemplate">
             <Grid>
-                <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Center" >
+                <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    
+                    <Button Width="20" Height="20" Content="X" 
+                            Margin="240,0,0,0"
+                            Command="{Binding CloseCommand}"
+                            Visibility="{Binding CanClose, Converter={StaticResource BooltoVisibilityConverter}}"
+                            BorderThickness="0" Background="Azure"
+                            FontWeight="Bold" HorizontalAlignment="Right"/>
             
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="250" Height="25">
-                <TextBlock Text="Uid" VerticalAlignment="Center" Margin="3" Width="60"/>
-                <TextBox  Width="170" Height="20" HorizontalAlignment="Right" Text="{Binding StudyInstanceId}"/>
-            </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="250" Height="25">
+                        <TextBlock Text="Uid" VerticalAlignment="Center" Margin="3" Width="60"/>
+                        <TextBox  Width="170" Height="20" HorizontalAlignment="Right" Text="{Binding StudyInstanceId}"/>
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="250" Height="25">
+                        <TextBlock Text="Name" VerticalAlignment="Center" Margin="3" Width="60"/>
+                        <TextBox x:Name="name_Box" Width="170" Height="20" HorizontalAlignment="Right" Text="{Binding PatientName}"/>
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="250" Height="25">
+                        <TextBlock Text="Gender" VerticalAlignment="Center" HorizontalAlignment="Center" Width="60" Margin="3"/>
+                        <TextBox x:Name="gender_Box" Width="170" Height="20" HorizontalAlignment="Right" Text="{Binding PatientGender}"/>
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="250" Height="25">
+                        <TextBlock Text="Age" VerticalAlignment="Center" HorizontalAlignment="Center" Width="60" Margin="3"/>
+                        <TextBox x:Name="age_Box" Width="170" Height="20" HorizontalAlignment="Right" Text="{Binding PatientAge}"/>
+                    </StackPanel>
             
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="250" Height="25">
-                <TextBlock Text="Name" VerticalAlignment="Center" Margin="3" Width="60"/>
-                <TextBox x:Name="name_Box" Width="170" Height="20" HorizontalAlignment="Right" Text="{Binding PatientName}"/>
-            </StackPanel>
-            
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="250" Height="25">
-                <TextBlock Text="Gender" VerticalAlignment="Center" HorizontalAlignment="Center" Width="60" Margin="3"/>
-                <TextBox x:Name="gender_Box" Width="170" Height="20" HorizontalAlignment="Right" Text="{Binding PatientGender}"/>
-            </StackPanel>
-            
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="250" Height="25">
-                <TextBlock Text="Age" VerticalAlignment="Center" HorizontalAlignment="Center" Width="60" Margin="3"/>
-                <TextBox x:Name="age_Box" Width="170" Height="20" HorizontalAlignment="Right" Text="{Binding PatientAge}"/>
-            </StackPanel>
-            
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="250" Height="25">
-                <TextBlock Text="AppType" VerticalAlignment="Center" HorizontalAlignment="Center" Width="60" Margin="3"/>
-                <ComboBox Name="AppTypeCombobox" Height="20" Width="170" ItemsSource="{Binding AppTypes}" SelectedItem="{Binding AppType, Mode=TwoWay}"/>
-            </StackPanel>
-            
-        </StackPanel>
+                </StackPanel>
             </Grid>
         </DataTemplate>
         
@@ -55,36 +58,54 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
         <!-- Title -->
         <TextBlock Grid.Row="0" 
-                   Margin="0,25,0,10"
+                   Margin="0,0,0,10"
                    Text="新建并打开病患资料" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         
         <!-- Content -->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="50"/>
             </Grid.ColumnDefinitions>
             
             <!-- ContentPanel -->
             <ItemsControl Grid.Column="0" BorderThickness="0" 
+                          Margin="50,0,0,0"
                      ItemsSource="{Binding StudyContainer}"
                      ItemTemplate="{StaticResource ListContentTemplate}"
-                     HorizontalContentAlignment="Center"/>
+                     VerticalContentAlignment="Center"
+                     HorizontalContentAlignment="Center"
+                     >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
             <!-- Plus Icon -->
             <Button Grid.Column="1" 
-                    Margin="0,0,10,0"
-                    Content="+" FontWeight="Bold" FontSize="15"
+                    Command="{Binding AddCommand}"
+                    Margin="0,0,3,0"
+                    Content="+" FontWeight="Bold" FontSize="25"
                     HorizontalAlignment="Right"
-                    Height="20" Background="Azure" BorderThickness="0"/>
+                    Height="40" Width="40"
+                    Background="Azure" BorderThickness="0"/>
             
         </Grid>
         
+        <!-- App Selector-->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Width="250" Height="25">
+            <TextBlock Text="AppType" VerticalAlignment="Center" HorizontalAlignment="Center" Width="60" Margin="3"/>
+            <ComboBox Name="AppTypeCombobox" Height="20" Width="170" ItemsSource="{Binding AppTypes}" SelectedItem="{Binding AppType, Mode=TwoWay}"/>
+        </StackPanel>
+        
         <!-- Buttons -->
-        <Grid x:Name="button_grid" Grid.Row="2" 
+        <Grid x:Name="button_grid" Grid.Row="3" 
               Margin="0,10,0,20"
               HorizontalAlignment="Center" Width="170" Height="25">
             <Grid.ColumnDefinitions>
