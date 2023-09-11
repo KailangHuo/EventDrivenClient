@@ -10,7 +10,7 @@ public class StudyCollectionItem : AbstractEventDrivenObject{
     public StudyCollectionItem(List<Study> studies = null) {
         studyComposition = studies == null ? new List<Study>() : studies;
         studyUidComposition = new List<string>();
-        _studyUidHashSet = new HashSet<string>();
+        _studyHashSet = new HashSet<Study>();
         Init();
         IsLockable = true;
         IsLocked = false;
@@ -20,7 +20,7 @@ public class StudyCollectionItem : AbstractEventDrivenObject{
     private void Init() {
         for (int i = 0; i < studyComposition.Count; i++) {
             studyUidComposition.Add(studyComposition[i].StudyInstanceId);
-            _studyUidHashSet.Add(studyComposition[i].StudyInstanceId);
+            _studyHashSet.Add(studyComposition[i]);
         }
     }
 
@@ -32,7 +32,7 @@ public class StudyCollectionItem : AbstractEventDrivenObject{
 
     private List<string> studyUidComposition;
 
-    private HashSet<string> _studyUidHashSet;
+    private HashSet<Study> _studyHashSet;
 
     #endregion
 
@@ -94,16 +94,28 @@ public class StudyCollectionItem : AbstractEventDrivenObject{
         this.IsLocked = false;
     }
     
-    public void AddInStudyComposition(Study study) {
-        if(this._studyUidHashSet.Contains(study.StudyInstanceId)) return;
-        this.studyComposition.Add(study);
-        studyUidComposition.Add(study.StudyInstanceId);
-        _studyUidHashSet.Add(study.StudyInstanceId);
+    public void AddInStudyComposition(List<Study> studies) {
+        if (this.ContainsAnyStudy(studies)) {
+            ExceptionManager.GetInstance().ThrowAsyncException("存在已打开的Study, 不可以append");
+            return;
+        }
+
+        for (int i = 0; i < studies.Count; i++) {
+            this.studyComposition.Add(studies[i]);
+            studyUidComposition.Add(studies[i].StudyInstanceId);
+            _studyHashSet.Add(studies[i]);
+        }
+        
         CheckSinglePatient();
+    }
+    
+    private bool ContainsAnyStudy(List<Study> studies) {
+        HashSet<Study> hashSet = new HashSet<Study>(studies);
+        return this._studyHashSet.Overlaps(hashSet);
     }
 
     private void CheckSinglePatient() {
-        IsSinglePatient = this._studyUidHashSet.Count <= 1 ? true : false;
+        IsSinglePatient = this._studyHashSet.Count <= 1 ? true : false;
     }
 
     public List<string> GetStudyUidComposition() {
@@ -123,16 +135,16 @@ public class StudyCollectionItem : AbstractEventDrivenObject{
         if (this == obj) return true;
         if (obj == null || GetType() != obj.GetType()) return false;
         StudyCollectionItem t = (StudyCollectionItem)obj;
-        return this._studyUidHashSet.SetEquals(t._studyUidHashSet);
+        return this._studyHashSet.SetEquals(t._studyHashSet);
     }
 
     public override int GetHashCode() {
-        if (this._studyUidHashSet.Count == 0) return base.GetHashCode();
-        int hashcode = 0;
+        if (this._studyHashSet.Count == 0) return base.GetHashCode();
+        string hashStr = "";
         for (int i = 0; i < studyUidComposition.Count; i++) {
-            hashcode += studyComposition[i].StudyInstanceId.GetHashCode();
+            hashStr += studyComposition[i].StudyInstanceId.GetHashCode();
         }
-        return hashcode;
+        return hashStr.GetHashCode();
     }
 
     #endregion

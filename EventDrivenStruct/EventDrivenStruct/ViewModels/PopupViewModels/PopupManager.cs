@@ -41,6 +41,16 @@ public class PopupManager : AbstractEventDrivenObject{
         });
     }
 
+    public void MainWindow_AppendWindowPopup() {
+        AddExamWindow addExamWindow = new AddExamWindow();
+        AddExamWindow_ViewModel addExamWindowViewModel = new AddExamWindow_ViewModel();
+        addExamWindow.DataContext = addExamWindowViewModel;
+        addExamWindow.Owner = GlobalContext.GetInstance().MainWindow;
+        Application.Current.Dispatcher.BeginInvoke(() => {
+            addExamWindow.ShowDialog();
+        });
+    }
+
     public void AsyncPopupWindow(string content) {
         MessageBox.Show(content);
     }

@@ -94,8 +94,9 @@
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
         
-        <!--Function Buttons-->
+        <!-- Function Buttons-->
         <StackPanel Grid.Row="0" Orientation="Horizontal" >
+            <!-- Function Button-->
             <Button  Name="ActionButton"
                      Margin="0,3, 7,0"
                      Height="30"
@@ -105,6 +106,8 @@
                      Content="{Binding ActionButtonContent}"
                      Command="{Binding TEST_COMMAND}"
             />
+            
+            <!-- AddPatient Button -->
             <Button Name="AddPatientButton"
                     Margin="0,3,7,0"
                     Height="30"
@@ -114,9 +117,11 @@
                     Content="Add Patient"
                     Command="{Binding TEST_ADD_COMMAND}"
             />
+            
+            <!-- ClearAll Button -->
             <Button Name="TriggeredActionButton"
                     Visibility="{Binding TriggeredActionBool, Converter={StaticResource BooltoVisibilityConverter}}"
-                    Margin="0,3,0,0"
+                    Margin="0,3,7,0"
                     Height="30"
                     Width="180"
                     VerticalAlignment="Top"
@@ -124,6 +129,16 @@
                     Content="清除所有检查"
                     Command="{Binding TEST_CLEARALL_COMMAND}"
             />
+            
+            <!-- AppendPatient Button -->
+            <Button Margin="0,3,0,0"
+                    Height="30"
+                    Width="180"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    Content="Append to CurrentStudy"
+                    Command="{Binding TEST_APPEND_COMMAND}"
+                    />
         </StackPanel>
         
         <!-- Simulating Monitors -->

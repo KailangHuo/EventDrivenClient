@@ -41,6 +41,7 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
         TEST_ADD_COMMAND = new CommonCommand(TEST_ADD);
         TEST_COMMAND = new CommonCommand(TEST_COMMAND_METHOD);
         TEST_CLEARALL_COMMAND = new CommonCommand(TEST_CLEARALL);
+        TEST_APPEND_COMMAND = new CommonCommand(TEST_APPEND);
     }
 
     #endregion
@@ -111,26 +112,32 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
 
     public ICommand TEST_CLEARALL_COMMAND { get; private set; }
 
+    public ICommand TEST_APPEND_COMMAND { get; private set; }
+
     #endregion
 
     #region COMMAND_BINDING_METHODS
 
-    public void TEST_COMMAND_METHOD(object o = null) {
+    private void TEST_COMMAND_METHOD(object o = null) {
         MainEntry_ModelFacade.GetInstance().TestAdd();
     }
 
-    public void GotoPaView(object o = null) {
+    private void GotoPaView(object o = null) {
         int screenNumber = int.Parse((string)o);
         this.AppTabViewModel.IsExpanded = false;
         this.PatientAdminAppManagerViewModel.InvokePaAt(screenNumber);
     }
 
-    public void TEST_ADD(object o = null) {
+    private void TEST_ADD(object o = null) {
         PopupManager.GetInstance().MainWindow_AddWindowPopup();
     }
 
-    public void TEST_CLEARALL(object o = null) {
+    private void TEST_CLEARALL(object o = null) {
         this.StudyContainerViewModel.ClearAll(o);
+    }
+
+    private void TEST_APPEND(object o = null) {
+        PopupManager.GetInstance().MainWindow_AppendWindowPopup();
     }
 
 

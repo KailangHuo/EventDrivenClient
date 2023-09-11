@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Documents;
 using EventDrivenElements;
 using EventDrivenStruct.ConfigurationLoader;
 using EventDrivenStruct.Models;
@@ -139,7 +140,9 @@ namespace EventDrivenStruct {
 
             for (int i = 0; i < times; i++) {
                 Study study = new Study(param1+ i + ". " );
-                studyCollectionItem.AddInStudyComposition(study);
+                List<Study> studies = new List<Study>();
+                studies.Add(study);
+                studyCollectionItem.AddInStudyComposition(studies);
             }
             
             return studyCollectionItem;
