@@ -11,9 +11,9 @@ public class Study_ViewModel : AbstractEventDrivenViewModel{
     #region CONSTRUCTION
 
     public Study_ViewModel(StudyCollectionItem studyCollectionItem) : base(studyCollectionItem){
-        studyCollectionItem.RegisterObserver(this);
         this.StudyCollectionItem = studyCollectionItem;
-        initDefaultInfo();
+        studyCollectionItem.RegisterObserver(this);
+        initDefaultInfo(studyCollectionItem);
         SetupCommand();
 
         LockingStatusStr = " lock ";
@@ -23,16 +23,16 @@ public class Study_ViewModel : AbstractEventDrivenViewModel{
         LockSwitchCommand = new CommonCommand(LockSwitch);
     }
 
-    private void initDefaultInfo() {
-        if (StudyCollectionItem.IsSinglePatient) {
-            this.PatientName = StudyCollectionItem.GetStudyComposition()[0].PatientName;
-            this.PatientAge = StudyCollectionItem.GetStudyComposition()[0].PatientAge;
-            this.PatientGender = StudyCollectionItem.GetStudyComposition()[0].PatientGender;
-            this.StudyUid = StudyCollectionItem.GetStudyComposition()[0].StudyInstanceId;
+    private void initDefaultInfo(StudyCollectionItem studyCollectionItem) {
+        if (studyCollectionItem.IsSinglePatient) {
+            this.PatientName = studyCollectionItem.GetStudyComposition()[0].PatientName;
+            this.PatientAge = studyCollectionItem.GetStudyComposition()[0].PatientAge;
+            this.PatientGender = studyCollectionItem.GetStudyComposition()[0].PatientGender;
+            this.StudyUid = studyCollectionItem.GetStudyComposition()[0].StudyInstanceId;
         }
         else {
-            this.PatientName = "多患者 (" + StudyCollectionItem.GetStudyComposition().Count + ")";
-            this.PatientAge = StudyCollectionItem.ToString();
+            this.PatientName = "多患者 (" + studyCollectionItem.GetStudyComposition().Count + ")";
+            this.PatientAge = studyCollectionItem.ToString();
         }
 
 
@@ -175,7 +175,8 @@ public class Study_ViewModel : AbstractEventDrivenViewModel{
         }
 
         if (propertyName.Equals(nameof(StudyCollectionItem.IsSinglePatient))) {
-            initDefaultInfo();
+            StudyCollectionItem studyCollectionItem = (StudyCollectionItem)o;
+            initDefaultInfo(studyCollectionItem);
             return;
         }
 

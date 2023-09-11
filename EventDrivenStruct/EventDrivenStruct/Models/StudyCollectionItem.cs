@@ -73,7 +73,7 @@ public class StudyCollectionItem : AbstractEventDrivenObject{
         set {
             if(_isSinglePatient == value)return;
             _isSinglePatient = value;
-            PublishEvent(nameof(IsSinglePatient), _isSinglePatient);
+            PublishEvent(nameof(IsSinglePatient), this);
         }
     }
 
