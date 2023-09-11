@@ -14,6 +14,7 @@ public class StudyCollectionItem : AbstractEventDrivenObject{
         Init();
         IsLockable = true;
         IsLocked = false;
+        CheckSinglePatient();
     }
     
     private void Init() {
@@ -63,6 +64,19 @@ public class StudyCollectionItem : AbstractEventDrivenObject{
         }
     }
 
+    private bool _isSinglePatient;
+
+    public bool IsSinglePatient {
+        get {
+            return _isSinglePatient;
+        }
+        set {
+            if(_isSinglePatient == value)return;
+            _isSinglePatient = value;
+            PublishEvent(nameof(IsSinglePatient), _isSinglePatient);
+        }
+    }
+
     #endregion
 
     #region METHODS
@@ -85,6 +99,11 @@ public class StudyCollectionItem : AbstractEventDrivenObject{
         this.studyComposition.Add(study);
         studyUidComposition.Add(study.StudyInstanceId);
         _studyUidHashSet.Add(study.StudyInstanceId);
+        CheckSinglePatient();
+    }
+
+    private void CheckSinglePatient() {
+        IsSinglePatient = this._studyUidHashSet.Count <= 1 ? true : false;
     }
 
     public List<string> GetStudyUidComposition() {
@@ -121,9 +140,11 @@ public class StudyCollectionItem : AbstractEventDrivenObject{
     public override string ToString() {
         string s = "";
 
-        for (int i = 0; i < studyComposition.Count; i++) {
-            s += studyComposition[i].ToString() + ", ";
+        for (int i = 0; i < studyComposition.Count - 1; i++) {
+            s += studyComposition[i].ToString() + " | ";
         }
+
+        s += studyComposition[studyComposition.Count - 1].ToString();
 
         return s;
     }

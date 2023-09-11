@@ -13,10 +13,7 @@ public class Study_ViewModel : AbstractEventDrivenViewModel{
     public Study_ViewModel(StudyCollectionItem studyCollectionItem) : base(studyCollectionItem){
         studyCollectionItem.RegisterObserver(this);
         this.StudyCollectionItem = studyCollectionItem;
-        this.PatientName = studyCollectionItem.GetStudyComposition()[0].PatientName;
-        this.PatientAge = studyCollectionItem.GetStudyComposition()[0].PatientAge;
-        this.PatientGender = studyCollectionItem.GetStudyComposition()[0].PatientGender;
-        this.StudyUid = studyCollectionItem.GetStudyComposition()[0].StudyInstanceId;
+        initDefaultInfo();
         SetupCommand();
 
         LockingStatusStr = " lock ";
@@ -24,6 +21,21 @@ public class Study_ViewModel : AbstractEventDrivenViewModel{
     
     private void SetupCommand() {
         LockSwitchCommand = new CommonCommand(LockSwitch);
+    }
+
+    private void initDefaultInfo() {
+        if (StudyCollectionItem.IsSinglePatient) {
+            this.PatientName = StudyCollectionItem.GetStudyComposition()[0].PatientName;
+            this.PatientAge = StudyCollectionItem.GetStudyComposition()[0].PatientAge;
+            this.PatientGender = StudyCollectionItem.GetStudyComposition()[0].PatientGender;
+            this.StudyUid = StudyCollectionItem.GetStudyComposition()[0].StudyInstanceId;
+        }
+        else {
+            this.PatientName = "多患者 (" + StudyCollectionItem.GetStudyComposition().Count + ")";
+            this.PatientAge = StudyCollectionItem.ToString();
+        }
+
+
     }
 
     #endregion
@@ -161,5 +173,11 @@ public class Study_ViewModel : AbstractEventDrivenViewModel{
             IsLockable = isLockable;
             return;
         }
+
+        if (propertyName.Equals(nameof(StudyCollectionItem.IsSinglePatient))) {
+            initDefaultInfo();
+            return;
+        }
+
     }
 }
