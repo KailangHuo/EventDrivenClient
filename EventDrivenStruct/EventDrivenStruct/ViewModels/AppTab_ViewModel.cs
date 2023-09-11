@@ -169,7 +169,7 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
 
         if (propertyName.Equals(nameof(AppItemContainer_ViewModel.AppSeqSelected))) {
             AppModel appModel = (AppModel)o;
-            MainEntry_ModelFacade.GetInstance().AddStudyItemWithApp(_currentSelectedStudyCollectionItem, appModel);
+            MainEntry_ModelFacade.GetInstance().AddAppToStudy(_currentSelectedStudyCollectionItem, appModel);
             return;
         }
 

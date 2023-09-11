@@ -24,9 +24,13 @@ public class StudyCollection : AbstractEventDrivenObject{
 
     public bool AddStudyCollectionItem(StudyCollectionItem studyCollectionItem) {
         if (this.ContainsAnyStudy(studyCollectionItem.GetStudyComposition())) {
+            ExceptionManager.GetInstance().ThrowAsyncException("存在已打开Study,不可重复添加!");
             return false;
         }
-        if (this.StudyCollectionItems.Count == MaxStudyNumber) return false;
+        if (this.StudyCollectionItems.Count == MaxStudyNumber) {
+            ExceptionManager.GetInstance().ThrowAsyncException("已达最大Study数目!不可再增加!");
+            return false;
+        }
         
         StudyCollectionItems.Add(studyCollectionItem);
         StudyLockManager.AddItem(studyCollectionItem);

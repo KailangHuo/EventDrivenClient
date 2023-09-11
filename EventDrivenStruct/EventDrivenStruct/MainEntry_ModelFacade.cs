@@ -80,7 +80,10 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
     }
 
     public void AddAppToStudy(StudyCollectionItem studyItem, AppModel appModel) {
-        if(!StudyCollection.Contains(studyItem) || studyItem == null) return;
+        if(!StudyCollection.Contains(studyItem) || studyItem == null) {
+            ExceptionManager.GetInstance().ThrowAsyncException("声明的Study不存在!");
+            return;
+        }
         StudyAppMappingManager.AddAppToMapObj(studyItem, appModel);
     }
 

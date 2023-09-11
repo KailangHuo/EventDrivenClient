@@ -130,7 +130,7 @@ public class AddExamWindow_ViewModel : AbstractEventDrivenViewModel{
         StudyCollectionItem studyCollectionItem = new StudyCollectionItem(studies);
         _appModel = new AppModel(_appType, studyCollectionItem);
         
-        MainEntry_ModelFacade.GetInstance().AddStudyItemWithApp(studyCollectionItem, _appModel);
+        MainEntry_ModelFacade.GetInstance().AddAppToStudy(studyCollectionItem, _appModel);
         IsLifeCycleEnd = true;
     }
 

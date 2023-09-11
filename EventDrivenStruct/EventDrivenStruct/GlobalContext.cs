@@ -1,3 +1,4 @@
+using System.Configuration.Internal;
 using System.Windows;
 using EventDrivenStruct.Models;
 using EventDrivenStruct.ViewModels;
@@ -6,7 +7,14 @@ namespace EventDrivenStruct;
 
 public class GlobalContext {
     private static GlobalContext _globalContext ;
-    private GlobalContext() { }
+
+    private GlobalContext() {
+        initSystem();
+    }
+
+    private void initSystem() {
+        ExceptionManager.GetInstance().RegisterObserver(PopupManager.GetInstance());
+    }
 
     public static GlobalContext GetInstance() {
         if (_globalContext == null) {

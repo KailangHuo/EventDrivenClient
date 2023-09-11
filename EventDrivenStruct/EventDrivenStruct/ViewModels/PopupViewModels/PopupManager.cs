@@ -41,4 +41,15 @@ public class PopupManager : AbstractEventDrivenObject{
         });
     }
 
+    public void AsyncPopupWindow(string content) {
+        MessageBox.Show(content);
+    }
+
+    public override void UpdateByEvent(string propertyName, object o) {
+        if (propertyName.Equals(nameof(ExceptionManager.ThrowAsyncException))) {
+            string content = (string)o;
+            AsyncPopupWindow(content);
+            return;
+        }
+    }
 }
