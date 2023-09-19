@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using EventDrivenElements;
 using EventDrivenStruct.ConfigurationLoader;
@@ -6,6 +7,8 @@ using EventDrivenStruct.ViewModels;
 namespace EventDrivenStruct.Models; 
 
 public class MainEntry_ModelFacade : AbstractEventDrivenObject {
+
+    #region CONSTRUCTION
 
     private static MainEntry_ModelFacade _instance;
 
@@ -35,6 +38,10 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
 
         return _instance;
     }
+
+    #endregion
+
+    #region NOTIFIABLE_PROPERTIES
 
     private StudyCollection _studyCollection;
     public StudyCollection StudyCollection {
@@ -74,9 +81,16 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
         }
     }
 
+    #endregion
+    
+    
     public void AddStudyItemWithApp(StudyCollectionItem studyItem, AppModel appModel) {
         StudyCollection.AddStudyCollectionItem(studyItem);
         StudyAppMappingManager.AddAppToMapObj(studyItem, appModel);
+    }
+
+    public void AppendStudyToStudyCollectionItem(List<Study> studies, StudyCollectionItem studyCollectionItem) {
+        
     }
 
     public void AddAppToStudy(StudyCollectionItem studyItem, AppModel appModel) {
@@ -109,8 +123,9 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
     public void DeleteApp(AppModel appModel) {
         StudyAppMappingManager.RemoveAppFromStudyAppObj(appModel.StudyCollectionItem, appModel);
     }
-    
 
+
+    #region |||TEST|||
 
     private int number;
     
@@ -164,4 +179,7 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
 
     }
 
+    #endregion
+    
+    
 }

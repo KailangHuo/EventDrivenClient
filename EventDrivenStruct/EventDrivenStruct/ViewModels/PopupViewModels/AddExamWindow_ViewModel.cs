@@ -13,7 +13,8 @@ public class AddExamWindow_ViewModel : AbstractEventDrivenViewModel{
 
     #region CONSTRUCTION
 
-    public AddExamWindow_ViewModel() {
+    public AddExamWindow_ViewModel(bool IsAppendMode = false) {
+        _isAppendMode = IsAppendMode;
         AddExamItemViewModels = new ObservableCollection<AddExamItem_ViewModel>();
         this.Add();
         SetupCommands();
@@ -39,6 +40,8 @@ public class AddExamWindow_ViewModel : AbstractEventDrivenViewModel{
     #region PROPERTY
 
     private AppModel _appModel;
+
+    private bool _isAppendMode;
 
     #endregion
 
@@ -130,7 +133,8 @@ public class AddExamWindow_ViewModel : AbstractEventDrivenViewModel{
         StudyCollectionItem studyCollectionItem = new StudyCollectionItem(studies);
         _appModel = new AppModel(_appType, studyCollectionItem);
         
-        MainEntry_ModelFacade.GetInstance().AddAppToStudy(studyCollectionItem, _appModel);
+        if(_isAppendMode) MainEntry_ModelFacade.GetInstance().;
+        MainEntry_ModelFacade.GetInstance().AddStudyItemWithApp(studyCollectionItem, _appModel);
         IsLifeCycleEnd = true;
     }
 
