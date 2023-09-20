@@ -24,15 +24,17 @@ public class Study_ViewModel : AbstractEventDrivenViewModel{
     }
 
     private void initDefaultInfo(StudyCollectionItem studyCollectionItem) {
-        if (studyCollectionItem.IsSinglePatient) {
+        if (studyCollectionItem.IsSinglePatient()) {
             this.PatientName = studyCollectionItem.GetStudyComposition()[0].PatientName;
             this.PatientAge = studyCollectionItem.GetStudyComposition()[0].PatientAge;
             this.PatientGender = studyCollectionItem.GetStudyComposition()[0].PatientGender;
             this.StudyUid = studyCollectionItem.GetStudyComposition()[0].StudyInstanceId;
         }
         else {
-            this.PatientName = "多患者 (" + studyCollectionItem.GetStudyComposition().Count + ")";
+            this.PatientName = "多患者 (" + studyCollectionItem.GetStudiesNumber() + ")";
             this.PatientAge = studyCollectionItem.ToString();
+            this.PatientGender = "";
+            this.StudyUid = "";
         }
 
 
@@ -174,7 +176,7 @@ public class Study_ViewModel : AbstractEventDrivenViewModel{
             return;
         }
 
-        if (propertyName.Equals(nameof(StudyCollectionItem.IsSinglePatient))) {
+        if (propertyName.Equals(nameof(StudyCollectionItem.StudyAmountChanged))) {
             StudyCollectionItem studyCollectionItem = (StudyCollectionItem)o;
             initDefaultInfo(studyCollectionItem);
             return;

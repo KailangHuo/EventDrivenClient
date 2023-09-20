@@ -22,9 +22,9 @@ public class PopupManager : AbstractEventDrivenObject{
     }
 
     public void MainWindow_AddWindowPopup() {
-        AddExamWindow addExamWindow = new AddExamWindow();
-        AddExamWindow_ViewModel addExamWindowViewModel = new AddExamWindow_ViewModel();
-        addExamWindow.DataContext = addExamWindowViewModel;
+        AddStudyWindow addExamWindow = new AddStudyWindow();
+        AddStudyWindow_ViewModel addStudyWindowViewModel = new AddStudyWindow_ViewModel();
+        addExamWindow.DataContext = addStudyWindowViewModel;
         addExamWindow.Owner = GlobalContext.GetInstance().MainWindow;
         Application.Current.Dispatcher.BeginInvoke(() => {
             addExamWindow.ShowDialog();
@@ -41,13 +41,13 @@ public class PopupManager : AbstractEventDrivenObject{
         });
     }
 
-    public void MainWindow_AppendWindowPopup() {
-        AddExamWindow addExamWindow = new AddExamWindow();
-        AddExamWindow_ViewModel addExamWindowViewModel = new AddExamWindow_ViewModel();
-        addExamWindow.DataContext = addExamWindowViewModel;
-        addExamWindow.Owner = GlobalContext.GetInstance().MainWindow;
+    public void MainWindow_AppendWindowPopup(AppTab_ViewModel appTabViewModel) {
+        AppendStudyWindow appendStudyWindow = new AppendStudyWindow();
+        AppendStudyWindow_ViewModel addStudyWindowViewModel = new AppendStudyWindow_ViewModel(appTabViewModel);
+        appendStudyWindow.DataContext = addStudyWindowViewModel;
+        appendStudyWindow.Owner = GlobalContext.GetInstance().MainWindow;
         Application.Current.Dispatcher.BeginInvoke(() => {
-            addExamWindow.ShowDialog();
+            appendStudyWindow.ShowDialog();
         });
     }
 

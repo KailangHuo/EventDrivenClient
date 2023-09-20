@@ -4,11 +4,11 @@ using EventDrivenStruct.Models;
 
 namespace EventDrivenStruct.ViewModels; 
 
-public class AddExamItem_ViewModel : AbstractEventDrivenViewModel{
+public class AddingStudyItem_ViewModel : AbstractEventDrivenViewModel{
 
     #region CONSTRUCTION
 
-    public AddExamItem_ViewModel() {
+    public AddingStudyItem_ViewModel() {
         _study = new Study();
         SetupCommands();
         CanClose = true;

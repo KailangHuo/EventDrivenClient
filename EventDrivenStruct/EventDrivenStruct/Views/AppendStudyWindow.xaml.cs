@@ -1,19 +1,12 @@
 using System.Windows;
 
-namespace EventDrivenStruct; 
+namespace EventDrivenStruct.Views; 
 
-public partial class AddExamWindow : Window {
-    public AddExamWindow() {
+public partial class AppendStudyWindow : Window {
+    public AppendStudyWindow() {
         InitializeComponent();
     }
-
-    private void Button_OnIsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e) {
-        if ((bool)e.NewValue == false) {
-            this.Close();
-        }
-    }
     
-
     private void AddExamWindow_OnSizeChanged(object sender, SizeChangedEventArgs e) {
         
         // Get the window and its old and new sizes
@@ -30,5 +23,11 @@ public partial class AddExamWindow : Window {
         // Adjust the window position to keep the geometric center unchanged
         window.Left -= widthDiff / 2;
         window.Top -= heightDiff / 2;
+    }
+    
+    private void Button_OnIsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e) {
+        if ((bool)e.NewValue == false) {
+            this.Close();
+        }
     }
 }

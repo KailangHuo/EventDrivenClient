@@ -9,13 +9,12 @@ using EventDrivenStruct.Models;
 
 namespace EventDrivenStruct.ViewModels; 
 
-public class AddExamWindow_ViewModel : AbstractEventDrivenViewModel{
+public class AddStudyWindow_ViewModel : AbstractEventDrivenViewModel{
 
     #region CONSTRUCTION
 
-    public AddExamWindow_ViewModel(bool IsAppendMode = false) {
-        _isAppendMode = IsAppendMode;
-        AddExamItemViewModels = new ObservableCollection<AddExamItem_ViewModel>();
+    public AddStudyWindow_ViewModel() {
+        AddExamItemViewModels = new ObservableCollection<AddingStudyItem_ViewModel>();
         this.Add();
         SetupCommands();
         SetUpApplicationTypeList();
@@ -41,13 +40,11 @@ public class AddExamWindow_ViewModel : AbstractEventDrivenViewModel{
 
     private AppModel _appModel;
 
-    private bool _isAppendMode;
-
     #endregion
 
     #region NOTIFIABLE_PROPERTIES
 
-    public ObservableCollection<AddExamItem_ViewModel> AddExamItemViewModels { get; private set; }
+    public ObservableCollection<AddingStudyItem_ViewModel> AddExamItemViewModels { get; private set; }
 
     private bool _isLifeCycleEnd;
 
@@ -132,8 +129,7 @@ public class AddExamWindow_ViewModel : AbstractEventDrivenViewModel{
         
         StudyCollectionItem studyCollectionItem = new StudyCollectionItem(studies);
         _appModel = new AppModel(_appType, studyCollectionItem);
-        
-        if(_isAppendMode) MainEntry_ModelFacade.GetInstance().;
+  
         MainEntry_ModelFacade.GetInstance().AddStudyItemWithApp(studyCollectionItem, _appModel);
         IsLifeCycleEnd = true;
     }
@@ -143,9 +139,9 @@ public class AddExamWindow_ViewModel : AbstractEventDrivenViewModel{
     }
 
     private void Add(object o = null) {
-        AddExamItem_ViewModel addExamItemViewModel = new AddExamItem_ViewModel();
-        this.AddExamItemViewModels.Add(addExamItemViewModel);
-        addExamItemViewModel.RegisterObserver(this);
+        AddingStudyItem_ViewModel addingStudyItemViewModel = new AddingStudyItem_ViewModel();
+        this.AddExamItemViewModels.Add(addingStudyItemViewModel);
+        addingStudyItemViewModel.RegisterObserver(this);
         OnlyOneElement = this.AddExamItemViewModels.Count == 1;
     }
     
@@ -174,18 +170,18 @@ public class AddExamWindow_ViewModel : AbstractEventDrivenViewModel{
         }
     }
 
-    public void RemoveOneAddExamItem(AddExamItem_ViewModel addExamItemViewModel) {
-        if (this.AddExamItemViewModels.Contains(addExamItemViewModel)) {
-            this.AddExamItemViewModels.Remove(addExamItemViewModel);
-            addExamItemViewModel.DeregisterObserver(this);
+    public void RemoveOneAddExamItem(AddingStudyItem_ViewModel addingStudyItemViewModel) {
+        if (this.AddExamItemViewModels.Contains(addingStudyItemViewModel)) {
+            this.AddExamItemViewModels.Remove(addingStudyItemViewModel);
+            addingStudyItemViewModel.DeregisterObserver(this);
             OnlyOneElement = this.AddExamItemViewModels.Count == 1;
         }
     }
     
     public override void UpdateByEvent(string propertyName, object o) {
-        if (propertyName.Equals(nameof(AddExamItem_ViewModel.CloseCommand))) {
-            AddExamItem_ViewModel addExamItemViewModel = (AddExamItem_ViewModel)o;
-            RemoveOneAddExamItem(addExamItemViewModel);
+        if (propertyName.Equals(nameof(AddingStudyItem_ViewModel.CloseCommand))) {
+            AddingStudyItem_ViewModel addingStudyItemViewModel = (AddingStudyItem_ViewModel)o;
+            RemoveOneAddExamItem(addingStudyItemViewModel);
         }
     }
 }

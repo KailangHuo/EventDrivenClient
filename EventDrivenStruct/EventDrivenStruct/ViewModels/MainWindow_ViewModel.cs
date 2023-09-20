@@ -137,7 +137,7 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
     }
 
     private void TEST_APPEND(object o = null) {
-        PopupManager.GetInstance().MainWindow_AppendWindowPopup();
+        PopupManager.GetInstance().MainWindow_AppendWindowPopup(this.AppTabViewModel);
     }
 
 

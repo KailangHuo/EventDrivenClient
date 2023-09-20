@@ -39,6 +39,16 @@ public class StudyCollection : AbstractEventDrivenObject{
         return true;
     }
 
+    public bool AppendStudyToCollectionItem(StudyCollectionItem studyCollectionItem, List<Study> studies) {
+        if (this.ContainsAnyStudy(studies)) {
+            ExceptionManager.GetInstance().ThrowAsyncException("存在已打开Study,不可重复添加!");
+            return false;
+        }
+        studyCollectionItem.AppendStudies(studies);
+        AddStudiesInHashSet(studies);
+        return true;
+    }
+
     public void DeleteStudyCollectionItem(StudyCollectionItem studyCollectionItem) {
         if (this.Contains(studyCollectionItem)) {
             StudyCollectionItems.Remove(studyCollectionItem);
