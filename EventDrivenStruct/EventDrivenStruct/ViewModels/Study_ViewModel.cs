@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
@@ -13,7 +14,7 @@ public class Study_ViewModel : AbstractEventDrivenViewModel{
     public Study_ViewModel(StudyCollectionItem studyCollectionItem) : base(studyCollectionItem){
         this.StudyCollectionItem = studyCollectionItem;
         studyCollectionItem.RegisterObserver(this);
-        initDefaultInfo(studyCollectionItem);
+        InitDefaultInfo(studyCollectionItem);
         SetupCommand();
 
         LockingStatusStr = " lock ";
@@ -23,20 +24,27 @@ public class Study_ViewModel : AbstractEventDrivenViewModel{
         LockSwitchCommand = new CommonCommand(LockSwitch);
     }
 
-    private void initDefaultInfo(StudyCollectionItem studyCollectionItem) {
+    private void InitDefaultInfo(StudyCollectionItem studyCollectionItem) {
+        string representationString = "";
         if (studyCollectionItem.IsSinglePatient()) {
             this.PatientName = studyCollectionItem.GetStudyComposition()[0].PatientName;
+            representationString += this.PatientName + "\n";
             this.PatientAge = studyCollectionItem.GetStudyComposition()[0].PatientAge;
+            representationString += this.PatientAge + "\n";
             this.PatientGender = studyCollectionItem.GetStudyComposition()[0].PatientGender;
+            representationString += this.PatientGender + "\n";
             this.StudyUid = studyCollectionItem.GetStudyComposition()[0].StudyInstanceId;
+            representationString += this.StudyUid;
         }
         else {
             this.PatientName = "多患者 (" + studyCollectionItem.GetStudiesNumber() + ")";
             this.PatientAge = studyCollectionItem.ToString();
             this.PatientGender = "";
             this.StudyUid = "";
+            representationString = studyCollectionItem.ToString();
         }
 
+        RepresentationStr = representationString;
 
     }
 
@@ -157,6 +165,19 @@ public class Study_ViewModel : AbstractEventDrivenViewModel{
         }
     }
 
+    private string _representationStr;
+
+    public string RepresentationStr {
+        get {
+            return _representationStr;
+        }
+        set {
+            if(_representationStr == value)return;
+            _representationStr = value;
+            RisePropertyChanged(nameof(RepresentationStr));
+        }
+    }
+
     #endregion
     
     public void CloseStudy() {
@@ -178,7 +199,7 @@ public class Study_ViewModel : AbstractEventDrivenViewModel{
 
         if (propertyName.Equals(nameof(StudyCollectionItem.StudyAmountChanged))) {
             StudyCollectionItem studyCollectionItem = (StudyCollectionItem)o;
-            initDefaultInfo(studyCollectionItem);
+            InitDefaultInfo(studyCollectionItem);
             return;
         }
 

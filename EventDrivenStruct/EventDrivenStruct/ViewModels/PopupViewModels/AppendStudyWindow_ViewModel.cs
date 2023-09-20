@@ -95,8 +95,8 @@ public class AppendStudyWindow_ViewModel: AbstractEventDrivenViewModel{
 
         StudyCollectionItem studyCollectionItem = this._appTabViewModel.CurrentSelectedStudyCollectionItem;
   
-        MainEntry_ModelFacade.GetInstance().AppendStudyToStudyCollectionItem(studyCollectionItem, studies);
-        IsLifeCycleEnd = true;
+        if(MainEntry_ModelFacade.GetInstance().AppendStudyToStudyCollectionItem(studyCollectionItem, studies))IsLifeCycleEnd = true;
+        
     }
 
     private void Cancle(object o = null) {

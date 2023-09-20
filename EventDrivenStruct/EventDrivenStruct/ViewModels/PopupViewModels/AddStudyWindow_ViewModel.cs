@@ -130,8 +130,8 @@ public class AddStudyWindow_ViewModel : AbstractEventDrivenViewModel{
         StudyCollectionItem studyCollectionItem = new StudyCollectionItem(studies);
         _appModel = new AppModel(_appType, studyCollectionItem);
   
-        MainEntry_ModelFacade.GetInstance().AddStudyItemWithApp(studyCollectionItem, _appModel);
-        IsLifeCycleEnd = true;
+        if(MainEntry_ModelFacade.GetInstance().AddStudyItemWithApp(studyCollectionItem, _appModel))IsLifeCycleEnd = true;
+        
     }
 
     private void Cancle(object o = null) {
@@ -182,6 +182,7 @@ public class AddStudyWindow_ViewModel : AbstractEventDrivenViewModel{
         if (propertyName.Equals(nameof(AddingStudyItem_ViewModel.CloseCommand))) {
             AddingStudyItem_ViewModel addingStudyItemViewModel = (AddingStudyItem_ViewModel)o;
             RemoveOneAddExamItem(addingStudyItemViewModel);
+            return;
         }
     }
 }

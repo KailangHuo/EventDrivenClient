@@ -43,7 +43,7 @@ public class AddAppWindow_ViewModel : AbstractEventDrivenViewModel{
     private int _screenNumber;
     
     #endregion
-    
+ 
     #region NOTIFIABLE_PROPERTIES
 
     private string _appType;
@@ -107,7 +107,4 @@ public class AddAppWindow_ViewModel : AbstractEventDrivenViewModel{
 
     #endregion
     
-
-    
-
 }

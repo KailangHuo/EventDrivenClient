@@ -7,7 +7,7 @@
         xmlns:converter="clr-namespace:EventDrivenStruct.ViewModels.Converter"
         mc:Ignorable="d"
         Title="Append Study" 
-        Height="220" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        Height="250" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
         SizeToContent="Width" 
         ShowInTaskbar="False"
         SizeChanged="AddExamWindow_OnSizeChanged"

@@ -217,7 +217,7 @@
                                 Content="{Binding StudyContainerViewModel.SelectedStudy, Mode=TwoWay}"
                                 HorizontalContentAlignment="Left"
                                 VerticalContentAlignment="Center"
-                                ToolTip="TBA"
+                                ToolTip="{Binding StudyContainerViewModel.SelectedStudy.RepresentationStr}"
                                 BorderThickness="0"
                                 Command="{Binding StudyContainerViewModel.TriggerSelectedCommand}"
                         >
@@ -423,7 +423,7 @@
                           >
                 <TextBox IsReadOnly="True" TextWrapping="Wrap"
                          BorderThickness="0"
-                         FontSize="15" 
+                         FontSize="15" FontWeight="Light"
                          Text="{Binding SystemInfoCollector.Content}"
                          />
             </ScrollViewer>

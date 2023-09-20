@@ -48,9 +48,9 @@ public class StudyContainer_ViewModel : AbstractEventDrivenViewModel{
         set {
             if(_selectedStudy == value) return;
             _selectedStudy = value;
-            HasItem = !(_selectedStudy == null);
             PublishEvent(nameof(SelectedStudy), _selectedStudy);
             RisePropertyChanged(nameof(SelectedStudy));
+            TriggerSelected();
         }
     }
 
@@ -75,6 +75,7 @@ public class StudyContainer_ViewModel : AbstractEventDrivenViewModel{
     public void CloseSelected(object o = null) {
         MainEntry_ModelFacade.GetInstance().DeleteStudyItem(SelectedStudy.StudyCollectionItem);
         RemoveStudyBroadCast();
+        
     }
 
     public void ClearAll(object o = null) {
@@ -114,8 +115,16 @@ public class StudyContainer_ViewModel : AbstractEventDrivenViewModel{
     }
 
     private void UpdateSelectedStudy() {
-        if (StudyViewModels.Count > 0) SelectedStudy = StudyViewModels[0];
-        else SelectedStudy = null;
+        if (StudyViewModels.Count > 0 ) {
+            _selectedStudy = StudyViewModels[0];
+            HasItem = true;
+        }
+        else {
+            _selectedStudy = null;
+            HasItem = false;
+        }
+        PublishEvent(nameof(SelectedStudy), _selectedStudy);
+        RisePropertyChanged(nameof(SelectedStudy));
 
         // TEST
         if (SelectedStudy == null) {

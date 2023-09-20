@@ -82,28 +82,28 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
     }
 
     #endregion
-    
-    
-    public void AddStudyItemWithApp(StudyCollectionItem studyItem, AppModel appModel) {
+
+
+    public bool AddStudyItemWithApp(StudyCollectionItem studyItem, AppModel appModel) {
         StudyCollection.AddStudyCollectionItem(studyItem);
-        StudyAppMappingManager.AddAppToMapObj(studyItem, appModel);
+        return StudyAppMappingManager.AddAppToMapObj(studyItem, appModel);
     }
 
-    public void AppendStudyToStudyCollectionItem(StudyCollectionItem studyItem, List<Study> studies) {
+    public bool AppendStudyToStudyCollectionItem(StudyCollectionItem studyItem, List<Study> studies) {
         if(!StudyCollection.Contains(studyItem) || studyItem == null) {
             ExceptionManager.GetInstance().ThrowAsyncException("声明的Study不存在!");
-            return;
+            return false;
         }
         
-        StudyCollection.AppendStudyToCollectionItem(studyItem, studies);
+        return StudyCollection.AppendStudyToCollectionItem(studyItem, studies);
     }
 
-    public void AddAppToStudy(StudyCollectionItem studyItem, AppModel appModel) {
+    public bool AddAppToStudy(StudyCollectionItem studyItem, AppModel appModel) {
         if(!StudyCollection.Contains(studyItem) || studyItem == null) {
             ExceptionManager.GetInstance().ThrowAsyncException("声明的Study不存在!");
-            return;
+            return false;
         }
-        StudyAppMappingManager.AddAppToMapObj(studyItem, appModel);
+        return StudyAppMappingManager.AddAppToMapObj(studyItem, appModel);
     }
 
     public void DeleteStudyItem(StudyCollectionItem studyItem) {

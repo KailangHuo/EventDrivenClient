@@ -46,8 +46,6 @@ D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\Event
 D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\Views\MainWindow.g.cs
 D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\Views\AddExamWindow.baml
 D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\Views\MainWindow.baml
-D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\Views\AddExamWindow.g.cs
-D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\Views\AddExamWindow.baml
 D:\git-repo-main\Personal_GIT\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
 D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
 D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\Views\MainWindow_Five.g.cs
@@ -58,3 +56,7 @@ D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\
 D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\Views\AddAppWindow.baml
 D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\Views\TestWindow.g.cs
 D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\Views\TestWindow.baml
+D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\Views\AddStudyWindow.g.cs
+D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\Views\AppendStudyWindow.g.cs
+D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\Views\AddStudyWindow.baml
+D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\net6.0-windows\Views\AppendStudyWindow.baml

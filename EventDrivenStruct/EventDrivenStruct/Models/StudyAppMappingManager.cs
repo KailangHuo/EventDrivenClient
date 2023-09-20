@@ -35,9 +35,10 @@ public class StudyAppMappingManager : AbstractEventDrivenObject{
         PublishEvent(nameof(PutStudyAppMapObj), obj);
     }
 
-    public void AddAppToMapObj(StudyCollectionItem studyItem, AppModel appModel) {
-        if(!_map.ContainsKey(studyItem)) return;
+    public bool AddAppToMapObj(StudyCollectionItem studyItem, AppModel appModel) {
+        if(!_map.ContainsKey(studyItem)) return false;
         _map[studyItem].AddAppModel((appModel));
+        return true;
     }
 
 
