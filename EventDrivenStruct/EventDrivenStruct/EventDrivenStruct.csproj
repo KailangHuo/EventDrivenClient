@@ -5,7 +5,7 @@
         <TargetFramework>net6.0-windows</TargetFramework>
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
-        <ApplicationIcon>ConfigurationLoader\ConfigurationFiles\workstation_5432.ico</ApplicationIcon>
+        <ApplicationIcon>ConfigurationLoader\ConfigurationFiles\macbookapplenotebookcomputer-116046_115991.ico</ApplicationIcon>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
