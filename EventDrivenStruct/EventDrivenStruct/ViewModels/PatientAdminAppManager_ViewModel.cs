@@ -68,6 +68,7 @@ public class PatientAdminAppManager_ViewModel : AbstractEventDrivenViewModel{
     }
 
     private void HidePa() {
+        _paAppSequenceItems[CurrentPaCenterNumber] = null;
         CurrentPaCenterNumber = 0;
         IsInvoked = false;
     }
