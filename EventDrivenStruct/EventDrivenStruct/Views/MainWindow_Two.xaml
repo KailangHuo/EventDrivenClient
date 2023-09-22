@@ -70,15 +70,16 @@
         
         <!--App ListBox template-->
         <DataTemplate x:Key="App_ListBox_Template">
-            <StackPanel Orientation="Vertical" CanHorizontallyScroll="False" CanVerticallyScroll="False">
+            <StackPanel Orientation="Horizontal" CanHorizontallyScroll="False" CanVerticallyScroll="False">
                 <TextBlock Width="50" 
                        Margin="0,0,5,0"
                        Text="{Binding AppName}" 
                        TextWrapping="Wrap"
                        HorizontalAlignment="Center" 
                        VerticalAlignment="Center" 
-                       FontSize="10" 
+                       FontSize="15" 
                        FontWeight="Light"/>
+                <Border Width="1" BorderThickness="2" Height="25" BorderBrush="Black"/>
                 <StackPanel.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="关闭该应用" Command="{Binding CloseThisAppCommand}"/>
@@ -106,6 +107,7 @@
                      Width="180"
                      VerticalAlignment="Top"
                      HorizontalAlignment="Left"
+                     Background="#FF007FFF" Foreground="WhiteSmoke"
                      Content="{Binding ActionButtonContent}"
                      Command="{Binding TEST_COMMAND}"
             />
@@ -131,6 +133,7 @@
                     Width="180"
                     VerticalAlignment="Top"
                     HorizontalAlignment="Left"
+                    Background="#FFBF0816" Foreground="WhiteSmoke" 
                     Content="清除所有检查"
                     Command="{Binding TEST_CLEARALL_COMMAND}"
             />
@@ -411,6 +414,7 @@
                            Margin="0,0,5,0"
                 />
                 <Button Content="Clear" Height="20" Width="100" FontSize="12" FontWeight="Light"
+                        Background="#FF007FFF" Foreground="WhiteSmoke"
                         Command="{Binding SystemInfoCollector.ClearCommand}"/>
             </StackPanel>
             

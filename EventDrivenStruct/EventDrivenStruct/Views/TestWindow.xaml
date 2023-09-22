@@ -7,6 +7,22 @@
         mc:Ignorable="d"
         Title="TestWindow" Height="450" Width="800">
     <Grid >
+        <StackPanel Orientation="Horizontal" CanHorizontallyScroll="False" CanVerticallyScroll="False">
+            <TextBlock Width="50" 
+                       Margin="0,0,5,0"
+                       Text="AppName" 
+                       TextWrapping="Wrap"
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" 
+                       FontSize="10" 
+                       FontWeight="Light"/>
+            <Border Width="1" BorderThickness="2" Height="15" BorderBrush="Black"/>
+            <StackPanel.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="关闭该应用" Command="{Binding CloseThisAppCommand}"/>
+                </ContextMenu>
+            </StackPanel.ContextMenu>
+        </StackPanel>
         
     </Grid>
 </Window>

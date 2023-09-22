@@ -20,11 +20,12 @@
             <Grid>
                 <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
                     
-                    <Button Width="20" Height="20" Content="X" 
+                    <Button Width="20" Height="20" Content="×" 
                             Margin="240,0,0,0"
                             Command="{Binding CloseCommand}"
                             Visibility="{Binding CanClose, Converter={StaticResource BooltoVisibilityConverter}}"
-                            BorderThickness="0" Background="Azure"
+                            BorderThickness="0" 
+                            Background="#FFBF0816" Foreground="WhiteSmoke" 
                             FontWeight="Bold" HorizontalAlignment="Right"/>
             
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="250" Height="25">
@@ -90,10 +91,11 @@
             <Button Grid.Column="1" 
                     Command="{Binding AddCommand}"
                     Margin="0,0,3,0"
-                    Content="+" FontWeight="Bold" FontSize="25"
+                    Content="+" FontWeight="ExtraBold" FontSize="25"
                     HorizontalAlignment="Right"
                     Height="40" Width="40"
-                    Background="Azure" BorderThickness="0"/>
+                    Background="#FF007FFF" Foreground="WhiteSmoke"
+                    BorderThickness="0"/>
             
         </Grid>
         
@@ -108,6 +110,7 @@
             </Grid.ColumnDefinitions>
             <Button x:Name="confirm_button" Content="确定"  Width="65" HorizontalAlignment="Left"
                     IsEnabled="{Binding IsLifeCycleEnd, Converter={StaticResource ReverseBoolConverter}}"
+                    Background="#FF007FFF" Foreground="WhiteSmoke"
                     IsEnabledChanged="Button_OnIsEnabledChanged"
                     Command="{Binding ConfirmCommand}">
             </Button>

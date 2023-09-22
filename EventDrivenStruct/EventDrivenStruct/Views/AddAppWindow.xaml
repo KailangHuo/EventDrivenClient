@@ -21,7 +21,11 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Width="250" Height="25">
             <TextBlock Text="Select App" VerticalAlignment="Center" HorizontalAlignment="Left" Width="70" Margin="0,0,0,0"/>
-            <ComboBox Name="AppTypeCombobox" Height="20" Width="170" ItemsSource="{Binding AppTypes}" SelectedItem="{Binding AppType, Mode=TwoWay}"/>
+            <ComboBox Name="AppTypeCombobox" Height="20" Width="170" 
+                      ItemsSource="{Binding AppTypes}" 
+                      SelectedItem="{Binding AppType, Mode=TwoWay}"
+                      FontWeight="Light"
+                      />
         </StackPanel>
         <Grid x:Name="button_grid" Grid.Row="1" HorizontalAlignment="Center" Width="170" Height="25">
             <Grid.ColumnDefinitions>
@@ -31,6 +35,7 @@
             <Button x:Name="confirm_button" Content="确定"  Width="65" HorizontalAlignment="Left"
                     Command="{Binding ConfirmCommand}"
                     IsEnabled="{Binding IsLifeCycleEnd, Converter={StaticResource ReverseBoolConverter}}"
+                    Background="#FF007FFF" Foreground="WhiteSmoke"
                     IsEnabledChanged="Confirm_button_OnIsEnabledChanged"
                     />
             <Button Grid.Column="1" x:Name="cancle_button" Content="取消"  Width="65" HorizontalAlignment="Right"

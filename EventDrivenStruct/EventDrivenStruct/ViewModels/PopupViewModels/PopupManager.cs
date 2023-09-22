@@ -42,6 +42,11 @@ public class PopupManager : AbstractEventDrivenObject{
     }
 
     public void MainWindow_AppendWindowPopup(AppTab_ViewModel appTabViewModel) {
+        if (appTabViewModel.CurrentSelectedStudyCollectionItem == null) {
+            ExceptionManager.GetInstance().ThrowAsyncException("No Study to Append to!");
+            return;
+        }
+
         AppendStudyWindow appendStudyWindow = new AppendStudyWindow();
         AppendStudyWindow_ViewModel addStudyWindowViewModel = new AppendStudyWindow_ViewModel(appTabViewModel);
         appendStudyWindow.DataContext = addStudyWindowViewModel;
