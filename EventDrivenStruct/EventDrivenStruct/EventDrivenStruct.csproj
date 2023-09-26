@@ -8,14 +8,16 @@
         <ApplicationIcon>ConfigurationLoader\ConfigurationFiles\macbookapplenotebookcomputer-116046_115991.ico</ApplicationIcon>
     </PropertyGroup>
 
-    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-       <!-- 产品环境-->
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' "><!-- 产品环境-->
       <!--<OutputPath>C:\Users\kailang.huo\Desktop\EDA_Struct\EDA_Client</OutputPath>-->
+    
+      <OutputPath></OutputPath>
     </PropertyGroup>
 
-    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-        <!--产品环境-->
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' "><!--产品环境-->
       <!--<OutputPath>C:\Users\kailang.huo\Desktop\EDA_Struct\EDA_Client</OutputPath>-->
+    
+      <OutputPath></OutputPath>
     </PropertyGroup>
 
     <ItemGroup>

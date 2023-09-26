@@ -78,3 +78,8 @@ D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\
 D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Release\net6.0-windows\EventDrivenStruct.pdb
 D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Release\net6.0-windows\EventDrivenStruct.genruntimeconfig.cache
 D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Release\net6.0-windows\ref\EventDrivenStruct.dll
+E:\EventDriverClient\net6.0-windows\EventDrivenStruct.exe
+E:\EventDriverClient\net6.0-windows\EventDrivenStruct.deps.json
+E:\EventDriverClient\net6.0-windows\EventDrivenStruct.runtimeconfig.json
+E:\EventDriverClient\net6.0-windows\EventDrivenStruct.dll
+E:\EventDriverClient\net6.0-windows\EventDrivenStruct.pdb

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Windows;
 using System.Xml;
 using EventDrivenStruct.Models;
 
@@ -11,10 +13,10 @@ public class SystemConfiguration {
 
     private SystemConfiguration() {
         // 研发环境
-        configFilePath = @"..\..\..\ConfigurationLoader\ConfigurationFiles\Configuration.xml";
+        configFilePath =System.Environment.CurrentDirectory + @"\..\..\..\ConfigurationLoader\ConfigurationFiles\Configuration.xml";
         
         // 产品环境
-        //configFilePath = @"..\ConfigurationLoader\ConfigurationFiles\Configuration.xml";
+        //configFilePath = System.Environment.CurrentDirectory + @"\ConfigurationFiles\Configuration.xml";
         _document = new XmlDocument();
         
         ConstantAppSet = new HashSet<string>();
@@ -58,6 +60,11 @@ public class SystemConfiguration {
     private Dictionary<String, AppConfigInfo> AppInfoMap;
 
     private void init() {
+        if (!File.Exists(configFilePath)) {
+            MessageBox.Show("ConfigurationFilesNotFound!");
+            return;
+        }
+
         _document.Load(configFilePath);
         initScreenNumber();
         initStudyNumber();
