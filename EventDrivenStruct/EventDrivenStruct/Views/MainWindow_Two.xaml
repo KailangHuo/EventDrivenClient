@@ -1,12 +1,16 @@
 <Window x:Class="EventDrivenStruct.Views.MainWindow_Two"
+        x:Name="ThisWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:EventDrivenStruct.Views"
         xmlns:converter="clr-namespace:EventDrivenStruct.ViewModels.Converter"
+        xmlns:titleBar="clr-namespace:CustomizedTitleBar;assembly=CustomizedTitleBar"
         mc:Ignorable="d"
-        Title="MainWindow_Two" Height="900" Width="1600" ResizeMode="CanResize" WindowStartupLocation="CenterScreen">
+        Title="MainWindow_Two" Height="900" Width="1600" 
+        ResizeMode="CanResize" 
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <converter:BoolToVisibilityConverter x:Key = "BooltoVisibilityConverter"/>
         <converter:ReverseBoolConverter x:Key="ReverseBoolConverter"/>
@@ -92,13 +96,20 @@
     
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="35"/>
             <RowDefinition Height="580"/>
-            <RowDefinition Height="5*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
+        <!-- TitleBar -->
+        <titleBar:CustomizedTitileBar_UserControl
+            HostWindow="{Binding ElementName=ThisWindow}"
+            Height="40"
+            />
+        
         <!-- Function Buttons-->
-        <StackPanel Grid.Row="0" Orientation="Horizontal" >
+        <StackPanel Grid.Row="1" Orientation="Horizontal" >
             <!-- Function Button-->
             <Button  Name="ActionButton"
                      FontWeight="Light"
@@ -151,7 +162,7 @@
         </StackPanel>
         
         <!-- Simulating Monitors -->
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -401,7 +412,7 @@
         </Grid>
         
         <!--System Information-->
-        <Grid Grid.Row="2" Margin="0,-20,0,0">
+        <Grid Grid.Row="3" Margin="0,-20,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="20"/>
                 <RowDefinition Height="*"/>

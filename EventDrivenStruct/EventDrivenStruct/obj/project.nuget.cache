@@ -1,15 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "P8UdhXIDsO0QnpBB9Sd0Vb57NOhetEDp5KwSNHmc8w4R8zstE2z8lM61gTp+yaU66uJzSNQqhEuTfadde8635Q==",
+  "dgSpecHash": "GB1o5WZE+h899RgjLqzY8/mL5wupJKLh+ra+xjNeOwqqzZ61UqUkyumVcHnxAemaQfTIcnHaI+PR7/zmTxyXFg==",
   "success": true,
-  "projectFilePath": "D:\\git-repo-main\\Personal_GIT\\MyEventDrivenStructExample\\EventDrivenStruct\\EventDrivenStruct\\EventDrivenStruct.csproj",
-  "expectedPackageFiles": [],
-  "logs": [
-    {
-      "code": "NU1803",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "You are running the 'restore' operation with an 'HTTP' source, 'http://nexus.uihcloud.cn/repository/nuget-hswgroup-dev/'. Non-HTTPS access will be removed in a future version. Consider migrating to an 'HTTPS' source."
-    }
-  ]
+  "projectFilePath": "D:\\Git-Repo-Main\\MyEventDrivenStructExample\\EventDrivenStruct\\EventDrivenStruct\\EventDrivenStruct.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\huoka\\.nuget\\packages\\customizedtitlebar\\1.0.4\\customizedtitlebar.1.0.4.nupkg.sha512",
+    "C:\\Users\\huoka\\.nuget\\packages\\microsoft.win32.systemevents\\8.0.0-rc.2.23479.6\\microsoft.win32.systemevents.8.0.0-rc.2.23479.6.nupkg.sha512",
+    "C:\\Users\\huoka\\.nuget\\packages\\system.drawing.common\\8.0.0-rc.2.23479.14\\system.drawing.common.8.0.0-rc.2.23479.14.nupkg.sha512",
+    "C:\\Users\\huoka\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.22\\microsoft.netcore.app.ref.6.0.22.nupkg.sha512",
+    "C:\\Users\\huoka\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.22\\microsoft.windowsdesktop.app.ref.6.0.22.nupkg.sha512",
+    "C:\\Users\\huoka\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.22\\microsoft.aspnetcore.app.ref.6.0.22.nupkg.sha512",
+    "C:\\Users\\huoka\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.22\\microsoft.netcore.app.host.win-x64.6.0.22.nupkg.sha512"
+  ],
+  "logs": []
 }

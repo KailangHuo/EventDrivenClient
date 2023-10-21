@@ -1,31 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "D:\\git-repo-main\\Personal_GIT\\MyEventDrivenStructExample\\EventDrivenStruct\\EventDrivenStruct\\EventDrivenStruct.csproj": {}
+    "D:\\Git-Repo-Main\\MyEventDrivenStructExample\\EventDrivenStruct\\EventDrivenStruct\\EventDrivenStruct.csproj": {}
   },
   "projects": {
-    "D:\\git-repo-main\\Personal_GIT\\MyEventDrivenStructExample\\EventDrivenStruct\\EventDrivenStruct\\EventDrivenStruct.csproj": {
+    "D:\\Git-Repo-Main\\MyEventDrivenStructExample\\EventDrivenStruct\\EventDrivenStruct\\EventDrivenStruct.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\git-repo-main\\Personal_GIT\\MyEventDrivenStructExample\\EventDrivenStruct\\EventDrivenStruct\\EventDrivenStruct.csproj",
+        "projectUniqueName": "D:\\Git-Repo-Main\\MyEventDrivenStructExample\\EventDrivenStruct\\EventDrivenStruct\\EventDrivenStruct.csproj",
         "projectName": "EventDrivenStruct",
-        "projectPath": "D:\\git-repo-main\\Personal_GIT\\MyEventDrivenStructExample\\EventDrivenStruct\\EventDrivenStruct\\EventDrivenStruct.csproj",
-        "packagesPath": "E:\\NUGET\\packages",
-        "outputPath": "D:\\git-repo-main\\Personal_GIT\\MyEventDrivenStructExample\\EventDrivenStruct\\EventDrivenStruct\\obj\\",
+        "projectPath": "D:\\Git-Repo-Main\\MyEventDrivenStructExample\\EventDrivenStruct\\EventDrivenStruct\\EventDrivenStruct.csproj",
+        "packagesPath": "C:\\Users\\huoka\\.nuget\\packages\\",
+        "outputPath": "D:\\Git-Repo-Main\\MyEventDrivenStructExample\\EventDrivenStruct\\EventDrivenStruct\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\kailang.huo\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\huoka\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0-windows"
         ],
         "sources": {
-          "http://nexus.uihcloud.cn/repository/nuget-hswgroup-dev/": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0-windows7.0": {
@@ -42,6 +37,12 @@
       "frameworks": {
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
+          "dependencies": {
+            "CustomizedTitleBar": {
+              "target": "Package",
+              "version": "[1.0.4, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -53,6 +54,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.22, 6.0.22]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[6.0.22, 6.0.22]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[6.0.22, 6.0.22]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[6.0.22, 6.0.22]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
@@ -61,7 +80,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.414\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

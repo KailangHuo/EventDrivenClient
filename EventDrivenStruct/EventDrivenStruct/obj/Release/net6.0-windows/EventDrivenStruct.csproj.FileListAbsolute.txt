@@ -83,3 +83,7 @@ E:\EventDriverClient\net6.0-windows\EventDrivenStruct.deps.json
 E:\EventDriverClient\net6.0-windows\EventDrivenStruct.runtimeconfig.json
 E:\EventDriverClient\net6.0-windows\EventDrivenStruct.dll
 E:\EventDriverClient\net6.0-windows\EventDrivenStruct.pdb
+D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\bin\Release\net6.0-windows\CustomizedTitleBar.dll
+D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\bin\Release\net6.0-windows\Microsoft.Win32.SystemEvents.dll
+D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\bin\Release\net6.0-windows\System.Drawing.Common.dll
+D:\Git-Repo-Main\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\bin\Release\net6.0-windows\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
