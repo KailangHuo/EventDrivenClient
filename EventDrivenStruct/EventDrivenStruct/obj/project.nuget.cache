@@ -1,16 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "GB1o5WZE+h899RgjLqzY8/mL5wupJKLh+ra+xjNeOwqqzZ61UqUkyumVcHnxAemaQfTIcnHaI+PR7/zmTxyXFg==",
+  "dgSpecHash": "n8a0BY2XHugwBiQLHQjFdLiRDlCcjKKpTW3dXYcacUsTRXtUbAHaTJPgTiNXmqstj1z2b7WSTXdaHQHWcBEFmw==",
   "success": true,
-  "projectFilePath": "D:\\Git-Repo-Main\\MyEventDrivenStructExample\\EventDrivenStruct\\EventDrivenStruct\\EventDrivenStruct.csproj",
+  "projectFilePath": "D:\\System\\Documents\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\EventDrivenStruct\\EventDrivenStruct.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\huoka\\.nuget\\packages\\customizedtitlebar\\1.0.4\\customizedtitlebar.1.0.4.nupkg.sha512",
-    "C:\\Users\\huoka\\.nuget\\packages\\microsoft.win32.systemevents\\8.0.0-rc.2.23479.6\\microsoft.win32.systemevents.8.0.0-rc.2.23479.6.nupkg.sha512",
-    "C:\\Users\\huoka\\.nuget\\packages\\system.drawing.common\\8.0.0-rc.2.23479.14\\system.drawing.common.8.0.0-rc.2.23479.14.nupkg.sha512",
-    "C:\\Users\\huoka\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.22\\microsoft.netcore.app.ref.6.0.22.nupkg.sha512",
-    "C:\\Users\\huoka\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.22\\microsoft.windowsdesktop.app.ref.6.0.22.nupkg.sha512",
-    "C:\\Users\\huoka\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.22\\microsoft.aspnetcore.app.ref.6.0.22.nupkg.sha512",
-    "C:\\Users\\huoka\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.22\\microsoft.netcore.app.host.win-x64.6.0.22.nupkg.sha512"
+    "C:\\Users\\kailang.huo\\.nuget\\packages\\customizedtitlebar\\1.0.4\\customizedtitlebar.1.0.4.nupkg.sha512",
+    "C:\\Users\\kailang.huo\\.nuget\\packages\\microsoft.win32.systemevents\\8.0.0-rc.2.23479.6\\microsoft.win32.systemevents.8.0.0-rc.2.23479.6.nupkg.sha512",
+    "C:\\Users\\kailang.huo\\.nuget\\packages\\system.drawing.common\\8.0.0-rc.2.23479.14\\system.drawing.common.8.0.0-rc.2.23479.14.nupkg.sha512"
   ],
   "logs": []
 }

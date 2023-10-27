@@ -50,7 +50,7 @@ namespace EventDrivenStruct {
             Current.Dispatcher.BeginInvoke(() => {
                 Window mainWindow = SystemConfiguration.GetInstance().GetScreenNumber() == 5
                     ? new MainWindow_Five()
-                    : new MainWindow_Two();
+                    : new MainWindowView();
                 //MainWindow_Five mainWindow = new MainWindow_Five();
                 //MainWindow_ViewModel mainWindowViewModel = new MainWindow_ViewModel();
                 

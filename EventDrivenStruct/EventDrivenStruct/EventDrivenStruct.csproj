@@ -10,14 +10,14 @@
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' "><!-- 产品环境-->
       <!--<OutputPath>C:\Users\kailang.huo\Desktop\EDA_Struct\EDA_Client</OutputPath>-->
-    
-      <OutputPath></OutputPath>
+        <AppendTargetFrameWorkToOutPutPath>false</AppendTargetFrameWorkToOutPutPath> 
+      <OutputPath>D:\System\DeskTop\EDA_ClientStruct</OutputPath>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' "><!--产品环境-->
       <!--<OutputPath>C:\Users\kailang.huo\Desktop\EDA_Struct\EDA_Client</OutputPath>-->
-    
-      <OutputPath></OutputPath>
+        <AppendTargetFrameWorkToOutPutPath>false</AppendTargetFrameWorkToOutPutPath>
+      <OutputPath>D:\System\DeskTop\EDA_ClientStruct</OutputPath>
     </PropertyGroup>
 
     <ItemGroup>
