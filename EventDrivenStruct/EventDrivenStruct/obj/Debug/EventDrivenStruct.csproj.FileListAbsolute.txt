@@ -33,3 +33,5 @@ D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\EventDri
 D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\EventDrivenStruct.pdb
 D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\EventDrivenStruct.genruntimeconfig.cache
 D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\ref\EventDrivenStruct.dll
+D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\Views\TestingController.g.cs
+D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\obj\Debug\Views\TestingController.baml

@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\EventDrivenStruct\App.xaml
-7-650884703
+8-460236586
 
-461076143490
+47-1834267502
 197-923865888
-Views\AddAppWindow.xaml;Views\AddStudyWindow.xaml;Views\AppendStudyWindow.xaml;Views\MainWindowView.xaml;Views\MainWindow_Five.xaml;Views\MainWindow_Two.xaml;Views\TestWindow.xaml;
+Views\AddAppWindow.xaml;Views\AddStudyWindow.xaml;Views\AppendStudyWindow.xaml;Views\MainWindowView.xaml;Views\MainWindow_Five.xaml;Views\MainWindow_Two.xaml;Views\TestingController.xaml;Views\TestWindow.xaml;
 
 False
 
