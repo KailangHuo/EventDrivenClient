@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventDrivenStruct", "EventDrivenStruct\EventDrivenStruct.csproj", "{C465D942-01C5-43C5-822B-140F70B238DB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDA_Client", "EDA_Client\EDA_Client.csproj", "{C465D942-01C5-43C5-822B-140F70B238DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

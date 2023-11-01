@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net6.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <UseWPF>true</UseWPF>
+        <ApplicationIcon>ConfigurationLoader\ConfigurationFiles\macbookapplenotebookcomputer-116046_115991.ico</ApplicationIcon>
+        <RootNamespace>EventDrivenStruct</RootNamespace>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' "><!-- 产品环境-->
+      <!--<OutputPath>C:\Users\kailang.huo\Desktop\EDA_Struct\EDA_Client</OutputPath>-->
+        <AppendTargetFrameWorkToOutPutPath>false</AppendTargetFrameWorkToOutPutPath> 
+      <OutputPath>D:\System\DeskTop\EDA_ClientStruct</OutputPath>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' "><!--产品环境-->
+      <!--<OutputPath>C:\Users\kailang.huo\Desktop\EDA_Struct\EDA_Client</OutputPath>-->
+        <AppendTargetFrameWorkToOutPutPath>false</AppendTargetFrameWorkToOutPutPath>
+      <OutputPath>D:\System\DeskTop\EDA_ClientStruct</OutputPath>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Reference Include="CustomizedTitleBar">
+        <HintPath>..\..\..\CustomizedTitleBar\CustomizedTitleBar\CustomizedTitleBar\bin\Debug\net6.0-windows\CustomizedTitleBar.dll</HintPath>
+      </Reference>
+      <Reference Include="EventDrivenElements">
+        <HintPath>..\..\..\EventDrivenObject\OutPut\net6.0\EventDrivenElements.dll</HintPath>
+      </Reference>
+      <Reference Include="EvevntDrivenAbstractElements">
+        <HintPath>..\..\..\EventDrivenObject\OutPut\net6.0\EvevntDrivenAbstractElements.dll</HintPath>
+      </Reference>
+
+
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="EventDrivenElements" Version="1.0.0" />
+    </ItemGroup>
+
+
+
+
+</Project>
