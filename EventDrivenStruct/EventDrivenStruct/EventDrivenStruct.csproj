@@ -11,16 +11,19 @@
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' "><!-- 产品环境-->
       <!--<OutputPath>C:\Users\kailang.huo\Desktop\EDA_Struct\EDA_Client</OutputPath>-->
         <AppendTargetFrameWorkToOutPutPath>false</AppendTargetFrameWorkToOutPutPath> 
-      <OutputPath>D:\System\DeskTop\EDA_ClientStruct</OutputPath>
+      <OutputPath>E:\DeskTop\EDA_ClientStruct</OutputPath>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' "><!--产品环境-->
       <!--<OutputPath>C:\Users\kailang.huo\Desktop\EDA_Struct\EDA_Client</OutputPath>-->
         <AppendTargetFrameWorkToOutPutPath>false</AppendTargetFrameWorkToOutPutPath>
-      <OutputPath>D:\System\DeskTop\EDA_ClientStruct</OutputPath>
+      <OutputPath>E:\DeskTop\EDA_ClientStruct</OutputPath>
     </PropertyGroup>
 
     <ItemGroup>
+      <Reference Include="CustomizedTitleBar">
+        <HintPath>..\..\..\CustomizedTitleBar\CustomizedTitleBar\CustomizedTitleBar\bin\Debug\net6.0-windows\CustomizedTitleBar.dll</HintPath>
+      </Reference>
       <Reference Include="EventDrivenElements">
         <HintPath>..\..\..\EventDrivenObject\OutPut\net6.0\EventDrivenElements.dll</HintPath>
       </Reference>
@@ -32,7 +35,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="CustomizedTitleBar" Version="1.0.4" />
+      <PackageReference Include="EventDrivenElements" Version="1.0.0" />
     </ItemGroup>
 
 

@@ -1,12 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "n8a0BY2XHugwBiQLHQjFdLiRDlCcjKKpTW3dXYcacUsTRXtUbAHaTJPgTiNXmqstj1z2b7WSTXdaHQHWcBEFmw==",
+  "dgSpecHash": "dzKdjWug/m7FuBAuincZfkUazMqlY2kzeN0JeaG04GG78WH5Y7D95m+9iRm6W5EN17/C8YabYraile9yt2gtVg==",
   "success": true,
-  "projectFilePath": "D:\\System\\Documents\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\EventDrivenStruct\\EventDrivenStruct.csproj",
+  "projectFilePath": "E:\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\EventDrivenStruct\\EventDrivenStruct.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\kailang.huo\\.nuget\\packages\\customizedtitlebar\\1.0.4\\customizedtitlebar.1.0.4.nupkg.sha512",
-    "C:\\Users\\kailang.huo\\.nuget\\packages\\microsoft.win32.systemevents\\8.0.0-rc.2.23479.6\\microsoft.win32.systemevents.8.0.0-rc.2.23479.6.nupkg.sha512",
-    "C:\\Users\\kailang.huo\\.nuget\\packages\\system.drawing.common\\8.0.0-rc.2.23479.14\\system.drawing.common.8.0.0-rc.2.23479.14.nupkg.sha512"
+    "C:\\Users\\huoka\\.nuget\\packages\\eventdrivenelements\\1.0.0\\eventdrivenelements.1.0.0.nupkg.sha512"
   ],
   "logs": []
 }

@@ -8,7 +8,7 @@
         xmlns:converter="clr-namespace:EventDrivenStruct.ViewModels.Converter"
         xmlns:titleBar="clr-namespace:CustomizedTitleBar;assembly=CustomizedTitleBar"
         mc:Ignorable="d"
-        Title="MainWindowView" Height="900" Width="1600" 
+        Title="EDA_Struct_Client" Height="900" Width="1600" 
         ResizeMode="CanResize" 
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
@@ -94,18 +94,19 @@
         
     </Window.Resources>
     
-    <Grid>
+    
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="35"/>
-            <RowDefinition Height="580"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
         <!-- TitleBar -->
         <titleBar:CustomizedTitileBar_UserControl
             HostWindow="{Binding ElementName=ThisWindow}"
-            Height="30"
+            Height="40"
             />
         
         <!-- Function Buttons-->
@@ -272,10 +273,10 @@
                 </Grid>
                 
                 <!-- Left monitor-->
-                <Grid Grid.Row="1">
+                <Grid Grid.Row="1" Height="600">
+                    <Border BorderBrush="Black" BorderThickness="1"/>
                     <Grid Name="PrimaryWindowPreview"  HorizontalAlignment="Stretch" >
                         <Grid VerticalAlignment="Top" Margin="0,0,0,0" >
-                            <Border BorderBrush="Black" BorderThickness="1" Height="500"/>
                             <StackPanel Orientation="Vertical">
                                 <Label Content="[*Binding Need: 屏幕编号]" Height="50" FontSize="30" FontWeight="Light"/>
                                 <TextBlock Text="{Binding ScreenManagerViewModel.ScreenCollection[0].AppText}" FontSize="40" HorizontalAlignment="Center" FontWeight="Light"/>
@@ -290,7 +291,7 @@
         </Grid>
         
         <!--System Information-->
-        <Grid Grid.Row="3" Margin="0,-20,0,0">
+        <Grid Grid.Row="3" Margin="0,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="20"/>
                 <RowDefinition Height="*"/>
