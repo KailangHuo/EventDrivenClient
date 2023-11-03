@@ -12,6 +12,7 @@
         ResizeMode="CanResize" 
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
+
         
         <converter:BoolToVisibilityConverter x:Key = "BooltoVisibilityConverter"/>
         <converter:ReverseBoolConverter x:Key="ReverseBoolConverter"/>
@@ -281,7 +282,7 @@
                             <StackPanel Orientation="Vertical">
                                 <Label Content="{Binding WindowIndex, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
                                        Height="50" FontSize="30" FontWeight="Light"/>
-                                <TextBlock Text="{Binding ScreenManagerViewModel.ScreenCollection[0].AppText}" 
+                                <TextBlock Text="{Binding ScreenManagerViewModel.ScreenCollection[0].AppText}"
                                            FontSize="40" HorizontalAlignment="Center" FontWeight="Light"/>
                                 <TextBlock Text="{Binding ScreenManagerViewModel.ScreenCollection[0].StudyText}" 
                                            FontSize="25" HorizontalAlignment="Center" Margin="0,0,0,30" FontWeight="Light"/>

@@ -28,7 +28,16 @@ namespace EventDrivenStruct {
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application {
-        
+
+        private void TestWindowRun() {
+            Window testWindow = new TestingController();
+            TestWindow_ViewModel viewModel = new TestWindow_ViewModel();
+            testWindow.DataContext = viewModel;
+            Application.Current.Dispatcher.BeginInvoke(() => {
+                testWindow.Show();
+            });
+        }
+
         protected override void OnExit(ExitEventArgs e) {
             Application.Current.Shutdown();
             Process.GetCurrentProcess().Kill();
@@ -36,8 +45,8 @@ namespace EventDrivenStruct {
         }
 
         protected override void OnStartup(StartupEventArgs e) {
-            /*TestWindowRun();
-            return;*/
+            TestWindowRun();
+            return;
             
             MainWindow_ViewModel mainWindowViewModel = new MainWindow_ViewModel();
             GlobalContext.GetInstance().RegisterMainWindowViewModel(mainWindowViewModel);
