@@ -25,6 +25,7 @@ public class ConcreteWindowViewModel : AbstractEventDrivenViewModel{
 
     public override void UpdateByEvent(string propertyName, object o) {
         if (propertyName.Equals(nameof(AppTab_ViewModel.SelectedAppItemContainer))) {
+            //TODO: 选取后重选会导致选中有问题
             this.SelectedAppSequenceManager
                 = this.MainWindowViewModel.AppTabViewModel.SelectedAppItemContainer.AppSequenceManagerCollection[
                     ScreenIndex];
