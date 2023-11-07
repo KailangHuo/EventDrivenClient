@@ -31,7 +31,7 @@ public class AppSequenceManager_ViewModel : AbstractEventDrivenViewModel{
         set {
             if(_appItemSelected == value )return;
             _appItemSelected = value;
-            PublishEvent(nameof(AppItemSelected), this);
+            if(_appItemSelected != null)PublishEvent(nameof(AppItemSelected), this);
         }
     }
 

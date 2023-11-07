@@ -191,8 +191,10 @@ public class SystemConfiguration {
     }
 
     public List<TestStudyAppNode> GetTestStudyList() {
-        TestStudyAppList = new List<TestStudyAppNode>();
-        initStudyAppNodeList();
+        if (TestStudyAppList.Count == 0) {
+            TestStudyAppList = new List<TestStudyAppNode>();
+            initStudyAppNodeList();
+        }
         return this.TestStudyAppList;
     }
 
