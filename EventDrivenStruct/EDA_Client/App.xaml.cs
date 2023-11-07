@@ -30,12 +30,6 @@ namespace EventDrivenStruct {
     public partial class App : Application {
 
         private void TestWindowRun() {
-            Window testWindow = new TestingController();
-            TestWindow_ViewModel viewModel = new TestWindow_ViewModel();
-            testWindow.DataContext = viewModel;
-            Application.Current.Dispatcher.BeginInvoke(() => {
-                testWindow.Show();
-            });
         }
 
         protected override void OnExit(ExitEventArgs e) {
@@ -45,8 +39,8 @@ namespace EventDrivenStruct {
         }
 
         protected override void OnStartup(StartupEventArgs e) {
-            TestWindowRun();
-            return;
+            /*TestWindowRun();
+            return;*/
             
             MainWindow_ViewModel mainWindowViewModel = new MainWindow_ViewModel();
             GlobalContext.GetInstance().RegisterMainWindowViewModel(mainWindowViewModel);
@@ -55,30 +49,12 @@ namespace EventDrivenStruct {
             int screenNum = SystemConfiguration.GetInstance().GetScreenNumber();
                 
             for (int i = 0; i < screenNum; i++) {
-                Window window = new MainWindowView(i);
-                if(i == 0) GlobalContext.GetInstance().RegisterMainWindow(window);
-                else {
-                    GlobalContext.GetInstance().RegisterSubWindow(window);
-                }
-                window.DataContext = mainWindowViewModel;
+                Window window = new MainWindowView();
+                GlobalContext.GetInstance().RegisterSubWindow(window);
+                window.DataContext = new ConcreteWindowViewModel(mainWindowViewModel, i);
             }
 
             GlobalContext.GetInstance().ShowDialogs();
-            
-            /*Current.Dispatcher.BeginInvoke(() => {
-               
-                Window mainWindow = SystemConfiguration.GetInstance().GetScreenNumber() == 5
-                    ? new MainWindow_Five()
-                    : new MainWindowView();
-                
-                GlobalContext.GetInstance().RegisterMainWindow(mainWindow);
-                GlobalContext.GetInstance().RegisterMainWindowViewModel(mainWindowViewModel);
-                
-                mainWindow.DataContext = mainWindowViewModel;
-                mainWindow.Show();
-                
-            });*/
-            //UnitTest1(mainWindowViewModel);
         }
 
     }

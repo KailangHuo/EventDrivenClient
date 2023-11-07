@@ -102,7 +102,7 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
     #region COMMAND_BINDING_METHODS
 
     public void AddApp(object o = null) {
-        int screenNumber = Convert.ToInt32((string)o);
+        int screenNumber = (int)o;
         PopupManager.GetInstance().MainWindow_AddAppWindowPopup(this, screenNumber);
     }
 

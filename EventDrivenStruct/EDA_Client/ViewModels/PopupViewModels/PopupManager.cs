@@ -21,27 +21,27 @@ public class PopupManager : AbstractEventDrivenObject{
         return _popupManager;
     }
 
-    public void MainWindow_AddWindowPopup() {
+    public void MainWindow_AddWindowPopup(int screenIndex) {
         AddStudyWindow addExamWindow = new AddStudyWindow();
         AddStudyWindow_ViewModel addStudyWindowViewModel = new AddStudyWindow_ViewModel();
         addExamWindow.DataContext = addStudyWindowViewModel;
-        addExamWindow.Owner = GlobalContext.GetInstance().MainWindow;
+        addExamWindow.Owner = GlobalContext.GetInstance().GetWindowOwnerByIndex(screenIndex);
         Application.Current.Dispatcher.BeginInvoke(() => {
             addExamWindow.ShowDialog();
         });
     }
 
-    public void MainWindow_AddAppWindowPopup(AppTab_ViewModel appTabViewModel, int screenNumber) {
+    public void MainWindow_AddAppWindowPopup(AppTab_ViewModel appTabViewModel, int screenIndex) {
         AddAppWindow addAppWindow = new AddAppWindow();
-        AddAppWindow_ViewModel addAppWindowViewModel = new AddAppWindow_ViewModel(appTabViewModel, screenNumber);
+        AddAppWindow_ViewModel addAppWindowViewModel = new AddAppWindow_ViewModel(appTabViewModel, screenIndex);
         addAppWindow.DataContext = addAppWindowViewModel;
-        addAppWindow.Owner = GlobalContext.GetInstance().MainWindow;
+        addAppWindow.Owner = GlobalContext.GetInstance().GetWindowOwnerByIndex(screenIndex);
         Application.Current.Dispatcher.BeginInvoke(() => {
             addAppWindow.ShowDialog();
         });
     }
 
-    public void MainWindow_AppendWindowPopup(AppTab_ViewModel appTabViewModel) {
+    public void MainWindow_AppendWindowPopup(AppTab_ViewModel appTabViewModel, int screenIndex) {
         if (appTabViewModel.CurrentSelectedStudyCollectionItem == null) {
             ExceptionManager.GetInstance().ThrowAsyncException("No Study to Append to!");
             return;
@@ -50,7 +50,7 @@ public class PopupManager : AbstractEventDrivenObject{
         AppendStudyWindow appendStudyWindow = new AppendStudyWindow();
         AppendStudyWindow_ViewModel addStudyWindowViewModel = new AppendStudyWindow_ViewModel(appTabViewModel);
         appendStudyWindow.DataContext = addStudyWindowViewModel;
-        appendStudyWindow.Owner = GlobalContext.GetInstance().MainWindow;
+        appendStudyWindow.Owner = GlobalContext.GetInstance().GetWindowOwnerByIndex(screenIndex);
         Application.Current.Dispatcher.BeginInvoke(() => {
             appendStudyWindow.ShowDialog();
         });

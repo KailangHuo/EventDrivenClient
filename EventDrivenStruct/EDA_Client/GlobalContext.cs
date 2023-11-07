@@ -15,7 +15,7 @@ public class GlobalContext {
 
     private void initSystem() {
         ExceptionManager.GetInstance().RegisterObserver(PopupManager.GetInstance());
-        WindowList = new List<Window>();
+        SubWindowList = new List<Window>();
     }
 
     public static GlobalContext GetInstance() {
@@ -30,29 +30,27 @@ public class GlobalContext {
         return _globalContext;
     }
 
-    private List<Window> WindowList;
-
-    public Window MainWindow { get; private set; }
+    private List<Window> SubWindowList;
 
     public MainWindow_ViewModel MainWindowViewModel { get; private set; }
 
     public MainEntry_ModelFacade MainEntryModelFacade { get; private set; }
 
+    public Window GetWindowOwnerByIndex(int screenNumber) {
+        return this.SubWindowList[screenNumber];
+    }
+
     public void ShowDialogs() {
         Application.Current.Dispatcher.BeginInvoke(() => {
-            MainWindow.Show();
-            for (int i = 0; i < this.WindowList.Count; i++) {
-                WindowList[i].Show();
+            for (int i = 0; i < this.SubWindowList.Count; i++) {
+                SubWindowList[i].Show();
             }
         });
     }
-
-    public void RegisterMainWindow(Window mainWindow) {
-        this.MainWindow = mainWindow;
-    }
+    
 
     public void RegisterSubWindow(Window subWindow) {
-        this.WindowList.Add(subWindow);
+        this.SubWindowList.Add(subWindow);
     }
 
     public void RegisterMainWindowViewModel(MainWindow_ViewModel mainWindowViewModel) {

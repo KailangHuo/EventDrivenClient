@@ -123,13 +123,14 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
     }
 
     private void GotoPaView(object o = null) {
-        int screenNumber = int.Parse((string)o);
+        int screenIndex = (int)o;
         this.AppTabViewModel.IsExpanded = false;
-        this.PatientAdminAppManagerViewModel.InvokePaAt(screenNumber);
+        this.PatientAdminAppManagerViewModel.InvokePaAt(screenIndex);
     }
 
     private void TEST_ADD(object o = null) {
-        PopupManager.GetInstance().MainWindow_AddWindowPopup();
+        int screenIndex = (int)o;
+        PopupManager.GetInstance().MainWindow_AddWindowPopup(screenIndex);
     }
 
     private void TEST_CLEARALL(object o = null) {
@@ -137,7 +138,8 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
     }
 
     private void TEST_APPEND(object o = null) {
-        PopupManager.GetInstance().MainWindow_AppendWindowPopup(this.AppTabViewModel);
+        int screenIndex = (int)o;
+        PopupManager.GetInstance().MainWindow_AppendWindowPopup(this.AppTabViewModel, screenIndex);
     }
 
 

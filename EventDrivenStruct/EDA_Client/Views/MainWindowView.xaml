@@ -122,8 +122,8 @@
                      VerticalAlignment="Top"
                      HorizontalAlignment="Left"
                      Background="#FF007FFF" Foreground="WhiteSmoke"
-                     Content="{Binding ActionButtonContent}"
-                     Command="{Binding TEST_COMMAND}"
+                     Content="{Binding MainWindowViewModel.ActionButtonContent}"
+                     Command="{Binding MainWindowViewModel.TEST_COMMAND}"
             />
             
             <!-- AddPatient Button -->
@@ -135,13 +135,14 @@
                     VerticalAlignment="Top"
                     HorizontalAlignment="Left"
                     Content="Add Patient"
-                    Command="{Binding TEST_ADD_COMMAND}"
+                    Command="{Binding MainWindowViewModel.TEST_ADD_COMMAND}"
+                    CommandParameter="{Binding ScreenIndex}"
             />
             
             <!-- ClearAll Button -->
             <Button Name="TriggeredActionButton"
                     FontWeight="Light"
-                    Visibility="{Binding TriggeredActionBool, Converter={StaticResource BooltoVisibilityConverter}}"
+                    Visibility="{Binding MainWindowViewModel.TriggeredActionBool, Converter={StaticResource BooltoVisibilityConverter}}"
                     Margin="0,3,7,0"
                     Height="30"
                     Width="180"
@@ -149,7 +150,7 @@
                     HorizontalAlignment="Left"
                     Background="#FFBF0816" Foreground="WhiteSmoke" 
                     Content="清除所有检查"
-                    Command="{Binding TEST_CLEARALL_COMMAND}"
+                    Command="{Binding MainWindowViewModel.TEST_CLEARALL_COMMAND}"
             />
             
             <!-- AppendPatient Button -->
@@ -160,7 +161,8 @@
                     VerticalAlignment="Top"
                     HorizontalAlignment="Left"
                     Content="Append to CurrentStudy"
-                    Command="{Binding TEST_APPEND_COMMAND}"
+                    Command="{Binding MainWindowViewModel.TEST_APPEND_COMMAND}"
+                    CommandParameter="{Binding ScreenIndex}"
                     />
         </StackPanel>
         
@@ -190,8 +192,8 @@
                     
                     <!-- PA button-->
                     <Button Margin="2" 
-                        Command="{Binding GotoPaTabCommand}" 
-                        CommandParameter="0"
+                        Command="{Binding MainWindowViewModel.GotoPaTabCommand}" 
+                        CommandParameter="{Binding ScreenIndex}"
                         Height="50" Width="50"
                         Content="PA" FontSize="20" FontWeight="Light"
                         Visibility="Visible" 
@@ -203,7 +205,7 @@
                 
                     <!-- Clickable Combobox-->
                     <Grid Grid.Column="1" Name = "StudiesComboGridLeft"
-                          Visibility="{Binding StudyContainerViewModel.HasItem, Converter={StaticResource BooltoVisibilityConverter}}"
+                          Visibility="{Binding MainWindowViewModel.StudyContainerViewModel.HasItem, Converter={StaticResource BooltoVisibilityConverter}}"
                           Margin="0,0,2,2"
                           Height="50"
                           Width="240"
@@ -216,8 +218,8 @@
                                   Width="240"
                                   IsReadOnly="True"
                                   ItemTemplate="{StaticResource Study_ComboBox_Template}"
-                                  ItemsSource="{Binding StudyContainerViewModel.StudyViewModels}"
-                                  SelectedItem="{Binding StudyContainerViewModel.SelectedStudy}"
+                                  ItemsSource="{Binding MainWindowViewModel.StudyContainerViewModel.StudyViewModels}"
+                                  SelectedItem="{Binding MainWindowViewModel.StudyContainerViewModel.SelectedStudy}"
                         >
                             
                         </ComboBox>
@@ -227,17 +229,17 @@
                                 VerticalAlignment="Center"
                                 Margin="2,1,0,2"
                                 ContentTemplate="{StaticResource Study_ComboBox_Template}"
-                                Content="{Binding StudyContainerViewModel.SelectedStudy, Mode=TwoWay}"
+                                Content="{Binding MainWindowViewModel.StudyContainerViewModel.SelectedStudy, Mode=TwoWay}"
                                 HorizontalContentAlignment="Left"
                                 VerticalContentAlignment="Center"
-                                ToolTip="{Binding StudyContainerViewModel.SelectedStudy.RepresentationStr}"
+                                ToolTip="{Binding MainWindowViewModel.StudyContainerViewModel.SelectedStudy.RepresentationStr}"
                                 BorderThickness="0"
-                                Command="{Binding StudyContainerViewModel.TriggerSelectedCommand}"
+                                Command="{Binding MainWindowViewModel.StudyContainerViewModel.TriggerSelectedCommand}"
                         >
                             <Button.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem Header="关闭当前检查" Command = "{Binding StudyContainerViewModel.CloseSelectedCommand}"/>
-                                    <MenuItem Header="关闭所有检查" Command = "{Binding StudyContainerViewModel.ClearAllCommand}"/>
+                                    <MenuItem Header="关闭当前检查" Command = "{Binding MainWindowViewModel.StudyContainerViewModel.CloseSelectedCommand}"/>
+                                    <MenuItem Header="关闭所有检查" Command = "{Binding MainWindowViewModel.StudyContainerViewModel.ClearAllCommand}"/>
                                 </ContextMenu>
                             </Button.ContextMenu>
                             
@@ -247,12 +249,12 @@
                     <!-- App ListBox -->
                     <ListBox Grid.Column="2" Name="AppsListBoxLeft"
                              Margin="0,0,0,2"
-                             Visibility="{Binding AppTabViewModel.IsExpanded, Converter={StaticResource BooltoVisibilityConverter}}"
+                             Visibility="{Binding MainWindowViewModel.AppTabViewModel.IsExpanded, Converter={StaticResource BooltoVisibilityConverter}}"
                              Height="50"
                              HorizontalAlignment="Left" VerticalAlignment="Bottom"
                              ItemTemplate="{StaticResource App_ListBox_Template}"
-                             ItemsSource="{Binding AppTabViewModel.SelectedAppItemContainer.VisibleAppModelList}"
-                             SelectedItem="{Binding AppTabViewModel.SelectedAppItemContainer.AppSequenceManagerCollection[WindowIndex].AppItemSelected, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=Window}}"
+                             ItemsSource="{Binding MainWindowViewModel.AppTabViewModel.SelectedAppItemContainer.VisibleAppModelList}"
+                             SelectedItem="{Binding SelectedAppSequenceManager.AppItemSelected, Mode=TwoWay}"
 
                     >
                         <ListBox.ItemsPanel>
@@ -264,10 +266,10 @@
                     
                     <!-- AddApp Button-->
                     <Button Grid.Column="3" Margin="2"
-                            Visibility="{Binding AppTabViewModel.IsExpanded, Converter={StaticResource BooltoVisibilityConverter}}"
+                            Visibility="{Binding MainWindowViewModel.AppTabViewModel.IsExpanded, Converter={StaticResource BooltoVisibilityConverter}}"
                             Content="+" 
-                            Command="{Binding AppTabViewModel.AddAppCommand}"
-                            CommandParameter="0"
+                            Command="{Binding MainWindowViewModel.AppTabViewModel.AddAppCommand}"
+                            CommandParameter="{Binding ScreenIndex}"
                             Background="White"
                             BorderThickness="0"
                             Width="40" Height="40" FontSize="30" FontWeight="Light"/>
@@ -280,11 +282,11 @@
                     <Grid Name="PrimaryWindowPreview"  HorizontalAlignment="Stretch" >
                         <Grid VerticalAlignment="Top" Margin="0,0,0,0" >
                             <StackPanel Orientation="Vertical">
-                                <Label Content="{Binding WindowIndex, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
+                                <Label Content="{Binding ScreenName}" 
                                        Height="50" FontSize="30" FontWeight="Light"/>
-                                <TextBlock Text="{Binding ScreenManagerViewModel.ScreenCollection[0].AppText}"
+                                <TextBlock Text="{Binding SelectedScreenViewModel.AppText}"
                                            FontSize="40" HorizontalAlignment="Center" FontWeight="Light"/>
-                                <TextBlock Text="{Binding ScreenManagerViewModel.ScreenCollection[0].StudyText}" 
+                                <TextBlock Text="{Binding SelectedScreenViewModel.StudyText}" 
                                            FontSize="25" HorizontalAlignment="Center" Margin="0,0,0,30" FontWeight="Light"/>
                             </StackPanel>
                         </Grid>
@@ -310,7 +312,7 @@
                 />
                 <Button Content="Clear" Height="20" Width="100" FontSize="12" FontWeight="Light"
                         Background="#FF007FFF" Foreground="WhiteSmoke"
-                        Command="{Binding SystemInfoCollector.ClearCommand}"/>
+                        Command="{Binding MainWindowViewModel.SystemInfoCollector.ClearCommand}"/>
             </StackPanel>
             
             
@@ -323,7 +325,7 @@
                 <TextBox IsReadOnly="True" TextWrapping="Wrap"
                          BorderThickness="0"
                          FontSize="15" FontWeight="Light"
-                         Text="{Binding SystemInfoCollector.Content}"
+                         Text="{Binding MainWindowViewModel.SystemInfoCollector.Content}"
                          />
             </ScrollViewer>
             

@@ -10,7 +10,6 @@ D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\EDA_Clie
 D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\EDA_Client\obj\Debug\Views\MainWindowView.g.cs
 D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\EDA_Client\obj\Debug\Views\MainWindow_Five.g.cs
 D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\EDA_Client\obj\Debug\Views\MainWindow_Two.g.cs
-D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\EDA_Client\obj\Debug\Views\TestingController.g.cs
 D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\EDA_Client\obj\Debug\App.g.cs
 D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\EDA_Client\obj\Debug\GeneratedInternalTypeHelper.g.cs
 D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\EDA_Client\obj\Debug\EDA_Client_MarkupCompile.cache
@@ -21,7 +20,6 @@ D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\EDA_Clie
 D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\EDA_Client\obj\Debug\Views\MainWindowView.baml
 D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\EDA_Client\obj\Debug\Views\MainWindow_Five.baml
 D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\EDA_Client\obj\Debug\Views\MainWindow_Two.baml
-D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\EDA_Client\obj\Debug\Views\TestingController.baml
 D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\EDA_Client\obj\Debug\EDA_Client.g.resources
 D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\EDA_Client\obj\Debug\EDA_Client.GeneratedMSBuildEditorConfig.editorconfig
 D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\EDA_Client\obj\Debug\EDA_Client.AssemblyInfoInputs.cache
