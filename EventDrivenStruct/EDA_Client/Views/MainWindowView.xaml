@@ -253,7 +253,7 @@
                              Height="50"
                              HorizontalAlignment="Left" VerticalAlignment="Bottom"
                              ItemTemplate="{StaticResource App_ListBox_Template}"
-                             ItemsSource="{Binding MainWindowViewModel.AppTabViewModel.SelectedAppItemContainer.VisibleAppModelList}"
+                             ItemsSource="{Binding SelectedAppItemContainer.VisibleAppModelList}"
                              SelectedItem="{Binding SelectedAppSequenceManager.AppItemSelected, Mode=TwoWay}"
 
                     >

@@ -9,7 +9,8 @@ public class ConcreteWindowViewModel : AbstractEventDrivenViewModel{
         this.ScreenIndex = decoIndex;
         this.ScreenName = "屏幕 " + ScreenIndex;
         this.SelectedAppSequenceManager = null;
-        mainWindowViewModel.AppTabViewModel.RegisterObserver(this);
+        this.SelectedAppItemContainer = null;
+        this.MainWindowViewModel.AppTabViewModel.RegisterObserver(this);
         this.SelectedScreenViewModel = mainWindowViewModel.ScreenManagerViewModel.ScreenCollection[ScreenIndex];
     }
 
@@ -20,15 +21,22 @@ public class ConcreteWindowViewModel : AbstractEventDrivenViewModel{
     public MainWindow_ViewModel MainWindowViewModel { get; set; }
 
     public AppSequenceManager_ViewModel SelectedAppSequenceManager { get; set; }
+    
+    public AppItemContainer_ViewModel SelectedAppItemContainer { get; set; }
 
     public Screen_ViewModel SelectedScreenViewModel { get; set; }
 
     public override void UpdateByEvent(string propertyName, object o) {
+        if (propertyName.Equals(nameof(AppTab_ViewModel.SelectedAppContainerAppSelectionChanged))) {
+            RisePropertyChanged(nameof(SelectedAppSequenceManager));
+            return;
+        }
+        
         if (propertyName.Equals(nameof(AppTab_ViewModel.SelectedAppItemContainer))) {
-            //TODO: 选取后重选会导致选中有问题
-            this.SelectedAppSequenceManager
-                = this.MainWindowViewModel.AppTabViewModel.SelectedAppItemContainer.AppSequenceManagerCollection[
-                    ScreenIndex];
+            AppItemContainer_ViewModel appItemContainerViewModel = (AppItemContainer_ViewModel)o;
+            this.SelectedAppItemContainer = appItemContainerViewModel;
+            this.SelectedAppSequenceManager = appItemContainerViewModel.AppSequenceManagerCollection[ScreenIndex];
+            RisePropertyChanged(nameof(SelectedAppItemContainer));
             RisePropertyChanged(nameof(SelectedAppSequenceManager));
             return;
         }

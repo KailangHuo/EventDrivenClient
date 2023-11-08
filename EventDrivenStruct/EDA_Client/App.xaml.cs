@@ -45,6 +45,10 @@ namespace EventDrivenStruct {
             MainWindow_ViewModel mainWindowViewModel = new MainWindow_ViewModel();
             GlobalContext.GetInstance().RegisterMainWindowViewModel(mainWindowViewModel);
             GlobalContext.GetInstance().RegisterModelFacade(MainEntry_ModelFacade.GetInstance());
+
+            /*Window window = new MainWindow_Two();
+            window.DataContext = mainWindowViewModel;
+            Application.Current.Dispatcher.BeginInvoke(() => { window.Show();});*/
             
             int screenNum = SystemConfiguration.GetInstance().GetScreenNumber();
                 

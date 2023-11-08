@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\EDA_Client\App.xaml
-61813752925
+7453420410
 
-452138690904
+461300972158
 1961823496718
-Views\AddAppWindow.xaml;Views\AddStudyWindow.xaml;Views\AppendStudyWindow.xaml;Views\MainWindowView.xaml;Views\MainWindow_Five.xaml;Views\MainWindow_Two.xaml;
+Views\AddAppWindow.xaml;Views\AddStudyWindow.xaml;Views\AppendStudyWindow.xaml;Views\MainWindowView.xaml;Views\MainWindow_Five.xaml;Views\MainWindow_Two.xaml;Views\TestControlConsole.xaml;
 
-False
+True
 
