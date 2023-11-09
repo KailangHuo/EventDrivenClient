@@ -49,7 +49,7 @@ public class Screen_ViewModel : AbstractEventDrivenViewModel{
             return _content;
         }
         set {
-            if (_content == value) {
+            if (_content == value || (_content != null &&_content.Equals(value))) {
                 IgnoreAction();
                 return;
             }
