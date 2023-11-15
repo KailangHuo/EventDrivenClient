@@ -82,8 +82,7 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
     }
 
     #endregion
-
-
+    
     public bool AddStudyItemWithApp(StudyCollectionItem studyItem, AppModel appModel) {
         StudyCollection.AddStudyCollectionItem(studyItem);
         return StudyAppMappingManager.AddAppToMapObj(studyItem, appModel);

@@ -112,7 +112,9 @@
             />
         
         <!-- Function Buttons-->
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="2,0,0,0">
+        <StackPanel Grid.Row="1" 
+            Visibility="{Binding MainViewModel.TestPanelStatus, Converter={StaticResource BooltoVisibilityConverter}}"        
+            Orientation="Horizontal" Margin="2,0,0,0">
             <!-- Function Button-->
             <Button  Name="ActionButton"
                      FontWeight="Light"
@@ -122,8 +124,8 @@
                      VerticalAlignment="Top"
                      HorizontalAlignment="Left"
                      Background="#FF007FFF" Foreground="WhiteSmoke"
-                     Content="{Binding MainWindowViewModel.ActionButtonContent}"
-                     Command="{Binding MainWindowViewModel.TEST_COMMAND}"
+                     Content="{Binding MainViewModel.ActionButtonContent}"
+                     Command="{Binding MainViewModel.TEST_COMMAND}"
             />
             
             <!-- AddPatient Button -->
@@ -135,14 +137,14 @@
                     VerticalAlignment="Top"
                     HorizontalAlignment="Left"
                     Content="Add Patient"
-                    Command="{Binding MainWindowViewModel.TEST_ADD_COMMAND}"
+                    Command="{Binding MainViewModel.TEST_ADD_COMMAND}"
                     CommandParameter="{Binding ScreenIndex}"
             />
             
             <!-- ClearAll Button -->
             <Button Name="TriggeredActionButton"
                     FontWeight="Light"
-                    Visibility="{Binding MainWindowViewModel.TriggeredActionBool, Converter={StaticResource BooltoVisibilityConverter}}"
+                    Visibility="{Binding MainViewModel.TriggeredActionBool, Converter={StaticResource BooltoVisibilityConverter}}"
                     Margin="0,3,7,0"
                     Height="30"
                     Width="180"
@@ -150,7 +152,7 @@
                     HorizontalAlignment="Left"
                     Background="#FFBF0816" Foreground="WhiteSmoke" 
                     Content="清除所有检查"
-                    Command="{Binding MainWindowViewModel.TEST_CLEARALL_COMMAND}"
+                    Command="{Binding MainViewModel.TEST_CLEARALL_COMMAND}"
             />
             
             <!-- AppendPatient Button -->
@@ -161,7 +163,7 @@
                     VerticalAlignment="Top"
                     HorizontalAlignment="Left"
                     Content="Append to CurrentStudy"
-                    Command="{Binding MainWindowViewModel.TEST_APPEND_COMMAND}"
+                    Command="{Binding MainViewModel.TEST_APPEND_COMMAND}"
                     CommandParameter="{Binding ScreenIndex}"
                     />
         </StackPanel>
@@ -192,7 +194,7 @@
                     
                     <!-- PA button-->
                     <Button Margin="2" 
-                        Command="{Binding MainWindowViewModel.GotoPaTabCommand}" 
+                        Command="{Binding MainViewModel.GotoPaTabCommand}" 
                         CommandParameter="{Binding ScreenIndex}"
                         Height="50" Width="50"
                         Content="PA" FontSize="20" FontWeight="Light"
@@ -205,7 +207,7 @@
                 
                     <!-- Clickable Combobox-->
                     <Grid Grid.Column="1" Name = "StudiesComboGridLeft"
-                          Visibility="{Binding MainWindowViewModel.StudyContainerViewModel.HasItem, Converter={StaticResource BooltoVisibilityConverter}}"
+                          Visibility="{Binding MainViewModel.StudyContainerViewModel.HasItem, Converter={StaticResource BooltoVisibilityConverter}}"
                           Margin="0,0,2,2"
                           Height="50"
                           Width="240"
@@ -218,8 +220,8 @@
                                   Width="240"
                                   IsReadOnly="True"
                                   ItemTemplate="{StaticResource Study_ComboBox_Template}"
-                                  ItemsSource="{Binding MainWindowViewModel.StudyContainerViewModel.StudyViewModels}"
-                                  SelectedItem="{Binding MainWindowViewModel.StudyContainerViewModel.SelectedStudy}"
+                                  ItemsSource="{Binding MainViewModel.StudyContainerViewModel.StudyViewModels}"
+                                  SelectedItem="{Binding MainViewModel.StudyContainerViewModel.SelectedStudy}"
                         >
                             
                         </ComboBox>
@@ -229,17 +231,17 @@
                                 VerticalAlignment="Center"
                                 Margin="2,1,0,2"
                                 ContentTemplate="{StaticResource Study_ComboBox_Template}"
-                                Content="{Binding MainWindowViewModel.StudyContainerViewModel.SelectedStudy, Mode=TwoWay}"
+                                Content="{Binding MainViewModel.StudyContainerViewModel.SelectedStudy, Mode=TwoWay}"
                                 HorizontalContentAlignment="Left"
                                 VerticalContentAlignment="Center"
-                                ToolTip="{Binding MainWindowViewModel.StudyContainerViewModel.SelectedStudy.RepresentationStr}"
+                                ToolTip="{Binding MainViewModel.StudyContainerViewModel.SelectedStudy.RepresentationStr}"
                                 BorderThickness="0"
-                                Command="{Binding MainWindowViewModel.StudyContainerViewModel.TriggerSelectedCommand}"
+                                Command="{Binding MainViewModel.StudyContainerViewModel.TriggerSelectedCommand}"
                         >
                             <Button.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem Header="关闭当前检查" Command = "{Binding MainWindowViewModel.StudyContainerViewModel.CloseSelectedCommand}"/>
-                                    <MenuItem Header="关闭所有检查" Command = "{Binding MainWindowViewModel.StudyContainerViewModel.ClearAllCommand}"/>
+                                    <MenuItem Header="关闭当前检查" Command = "{Binding MainViewModel.StudyContainerViewModel.CloseSelectedCommand}"/>
+                                    <MenuItem Header="关闭所有检查" Command = "{Binding MainViewModel.StudyContainerViewModel.ClearAllCommand}"/>
                                 </ContextMenu>
                             </Button.ContextMenu>
                             
@@ -249,7 +251,7 @@
                     <!-- App ListBox -->
                     <ListBox Grid.Column="2" Name="AppsListBoxLeft"
                              Margin="0,0,0,2"
-                             Visibility="{Binding MainWindowViewModel.AppTabViewModel.IsExpanded, Converter={StaticResource BooltoVisibilityConverter}}"
+                             Visibility="{Binding MainViewModel.AppTabViewModel.IsExpanded, Converter={StaticResource BooltoVisibilityConverter}}"
                              Height="50"
                              HorizontalAlignment="Left" VerticalAlignment="Bottom"
                              ItemTemplate="{StaticResource App_ListBox_Template}"
@@ -266,9 +268,9 @@
                     
                     <!-- AddApp Button-->
                     <Button Grid.Column="3" Margin="2"
-                            Visibility="{Binding MainWindowViewModel.AppTabViewModel.IsExpanded, Converter={StaticResource BooltoVisibilityConverter}}"
+                            Visibility="{Binding MainViewModel.AppTabViewModel.IsExpanded, Converter={StaticResource BooltoVisibilityConverter}}"
                             Content="+" 
-                            Command="{Binding MainWindowViewModel.AppTabViewModel.AddAppCommand}"
+                            Command="{Binding MainViewModel.AppTabViewModel.AddAppCommand}"
                             CommandParameter="{Binding ScreenIndex}"
                             Background="White"
                             BorderThickness="0"
@@ -312,7 +314,7 @@
                 />
                 <Button Content="Clear" Height="20" Width="100" FontSize="12" FontWeight="Light"
                         Background="#FF007FFF" Foreground="WhiteSmoke"
-                        Command="{Binding MainWindowViewModel.SystemInfoCollector.ClearCommand}"/>
+                        Command="{Binding MainViewModel.SystemInfoCollector.ClearCommand}"/>
             </StackPanel>
             
             
@@ -325,7 +327,7 @@
                 <TextBox IsReadOnly="True" TextWrapping="Wrap"
                          BorderThickness="0"
                          FontSize="15" FontWeight="Light"
-                         Text="{Binding MainWindowViewModel.SystemInfoCollector.Content}"
+                         Text="{Binding MainViewModel.SystemInfoCollector.Content}"
                          />
             </ScrollViewer>
             

@@ -4,21 +4,21 @@ namespace EventDrivenStruct.ViewModels;
 
 public class ConcreteWindowViewModel : AbstractEventDrivenViewModel{
 
-    public ConcreteWindowViewModel(MainWindow_ViewModel mainWindowViewModel, int decoIndex) {
-        this.MainWindowViewModel = mainWindowViewModel;
+    public ConcreteWindowViewModel(MainViewModel mainViewModel, int decoIndex) {
+        this.MainViewModel = mainViewModel;
         this.ScreenIndex = decoIndex;
         this.ScreenName = "屏幕 " + ScreenIndex;
         this.SelectedAppSequenceManager = null;
         this.SelectedAppItemContainer = null;
-        this.MainWindowViewModel.AppTabViewModel.RegisterObserver(this);
-        this.SelectedScreenViewModel = mainWindowViewModel.ScreenManagerViewModel.ScreenCollection[ScreenIndex];
+        this.MainViewModel.AppTabViewModel.RegisterObserver(this);
+        this.SelectedScreenViewModel = mainViewModel.ScreenManagerViewModel.ScreenCollection[ScreenIndex];
     }
 
     public int ScreenIndex { get; set; }
 
     public string ScreenName { get; set; }
 
-    public MainWindow_ViewModel MainWindowViewModel { get; set; }
+    public MainViewModel MainViewModel { get; set; }
 
     public AppSequenceManager_ViewModel SelectedAppSequenceManager { get; set; }
     

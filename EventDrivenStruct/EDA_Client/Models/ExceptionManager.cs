@@ -7,8 +7,7 @@ public class ExceptionManager : AbstractEventDrivenObject {
 
     private static ExceptionManager _instance;
 
-    private ExceptionManager() {
-        
+    public ExceptionManager() {
     }
 
     public static ExceptionManager GetInstance() {

@@ -6,11 +6,11 @@ using EventDrivenStruct.Models;
 
 namespace EventDrivenStruct.ViewModels; 
 
-public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
+public class MainViewModel : AbstractEventDrivenViewModel {
     
     #region CONSTRUCTION
 
-    public MainWindow_ViewModel() {
+    public MainViewModel() {
 
         //TEST ONLY
         TestNumber = 0;
@@ -32,8 +32,8 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
         this.RegisterObserver(PopupManager.GetInstance());
         
         SetupCommands();
-        IsFiveWindow = SystemConfiguration.GetInstance().GetScreenNumber() == 5;
-        IsTwoWindow = SystemConfiguration.GetInstance().GetScreenNumber() == 2;
+        // TEST 
+        this.TestPanelStatus = SystemConfiguration.GetInstance().GetTestPanelStatus();
     }
 
     private void SetupCommands() {
@@ -55,6 +55,8 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
     public ScreenManager_ViewModel ScreenManagerViewModel { get; private set; }
 
     public SystemInfoCollector SystemInfoCollector { get; private set; }
+
+    public bool TestPanelStatus { get; private set; }
 
     private string _actionButtonContent;
 
@@ -94,10 +96,6 @@ public class MainWindow_ViewModel : AbstractEventDrivenViewModel {
             RisePropertyChanged(nameof(TestNumber));
         }
     }
-
-    public bool IsFiveWindow { get; private set; }
-
-    public bool IsTwoWindow { get; private set; }
 
 
     #endregion

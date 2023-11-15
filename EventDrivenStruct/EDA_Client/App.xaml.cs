@@ -41,22 +41,15 @@ namespace EventDrivenStruct {
         protected override void OnStartup(StartupEventArgs e) {
             /*TestWindowRun();
             return;*/
-            
-            MainWindow_ViewModel mainWindowViewModel = new MainWindow_ViewModel();
-            GlobalContext.GetInstance().RegisterMainWindowViewModel(mainWindowViewModel);
+            GlobalContext.Init();
+            MainViewModel mainViewModel = new MainViewModel();
+            GlobalContext.GetInstance().RegisterMainWindowViewModel(mainViewModel);
             GlobalContext.GetInstance().RegisterModelFacade(MainEntry_ModelFacade.GetInstance());
+            GlobalContext.GetInstance().SetupSystemScreens();
 
             /*Window window = new MainWindow_Two();
             window.DataContext = mainWindowViewModel;
             Application.Current.Dispatcher.BeginInvoke(() => { window.Show();});*/
-            
-            int screenNum = SystemConfiguration.GetInstance().GetScreenNumber();
-                
-            for (int i = 0; i < screenNum; i++) {
-                Window window = new MainWindowView();
-                GlobalContext.GetInstance().RegisterSubWindow(window);
-                window.DataContext = new ConcreteWindowViewModel(mainWindowViewModel, i);
-            }
 
             GlobalContext.GetInstance().ShowDialogs();
         }

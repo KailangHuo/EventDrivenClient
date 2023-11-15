@@ -198,4 +198,14 @@ public class SystemConfiguration {
         return this.TestStudyAppList;
     }
 
+    public bool GetTestPanelStatus() {
+        XmlNode testPanelStatusNode = _document.SelectSingleNode(@"Root/TestPanelStatus");
+        int boolNum = Int32.Parse((string)testPanelStatusNode.FirstChild.InnerText);
+        if (boolNum == 1) return true;
+        if (boolNum == 0) return false;
+        ExceptionManager.GetInstance().ThrowAsyncException("WRONG CONFIGURATION: <TestPanelStatus/>");
+        System.Environment.Exit(1);
+        return false;
+    }
+
 }
