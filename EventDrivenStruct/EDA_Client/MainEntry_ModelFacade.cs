@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Threading;
 using EventDrivenElements;
 using EventDrivenStruct.ConfigurationLoader;
 using EventDrivenStruct.ViewModels;
@@ -13,6 +14,10 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
     private static MainEntry_ModelFacade _instance;
 
     private MainEntry_ModelFacade() {
+        this.MissionExecutionBuffer = new MissionExecutionBuffer();
+        this.WorkerThread = new Thread(WorkerStart);
+        this.WorkerThread.Start();
+        
         StudyCollection = new StudyCollection();
         StudyAppMappingManager = StudyAppMappingManager.GetInstance();
         PatientAdminCenterApp = PatientAdminCenterApp.GetInstance();
@@ -37,6 +42,22 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
         }
 
         return _instance;
+    }
+
+    private MissionExecutionBuffer MissionExecutionBuffer;
+
+    private Thread WorkerThread;
+
+    private void WorkerStart() {
+        while (true) {
+            Mission mission = MissionExecutionBuffer.TakeTopMission();
+            if (mission.MissionType == MissionType.NULL) {
+                Thread.Sleep(100);
+                continue;
+            }
+
+            mission.Execute();
+        }
     }
 
     #endregion
@@ -82,13 +103,15 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
     }
 
     #endregion
-    
-    public bool AddStudyItemWithApp(StudyCollectionItem studyItem, AppModel appModel) {
+
+    #region WORKER_METHOD
+
+    private bool AddStudyItemWithAppWorker(StudyCollectionItem studyItem, AppModel appModel) {
         StudyCollection.AddStudyCollectionItem(studyItem);
         return StudyAppMappingManager.AddAppToMapObj(studyItem, appModel);
     }
 
-    public bool AppendStudyToStudyCollectionItem(StudyCollectionItem studyItem, List<Study> studies) {
+    private bool AppendStudyToStudyCollectionItemWorker(StudyCollectionItem studyItem, List<Study> studies) {
         if(!StudyCollection.Contains(studyItem) || studyItem == null) {
             ExceptionManager.GetInstance().ThrowAsyncException("声明的Study不存在!");
             return false;
@@ -96,20 +119,20 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
         
         return StudyCollection.AppendStudyToCollectionItem(studyItem, studies);
     }
-
-    public bool AddAppToStudy(StudyCollectionItem studyItem, AppModel appModel) {
+    
+    private bool AddAppToStudyWorker(StudyCollectionItem studyItem, AppModel appModel) {
         if(!StudyCollection.Contains(studyItem) || studyItem == null) {
             ExceptionManager.GetInstance().ThrowAsyncException("声明的Study不存在!");
             return false;
         }
         return StudyAppMappingManager.AddAppToMapObj(studyItem, appModel);
     }
-
-    public void DeleteStudyItem(StudyCollectionItem studyItem) {
+    
+    private void DeleteStudyItemWorker(StudyCollectionItem studyItem) {
         StudyCollection.DeleteStudyCollectionItem(studyItem);
     }
-
-    public void DeleteAllStudy() {
+    
+    private void DeleteAllStudyWorker() {
         StudyCollection.DeleteAllStudyCollectionItem();
         // TEST_ONLY
         number = 0;
@@ -119,15 +142,56 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
                               + nextNode.appName;
         TriggeredActionBool = false;
     }
+    
+    private void DeleteAppWorker(AppModel appModel) {
+        StudyAppMappingManager.RemoveAppFromStudyAppObj(appModel.StudyCollectionItem, appModel);
+    }
+    
+    #endregion
+    
+    public bool AddStudyItemWithApp(StudyCollectionItem studyItem, AppModel appModel) {
+        List<object> paramList = new List<object>();
+        paramList.Add(studyItem);
+        paramList.Add(appModel);
+        Mission mission = new Mission(MissionType.SERIAL, this, "AddStudyItemWithAppWorker", paramList);
+        return this.MissionExecutionBuffer.PutMission(mission);
+    }
 
-    public void DeleteAppFromStudy(StudyCollectionItem studyCollectionItem, AppModel appModel) {
-        StudyAppMappingManager.RemoveAppFromStudyAppObj(studyCollectionItem, appModel);
+    public bool AppendStudyToStudyCollectionItem(StudyCollectionItem studyItem, List<Study> studies) {
+        List<object> paramList = new List<object>();
+        paramList.Add(studyItem);
+        paramList.Add(studies);
+        Mission mission = new Mission(MissionType.SERIAL, this, "AppendStudyToStudyCollectionItemWorker", paramList);
+        return this.MissionExecutionBuffer.PutMission(mission);
+    }
+
+    public bool AddAppToStudy(StudyCollectionItem studyItem, AppModel appModel) {
+        List<object> paramList = new List<object>();
+        paramList.Add(studyItem);
+        paramList.Add(appModel);
+        Mission mission = new Mission(MissionType.SERIAL, this, "AddAppToStudyWorker", paramList);
+        return this.MissionExecutionBuffer.PutMission(mission);
+    }
+    
+    public void DeleteStudyItem(StudyCollectionItem studyItem) {
+        List<object> paramList = new List<object>();
+        paramList.Add(studyItem);
+        Mission mission = new Mission(MissionType.SERIAL, this, "DeleteStudyItemWorker", paramList);
+        this.MissionExecutionBuffer.PutMission(mission);
+    }
+    
+    public void DeleteAllStudy() {
+        List<object> paramList = new List<object>();
+        Mission mission = new Mission(MissionType.SERIAL, this, "DeleteAllStudyWorker", paramList);
+        this.MissionExecutionBuffer.PutMission(mission);
     }
 
     public void DeleteApp(AppModel appModel) {
-        StudyAppMappingManager.RemoveAppFromStudyAppObj(appModel.StudyCollectionItem, appModel);
+        List<object> paramList = new List<object>();
+        paramList.Add(appModel);
+        Mission mission = new Mission(MissionType.SERIAL, this, "DeleteAppWorker", paramList);
+        this.MissionExecutionBuffer.PutMission(mission);    
     }
-
 
     #region |||TEST|||
 
@@ -160,6 +224,12 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
     }
 
     public void TestAdd() {
+        List<object> paramList = new List<object>();
+        Mission mission = new Mission(MissionType.SERIAL, this, "TestAddWorker", paramList);
+        this.MissionExecutionBuffer.PutMission(mission);  
+    }
+
+    private void TestAddWorker() { 
         if (number >= SystemConfiguration.GetInstance().GetTestStudyList().Count) {
             return;
         }
@@ -179,8 +249,6 @@ public class MainEntry_ModelFacade : AbstractEventDrivenObject {
             ActionString = "清除所有检查后才可使用";
             TriggeredActionBool = true;
         }
-
-
     }
 
     #endregion
