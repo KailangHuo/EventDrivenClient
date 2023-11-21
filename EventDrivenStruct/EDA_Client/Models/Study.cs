@@ -3,7 +3,7 @@ using EventDrivenElements;
 
 namespace EventDrivenStruct.Models; 
 
-public class Study : AbstractEventDrivenObject{
+public class Study : AbstractEventDrivenModel{
 
     public Study() {
     }

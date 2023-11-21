@@ -4,7 +4,7 @@ using EventDrivenElements;
 
 namespace EventDrivenStruct.Models; 
 
-public class StudyAppMappingObj : AbstractEventDrivenObject {
+public class StudyAppMappingObj : AbstractEventDrivenModel {
 
     public StudyAppMappingObj() {
         AppList = new List<AppModel>();

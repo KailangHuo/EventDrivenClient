@@ -36,7 +36,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="EventDrivenElements" Version="1.0.0" />
+      <PackageReference Include="EventDrivenElements" Version="1.0.1" />
     </ItemGroup>
 
 

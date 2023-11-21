@@ -4,7 +4,7 @@ using EventDrivenElements;
 
 namespace EventDrivenStruct.Models; 
 
-public class StudyCollectionItem : AbstractEventDrivenObject{
+public class StudyCollectionItem : AbstractEventDrivenModel{
 
     #region CONSTRUCTION
 

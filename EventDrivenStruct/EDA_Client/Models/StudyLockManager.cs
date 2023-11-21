@@ -4,7 +4,7 @@ using EventDrivenStruct.ConfigurationLoader;
 
 namespace EventDrivenStruct.Models; 
 
-public class StudyLockManager : AbstractEventDrivenObject {
+public class StudyLockManager : AbstractEventDrivenModel {
 
     public StudyLockManager() {
         this._studyList = new List<StudyCollectionItem>();

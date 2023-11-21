@@ -4,7 +4,7 @@ using EventDrivenStruct.ConfigurationLoader;
 
 namespace EventDrivenStruct.Models; 
 
-public class AppModel : AbstractEventDrivenObject{
+public class AppModel : AbstractEventDrivenModel{
     
     public AppModel(string name) {
         AppName = name;

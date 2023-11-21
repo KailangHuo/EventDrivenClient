@@ -2,35 +2,38 @@
   "version": 3,
   "targets": {
     "net6.0-windows7.0": {
-      "EventDrivenElements/1.0.0": {
+      "EventDrivenElements/1.0.1": {
         "type": "package",
         "compile": {
-          "lib/net6.0/EventDrivenElements.dll": {}
+          "lib/net6.0-windows7.0/EventDrivenElements.dll": {}
         },
         "runtime": {
-          "lib/net6.0/EventDrivenElements.dll": {}
-        }
+          "lib/net6.0-windows7.0/EventDrivenElements.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
       }
     }
   },
   "libraries": {
-    "EventDrivenElements/1.0.0": {
-      "sha512": "WghfVyjxp1DNXAQg9tW+BdXcxN+MI3K11Aoe/Uz3edNgPjzUisD1nNC7scMj6UQToTdcE+UpGeAoYVnrw5jSlw==",
+    "EventDrivenElements/1.0.1": {
+      "sha512": "H3P22zlzp4WmBcPHfV6uWlath37VQhrzmsRR1ZAUBmKvnf8FKDlmThoH38BprbbwXv4Xdiv5BQ8gRRyyfMLfjQ==",
       "type": "package",
-      "path": "eventdrivenelements/1.0.0",
+      "path": "eventdrivenelements/1.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "README.md",
-        "eventdrivenelements.1.0.0.nupkg.sha512",
+        "eventdrivenelements.1.0.1.nupkg.sha512",
         "eventdrivenelements.nuspec",
-        "lib/net6.0/EventDrivenElements.dll"
+        "lib/net6.0-windows7.0/EventDrivenElements.dll"
       ]
     }
   },
   "projectFileDependencyGroups": {
     "net6.0-windows7.0": [
-      "EventDrivenElements >= 1.0.0"
+      "EventDrivenElements >= 1.0.1"
     ]
   },
   "packageFolders": {
@@ -73,7 +76,7 @@
         "dependencies": {
           "EventDrivenElements": {
             "target": "Package",
-            "version": "[1.0.0, )"
+            "version": "[1.0.1, )"
           }
         },
         "imports": [

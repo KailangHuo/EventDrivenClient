@@ -3,7 +3,7 @@ using EventDrivenElements;
 
 namespace EventDrivenStruct.Models; 
 
-public class StudyAppMappingManager : AbstractEventDrivenObject{
+public class StudyAppMappingManager : AbstractEventDrivenModel{
     
     private volatile static StudyAppMappingManager _instance;
 

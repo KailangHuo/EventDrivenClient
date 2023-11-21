@@ -3,7 +3,7 @@ using EventDrivenStruct.ViewModels;
 
 namespace EventDrivenStruct.Models; 
 
-public class ExceptionManager : AbstractEventDrivenObject {
+public class ExceptionManager : AbstractEventDrivenModel {
 
     private static ExceptionManager _instance;
 

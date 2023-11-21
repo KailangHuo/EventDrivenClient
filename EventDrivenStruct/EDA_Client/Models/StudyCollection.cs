@@ -5,7 +5,7 @@ using EventDrivenStruct.ConfigurationLoader;
 
 namespace EventDrivenStruct.Models; 
 
-public class StudyCollection : AbstractEventDrivenObject{
+public class StudyCollection : AbstractEventDrivenModel{
 
     public StudyCollection() {
         StudyCollectionItems = new List<StudyCollectionItem>();
