@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.ObjectModel;
+using System.Threading;
 using System.Windows.Input;
 using EventDrivenElements;
 using EventDrivenStruct.Models;
@@ -110,8 +111,8 @@ public class StudyContainer_ViewModel : AbstractEventDrivenViewModel{
 
     private void RemoveAllStudyViewModels() {
         this.StudyViewModels = new ObservableCollection<Study_ViewModel>();
-        RisePropertyChanged(nameof(StudyViewModels));
         UpdateSelectedStudy();
+        RisePropertyChanged(nameof(StudyViewModels));
     }
 
     private void UpdateSelectedStudy() {

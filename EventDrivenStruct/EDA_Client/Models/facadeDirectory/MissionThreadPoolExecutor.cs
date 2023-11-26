@@ -8,7 +8,8 @@ public class MissionThreadPoolExecutor {
     public MissionThreadPoolExecutor(int workerNumber, int maxMissionAmount) {
         this.workerList = new List<Thread>();
         this.missionQue = new List<Mission>();
-        this.Locker = new object();
+        this.QueueLocker = new object();
+        this.ExecutionLocker = new object();
         this.MaxMissionAmount = maxMissionAmount;
         this.InitThreadPool(workerNumber);
     }
@@ -17,7 +18,9 @@ public class MissionThreadPoolExecutor {
 
     private List<Mission> missionQue;
 
-    private object Locker;
+    private object QueueLocker;
+
+    private object ExecutionLocker;
 
     private int MaxMissionAmount;
     
@@ -32,26 +35,33 @@ public class MissionThreadPoolExecutor {
 
     private void Runnable() {
         while (true) {
-            lock (Locker) {
+            Mission mission;
+            lock (QueueLocker) {
                 if (this.missionQue.Count == 0) {
-                    Monitor.Wait(Locker);
+                    Monitor.Wait(QueueLocker);
                 }
                 if(this.missionQue.Count == 0) continue;
-                Mission mission = missionQue[0];
+                mission = missionQue[0];
                 missionQue.RemoveAt(0);
-                mission.Execute();
-                Monitor.PulseAll(Locker);
+                Monitor.PulseAll(QueueLocker);
             }
+
+            if (mission != null) {
+                lock (ExecutionLocker) {
+                    mission.Execute();
+                }
+            }
+            
         }
     }
 
     public void EnqueueMission(Mission mission) {
         while (true) {
-            lock (Locker) {
-                if (this.missionQue.Count >= this.MaxMissionAmount) Monitor.Wait(Locker);
+            lock (QueueLocker) {
+                if (this.missionQue.Count >= this.MaxMissionAmount) Monitor.Wait(QueueLocker);
                 if (this.missionQue.Count >= this.MaxMissionAmount) continue;
                 this.missionQue.Add(mission);
-                Monitor.PulseAll(Locker);
+                Monitor.PulseAll(QueueLocker);
                 break;
             }
         }

@@ -2,61 +2,184 @@
   "version": 3,
   "targets": {
     "net6.0-windows7.0": {
-      "EventDrivenElements/1.0.1": {
+      "CustomizedTitleBar/1.0.5": {
         "type": "package",
+        "dependencies": {
+          "System.Drawing.Common": "8.0.0-rc.2.23479.14"
+        },
         "compile": {
-          "lib/net6.0-windows7.0/EventDrivenElements.dll": {}
+          "lib/net6.0-windows7.0/CustomizedTitleBar.dll": {
+            "related": ".runtimeconfig.json"
+          }
         },
         "runtime": {
-          "lib/net6.0-windows7.0/EventDrivenElements.dll": {}
+          "lib/net6.0-windows7.0/CustomizedTitleBar.dll": {
+            "related": ".runtimeconfig.json"
+          }
         },
         "frameworkReferences": [
           "Microsoft.WindowsDesktop.App.WPF"
         ]
+      },
+      "Microsoft.Win32.SystemEvents/8.0.0-rc.2.23479.6": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/Microsoft.Win32.SystemEvents.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.Win32.SystemEvents.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net6.0/_._": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net6.0/Microsoft.Win32.SystemEvents.dll": {
+            "assetType": "runtime",
+            "rid": "win"
+          }
+        }
+      },
+      "System.Drawing.Common/8.0.0-rc.2.23479.14": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Win32.SystemEvents": "8.0.0-rc.2.23479.6"
+        },
+        "compile": {
+          "lib/net6.0/System.Drawing.Common.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/System.Drawing.Common.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net6.0/_._": {}
+        }
       }
     }
   },
   "libraries": {
-    "EventDrivenElements/1.0.1": {
-      "sha512": "H3P22zlzp4WmBcPHfV6uWlath37VQhrzmsRR1ZAUBmKvnf8FKDlmThoH38BprbbwXv4Xdiv5BQ8gRRyyfMLfjQ==",
+    "CustomizedTitleBar/1.0.5": {
+      "sha512": "SxFLxyNzQuUlbacFYnPiZNfxMehwnb05732yrF7nBT0140E8RVIh6mHNKhvM+MU2c1/FTu+otOX53p5M4MJFAA==",
       "type": "package",
-      "path": "eventdrivenelements/1.0.1",
+      "path": "customizedtitlebar/1.0.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "README.md",
-        "eventdrivenelements.1.0.1.nupkg.sha512",
-        "eventdrivenelements.nuspec",
-        "lib/net6.0-windows7.0/EventDrivenElements.dll"
+        "customizedtitlebar.1.0.5.nupkg.sha512",
+        "customizedtitlebar.nuspec",
+        "lib/net6.0-windows7.0/CustomizedTitleBar.dll",
+        "lib/net6.0-windows7.0/CustomizedTitleBar.runtimeconfig.json"
+      ]
+    },
+    "Microsoft.Win32.SystemEvents/8.0.0-rc.2.23479.6": {
+      "sha512": "t83wew4bAz1UTsbLX8CQhJEY0+Q40xN1/yKJ0RL8Bphjk/KzK/jjc5+CdPnJGP4oLlTmo5p5jZp3NnrQ6V/cAw==",
+      "type": "package",
+      "path": "microsoft.win32.systemevents/8.0.0-rc.2.23479.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net461/Microsoft.Win32.SystemEvents.targets",
+        "buildTransitive/net462/_._",
+        "buildTransitive/net6.0/_._",
+        "buildTransitive/netcoreapp2.0/Microsoft.Win32.SystemEvents.targets",
+        "lib/net462/Microsoft.Win32.SystemEvents.dll",
+        "lib/net462/Microsoft.Win32.SystemEvents.xml",
+        "lib/net6.0/Microsoft.Win32.SystemEvents.dll",
+        "lib/net6.0/Microsoft.Win32.SystemEvents.xml",
+        "lib/net7.0/Microsoft.Win32.SystemEvents.dll",
+        "lib/net7.0/Microsoft.Win32.SystemEvents.xml",
+        "lib/net8.0/Microsoft.Win32.SystemEvents.dll",
+        "lib/net8.0/Microsoft.Win32.SystemEvents.xml",
+        "lib/netstandard2.0/Microsoft.Win32.SystemEvents.dll",
+        "lib/netstandard2.0/Microsoft.Win32.SystemEvents.xml",
+        "microsoft.win32.systemevents.8.0.0-rc.2.23479.6.nupkg.sha512",
+        "microsoft.win32.systemevents.nuspec",
+        "runtimes/win/lib/net6.0/Microsoft.Win32.SystemEvents.dll",
+        "runtimes/win/lib/net6.0/Microsoft.Win32.SystemEvents.xml",
+        "runtimes/win/lib/net7.0/Microsoft.Win32.SystemEvents.dll",
+        "runtimes/win/lib/net7.0/Microsoft.Win32.SystemEvents.xml",
+        "runtimes/win/lib/net8.0/Microsoft.Win32.SystemEvents.dll",
+        "runtimes/win/lib/net8.0/Microsoft.Win32.SystemEvents.xml",
+        "useSharedDesignerContext.txt"
+      ]
+    },
+    "System.Drawing.Common/8.0.0-rc.2.23479.14": {
+      "sha512": "kdIRPl2+A6F6QxV48fF1dXvB2+K+5nDuKxhYydgT8X7HWpCnlr2CKptzyKMkXOGFAXOFsiNByr4LBWWLOqOfYA==",
+      "type": "package",
+      "path": "system.drawing.common/8.0.0-rc.2.23479.14",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net461/System.Drawing.Common.targets",
+        "buildTransitive/net462/_._",
+        "buildTransitive/net6.0/_._",
+        "buildTransitive/netcoreapp2.0/System.Drawing.Common.targets",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net462/System.Drawing.Common.dll",
+        "lib/net462/System.Drawing.Common.pdb",
+        "lib/net462/System.Drawing.Common.xml",
+        "lib/net6.0/System.Drawing.Common.dll",
+        "lib/net6.0/System.Drawing.Common.pdb",
+        "lib/net6.0/System.Drawing.Common.xml",
+        "lib/net7.0/System.Drawing.Common.dll",
+        "lib/net7.0/System.Drawing.Common.pdb",
+        "lib/net7.0/System.Drawing.Common.xml",
+        "lib/net8.0/System.Drawing.Common.dll",
+        "lib/net8.0/System.Drawing.Common.pdb",
+        "lib/net8.0/System.Drawing.Common.xml",
+        "lib/netstandard2.0/System.Drawing.Common.dll",
+        "lib/netstandard2.0/System.Drawing.Common.pdb",
+        "lib/netstandard2.0/System.Drawing.Common.xml",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "system.drawing.common.8.0.0-rc.2.23479.14.nupkg.sha512",
+        "system.drawing.common.nuspec",
+        "useSharedDesignerContext.txt"
       ]
     }
   },
   "projectFileDependencyGroups": {
     "net6.0-windows7.0": [
-      "EventDrivenElements >= 1.0.1"
+      "CustomizedTitleBar >= 1.0.5"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\kailang.huo\\.nuget\\packages\\": {}
+    "C:\\Users\\huoka\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\System\\Documents\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\EDA_Client\\EDA_Client.csproj",
+      "projectUniqueName": "E:\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\EDA_Client\\EDA_Client.csproj",
       "projectName": "EDA_Client",
-      "projectPath": "D:\\System\\Documents\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\EDA_Client\\EDA_Client.csproj",
-      "packagesPath": "C:\\Users\\kailang.huo\\.nuget\\packages\\",
-      "outputPath": "D:\\System\\Documents\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\EDA_Client\\obj\\",
+      "projectPath": "E:\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\EDA_Client\\EDA_Client.csproj",
+      "packagesPath": "C:\\Users\\huoka\\.nuget\\packages\\",
+      "outputPath": "E:\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\EDA_Client\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\kailang.huo\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\huoka\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0-windows"
       ],
       "sources": {
-        "https://api.nuget.org/v3/index.json": {},
-        "https://nexus.uihcloud.cn/repository/nuget-hswgroup-dev": {}
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0-windows7.0": {
@@ -74,9 +197,9 @@
       "net6.0-windows7.0": {
         "targetAlias": "net6.0-windows",
         "dependencies": {
-          "EventDrivenElements": {
+          "CustomizedTitleBar": {
             "target": "Package",
-            "version": "[1.0.1, )"
+            "version": "[1.0.5, )"
           }
         },
         "imports": [

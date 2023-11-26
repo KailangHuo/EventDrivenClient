@@ -17,6 +17,7 @@ public class AppTab_ViewModel : AbstractEventDrivenViewModel{
         IsExpanded = false;
         SelectedAppItemContainer = null;
         CurrentSelectedStudyCollectionItem = null;
+        this.RegisterObserver(ExceptionManager.GetInstance());
         SetupCommands();
     }
 

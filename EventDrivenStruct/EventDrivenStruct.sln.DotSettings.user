@@ -3,6 +3,7 @@
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=D_003A_005Cgit_002Drepo_002Dmain_005CPersonal_005FGIT_005CEventDrivenObject_005COutPut_005Cnet6_002E0_005CEventDrivenElements_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=D_003A_005Cgit_002Drepo_002Dmain_005CPersonal_005FGIT_005CEventDrivenObject_005COutPut_005Cnet6_002E0_005CEvevntDrivenAbstractElements_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=E_003A_005CGitHub_005CCustomizedTitleBar_005CCustomizedTitleBar_005CCustomizedTitleBar_005Cbin_005CDebug_005Cnet6_002E0_002Dwindows_005CCustomizedTitleBar_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=E_003A_005CGitHub_005CEventDrivenObject_005CEventDrivenElements_005CEventDrivenElements_005Cbin_005CDebug_005Cnet6_002E0_002Dwindows_005CEventDrivenElements_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="D:\Git-Repo-Main\EventDrivenObject\OutPut\net6.0\EventDrivenElements.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String></wpf:ResourceDictionary>
