@@ -172,7 +172,7 @@ public class MainViewModel : AbstractEventDrivenViewModel {
             PatientAdminCenterApp patientAdminCenterApp = (PatientAdminCenterApp)o;
             PatientAdminCenterApp_ViewModel patientAdminCenterAppViewModel =
                 new PatientAdminCenterApp_ViewModel(patientAdminCenterApp);
-            patientAdminCenterAppViewModel.RegisterObserver(patientAdminCenterApp);
+            //patientAdminCenterAppViewModel.RegisterObserver(patientAdminCenterApp);
             PatientAdminAppManagerViewModel.InitPaCenter(patientAdminCenterAppViewModel);
             return;
         }

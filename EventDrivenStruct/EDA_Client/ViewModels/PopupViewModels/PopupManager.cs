@@ -5,7 +5,7 @@ using EventDrivenStruct.Views;
 
 namespace EventDrivenStruct.ViewModels; 
 
-public class PopupManager : AbstractEventDrivenModel{
+public class PopupManager : AbstractEventDrivenViewModel{
     private static PopupManager _popupManager ;
     private PopupManager() { }
 
