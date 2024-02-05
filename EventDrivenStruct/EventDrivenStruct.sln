@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDA_Client", "EDA_Client\EDA_Client.csproj", "{C465D942-01C5-43C5-822B-140F70B238DB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integration", "Integration\Integration.csproj", "{EFC02714-A74B-4676-83BB-75537BDDF9E4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{C465D942-01C5-43C5-822B-140F70B238DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C465D942-01C5-43C5-822B-140F70B238DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C465D942-01C5-43C5-822B-140F70B238DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFC02714-A74B-4676-83BB-75537BDDF9E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFC02714-A74B-4676-83BB-75537BDDF9E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFC02714-A74B-4676-83BB-75537BDDF9E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFC02714-A74B-4676-83BB-75537BDDF9E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

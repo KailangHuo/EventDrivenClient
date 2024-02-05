@@ -40,4 +40,16 @@
         <StudyAppNode patientName="Frank" patientGender="male" patientAge="28Y" studyUid="12.32617324.1991.940" AppName="Lung"/>
     </TestStudyData>
     
+    <IntegrationCommands>
+        <Command CommandType="Wakeup" CommandPriority="Normal" CommandName="loginLaunch" CommandParameterNames="user,selectedStudy,language,selectedSeries,application,serverDomain" />
+        <Command CommandType="Wakeup" CommandPriority="Normal" CommandName="verticalLogin" CommandParameterNames="user,password,selectedStudy,selectedSeries,application,serverDomain" />
+        <Command CommandType="Generic" CommandPriority="High" CommandName="setTCPPort" CommandParameterNames="portNumber" />
+        <Command CommandType="Wakeup" CommandPriority="Normal" CommandName="login" CommandParameterNames="user,language,serverDomain" />
+        <Command CommandType="Generic" CommandPriority="Normal" CommandName="launch" CommandParameterNames="user,selectedStudy,selectedSeries,application"/>
+        <Command CommandType="Generic" CommandPriority="Normal" CommandName="append" CommandParameterNames="user,selectedSeries,selectedStudy" />
+        <Command CommandType="Generic" CommandPriority="High" CommandName="closeTab" CommandParameterNames="selectedStudy" />
+        <Command CommandType="Generic" CommandPriority="High" CommandName="exit" CommandParameterNames="" />
+        <Command CommandType="Generic" CommandPriority="Normal" CommandName="logout" CommandParameterNames="" />
+    </IntegrationCommands>
+    
 </Root>

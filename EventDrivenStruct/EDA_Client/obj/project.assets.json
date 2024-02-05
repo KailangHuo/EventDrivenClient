@@ -34,26 +34,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\kailang.huo\\.nuget\\packages\\": {}
+    "C:\\Users\\huoka\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\System\\Documents\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\EDA_Client\\EDA_Client.csproj",
+      "projectUniqueName": "E:\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\EDA_Client\\EDA_Client.csproj",
       "projectName": "EDA_Client",
-      "projectPath": "D:\\System\\Documents\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\EDA_Client\\EDA_Client.csproj",
-      "packagesPath": "C:\\Users\\kailang.huo\\.nuget\\packages\\",
-      "outputPath": "D:\\System\\Documents\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\EDA_Client\\obj\\",
+      "projectPath": "E:\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\EDA_Client\\EDA_Client.csproj",
+      "packagesPath": "C:\\Users\\huoka\\.nuget\\packages\\",
+      "outputPath": "E:\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\EDA_Client\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\kailang.huo\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\huoka\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0-windows"
       ],
       "sources": {
-        "https://api.nuget.org/v3/index.json": {},
-        "https://nexus.uihcloud.cn/repository/nuget-hswgroup-dev": {}
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0-windows7.0": {
