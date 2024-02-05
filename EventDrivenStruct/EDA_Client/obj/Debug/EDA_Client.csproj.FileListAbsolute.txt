@@ -31,3 +31,9 @@ D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\EDA_Clie
 D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\EDA_Client\obj\Debug\EDA_Client.pdb
 D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\EDA_Client\obj\Debug\EDA_Client.genruntimeconfig.cache
 D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\EDA_Client\obj\Debug\ref\EDA_Client.dll
+D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\EDA_Client\obj\Debug\EDA_Client_Content.g.cs
+D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\Published\Client\bin\EDA_Client.exe
+D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\Published\Client\bin\EDA_Client.deps.json
+D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\Published\Client\bin\EDA_Client.runtimeconfig.json
+D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\Published\Client\bin\EDA_Client.dll
+D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\Published\Client\bin\EDA_Client.pdb

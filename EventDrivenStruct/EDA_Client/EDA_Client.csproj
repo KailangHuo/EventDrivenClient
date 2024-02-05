@@ -5,21 +5,28 @@
         <TargetFramework>net6.0-windows</TargetFramework>
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
-        <ApplicationIcon>ConfigurationLoader\ConfigurationFiles\macbookapplenotebookcomputer-116046_115991.ico</ApplicationIcon>
+        <ApplicationIcon>ConfigurationFiles\macbookapplenotebookcomputer-116046_115991.ico</ApplicationIcon>
         <RootNamespace>EventDrivenStruct</RootNamespace>
     </PropertyGroup>
-
-    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' "><!-- 产品环境-->
-      <!--<OutputPath>C:\Users\kailang.huo\Desktop\EDA_Struct\EDA_Client</OutputPath>-->
-        <AppendTargetFrameWorkToOutPutPath>false</AppendTargetFrameWorkToOutPutPath> 
-      <OutputPath>D:\System\DeskTop\EDA_ClientStruct</OutputPath>
+    
+    <PropertyGroup>
+        <EnableDynamicLoading>true</EnableDynamicLoading>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <OutputPath>..\Published\Client\bin\</OutputPath>
     </PropertyGroup>
+    
+    <ItemGroup>
+        <Content Include=".\ConfigurationFiles\Configuration.xml">
+            <Link>..\..\Client\ConfigurationFiles\Configuration.xml</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
 
-    <PropertyGroup Condition=" '$(Configuration)' == 'Release' "><!--产品环境-->
-      <!--<OutputPath>C:\Users\kailang.huo\Desktop\EDA_Struct\EDA_Client</OutputPath>-->
-        <AppendTargetFrameWorkToOutPutPath>false</AppendTargetFrameWorkToOutPutPath>
-      <OutputPath>D:\System\DeskTop\EDA_ClientStruct</OutputPath>
-    </PropertyGroup>
+        <Content Include=".\ConfigurationFiles\Configuration.xml">
+            <Link>..\..\Client\ConfigurationFiles\Configuration.xml</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        
+    </ItemGroup>
 
     <ItemGroup>
       <Reference Include="CustomizedTitleBar">
@@ -37,6 +44,10 @@
 
     <ItemGroup>
       <PackageReference Include="EventDrivenElements" Version="1.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_DeploymentManifestIconFile Remove="ConfigurationLoader\ConfigurationFiles\macbookapplenotebookcomputer-116046_115991.ico" />
     </ItemGroup>
 
 

@@ -8,25 +8,26 @@
     "net7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\huoka\\.nuget\\packages\\": {}
+    "E:\\NUGET\\packages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\Integration\\Integration.csproj",
+      "projectUniqueName": "D:\\System\\Documents\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\Integration\\Integration.csproj",
       "projectName": "Integration",
-      "projectPath": "E:\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\Integration\\Integration.csproj",
-      "packagesPath": "C:\\Users\\huoka\\.nuget\\packages\\",
-      "outputPath": "E:\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\Integration\\obj\\",
+      "projectPath": "D:\\System\\Documents\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\Integration\\Integration.csproj",
+      "packagesPath": "E:\\NUGET\\packages",
+      "outputPath": "D:\\System\\Documents\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\Integration\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\huoka\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\kailang.huo\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
-        "https://api.nuget.org/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {},
+        "https://nexus.uihcloud.cn/repository/nuget-hswgroup-dev": {}
       },
       "frameworks": {
         "net7.0": {

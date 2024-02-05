@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "w1Qwt36Gd0lUZJ/CIyP8j+hHN3YAvc3hF1GbRTnkDoJBInGT0IVimtfMEJrEvJuv0UlI/cU1zaYzT3T56R++NQ==",
+  "dgSpecHash": "ZeLyGw3Uzgy+eJpRcznNdO2xqeGCPI9yMnBcVnc3XAEfuC12YPfU33/Mgd3eLfHgvOClCtfYQzJQo4xLPyp/EQ==",
   "success": true,
-  "projectFilePath": "E:\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\EDA_Client\\EDA_Client.csproj",
+  "projectFilePath": "D:\\System\\Documents\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\EDA_Client\\EDA_Client.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\huoka\\.nuget\\packages\\eventdrivenelements\\1.0.0\\eventdrivenelements.1.0.0.nupkg.sha512"
+    "E:\\NUGET\\packages\\eventdrivenelements\\1.0.0\\eventdrivenelements.1.0.0.nupkg.sha512"
   ],
   "logs": []
 }

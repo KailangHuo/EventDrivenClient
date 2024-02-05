@@ -1,9 +1,10 @@
-﻿using Integration;
+﻿using System.Diagnostics;
+using Integration;
 
 public class Program {
     public static void Main(string[] args) {
-
-        CommandManager commandManager = CommandManager.GetInstance();
-
+        SystemFacade systemFacade = SystemFacade.GetInstance();
+        DynamicCommand dynamicCommand = DynamicCommandFactory.GetInstance().CreateCommand(args);
+        systemFacade.TakeCommand(args);
     }
 }

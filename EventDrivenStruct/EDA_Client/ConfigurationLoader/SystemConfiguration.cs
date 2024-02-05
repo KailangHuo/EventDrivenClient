@@ -16,7 +16,7 @@ public class SystemConfiguration {
         //configFilePath =System.Environment.CurrentDirectory + @"\..\..\..\ConfigurationLoader\ConfigurationFiles\Configuration.xml";
         
         // 产品环境
-        configFilePath = System.Environment.CurrentDirectory + @"\ConfigurationFiles\Configuration.xml";
+        configFilePath = System.Environment.CurrentDirectory + @"\..\ConfigurationFiles\Configuration.xml";
         _document = new XmlDocument();
         
         ConstantAppSet = new HashSet<string>();
