@@ -27,7 +27,18 @@ public class MetaCommandManager {
 
     private Dictionary<string, MetaCommand> MetaCommands;
 
+    public Dictionary<string, List<string>> WakeupCommandParams;
+
     private XmlDocument _xmlDocument;
+
+    public MetaCommand GetMetaCommand(string commandName) {
+        if (!MetaCommands.ContainsKey(commandName)) {
+            ExceptionManager.GetInstance().ThrowExceptionAndExit("WRONG INPUT!", 3);
+        }
+
+        return MetaCommands[commandName];
+
+    }
 
     private void Init() {
         this.FilePath = Environment.CurrentDirectory + @"\..\Client\ConfigurationFiles\Configuration.xml";
@@ -38,6 +49,7 @@ public class MetaCommandManager {
         this._xmlDocument = new XmlDocument();
         _xmlDocument.Load(this.FilePath);
         LoadMetaCommands();
+        LoadWakeupCommandParams();
     }
 
     private void LoadMetaCommands() {
@@ -73,6 +85,19 @@ public class MetaCommandManager {
 
     }
 
+    private void LoadWakeupCommandParams() {
+        this.WakeupCommandParams = new Dictionary<string, List<string>>();
+        XmlNode node = _xmlDocument.SelectSingleNode(@"Root/WakeupCommandParameters");
+        XmlAttributeCollection attributeCollection = node.Attributes;
+        foreach (XmlAttribute xmlAttribute in attributeCollection) {
+            List<string> parameters = new List<string>();
+            string[] strs = xmlAttribute.Value.Split(",");
+            for (int i = 0; i < strs.Length; i++) {
+                parameters.Add(strs[i]);
+            }
 
+            this.WakeupCommandParams[xmlAttribute.Name]= parameters;
+        }
+    }
 
 }

@@ -3,7 +3,7 @@ namespace Integration;
 public class MetaCommand {
 
     public MetaCommand() {
-        
+        this.CommandParamNameSet = new HashSet<string>();
     }
 
     public string CommandName;
@@ -14,7 +14,11 @@ public class MetaCommand {
 
     public HashSet<string> CommandParamNameSet;
 
-    public void SetCommandParameterNamesSet() {
+    public void SetCommandParameterNamesSet(string str) {
+        string[] strs = str.Split(",");
+        for (int i = 0; i < strs.Length; i++) {
+            this.CommandParamNameSet.Add(strs[i]);
+        }
     }
 
 }
