@@ -1,26 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "E:\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\EDA_Client\\EDA_Client.csproj": {}
+    "D:\\System\\Documents\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\EDA_Client\\EDA_Client.csproj": {}
   },
   "projects": {
-    "E:\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\EDA_Client\\EDA_Client.csproj": {
+    "D:\\System\\Documents\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\EDA_Client\\EDA_Client.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\EDA_Client\\EDA_Client.csproj",
+        "projectUniqueName": "D:\\System\\Documents\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\EDA_Client\\EDA_Client.csproj",
         "projectName": "EDA_Client",
-        "projectPath": "E:\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\EDA_Client\\EDA_Client.csproj",
-        "packagesPath": "C:\\Users\\huoka\\.nuget\\packages\\",
-        "outputPath": "E:\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\EDA_Client\\obj\\",
+        "projectPath": "D:\\System\\Documents\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\EDA_Client\\EDA_Client.csproj",
+        "packagesPath": "E:\\NUGET\\packages",
+        "outputPath": "D:\\System\\Documents\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\EDA_Client\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\huoka\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\kailang.huo\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0-windows"
         ],
         "sources": {
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nexus.uihcloud.cn/repository/nuget-hswgroup-dev": {}
         },
         "frameworks": {
           "net6.0-windows7.0": {
@@ -41,6 +42,10 @@
             "EventDrivenElements": {
               "target": "Package",
               "version": "[1.0.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
             }
           },
           "imports": [

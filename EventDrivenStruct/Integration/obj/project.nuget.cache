@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "dyWonyDe8p0FA3AzGCioqdihH1AdlLAY9Tch50O9Yu8Uk7R/skj6n5jEhmH7K8eHrZBZlBUB0LRVQfFx6An6eg==",
+  "dgSpecHash": "V3meZ1T/WZ6JvNCpIAJ3SGld4Ht/elPOd/CeYoj1wg+4VqoWd61FcGcUgLdsC6/NI7oo00sbSEt7LVte4bmbYg==",
   "success": true,
-  "projectFilePath": "E:\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\Integration\\Integration.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "D:\\System\\Documents\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\Integration\\Integration.csproj",
+  "expectedPackageFiles": [
+    "E:\\NUGET\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
   "logs": []
 }
