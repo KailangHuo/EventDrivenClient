@@ -12,11 +12,9 @@ public class SystemConfiguration {
     private static SystemConfiguration _instance;
 
     private SystemConfiguration() {
-        // 研发环境
-        //configFilePath =System.Environment.CurrentDirectory + @"\..\..\..\ConfigurationLoader\ConfigurationFiles\Configuration.xml";
-        
-        // 产品环境
-        configFilePath = System.Environment.CurrentDirectory + @"\..\ConfigurationFiles\Configuration.xml";
+        string assemblyLocation = System.Reflection.Assembly.GetExecutingAssembly().Location;
+        this.AppDirectory = System.IO.Path.GetDirectoryName(assemblyLocation);
+        configFilePath = this.AppDirectory + @"\..\ConfigurationFiles\Configuration.xml";
         _document = new XmlDocument();
         
         ConstantAppSet = new HashSet<string>();
@@ -38,6 +36,8 @@ public class SystemConfiguration {
 
         return _instance;
     }
+
+    private string AppDirectory;
 
     private string configFilePath;
 
@@ -164,6 +164,10 @@ public class SystemConfiguration {
         }
 
         throw new NullReferenceException();
+    }
+
+    public string GetApplicationDirectory() {
+        return this.AppDirectory;
     }
 
     public bool IsConstantApp(string appName) {

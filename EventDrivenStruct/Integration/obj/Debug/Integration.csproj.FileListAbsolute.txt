@@ -17,3 +17,5 @@ D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\Publishe
 D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\Published\Integration\Integration.runtimeconfig.json
 D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\Published\Integration\Integration.dll
 D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\Published\Integration\Integration.pdb
+D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\Integration\obj\Debug\Integration.csproj.AssemblyReference.cache
+D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\Integration\obj\Debug\Integration.csproj.CopyComplete

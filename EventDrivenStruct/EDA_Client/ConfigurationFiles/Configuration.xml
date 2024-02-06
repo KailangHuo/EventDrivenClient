@@ -52,6 +52,6 @@
         <Command CommandType="GENERIC" CommandPriority="NORMAL" CommandName="logout" CommandParameterNames="" />
     </IntegrationCommands>
 
-    <WakeupCommandParameters Mandatory="commandName,user,serverDomain" Options="password"/>
+    <WakeupCommandParameters Params="user,password,serverDomain"/>
     
 </Root>

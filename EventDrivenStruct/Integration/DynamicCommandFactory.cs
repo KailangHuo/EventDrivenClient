@@ -23,6 +23,10 @@ public class DynamicCommandFactory {
     }
 
     public DynamicCommand CreateCommand(string[] args) {
+        if (args.Length == 0) {
+            ExceptionManager.GetInstance().ThrowExceptionAndExit("WRONG INPUT", 3);
+        }
+
         DynamicCommand dynamicCommand = new DynamicCommand(args[0]);
         for (int i = 1; i < args.Length; i++) {
             string curStr = args[i];

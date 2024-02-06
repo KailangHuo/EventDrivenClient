@@ -5,3 +5,7 @@
 *.baml
 *.props
 *.props
+*.props
+*.pdb
+*.cache
+*.lref

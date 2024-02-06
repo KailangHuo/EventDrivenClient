@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -27,7 +28,7 @@ public class MetaCommandManager {
 
     private Dictionary<string, MetaCommand> MetaCommands;
 
-    public Dictionary<string, List<string>> WakeupCommandParams;
+    private List<string> WakeupCommandParams;
 
     private XmlDocument _xmlDocument;
 
@@ -37,11 +38,19 @@ public class MetaCommandManager {
         }
 
         return MetaCommands[commandName];
+    }
 
+    public List<string> GetWakeupCommandParams() {
+        List<string> list = new List<string>();
+        for (int i = 0; i < WakeupCommandParams.Count; i++) {
+            list.Add(WakeupCommandParams[i]);
+        }
+
+        return list;
     }
 
     private void Init() {
-        this.FilePath = Environment.CurrentDirectory + @"\..\Client\ConfigurationFiles\Configuration.xml";
+        this.FilePath = SystemConfiguration.GetInstance().SystemDirectory + @"\..\Client\ConfigurationFiles\Configuration.xml";
         if (!File.Exists(FilePath)) {
             ExceptionManager.GetInstance().ThrowExceptionAndExit("WRONG INSTALL PATH", 21);
         }
@@ -86,17 +95,14 @@ public class MetaCommandManager {
     }
 
     private void LoadWakeupCommandParams() {
-        this.WakeupCommandParams = new Dictionary<string, List<string>>();
+        this.WakeupCommandParams = new List<string>();
         XmlNode node = _xmlDocument.SelectSingleNode(@"Root/WakeupCommandParameters");
         XmlAttributeCollection attributeCollection = node.Attributes;
         foreach (XmlAttribute xmlAttribute in attributeCollection) {
-            List<string> parameters = new List<string>();
             string[] strs = xmlAttribute.Value.Split(",");
             for (int i = 0; i < strs.Length; i++) {
-                parameters.Add(strs[i]);
+                this.WakeupCommandParams.Add(strs[i]);
             }
-
-            this.WakeupCommandParams[xmlAttribute.Name]= parameters;
         }
     }
 
