@@ -1,11 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "6e6cjHJBLsMvRGL/kvo4e3hsryXhfoPYPXAx2fidtre9ItwBi1+vJHPyWorWYWH3hHDCjdyn1PuAwhtj+t+Wng==",
+  "dgSpecHash": "59HjdtgAffRjm2ElUlcWq3VRGSgXPy3nWxkANDVp1qqdWg56pXLeXbnnJehO+XwaXSLlp50pMkOv8SDFL83oLQ==",
   "success": true,
-  "projectFilePath": "D:\\System\\Documents\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\EDA_Client\\EDA_Client.csproj",
+  "projectFilePath": "D:\\SYSTEM\\Documents\\GitHub\\EventDrivenClient\\EventDrivenStruct\\EDA_Client\\EDA_Client.csproj",
   "expectedPackageFiles": [
-    "E:\\NUGET\\packages\\eventdrivenelements\\1.0.0\\eventdrivenelements.1.0.0.nupkg.sha512",
-    "E:\\NUGET\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+    "C:\\Users\\huoka\\.nuget\\packages\\customizedtitlebar\\1.0.10\\customizedtitlebar.1.0.10.nupkg.sha512",
+    "C:\\Users\\huoka\\.nuget\\packages\\eventdrivenelements\\1.0.0\\eventdrivenelements.1.0.0.nupkg.sha512",
+    "C:\\Users\\huoka\\.nuget\\packages\\microsoft.win32.systemevents\\8.0.0-rc.2.23479.6\\microsoft.win32.systemevents.8.0.0-rc.2.23479.6.nupkg.sha512",
+    "C:\\Users\\huoka\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\huoka\\.nuget\\packages\\system.drawing.common\\8.0.0-rc.2.23479.14\\system.drawing.common.8.0.0-rc.2.23479.14.nupkg.sha512"
   ],
   "logs": []
 }

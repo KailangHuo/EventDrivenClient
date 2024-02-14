@@ -10,18 +10,18 @@
     <StudyRemainUnlockNummber>1</StudyRemainUnlockNummber>
 
     <ConstantAppList>
-        <App Name="Review2D"/>
-        <App Name="Review3D"/>
-        <App Name="MMFusion"/>
+        <App Name="ReviewIn2D"/>
+        <App Name="ReviewIn3D"/>
+        <App Name="MultiModel"/>
         <App Name="Filming"/>
 
     </ConstantAppList>
 
     <AppConfiguration>
         <App Name="PatientAdmin" MaxConfigScreenNumber ="0"/>
-        <App Name="Review2D" MaxConfigScreenNumber ="2"/>
-        <App Name="Review3D" MaxConfigScreenNumber ="2"/>
-        <App Name="MMFusion" MaxConfigScreenNumber ="2"/>
+        <App Name="ReviewIn2D" MaxConfigScreenNumber ="2"/>
+        <App Name="ReviewIn3D" MaxConfigScreenNumber ="2"/>
+        <App Name="MultiModel" MaxConfigScreenNumber ="2"/>
         <App Name="Filming" MaxConfigScreenNumber ="1"/>
 
         <App Name="Oncology" MaxConfigScreenNumber ="1"/>
@@ -33,7 +33,7 @@
     </AppConfiguration>
 
     <TestStudyData>
-        <StudyAppNode patientName="Alice" patientGender="female" patientAge="25Y" studyUid="1023.256576.7891340.1" AppName="Review2D"/>
+        <StudyAppNode patientName="Alice" patientGender="female" patientAge="25Y" studyUid="1023.256576.7891340.1" AppName="ReviewIn2D"/>
         <StudyAppNode patientName="Charlie" patientGender="male" patientAge="7Y" studyUid="5743.4592345.1.1258.3" AppName="Dental"/>
         <StudyAppNode patientName="Denise" patientGender="female" patientAge="56Y" studyUid="692834.15479052.168.9" AppName="Filming"/>
         <StudyAppNode patientName="Edda" patientGender="female" patientAge="30Y" studyUid="56.38409257.0030.1" AppName="Liver"/>

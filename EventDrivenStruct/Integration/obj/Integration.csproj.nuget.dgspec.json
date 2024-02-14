@@ -1,27 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "D:\\System\\Documents\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\Integration\\Integration.csproj": {}
+    "D:\\SYSTEM\\Documents\\GitHub\\EventDrivenClient\\EventDrivenStruct\\Integration\\Integration.csproj": {}
   },
   "projects": {
-    "D:\\System\\Documents\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\Integration\\Integration.csproj": {
+    "D:\\SYSTEM\\Documents\\GitHub\\EventDrivenClient\\EventDrivenStruct\\Integration\\Integration.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\System\\Documents\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\Integration\\Integration.csproj",
+        "projectUniqueName": "D:\\SYSTEM\\Documents\\GitHub\\EventDrivenClient\\EventDrivenStruct\\Integration\\Integration.csproj",
         "projectName": "Integration",
-        "projectPath": "D:\\System\\Documents\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\Integration\\Integration.csproj",
-        "packagesPath": "E:\\NUGET\\packages",
-        "outputPath": "D:\\System\\Documents\\GitHub\\MyEventDrivenStructExample\\EventDrivenStruct\\Integration\\obj\\",
+        "projectPath": "D:\\SYSTEM\\Documents\\GitHub\\EventDrivenClient\\EventDrivenStruct\\Integration\\Integration.csproj",
+        "packagesPath": "C:\\Users\\huoka\\.nuget\\packages\\",
+        "outputPath": "D:\\SYSTEM\\Documents\\GitHub\\EventDrivenClient\\EventDrivenStruct\\Integration\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\kailang.huo\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\huoka\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nexus.uihcloud.cn/repository/nuget-hswgroup-dev": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
@@ -60,7 +59,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.405\\RuntimeIdentifierGraph.json"
         }
       }
     }

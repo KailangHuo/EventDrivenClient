@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\EDA_Client\obj\Debug\
+D:\SYSTEM\Documents\GitHub\EventDrivenClient\EventDrivenStruct\EDA_Client\obj\Debug\
 EventDrivenStruct
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-D:\System\Documents\GitHub\MyEventDrivenStructExample\EventDrivenStruct\EDA_Client\App.xaml
+D:\SYSTEM\Documents\GitHub\EventDrivenClient\EventDrivenStruct\EDA_Client\App.xaml
 61813752925
 2-1972517834
 45-977077118
-197569612120
+198353469391
 Views\AddAppWindow.xaml;Views\AddStudyWindow.xaml;Views\AppendStudyWindow.xaml;Views\MainWindowView.xaml;Views\MainWindow_Five.xaml;Views\MainWindow_Two.xaml;
 
-True
+False
 
